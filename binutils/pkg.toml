@@ -1,0 +1,13 @@
+[package]
+name = "binutils"
+version = "2.43.1"
+description = "Contains a linker and stuff"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://sourceware.org/pub/binutils/releases/binutils-2.43.1.tar.xz"
+
+build = [
+    "BUILD",
+]

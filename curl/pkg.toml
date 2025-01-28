@@ -1,0 +1,13 @@
+[package]
+name = "curl"
+version = "8.9.1"
+description = "curl!"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://curl.se/download/curl-8.9.1.tar.xz"
+
+build = [
+    "BUILD",
+]

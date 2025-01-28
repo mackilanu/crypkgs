@@ -1,0 +1,13 @@
+[package]
+name = "glibc"
+version = "2.40"
+description = "stuff from iana"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://ftp.gnu.org/gnu/glibc/glibc-2.40.tar.xz"
+
+build = [
+    "BUILD",
+]

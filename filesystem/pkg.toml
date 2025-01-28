@@ -1,0 +1,12 @@
+[package]
+name = "filesystem"
+version = "0.1"
+description = "Creates the basic system dirs for Crystal."
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+
+build = [
+    "BUILD",
+]
