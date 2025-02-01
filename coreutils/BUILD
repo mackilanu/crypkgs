@@ -1,5 +1,5 @@
 
-BD=../$BUILDDIR
+BD=$(pwd)/$BUILDDIR
 SRCDIR=$PKGNAME-$PKGVER
 tar -xf $SRCDIR.tar.xz
 
@@ -19,6 +19,7 @@ make DESTDIR=$BD install
 
 # Move programs to the locations specified by the FHS
 mkdir -pv $BD/usr/share/man/man8
+mkdir -pv $BD/usr/sbin
 mv -v $BD/usr/bin/chroot $BD/usr/sbin
 mv -v $BD/usr/share/man/man1/chroot.1 $BD/usr/share/man/man8/chroot.8
 sed -i 's/"1"/"8"/' $BD/usr/share/man/man8/chroot.8
