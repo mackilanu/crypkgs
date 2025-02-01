@@ -1,0 +1,13 @@
+[package]
+name = "libpipeline"
+version = "1.5.7"
+description = "description"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.7.tar.gz"
+
+build = [
+    "BUILD",
+]

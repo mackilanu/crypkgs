@@ -1,0 +1,13 @@
+[package]
+name = "kbd"
+version = "2.6.4"
+description = "description"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://www.kernel.org/pub/linux/utils/kbd/kbd-2.6.4.tar.xz"
+
+build = [
+    "BUILD",
+]
