@@ -1,0 +1,13 @@
+[package]
+name = "libffi"
+version = "3.4.6"
+description = "description"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://github.com/libffi/libffi/releases/download/v3.4.6/libffi-3.4.6.tar.gz"
+
+build = [
+    "BUILD",
+]

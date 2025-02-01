@@ -1,0 +1,13 @@
+[package]
+name = "kmod"
+version = "33"
+description = "description"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-33.tar.xz"
+
+build = [
+    "BUILD",
+]
