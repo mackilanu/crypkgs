@@ -1,0 +1,170 @@
+'\" t
+.\" Man page for mandb
+.\"
+.\" Copyright (C) 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Tue Apr 26 12:56:44 BST 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANDB 8 2024-04-05 2.12.1 マニュアルページユーティリティー
+.SH 名前
+mandb \- マニュアルページのインデックスキャッシュを作成、更新する
+.SH 書式
+\fBmandb\fP [\|\fB\-dqsucpt?V\fP\|] [\|\fB\-C\fP \fIfile\fP\|] [\|\fImanpath\fP\|]
+.br
+\fBmandb\fP [\|\fB\-dqsut\fP\|] [\|\fB\-C\fP \fIfile\fP\|] \fB\-f\fP \fIfilename\fP\ .\|.\|.
+.SH 説明
+\fBmandb\fP is used to initialise or manually update \fBindex\fP database
+caches.  The caches contain information relevant to the current state of the
+manual page system and the information stored within them is used by the
+man\-db utilities to enhance their speed and functionality.
+
+When creating or updating an \fBindex\fP, \fBmandb\fP will warn of bad ROFF .so
+requests, bogus manual page filenames and manual pages from which the
+\fBwhatis\fP cannot be parsed.
+
+Supplying \fBmandb\fP with an optional colon\-delimited path will override the
+internal system manual page hierarchy search path, determined from
+information found within the man\-db configuration file.
+.SH データベースキャッシュ
+\fBmandb\fP は次のうち一つのデータベースタイプをサポートするようにコンパイルされます。
+
+.TS
+tab (@);
+l l l.
+名前@非同期@ファイル名
+_
+Berkeley db@○@\fIindex.bt\fP
+GNU gdbm@○@\fIindex.db\fP
+UNIX ndbm@×@\fIindex.(dir|pag)\fP
+.TE
+
+Those database types that support asynchronous updates provide enhanced
+speed at the cost of possible corruption in the event of unusual
+termination.  In an unusual case where this has occurred, it may be
+necessary to rerun \fBmandb\fP with the \fB\-c\fP option to re\-create the
+databases from scratch.
+.SH オプション
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+デバッグ情報を表示します。
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+警告を表示しません。
+.TP 
+.if  !'po4a'hide' .BR \-s ", " \-\-no-straycats
+Do not spend time looking for or adding information to the databases
+regarding stray cats.
+.TP 
+.if  !'po4a'hide' .BR \-p ", " \-\-no-purge
+削除されたマニュアルページの検索と、それに伴うデータベースのデータ削除を行いません。
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-create
+デフォルトでは、 \fBmandb\fP
+ま作成済みのデータベースを更新します。データベースが存在しない場合、データベースを作成します。このオプションを使用した場合、 \fBmandb\fP
+はこれまでに作成されたデータベースを削除し、新規にデータベースを作成します。また、暗黙的に \fB\-\-no\-purge\fP
+が指定されます。これの作業は、データベースが破損したか、新機能によりデータベースのスキーマが変更された場合に必要となります。
+.TP 
+.if  !'po4a'hide' .BR \-u ", " \-\-user-db
+ユーザー用データベースの作成のみ行います。システム用データベースの作成権限があったとしても、システム用データベースの作成は行いません。
+.TP 
+.if  !'po4a'hide' .BR \-t ", " \-\-test
+検索パス内の階層にあるマニュアルページとデータベース情報が正確に合っているかの確認をします。このオプションを使用した場合、 \fBmandb\fP
+は既存のデータベースの変更は行いません。
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-filename
+指定したファイル名に関するデータベースの項目のみ更新します。このオプションは一般的には使用しません。 \fBMAN_DB_UPDATES\fP
+オプションを有効にしてコンパイルした場合、ページが古いかどうかを確認するために、 \fBman\fP の内部で使用されます。このオプションは、暗黙的に、
+\fB\-p\fP を有効にし、 \fB\-c\fP および \fB\-s\fP を無効にします。
+.TP 
+\fB\-C\ \fP\fIfile\fP,\ \fB\-\-config\-file=\fP\fIfile\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+使用法を表示して終了します。
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Print a short usage message and exit.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+バージョン情報を表示して終了します。
+.SH 終了ステータス
+.TP 
+.if  !'po4a'hide' .B 0
+プログラムが正常に実行されました。
+.TP 
+.if  !'po4a'hide' .B 1
+使用法、構文、または設定ファイルのエラーです。
+.TP 
+.if  !'po4a'hide' .B 2
+操作のエラーです。
+.TP 
+.if  !'po4a'hide' .B 3
+子プロセスが異常終了しました。
+.SH 診断
+データベースを構築中に次の警告メッセージが表示されることがあります。
+.TP 
+\fB<filename>: whatis parse for page(sec) failed\fP
+An attempt to extract whatis line(s) from the given <filename>
+failed.  This is usually due to a poorly written manual page, but if many
+such messages are emitted it is likely that the system contains non\-standard
+manual pages which are incompatible with the man\-db whatis parser.  See the
+\fBWHATIS PARSING\fP section in \fBlexgrog\fP(1)  for more information.
+.TP 
+\fB<ファイル名> はシンボリックリンクが切れています\fP
+<ファイル名>が参照しているシンボリックリンクの先が存在しません。通常、<ファイル名>の参照しているリンク先を特定するための追加の診断メッセージが表示されます。
+.TP 
+\fB<ファイル名>: ： シンボリックリンクまたは ROFF の `.so' 要求に誤りがあります\fP
+シンボリックリンクの参照先または ROFF のインクルード (.so) 要求に含まれる<ファイル名>が存在しません。
+.TP 
+\fB<ファイル名>: おかしなファイル名を無視しています\fP
+<ファイル名>を持つマニュアルページが有効であるか無効であるかにかかわらず、名前が無効です。これは通常、マニュアルページがセクション拡張名
+<x> であるのに、マニュアルページセクション <y> に配置されている時に発生します。
+.TP 
+\fB<filename_mask>: competing extensions\fP
+The wildcard <filename_mask> is not unique.  This is usually caused
+by the existence of both a compressed and uncompressed version of the same
+manual page.  All but the most recent are ignored.
+.SH ファイル
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+man\-db 設定ファイルです。
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt|db|dir|pag)
+FHS 準拠の大域\fIインデックス型\fPデータベースキャッシュです。
+.PP
+過去に使用されていたデータベースキャッシュの位置:
+.TP 
+.if  !'po4a'hide' .I /usr/man/index.(bt|db|dir|pag)
+伝統的な大域\fIインデックス型\fPデータベースキャッシュです。
+.TP 
+.if  !'po4a'hide' .I /var/catman/index.(bt|db|dir|pag)
+代替または FSSTND 準拠の大域\fIインデックス型\fPデータベースキャッシュです。
+.SH 関連項目
+.if  !'po4a'hide' .BR lexgrog (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR catman (8)
+.PP
+このマニュアルページにあった\fB処理されるデータ\fP節は \fBlexgrog\fP(1) ページに移動しました。
+.SH 著者
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH バグ
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

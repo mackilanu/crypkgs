@@ -1,0 +1,76 @@
+.\" Man page for manconv
+.\"
+.\" Copyright (c) 2007, 2008 Colin Watson <cjwatson@debian.org>
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANCONV 1 2024-04-05 2.12.1 "Verktyg för sidvisning av manual"
+.SH NAMN
+manconv \- konvertera manualsida från en kodning till en annan
+.SH SYNOPSIS
+\fBmanconv\fP \fB\-f\fP [\|\fIfrån\-kod\fP\|[:\fIfrån\-kod\fP\|.\|.\|.]\|] \fB\-t\fP
+\fItill\-kod\fP [\|\fB\-dqhV\fP\|] [\|\fIfilnamn\fP\|]
+.SH BESKRIVNING
+\fBmanconv\fP konverterar en manualsida från en kodning till en annan, likt
+\fBiconv\fP.  Till skillnad från \fBiconv\fP kan det prova flera möjliga
+inmatningskodningar i sekvens.  Detta är användbart för manualsidor som
+installerats i kataloger utan en uttrycklig kodningsdeklaration eftersom de
+kan använda UTF\-8 eller någon föråldrad teckenkodning.
+.PP
+Om en kodningsdeklaration hittas på första raden i manualsidan kommer den
+deklarationen att åsidosätta inmatningskodningar som anges på \fBmanconv\fP:s
+kommandorad.  Kodningsdeklarationer anges på följande form:
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" \-*\- coding: UTF\-8 \-*\-
+.fi
+.RE
+.PP
+eller (om preprocessorer för manualsidans också ska deklareras):
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" t \-*\- coding: ISO\-8859\-1 \-*\-
+.fi
+.RE
+.SH FLAGGOR
+.TP 
+\fB\-f\fP \fIkodningar\fP, \fB\-\-from\-code\fP \fIkodningar\fP
+Prova var och en av \fIkodningar\fP:na (en kolonseparerad lista) i sekvens som
+inmatningskodningen. Standard är att gissa en trolig indatakodning baserat
+på filnamnet.
+.TP 
+\fB\-t\fP \fIkodning\fP, \fB\-\-to\-code\fP \fIkodning\fP
+Konvertera manualsidan till \fIkodning\fP.
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Mata inte ut felmeddelanden när sidan inte kan konverteras.
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Skriver ut felsökningsinformation.
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+Skriv ut ett hjälpmeddelande och avsluta.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Visa versionsinformation.
+.SH "SE VIDARE"
+.if  !'po4a'hide' .IR iconv (1),
+.if  !'po4a'hide' .IR man (1),
+.if  !'po4a'hide' .IR man-recode (1)
+.SH UPPHOVSMAN
+.nf
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH FEL
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

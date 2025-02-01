@@ -1,0 +1,67 @@
+.\" Man page for zsoelim
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Dec 10 19:33:32 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH ZSOELIM 1 2024-04-05 2.12.1 "Utilidades de paginador del manual"
+.SH NOMBRE
+zsoelim \- satisface peticiones .so en la entrada de roff
+.SH SINOPSIS
+\fBzsoelim\fP [\|\fB\-CVh\fP\|] [\|\fIarchivo\fP \&.\|.\|.\|]
+.SH DESCRIPCIÓN
+\fBzsoelim\fP analiza argumentos \fIarchivo\fP, o si no se especifica ninguno,
+su entrada estándar para líneas de la forma:
+
+\&\fB.so\fP <\|\fInombrearchivo\fP\|>
+
+Estas peticiones son sustituídas por los contenidos del \fInombrearchivo\fP
+especificado.  Si la petición no puede cumplirse, \fBzsoelim\fP busca
+\fInombrearchivo.ext\fP, donde \fI.ext\fP puede ser \fB.gz\fP, \fB.Z\fP o \fB.z\fP. Otros
+tipos de extensión son posibles según las opciones de tiempo de
+compilación.  Si la petición puede satisfacerla un archivo comprimido, este
+archivo se descomprime utilizando un descompresor apropiado y su salida se
+utiliza para satisfacer la petición.
+
+Tradicionalmente, los programas \fBsoelim\fP se utilizaron para permitir que
+los preprocesadores roff pudieran preprocesar los archivos referidos por las
+peticiones.  Esta versión concreta se escribió para evitar problemas creados
+por la compatibilidad con páginas de manual comprimidas.
+.SH OPCIONES
+.TP 
+.if  !'po4a'hide' .BR \-C ", " \-\-compatible
+Esta opción está disponible para compatibilidad con otros programas
+\fBsoelim\fP.  Se utiliza para activar solicitudes .so seguidas por algo que no
+sea espacio en blanco.  Como ya es este el comportamiento predeterminado, se
+hace caso omiso de ella.
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+Escribe un mensaje de ayuda y termina.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Muestra información sobre la versión.
+.SH "VÉASE TAMBIÉN"
+.if  !'po4a'hide' .BR groff (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR nroff (1),
+.if  !'po4a'hide' .BR troff (1)
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH DEFECTOS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

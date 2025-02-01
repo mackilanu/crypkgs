@@ -1,0 +1,163 @@
+.\" Man page for format of the manpath.config data file
+.\"
+.\" Copyright (C) 1994, 1995 Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANPATH 5 2024-04-05 2.12.1 /etc/man_db.conf
+.SH NAMN
+manpath \- formatet för filen /etc/man_db.conf
+.SH BESKRIVNING
+Konfigurationsfilen för manpath används av verktygen för manualsidor för att
+bedöma användarnas man\-sökvägar i körtid, för att indikera vilka hierarkier
+av manualsidor (man\-sökvägar) som ska hanteras som systemhierarkier och för
+att tilldela dem kataloger som används för att lagra cat\-filer.
+
+Om miljövariabeln $\fBMANPATH\fP redan är satt kommer informationen i
+/etc/man_db.conf inte att åsidosätta den.
+.SH SÖKVÄG
+Som standard genomsöker man\-db användarens $\fBSÖKVÄG\fP.  För varje
+\fIpath_element\fP som hittas där lägger det till \fImanpath_element\fP till
+sökvägen.
+
+Om det inte finns någon \fBMANPATH_MAP\fP\-rad i konfigurationsfilen för ett
+givet \fIpath_element\fP, då läggs alla \fIpath_element/../man\fP,
+\fIpath_element/man\fP, \fIpath_element/../share/man\fP och
+\fIpath_element/share/man\fP till som existerar som kataloger i sökvägen.
+
+Det lägger sedan till de \fBMANDATORY_MANPATH\fP\-poster från
+konfigurationsfilen till sökvägen.
+
+Avslutningsvis, om flaggan \fB\-\-systems\fP används eller om miljövariabeln
+$\fBSYSTEM\fP är satt, då bör denna bestå av en sekvens av operativsystemsnamn
+separerade av komman eller kolon.  Detta fungerar som en mall och expanderar
+sökvägen ännu en gång för att tillåta åtkomst till andra operativsystems
+manualsidor: för varje systemnamn kommer man\-db att leta efter det namnet
+som en underkatalog i varje post i sökvägen och lägger till den till den
+slutgiltiga sökvägen om den existerar.  Systemnamnet \fBman\fP infogar den
+normala sökvägen utan underkataloger.  Om till exempel sökvägen annars hade
+varit \fI/usr/share/man:/usr/local/man\fP och $\fBSYSTEM\fP är satt till
+\fInyttOS:man\fP, då kommer den slutgiltiga sökvägen att vara
+\fI/usr/share/man/nyttOS:/usr/share/man:/usr/local/man/nyttwOS:/usr/local/man\fP.
+
+Miljövariabeln $\fBMANPATH\fP åsidosätter man\-dbs standardsökväg för
+manualsidor.  De flesta användare behöver inte sätta den.  Dess syntax
+liknar den för miljövariabeln $\fBPATH\fP: den består av en sekvens av
+katalognamn separerade av kolon.  Den åsidosätter standardsökvägen som
+beskrivits ovan.
+
+Om värdet av $\fBMANPATH\fP börjar med ett kolon så kommer standardsökvägen att
+läggas till i dess början.  Om värdet av $\fBMANPATH\fP slutar med ett kolon så
+kommer standardsökvägen att läggas till i dess slut.  Om värdet av
+$\fBMANPATH\fP innehåller dubbla kolon (\fB::\fP) så kommer standardsökvägen att
+infogas mitt i värdet mellan de två kolonen.
+.SH FORMAT
+Följande fälttyper erkänns för närvarande:
+.TP 
+\fB#\fP\fI\ kommentar\fP
+Tomma rader eller de som börjar med ett \fB#\fP kommer att hanteras som
+kommentarer och ignoreras.
+.TP 
+\fBMANDATORY_MANPATH\fP\fI\ man\-sökvägselement\fP
+Rader på detta format indikerar man\-sökvägar som varje automatiskt genererad
+$\fBMANPATH\fP bör innehålla.  Detta kommer typiskt att inkludera \fI/usr/man\fP.
+.TP 
+\fBMANPATH_MAP\fP\fI\ sökvägselement\ man\-sökvägselement\fP
+Rader på detta format ställer in mappningarna från $\fBPATH\fP till
+$\fBMANPATH\fP.  För varje \fIsökvägselement\fP som hittas i användarens $\fBPATH\fP,
+kommer \fIman\-sökvägselement\fP att läggas till i $\fBMANPATH\fP.
+.TP 
+\fBMANDB_MAP \fP\fIman\-sökvägselement \fP\|[\| \fIcat\-sökvägselement\fP \|]
+Rader på detta format indikerar vilka man\-sökvägar som ska behandlas som
+systemman\-sökvägar och valfritt om deras cat\-filer bör lagras.  Denna
+fälttyp är särskilt viktig om \fBman\fP är ett setuid\-program eftersom (när det
+finns i systemkonfigurationsfilen /etc/man_db.conf snarare än i
+användarnas konfigurationsfil .manpath) det indikerar vilka hierarkier av
+manualsidor som ska nås som setuid\-användaren och vilka som ska nås som den
+anropande användaren.
+
+Systemets hierarkier av manualsidor är vanligtvis de som lagras under
+\fI/usr\fP så som \fI/usr/man\fP, \fI/usr/local/man\fP och \fI/usr/X11R6/man\fP.
+
+Om cat\-sidor från ett visst \fIman\-sökvägselement\fP inte ska lagras eller ska
+lagras på den traditionella platsen kan \fIcat\-sökvägselement\fP utelämnas.
+
+Traditionell cat\-placering skulle vara omöjlig för skrivskyddade hierarkier
+av manualsidor och på grund av detta är det möjligt att ange vilken giltig
+kataloghierarki som helst för att lagra dem.  För att vara kompatibel med
+\fBLinux FSSTND\fP kan nyckelordet \fBFSSTND\fP användas istället för en riktig
+katalog.
+
+Tyvärr är det nödvändigt att ange \fBalla\fP systemsökvägar för manualträd,
+inklusive alternativa operativsystemssökvägar så som \fI/usr/man/sun\fP och
+eventuella \fBNLS\-lokal\fP\-sökvägar så som \fI/usr/man/de_DE.88591\fP.
+
+Eftersom informationen tolkas rad för rad i den ordning de är skrivna, så är
+det nödvändigt att först lista den man\-sökväg som är underhierarki till en
+annan hierarki, annars kommer felaktiga matchningar att göras.  Ett exempel
+är att \fI/usr/man/de_DE.88591\fP måste komma före \fI/usr/man\fP.
+.TP 
+\fBDEFINE\fP\fI\ nyckel\ värde\fP
+Rader på detta format definierar diverse konfigurationsvariabler; se
+standardkonfigurationsfilen för vilka de variabler är som används av
+sidvisaren för manualsidor.  De inkluderar standardsökvägar till diverse
+program (så som \fIgrep\fP och \fItbl\fP), och standarduppsättningar av argument
+för dessa program.
+.TP 
+\fBSECTION\fP \fIavsnitt\fP .\|.\|.
+.RS
+Rader på denna form definierar ordningen i vilken manualavsnitt bör
+genomsökas.  Om det inte finns några \fBSECTION\fP\-direktiv i
+konfigurationsfilen är standardvärdet:
+.PP
+.RS
+.nf
+.if  !'po4a'hide' SECTION 1 n l 8 3 0 2 3type 5 4 9 6 7
+.fi
+.RE
+.PP
+Om flera \fBSECTION\fP\-direktiv anges kommer avsnittslistorna att konkateneras.
+.PP
+Om en särskild ändelse inte finns i denna lista (säg, 1mh) kommer den att
+visas med resten av avsnittet som den hör till.  Effekten av detta är att du
+bara behöver att uttryckligen lista ändelser om du vill tvinga fram en
+särskild ordning.  Avsnitt med ändelser bör vanligtvis finnas intill deras
+huvudavsnitt (t.ex. ”1 1mh 8...”).
+.PP
+\fBSECTIONS\fP accepteras som ett alternativt namn på detta direktiv.
+.RE
+.TP 
+\fBMINCATWIDTH\fP\fI\ bredd\fP
+Om terminalbredden är mindre än \fIbredd\fP kommer cat\-sidor inte att skapas
+(om de saknas) eller visas.  Standardvärdet är 80.
+.TP 
+\fBMAXCATWIDTH\fP\fI\ bredd\fP
+Om terminalbredden är större än \fIbredd\fP kommer cat\-sidor inte att skapas
+(om de saknas) eller visas.  Standardvärdet är 80.
+.TP 
+\fBCATWIDTH\fP\fI\ bredd\fP
+Om \fIbredd\fP inte är noll kommer cat\-sidor alltid att formateras för en
+terminal av en angivna bredden, oavsett bredden på terminalen som faktiskt
+används.  Detta åsidosätter \fBMINCATWIDTH\fP och \fBMAXCATWIDTH\fP.
+.TP 
+.if  !'po4a'hide' .B NOCACHE
+Denna flagga förhindrar \fBman\fP(1) från att automatiskt skapa cat\-sidor.
+.SH FEL
+Om reglerna ovan inte följs till punkt och pricka kommer verktygen för
+sidvisning av manualer inte att fungera som önskat.  Dessa regler är
+överdrivet komplicerade.
+.PP
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

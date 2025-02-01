@@ -1,0 +1,173 @@
+.\" Man page for format of the manpath.config data file
+.\"
+.\" Copyright (C) 1994, 1995 Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANPATH 5 2024-04-05 2.12.1 /etc/man_db.conf
+.SH NAZWA
+manpath \- format pliku /etc/man_db.conf
+.SH OPIS
+Plik konfiguracyjny ścieżek przeszukiwania stron podręcznika stosowany jest
+przez narzędzia obsługi stron podręcznika do oszacowania ścieżek manpath
+użytkowników na bieżąco, podczas wykonywania programu. Wskazuje, jakie
+hierarchie stron man (manpaths) powinny być traktowane jako globalne oraz
+przypisuje im katalogi, które będą użyte do składowania plików cat.
+
+Jeżeli jest już ustawiona zmienna środowiska $\fBMANPATH\fP, to informacja
+zawarta w /etc/man_db.conf nie będzie jej nadpisywać.
+.SH "SEARCH PATH"
+By default, man\-db examines the user's $\fBPATH\fP.  For each \fIpath_element\fP
+found there, it adds \fImanpath_element\fP to the search path.
+
+If there is no \fBMANPATH_MAP\fP line in the configuration file for a given
+\fIpath_element\fP, then it adds all of \fIpath_element/../man\fP,
+\fIpath_element/man\fP, \fIpath_element/../share/man\fP, and
+\fIpath_element/share/man\fP that exist as directories to the search path.
+
+It then adds any \fBMANDATORY_MANPATH\fP entries from the configuration file to
+the search path.
+
+Finally, if the \fB\-\-systems\fP option is used or the $\fBSYSTEM\fP environment
+variable is set, then that should consist of a sequence of operating system
+names separated by commas or colons.  This acts as a template, expanding the
+search path once more to allow access to other operating systems' manual
+pages: for each system name, man\-db looks for that name as a subdirectory of
+each entry in the search path, and adds it to the final search path if it
+exists.  A system name of \fBman\fP inserts the normal search path without
+subdirectories.  For example, if the search path would otherwise have been
+\fI/usr/share/man:/usr/local/man\fP, and $\fBSYSTEM\fP is set to \fInewOS:man\fP,
+then the final search path will be
+\fI/usr/share/man/newOS:/usr/share/man:/usr/local/man/newOS:/usr/local/man\fP.
+
+The $\fBMANPATH\fP environment variable overrides man\-db's default manual page
+search paths.  Most users should not need to set it.  Its syntax is similar
+to the $\fBPATH\fP environment variable: it consists of a sequence of directory
+names separated by colons.  It overrides the default search path described
+above.
+
+If the value of $\fBMANPATH\fP starts with a colon, then the default search
+path is added at its start.  If the value of $\fBMANPATH\fP ends with a colon,
+then the default search path is added at its end.  If the value of
+$\fBMANPATH\fP contains a double colon (\fB::\fP), then the default search path is
+inserted in the middle of the value, between the two colons.
+.SH FORMAT
+Obecnie rozpoznawane są następujące typy pól:
+.TP 
+\fB#\fP\fI\ komentarz\fP
+Wiersze puste bądź rozpoczynające się znakiem \fB#\fP zostaną uznane za
+komentarze i zignorowane.
+.TP 
+\fBMANDATORY_MANPATH\fP\fI\ element_manpath\fP
+Wiersze tej postaci wskazują ścieżki man, które powinna zawierać każda
+automatycznie utworzona wartość zmiennej $\fBMANPATH\fP. Zwykle obejmuje to
+\fI/usr/man\fP.
+.TP 
+\fBMANPATH_MAP\fP\fI\ element_path\ element_manpath\fP
+Wiersze tej postaci ustawiają odwzorowania $\fBPATH\fP na $\fBMANPATH\fP. Dla
+każdego \fIelementu_path\fP znalezionego w ścieżce $\fBPATH\fP użytkownika do
+zmiennej \fB$\fPMANPATH zostanie dodany \fIelement_manpath\fP.
+.TP 
+\fBMANDB_MAP \fP\fIelement_manpath \fP\|[\| \fIelement_catpath\fP \|]
+Wiersze tej postaci wskazują, które ścieżki man powinny być traktowane jako
+systemowe, i opcjonalnie, gdzie powinny być składowane ich pliki cat. Ten
+typ pola jest szczególnie ważny, gdy \fBman\fP jest programem setuid, gdyż
+(jeżeli jest umieszczony w systemowym pliku konfiguracyjnym
+/etc/man_db.conf, a nie w pliku konfiguracyjnym użytkownika .manpath)
+mówi, do których hierarchii (katalogów) stron man należy sięgać jako
+użytkownik setuid, a do których jako użytkownik wywołujący program.
+
+Systemowe hierarchie stron man są zwykle składowane wewnątrz katalogu
+\fI/usr\fP jak na przykład \fI/usr/man\fP, \fI/usr/local/man\fP czy
+\fI/usr/X11R6/man\fP.
+
+Jeśli strony cat z danej ścieżki \fIelement_manpath\fP mają nie być
+przechowywane albo mają być składowane w tradycyjnym miejscu, to
+\fIelement_catpath\fP można pominąć.
+
+Traditional cat placement would be impossible for read only mounted manual
+page hierarchies and because of this it is possible to specify any valid
+directory hierarchy for their storage.  To observe the \fBLinux FSSTND\fP the
+keyword \fBFSSTND\fP can be used in place of an actual directory.
+
+Niestety, niezbędne jest podanie \fBwszystkich\fP systemowych ścieżek drzew
+man, łącznie ze ścieżkami kolejnych systemów, jak np.  \fI/usr/man/sun\fP czy
+też ścieżki \fBNLS locale\fP, takie jak \fI/usr/man/de_DE.88591\fP.
+
+Ponieważ informacja jest analizowana wiersz po wierszu, w kolejności zapisu,
+każda ścieżka manpath będąca podhierarchią innej hierarchii powinna być
+podana jako pierwsza. W przeciwnym razie zostaną wykonane niepoprawne
+dopasowania. Na przykład \fI/usr/man/de_DE.88591\fP musi wystąpić przed
+\fI/usr/man\fP.
+.TP 
+\fBDEFINE\fP\fI\ klucz\ wartość\fP
+Linie tej postaci definiują różnorodne zmienne konfiguracyjne \- domyślny
+plik konfiguracyjny zawiera zmienne używane przez programy użytkowe
+przeglądarki stron man.  Zawierają one domyślne ścieżki do różnych programów
+(takich jak \fIgrep\fP i \fItbl\fP)  oraz domyślne argumenty wywołań tych
+programów.
+.TP 
+\fBSECTION\fP \fIsekcja\fP .\|.\|.
+.RS
+Linie w tej postaci określają porządek przeszukiwania sekcji podręcznika
+ekranowego. Jeżeli plik konfiguracyjny nie zawiera żadnej dyrektywy
+\fBSECTION\fP, to domyślny porządek przeszukiwania sekcji jest następujący:
+.PP
+.RS
+.nf
+.if  !'po4a'hide' SECTION 1 n l 8 3 0 2 3type 5 4 9 6 7
+.fi
+.RE
+.PP
+Jeśli podano wiele dyrektyw \fBSECTION\fP, podane w nich sekcje będą połączone.
+.PP
+Jeśli pewne rozszerzenie (na przykład 1mh) nie występuje w liście sekcji, to
+będzie wyświetlane z pozostałą częścią  sekcji, do której należy. Tak więc
+nie ma potrzeby wymieniać wszystkich sekcji w pliku konfiguracyjnym, aby
+wymusić określony porządek przeszukiwania sekcji. Sekcje z rozszerzeniami
+będą występować po głównej sekcji (np. "1 1mh 8...").
+.PP
+Można użyć słowa \fBSECTIONS\fP jako alternatywnej nazwy tej dyrektywy.
+.RE
+.TP 
+\fBMINCATWIDTH\fP\fI\ szerokość\fP
+Jeżeli szerokość terminalu jest mniejsza niż \fIszerokość\fP, to preformatowane
+strony podręcznika nie będą ani tworzone (jeśli ich nie ma), ani
+wyświetlane. Domyślną wartością jest 80.
+.TP 
+\fBMAXCATWIDTH\fP\fI\ szerokość\fP
+Jeżeli szerokość terminalu jest większa niż \fIszerokość\fP, to preformatowane
+strony podręcznika nie będą ani tworzone (jeśli ich nie ma), ani
+wyświetlane. Domyślną wartością jest 80.
+.TP 
+\fBCATWIDTH\fP\fI\ szerokość\fP
+If \fIwidth\fP is non\-zero, cat pages will always be formatted for a terminal
+of the given width, regardless of the width of the terminal actually being
+used.  This overrides \fBMINCATWIDTH\fP and \fBMAXCATWIDTH\fP.
+.TP 
+.if  !'po4a'hide' .B NOCACHE
+Ta flaga zapobiega automatycznemu tworzeniu preformatowanych stron "cat"
+przez \fBman\fP.
+.SH BŁĘDY
+Jeżeli nie są ściśle przestrzegane powyższe reguły, to narzędzia
+przeglądania stron man nie będą działać w pożądany sposób.
+.PP
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db
+.SH TŁUMACZENIE
+Wojciech Kotwica w 1999 roku przetłumaczył część stron podręcznika pakietu
+man-db i udostępnił je w ramach Projektu Tłumaczenia Manuali.
+.br
+Robert Luberda tłumaczenie zaktualizował i uzupełnił w roku 2008.

@@ -1,0 +1,206 @@
+.if  !'po4a'hide' .ds mC CW
+.\" Man page for lexgrog
+.\"
+.\" Copyright (c) 2001 Colin Watson <cjwatson@debian.org>
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.if  t .if \n(.g .ds mC CR
+.if  n .ds mC R
+.
+.\" in an example (EX/EE)?
+.nr mE 0
+.
+.if  !\n(.g \{\
+.de EX
+.  br
+.  if !\\n(mE \{\
+.    nr mF \\n(.f
+.    nr mP \\n(PD
+.    nr PD 1v
+.    nf
+.    ft \\*(mC
+.    nr mE 1
+.  \}
+..
+.\}
+.
+.
+.if  !\n(.g \{\
+.de EE
+.  br
+.  if \\n(mE \{\
+.    ft \\n(mF
+.    nr PD \\n(mP
+.    fi
+.    nr mE 0
+.  \}
+..
+.\}
+.\" End example.
+.
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH LEXGROG 1 2024-04-05 2.12.1 "Verktyg för sidvisning av manual"
+.SH NAMN
+lexgrog \- tolka rubrikhuvud i manualsidor
+.SH SYNOPSIS
+\fBlexgrog\fP [\|\fB\-m\fP\||\|\fB\-c\fP\|] [\|\fB\-dfw?V\fP\|] [\|\fB\-E\fP \fIkodning\fP\|]
+\fIfil\fP \&.\|.\|.
+.SH BESKRIVNING
+\fBlexgrog\fP är en implementation av det traditionella verktyget \(lqgroff
+guess\(rq i \fBlex\fP. Det läser listan av filer på dess kommandorad antingen
+som källkodsfiler till manualsidor eller förformaterade \(lqcat\(rq sidor,
+och visar deras namn och beskrivning så som de används av \fBapropos\fP och
+\fBwhatis\fP, som en lista av preprocessorfilter som krävs av manualsidan innan
+den skickas vidare till \fBnroff\fP eller \fBtroff\fP, eller båda delar.
+.PP
+Om inmatningen är dåligt formaterad kommer \fBlexgrog\fP att skriva ut
+\(lqtolkning misslyckades\(rq; detta kan vara användbart för externa program
+som behöver kontrollera manualsidors korrekthet.  Om en av \fBlexgrog\fP:s
+inmatningsfiler är \(lq\-\(rq så kommer det att läsa från standard in; om
+någon inmatningsfil är komprimerad kommer en dekomprimerad version
+automatiskt att läsas in.
+.SH FLAGGOR
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Skriver ut felsökningsinformation.
+.TP 
+.if  !'po4a'hide' .BR \-m ", " \-\-man
+Tolka inmatning som källkodsfiler till manualsidor.  Detta är standard om
+varken \fB\-\-man\fP eller \fB\-\-cat\fP anges.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-cat
+Tolka inmatning som förformaterade manualsidor (\(lqcat\-sidor\(rq).
+\fB\-\-man\fP och \fB\-\-cat\fP får inte anges samtidigt.
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-whatis
+Visa namnet och beskrivningen från manualsidans rubrikhuvud så som de
+används av \fBapropos\fP och \fBwhatis\fP.  Detta är standard om varken
+\fB\-\-whatis\fP eller \fB\-\-filters\fP anges.
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-filters
+Visa listan över filter som behövs för att förformatera manualsidan innan
+den formateras med \fBnroff\fP eller \fBtroff\fP.
+.TP 
+\fB\-E\fP \fIkodning\fP, \fB\-\-encoding\fP \fIkodning\fP
+Åsidosätt den gissade teckenuppsättningen för sidan och använd \fIkodning\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Skriv ut ett hjälpmeddelande och avsluta.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Skriv ut ett kort användningsmeddelande och avsluta.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Visa versionsinformation.
+.SH SLUTSTATUS
+.TP 
+.if  !'po4a'hide' .B 0
+Framgångsrik programexekvering.
+.TP 
+.if  !'po4a'hide' .B 1
+Användningsfel.
+.TP 
+.if  !'po4a'hide' .B 2
+\fBlexgrog\fP misslyckades med att tolka en eller flera av dess
+inmatningsfiler.
+.SH EXEMPEL
+.nf
+  $ lexgrog man.1
+  man.1: "man \- ett gränssnitt för systemreferensmanualer"
+  $ lexgrog \-fw man.1
+  man.1 (t): "man \- ett gränssnitt för systemreferensmanualer"
+  $ lexgrog \-c whatis.cat1
+  whatis.cat1: "whatis \- visa beskrivningar för manualsidor"
+  $ lexgrog broken.1
+  broken.1: tolkning misslyckades
+.fi
+.SH WHATIS\-TOLKNING
+\fBmandb\fP (som använder samma kod som \fBlexgrog\fP)  tolkar \fBNAMN\fP\-avsnittet
+längst upp på varje manualsida och letar efter namn och beskrivningar för de
+funktioner som dokumenteras i varje sida.  Även om tolken är tämligen
+tolerant, då den varit tvungen att klara av ett antal olika format som
+använts historiskt, kan den ibland misslyckas med att extrahera den begärda
+informationen.
+.PP
+När den traditionella makrouppsättningen \fIman\fP används ser ett
+\fBNAMN\fP\-avsnitt ut ungefär så här:
+.PP
+.RS
+.EX
+\&.SH NAMN
+foo \e\- program som gör någonting
+.EE
+.RE
+.PP
+Vissa manualsidor kräver att \(oq\e\-\(cq anges exakt som visats; \fBmandb\fP
+är mer tolerant, men för kompatibilitet med andra system är det trots detta
+en bra idé att behålla bakstrecket.
+.PP
+På vänstersidan kan det finnas flera namn, separerade av komman.  Namn som
+innehåller blanksteg kommer att ignoreras för att undvika felaktigt beteende
+för vissa dåligt namngivna \fBNAMN\fP\-avsnitt.  Texten på höger sida är
+friformstext och får sträcka sig över flera rader.  Om flera funktioner med
+olika beskrivningar dokumenteras på samma manualsida ska därför följande
+form användas:
+.PP
+.RS
+.EX
+\&.SH NAMN
+foo, bar \e\- program som gör någonting
+\&.br
+baz \e\- program som inte gör någonting
+.EE
+.RE
+.PP
+(Ett makro som påbörjar ett nytt stycke, så som \fB.PP\fP, kan användas
+istället för avbrytningsmakrot \fB.br\fP.)
+.PP
+När den BSD\-baserade makrouppsättningen \fImdoc\fP används ser ett
+\fBNAMN\fP\-avsnitt ut ungefär så här:
+.PP
+.RS
+.EX
+\&.Sh NAMN
+\&.Nm foo
+\&.Nd program som gör någonting
+.EE
+.RE
+
+Det finns flera anledningar till varför whatis\-tolkning misslyckas.  Ibland
+ersätter upphovsmännen till manualsidorna \(oq.SH NAMN\(cq med \(oq.SH
+MITTPROGRAM\(cq och så kan inte \fBmandb\fP hitta avsnittet från vilket
+informationen det behöver ska extraheras.  Ibland inkluderar upphovsmännen
+NAMN\-avsnittet, men placerar friformstext där snarare än \(oqnamn \e\-
+beskrivning\(cq.  Syntax som är lik ovanstående bör dock accepteras.
+.SH "SE VIDARE"
+.if  !'po4a'hide' .IR apropos (1),
+.if  !'po4a'hide' .IR man (1),
+.if  !'po4a'hide' .IR whatis (1),
+.if  !'po4a'hide' .IR mandb (8)
+.SH NOTERINGAR
+\fBlexgrog\fP försöker att tolka filer som innehåller .so\-begäran men kommer
+endast att lyckas göra det korrekt om filerna är korrekt installerade i
+hierarkin av manualsidor.
+.SH UPPHOVSMAN
+Koden som används av \fBlexgrog\fP för att genomsöka manualsidor skrevs av:
+.PP
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.PP
+Colin Watson skrev den innevarande inkarnationen av
+kommandoradsgränssnittet, såväl som denna manualsida.
+.SH FEL
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

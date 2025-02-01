@@ -45,3 +45,7 @@ tar -xf ../../systemd-man-pages-256.4.tar.xz \
 
 systemd-machine-id-setup --root=$BD
 systemctl --root=$BD preset-all
+
+# For dbus:
+mkdir -pv $BD/var/lib/dbus
+ln -sfv $BD/etc/machine-id $BD/var/lib/dbus

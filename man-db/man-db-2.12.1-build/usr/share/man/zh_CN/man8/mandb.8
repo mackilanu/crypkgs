@@ -1,0 +1,152 @@
+'\" t
+.\" Man page for mandb
+.\"
+.\" Copyright (C) 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Tue Apr 26 12:56:44 BST 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANDB 8 2024-04-05 2.12.1 手册分页显示工具
+.SH 名称
+mandb \- 创建或更新手册页索引缓存
+.SH 概述
+\fBmandb\fP [\|\fB\-dqsucpt?V\fP\||\|\fB\-h\fP\||\|\fB\-V\fP\|] [\|\fB\-C\fP \fI文件\fP\|]
+[\|\fImanpath\fP\|]
+.br
+\fBmandb\fP [\|\fB\-dqsut\fP\|] [\|\fB\-C\fP \fI文件\fP\|] \fB\-f\fP \fI文件名\fP\ .\|.\|.
+.SH 描述
+\fBmandb\fP 用于初始化或手动更新 \fB索引\fP 数据库缓存。缓存包含与手册页系统当前状态相关的信息；保存在缓存中的这些信息被 man\-db
+工具用来提高速度和增强功能。
+
+当创建或更新 \fB索引\fP时，\fBmandb\fP 会警告错误的 ROFF .so 请求，无效的手册页名称和手册页，因为 \fBwhatis\fP
+无法解析它们。
+
+给 \fBmandb\fP 提供可选的，以冒号分隔的路径会覆盖内部的系统手册页层次结构搜索路径，这些路径是从 man\-db 配置文件中的信息确定的。
+.SH 数据库缓存
+\fBmandb\fP 可以编译支持以下任何一种数据库类型。
+
+.TS
+tab (@);
+l l l.
+名称@异步@文件名
+_
+Berkeley db@是@\fIindex.bt\fP
+GNU gdbm@是@\fIindex.db\fP
+UNIX ndbm@否@\fIindex.(dir|pag)\fP
+.TE
+
+那些提供异步更新的数据库速度更快，但代价是可能在异常中止时损坏数据。万一这种事情发生，可能要重新以 \fB\-c\fP 选项运行 \fBmandb\fP
+来重建数据库。
+.SH 选项
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+打印调试信息。
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+不显示警告。
+.TP 
+.if  !'po4a'hide' .BR \-s ", " \-\-no-straycats
+不花时间查找或向数据库添加有关孤立 cat 页面的信息。
+.TP 
+.if  !'po4a'hide' .BR \-p ", " \-\-no-purge
+不花时间检查删除的手册页并从数据库中清理它们。
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-create
+默认情况下，\fBmandb\fP 会尝试更新任何以前创建的数据库。如果某个数据库不存在，程序会创建它。此选项强制 \fBmandb\fP
+删除以前的数据库并重新生成数据库，并隐含了 \fB\-\-no\-purge\fP。在数据库损坏或将来引入新数据库存储方案时，这一选项可能用到。
+.TP 
+.if  !'po4a'hide' .BR \-u ", " \-\-user-db
+只创建用户数据库，即使有创建系统数据库所需的写权限。
+.TP 
+.if  !'po4a'hide' .BR \-t ", " \-\-test
+对层次结构搜索路径中的手册页执行正确性检查。使用此选项时，\fBmandb\fP 不会更改现有的数据库。
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-filename
+只更新指定文件名对应的记录。此选项不作常规使用；它由 \fBman\fP 内部使用(以 \fBMAN_DB_UPDATES\fP
+选项编译时)，以便查找页面是否过期。它隐含了 \fB\-p\fP，关闭了 \fB\-c\fP 和 \fB\-s\fP。
+.TP 
+\fB\-C\ \fP\fI文件\fP,\ \fB\-\-config\-file=\fP\fI文件\fP
+使用此用户配置文件代替默认的 \fI\(ti/.manpath\fP。
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+显示用法消息，然后退出。
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+打印简短的帮助消息并退出。
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+显示版本号，然后退出。
+.SH 退出状态
+.TP 
+.if  !'po4a'hide' .B 0
+程序成功执行。
+.TP 
+.if  !'po4a'hide' .B 1
+用法、语法或配置文件错误。
+.TP 
+.if  !'po4a'hide' .B 2
+操作出错。
+.TP 
+.if  !'po4a'hide' .B 3
+子进程失败。
+.SH 诊断
+在构建数据库时可能会显示以下警告消息。
+.TP 
+\fB<文件名>: 页面(章节) 的 whatis 解析失败\fP
+从给定 <文件名> 提取 whatis 行失败。这通常是由于手册编写不当导致的。但如果出现了大量这种消息，则可能是系统包含非标准的，和
+man\-db whatis 解析器不兼容的手册页。请参阅 \fBlexgrog\fP(1) 中的 \fBWHATIS PARSING\fP 一节了解更多信息。
+.TP 
+\fB<文件名>: 是一个的无效的符号链接\fP
+<文件名>不存在，但被一个符号链接引用。通常会给出进一步的诊断信息，识别出非法链接的 <文件名>。
+.TP 
+\fB<文件名>: 错误的符号链接或 ROFF `.so' 请求\fP
+<文件名> 是指向不存在的文件的符号链接，或包含带有请求不存在文件的 ROFF。
+.TP 
+\fB<文件名>: 将忽略假的文件名\fP
+<文件名> 可能是或不是有效的手册页，但它的名称是无效的。这通常是由于手册页包含章节扩展 <x> 却被放在了手册页章节
+<y>。
+.TP 
+\fB<文件名掩码>: 扩展冲突\fP
+通配符 <文件名掩码> 不唯一。这通常是同时存在同一手册页的压缩和非压缩版本导致的。
+.SH 文件
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+man\-db 配置文件。
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt|db|dir|pag)
+与 FHS 兼容的全局 \fI索引\fP 数据库缓存。
+.PP
+包含的数据库缓存的较早位置：
+.TP 
+.if  !'po4a'hide' .I /usr/man/index.(bt|db|dir|pag)
+传统的全局 \fI索引\fP 数据库缓存。
+.TP 
+.if  !'po4a'hide' .I /var/catman/index.(bt|db|dir|pag)
+替代的或 FSSTND 兼容的全局 \fI索引\fP 数据库缓存。
+.SH 亦见
+.if  !'po4a'hide' .BR lexgrog (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR catman (8)
+.PP
+此手册页中的 \fBWHATIS PARSING\fP 小节现在是 \fBlexgrog\fP(1) 的一部分。
+.SH 作者
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BUGS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

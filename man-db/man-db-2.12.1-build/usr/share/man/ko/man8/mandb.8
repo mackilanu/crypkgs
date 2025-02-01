@@ -1,0 +1,158 @@
+'\" t
+.\" Man page for mandb
+.\"
+.\" Copyright (C) 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Tue Apr 26 12:56:44 BST 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANDB 8 2024-04-05 2.12.1 "설명서 페이저 유틸리티"
+.SH 이름
+mandb \- 설명서 페이지 색인 캐시를 만들거나 업데이트합니다
+.SH 개요
+\fBmandb\fP [\|\fB\-dqsucpt?V\fP\|] [\|\fB\-C\fP \fI파일\fP\|] [\|\fI맨_페이지_경로\fP\|]
+.br
+\fBmandb\fP [\|\fB\-dqsut\fP\|] [\|\fB\-C\fP \fI파일\fP\|] \fB\-f\fP \fI파일이름\fP\ .\|.\|.
+.SH 설명
+\fBmandb\fP는 \fB색인\fP 데이터베이스 캐시를 초기화하거나 직접 업데이트할 때 사용합니다.  캐시에는 설명서 페이지 시스템의 현재
+상태 관련 정보가 들어있으며, 여기에 저장한 정보는 man\-db 유틸리티에서 속도와 기능을 개선하는데 활용합니다.
+
+\fB색인\fP을 만들거나 업데이트할 때, \fBmandb\fP는 ROFF .so 요청의 문제, 어떤 설명서 페이지 파일 이름이 잘못되었는지,
+어떤 설명서 페이지가 \fBwhatis\fP 행을 해석할 수 없는지 경고할 수 있습니다.
+
+추가 콜론 구분 경로로 \fBmandb\fP를 제공하면 내부 시스템 설명서 페이지 계층 검색 경로보다 우선할 수 있으며, man\-db 설정
+파일에서 찾을 수 있는 정보로 결정합니다.
+.SH "데이터베이스 캐시"
+\fBmandb\fP는 다음 데이터베이스 형식 중 하나를 지원하도록 컴파일할 수 있습니다.
+
+.TS
+tab (@);
+l l l.
+이름@비동기@파일 이름
+_
+버클리 DB@예@\fIindex.bt\fP
+GNU GDBM@예@\fIindex.db\fP
+유닉스 NDBM@아니요@\fIindex.(dir|pag)\fP
+.TE
+
+이 데이터베이스 형식은 비정상 종료 상황에서 가능한 손상을 개선된 속도로 감당하기 위해 비동기 업데이트를 지원합니다.  이런 일이
+일어났을 경우 \fBmandb\fP에 \fB\-c\fP 옵션을 추가하여 바닥부터 데이터베이스를 다시 만드는 과정의 실행이 필요합니다.
+.SH 옵션
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+디버깅 정보를 출력합니다.
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+경고 메시지를 표시하지 않습니다.
+.TP 
+.if  !'po4a'hide' .BR \-s ", " \-\-no-straycats
+위치가 잘못된 cat 페이지를 찾거나 데이터에 정보를 추가하는데 시간을 소요하지 않습니다.
+.TP 
+.if  !'po4a'hide' .BR \-p ", " \-\-no-purge
+데이터베이스에서 설명서 페이지를 삭제하거나 소거하는동안 소요 시간 검사를 하지 않습니다.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-create
+기본적으로 \fBmandb\fP는 앞서 만든 데이터베이스 업데이트를 시도합니다.  데이터베이스가 없다면 만듭니다.  이 옵션은
+\fBmandb\fP로 하여금 이전 데이터베이스를 삭제하고 바닥부터 다시 만드는 동작을 강제하며 \fB\-\-no\-purge\fP 옵션을 암묵적으로
+실행합니다.  데이터베이스가 깨졌거나 새 데이터베이스 저장소 스킴을 앞으로 도입할 예정이라면 필요한 과정일 수 있습니다.
+.TP 
+.if  !'po4a'hide' .BR \-u ", " \-\-user-db
+사용자 데이터베이스만 만듭니다만, 시스템 데이터베이스를 만들 때는 쓰기 권한이 필요합니다.
+.TP 
+.if  !'po4a'hide' .BR \-t ", " \-\-test
+계층 검색 경로 상에서 설명서 페이지의 정확성 검사를 수행합니다.  \fBmandb\fP에서는 이 옵션으로 기존 데이터베이스를 대체하지
+않습니다.
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-filename
+주어진 파일 이름 항목만 업데이트합니다.  이 옵션은 평시 활용 옵션이 아닙니다. \fBMAN_DB_UPDATES\fP 옵션으로 컴파일 했고
+페이지가 오래됐음을 발견했을 때 \fBman\fP에서 내부적으로 사용합니다.  \fB\-p\fP 동작을 암묵적으로 실행하며 \fB\-c\fP 와
+\fB\-s\fP 옵션의 동작을 멈춥니다.
+.TP 
+\fB\-C\ \fP\fI파일\fP,\ \fB\-\-config\-file=\fP\fI파일\fP
+\fI\(ti/.manpath\fP 기본값 대신 사용자 설정 파일을 활용합니다.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+사용법 메시지를 표시하고 나갑니다.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+간단한 사용법 메시지를 출력하고 나갑니다.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+버전을 표시하고 나갑니다.
+.SH "종료 상태"
+.TP 
+.if  !'po4a'hide' .B 0
+프로그램 실행 성공.
+.TP 
+.if  !'po4a'hide' .B 1
+사용법, 문법, 구성 파일 오류.
+.TP 
+.if  !'po4a'hide' .B 2
+처리 오류.
+.TP 
+.if  !'po4a'hide' .B 3
+하위 프로세스 실행에 실패했습니다.
+.SH 진단
+다음 경고 메시지는 데이터베이스 구성을 진행하는 동안 나타날 수 있습니다.
+.TP 
+\fB<파일이름>: 페이지(섹션)의 whatis 해석에 실패했습니다\fP
+<파일이름>에서 whatis 행 추출 시도에 실패했습니다.  보통 설명서 페이지를 제대로 작성하지 않았기 때문이긴 하지만,
+상당수의 메시지가 나타났다면 man\-db whatis 해석 프로그램과 호환성이 없는 비표준 설명서 페이지가 시스템에 들어있어서일지도
+모릅니다.  자세한 내용은 \fBlexgrog\fP(1)의 \fBWHATIS 해석\fP 섹션을 살펴보십시오.
+.TP 
+\fB<파일이름>: 은 연속 심볼릭 링크입니다\fP
+<파일이름>은 없는데 심볼릭 링크가 참조하는 경우입니다.  더 자세한 진단에서는 제공하는 링크의
+<파일이름>을 식별합니다.
+.TP 
+\fB<파일이름>: 잘못된 심볼링 링크 또는 ROFF `.so' 요청입니다\fP
+<파일이름>이 어딘가를 가리키는 심볼릭 링크거나 없는 파일에 요청을 보내는 ROFF가 들어있습니다.
+.TP 
+\fB<파일이름>: 가짜 파일 이름 무시\fP
+<파일이름>이 적절한 설명서 페이지일 수도, 아닐 수도 있지만, 이름이 잘못됐습니다.  보통 <x> 섹션
+확장자가 붙은 설명서 페이지가 설명서 페이지 섹션 <y>에 있어서일 수도 있습니다.
+.TP 
+\fB<파일이름_마스크>: 여러 확장자가 있습니다\fP
+<파일이름_마스크>의 와일드카드 결과가 유일 값이 아닙니다.  이 메시지는 보통 동일한 설명서 페이지의 같은 버전이 압축
+버전과 비압축 버전이 공존할 경우에 나타납니다.  최근 대부분의 경우는 무시합니다.
+.SH 파일
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+man\-db 구성 파일.
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt|db|dir|pag)
+FHS 준수 전역 \fI색인\fP 데이터베이스 캐시입니다.
+.PP
+데이터베이스 캐시의 이전 위치는 다음과 같습니다:
+.TP 
+.if  !'po4a'hide' .I /usr/man/index.(bt|db|dir|pag)
+전통 전역 \fI색인\fP 데이터베이스 캐시입니다.
+.TP 
+.if  !'po4a'hide' .I /var/catman/index.(bt|db|dir|pag)
+대체 또는 FSSTND 준수 전역 \fI색인\fP 데이터베이스 캐시입니다.
+.SH "추가 참조"
+.if  !'po4a'hide' .BR lexgrog (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR catman (8)
+.PP
+이 설명서 페이지의 \fBWHATIS 해석\fP 섹션은 이제 \fBlexgrog\fP(1)의 일부입니다.
+.SH 저작자
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH 버그
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

@@ -1,0 +1,13 @@
+[package]
+name = "procps-ng"
+version = "4.0.4"
+description = "description"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-4.0.4.tar.xz"
+
+build = [
+    "BUILD",
+]

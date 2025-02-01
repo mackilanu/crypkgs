@@ -1,0 +1,99 @@
+.\" Man page for catman
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Dec 10 14:17:29 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH CATMAN 8 2024-04-05 2.12.1 "Kılavuz sayfası yardımcıları"
+.SH AD
+catman \- önceden biçimlendirilmiş kılavuz sayfaları oluştur veya güncelle
+.SH ÖZET
+\fBcatman\fP [\|\fB\-d?V\fP\|] [\|\fB\-M\fP \fIyol\fP\|] [\|\fB\-C\fP \fIdosya\fP\|]
+[\|\fIbölüm\fP\|] \&.\|.\|.
+.SH AÇIKLAMA
+\fBcatman\fP, cat sayfası olarak bilinen ve önceden biçimlendirilmiş kılavuz
+sayfalarının güncel bir kümesini oluşturmak için kullanılır.  Cat sayfaları,
+orijinal kılavuz sayfalara göre genellikle daha hızlı görüntülenir; ancak
+ekstra saklama alanı gerektirir.  Cat sayfalarını destekleme kararı, bunları
+içermesi için uygun dizinleri sağlaması gereken yerel yöneticinindir.
+
+\fBcatman\fP için kullanılabilen seçenekler kılavuz sayfa hiyerarşileri ve ön
+biçimlendirme için bölümlerdir.  Öntanımlı hiyerarşiler, man\-db yapılandırma
+dosyasında sistem hiyerarşileri olarak belirtilen hiyerarşilerdir ve
+öntanımlı bölümler çevre değişkeni $\fBMANSECT\fP'ın iki nokta üst üste
+çizgiyle ayrılmış içerikleri veya eğer $\fBMANSECT\fP tanımlanmamış ise
+\fBman\fP içine derlenmiş standart kümedir.  \fBcatman\fP'e boşluklarla
+ayrılmış bölüm adları vermek, her ikisinin de üzerine yazacaktır.
+
+\fBcatman\fP hangi dosyaların biçimlendirilmesi gerektiğini belirlemek için
+her hiyerarşi ile ilişkili \fBindex\fP veritabanı önbelleğini kullanır.
+.SH SEÇENEKLER
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Hata ayıklama bilgisini göster.
+.TP 
+\fB\-M\ \fP\fIyol\fP,\ \fB\-\-manpath=\fP\fIyol\fP
+İki nokta üst üste ayrılmış alternatif kılavuz sayfa hiyerarşisi arama yolu
+belirtin.  Öntanımlı olarak, bu, man\-db yapılandırma dosyasında sistem
+hiyerarşileri olarak belirtilen tüm yollardır.
+.TP 
+\fB\-C\ \fP\fIdosya\fP,\ \fB\-\-config\-file=\fP\fIdosya\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Bir yardım iletisi göster ve çık.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Kısa kullanım iletisini göster ve çık.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Sürüm bilgisini göster.
+.SH ÇEVRE
+.TP 
+.if  !'po4a'hide' .B MANSECT
+$\fBMANSECT\fP ayarlandıysa değeri kolonlarla ayrılmış bir bölüm listesidir ve
+hangi kılavuz bölümlerin hangi sırada bulunacağını belirlemek için
+kullanılır.  \fI/etc/man_db.conf\fP içindeki \fBSECTION\fP yönergesi
+tarafından geçersiz kılınmadıkça öntanımlı "% sections%"dir.
+.TP 
+.if  !'po4a'hide' .B MANPATH
+$\fBMANPATH\fP ayarlanmışsa değeri iki nokta ile ayrılmış kullanılacak kılavuz
+sayfa arama yolu olarak yorumlanır.
+
+Bu çevre değişkeninin nice işlendiğinin ayrıntılarına ve öntanımlı
+davranışına bakmak için \fBmanpath\fP(5)'in \fBSEARCH PATH\fP bölümüne bakın.
+.SH DOSYALAR
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+man\-db yapılandırma dosyası.
+.TP 
+.if  !'po4a'hide' .I /usr/man/index.(bt|db|dir|pag)
+Geleneksel bir global \fIindeks\fP veritabanı önbelleği.
+.TP 
+.if  !'po4a'hide' .I /var/catman/index.(bt|db|dir|pag)
+Alternatif veya FSSTND uyumlu genel \fIindeks\fP veritabanı önbelleği.
+.SH "AYRICA BAKINIZ"
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR mandb (8)
+.SH YAZAR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH HATALAR
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

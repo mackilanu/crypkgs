@@ -1,0 +1,87 @@
+.\" Man page for man-recode
+.\"
+.\" Copyright (C) 2019 Colin Watson <cjwatson@debian.org>
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MAN-RECODE 1 2024-04-05 2.12.1 "Utilitare ale paginatorului de manual"
+.SH NUME
+man-recode \- convertește paginile de manual la altă codificare
+.SH REZUMAT
+\fBman-recode\fP \fB\-t\fP \fIcodificarea\-dorită\fP
+{\|\fB\-\-suffix=\fP\fIsufix\/\fP\||\|\fB\-\-in\-place\fP\|} [\|\fB\-dqhV\fP\|]
+[\|\fInume\-fișier\fP\|]
+.SH DESCRIERE
+\fBman-recode\fP convertește pagini de manual multiple de la o codare la
+alta, ghicind codarea de intrare potrivită pentru fiecare din acestea.  Este
+util când se înregistrează permanent pagini scrise în seturi de caractere de
+moștenire, sau în sisteme de generare care au nevoie să recodeze un set de
+pagini la o codare comună singură (de obicei UTF\-8) pentru instalare.  Când
+se convertesc multe pagini de manual, acest program este mult mai rapid
+decât rularea \fBman \-\-recode\fP sau \fBmanconv\fP pe fiecare pagină.
+.PP
+Dacă o declarație de codificare este găsită pe prima linie a unei pagini de
+manual, atunci declarația respectivă este utilizată drept codificare de
+intrare pentru pagina respectivă.  Dacă nu este găsită, codificarea de
+intrare este ghicită pe baza numelui fișierului.
+.PP
+Declarațiile de codificare au următoarea formă:
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" \-*\- coding: UTF\-8 \-*\-
+.fi
+.RE
+.PP
+sau (dacă vor fi, de asemenea, declarate preprocesoarele de pagină de
+manual):
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" t \-*\- coding: ISO\-8859\-1 \-*\-
+.fi
+.RE
+.SH OPȚIUNI
+.TP 
+\fB\-t\fP \fIcodificarea\/\fP, \fB\-\-to\-code=\fP\fIcodificarea\fP
+Convertește pagini de manual la \fIcodificarea\fP.
+.TP 
+\fB\-\-suffix=\fP\fIsufix\fP
+Formează fiecare nume de fișier de ieșire prin adăugarea \fIsufix\fPului la
+numele fișierului de intrare, după eliminarea oricărei extensii de
+comprimare.
+.TP 
+.if  !'po4a'hide' .B \-\-in\-place
+Suprascrie fiecare fișier de intrare cu ieșirea, după eliminarea oricărei
+extensii de comprimare.
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Nu emite mesaje de eroare atunci când pagina nu poate fi convertită.
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Imprimă informațiile de depanare.
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+Imprimă un mesaj de ajutor și iese.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Afișează informații despre versiune.
+.SH "CONSULTAȚI ȘI"
+.if  !'po4a'hide' .IR iconv (1),
+.if  !'po4a'hide' .IR man (1),
+.if  !'po4a'hide' .IR manconv (1)
+.SH DEFECȚIUNI
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi

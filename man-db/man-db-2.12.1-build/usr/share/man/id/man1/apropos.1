@@ -1,0 +1,185 @@
+.\" Man page for apropos
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH APROPOS 1 2024-04-05 2.12.1 "Penggunaan halaman buku panduan"
+.SH NAMA
+apropos \- cari halaman buku panduan dari nama dan deskripsinya
+.SH RINGKASAN
+\fBapropos\fP [\|\fB\-dalhvV\fP\|] [\|\fB\-e\fP\||\|\fB\-w\fP\||\|\fB\-r\fP\|] [\|\fB\-s\fP
+\fIbagian\fP\|] [\|\fB\-m\fP \fIsistem\fP\|[\|,.\|.\|.\|]\|] [\|\fB\-M\fP \fIjalur\fP\|]
+[\|\fB\-L\fP \fIlokal\fP\|] [\|\fB\-C\fP \fIberkas\fP\|] \fIkata kunci\fP \&.\|.\|.
+.SH DESKRIPSI
+Setiap halaman buku panduan memiliki sebuah deskripsi singkat
+didalamnya. \fBapropos\fP mencari deskripsi untuk setiap hal dari \fIkata kunci\fP.
+
+\fIkata kunci\fP biasanya sebuah ekspresi umum, sama seperti (\fB\-r\fP) yang telah
+digunakan, atau mungkin berisi karakter bebas (\fB\-w\fP), atau yang cocok
+dengan kata kunci (\fB\-e\fP). Menggunakan pilihan ini, mungkin diperlukan untuk
+memperjelas \fIkata kunci\fP atau karakter spesial untuk keluar (\e) untuk
+menghentikan shell menginterpretasikannya.
+
+Aturan baku pencocokan mengijinkan pencocokan dibuat terhadap nama halaman
+dan batas kata dalam deskripsi.
+
+Basis data dicari dengan \fBapropos\fP diperbarui oleh aplikasi
+\fBmandb\fP. Tergantung di instalasi anda, ini mungkin akan dijalankan secara
+berkala oleh pekerjaan cron, atau mungkin bisa dijalankan secara manual
+setelah halaman buku panduan telah terpasang.
+.SH PILIHAN
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Tampilkan informasi penelusuran.
+.TP 
+.if  !'po4a'hide' .BR \-v ", " \-\-verbose
+Tampilkan pesan peringatan bertele\-tele.
+.TP 
+.if  !'po4a'hide' .BR \-r ", " \-\-regex
+Interpretasikan setiap kata kunci sebagai sebuah ekspresi umum. Ini adalah
+perilaku baku. Setiap kata kunci akan dicocokan terhadap nama dan deskripsi
+halaman secara bebas.  Ini dapat cocok dengan bagian apapun juga. Pencocokan
+tidak terbatas ke batasan kata.
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-wildcard
+Interpretasikan setiap kata kunci sebagai sebuah pola berisi gaya shell
+karakter bebas. Setiap kata kunci akan dicocokan terhadap nama dan deskripsi
+halaman secara bebas. Jika \fB\-\-exact\fP juga digunakan, sebuah pasangan hanya
+akan ditemukan jika sebuah kata kunci yang diekspan cocok ke seluruh
+deskripsi atau nama halaman. Jika tidak kata kunci juga diijinkan untuk
+dicocokan di batas kata dalam deskripsi.
+.TP 
+.if  !'po4a'hide' .BR \-e ", " \-\-exact
+Setiap kata kunci akan secara tepat dicocokan terhadap nama dan deskripsi
+halaman.
+.TP 
+.if  !'po4a'hide' .BR \-a ", " \-\-and
+Hanya tampilkan item yang cocok dengan seluruh kata kunci yang
+diberikan. Secara baku adalah menampilkan item yang cocok dengan kata kunci
+apapun.
+.TP 
+.if  !'po4a'hide' .BR \-l ", " \-\-long
+Jangan trim keluaran ke lebar terminal. Secara normal, keluaran akan
+dipotong ke lebar terminal untuk menghindari hasil aneh dari bagian \fBNAMA\fP
+yang ditulis tidak sempurna.
+.TP 
+\fB\-s\fP \fIlist\/\fP, \fB\-\-sections=\fP\fIlist\/\fP, \fB\-\-section=\fP\fIlist\fP
+Hanya cari di bagian buku panduan yang diberikan. Jika \fIbagian\fP adalah
+sebuah bagian sederhana, sebagai contoh "3", maka tampilkan daftar dari
+deskripsi akan memasukan halaman dalam bagian "3", "3perl", "3x", dan
+selanjutnya; jika \fIbagian\fP memiliki sebuah ekstensi, sebagai contoh
+"3perl", maka daftar hanya akan memasukan halaman dalam bagian tepat dari
+bagian buku panduan.
+.TP 
+\fB\-m\fP \fIsistem\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fIsistem\fP\|[\|,.\|.\|.\|]
+If this system has access to other operating systems' manual page
+descriptions, they can be searched using this option.  To search NewOS's
+manual page descriptions, use the option \fB\-m\fP \fBNewOS\fP.
+
+\fIsistem\fP yang dispesifikasikan dapat berupa sebuah kombinasi dari nama
+sistem operasi dipisahkan oleh koma. Untuk memasukan sebuah pencarian dari
+deskripsi sistem operasi asal \fBwhatis\fP, masukan nama sistem \fBman\fP dalam
+argumen string. Pilihan ini akan mengesampingkan variabel lingkungan
+$\fBSYSTEM\fP.
+.TP 
+\fB\-M\ \fP\fIjalur\fP,\ \fB\-\-manpath=\fP\fIjalur\fP
+Spesifikasikan sebuah alternatif set dari struktur halaman buku panduan
+dipisahkan oleh kolon ke pencarian. Secara Baku, \fBapropos\fP menggunakan
+variabel lingkungan $\fBMANPATH\fP, kecuali itu kosong atau tidak diset, dalam
+beberapa kasus itu akan menentukan sebuah jalur man yang sesuai di variabel
+lingkungan anda $\fBPATH\fP. Pilihan ini mengesampingkan isi dari $\fBMANPATH\fP.
+.TP 
+\fB\-L\ \fP\fIlokal\fP,\ \fB\-\-locale=\fP\fIlokal\fP
+\fBapropos\fP akan secara normal menentukan lokal anda sekarang dengan sebuah
+panggilan ke fungsi \fBsetlocale\fP(3) yang menanyakan berbagai variabel
+lingkungan, kemungkinan termasuk $\fBLC_MESSAGES\fP dan $\fBLANG\fP. Untuk memaksa
+sementara ke nilai yang telah ditentukan, gunakan pilihan ini untuk
+mensuplai sebuah string \fIlokal\fP secara langsung ke \fBapropos\fP. Catat
+bahwa itu tidak akan berpengaruh sampai pencarian untuk halaman benar benar
+dimulai. Pesan bantuan akan selalu ditampilkan dalam lokal yang ditentukan
+diawal.
+.TP 
+\fB\-C\ \fP\fIberkas\fP,\ \fB\-\-config\-file=\fP\fIberkas\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Tampilkan sebuah pesan bantuan dan keluar.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Tampilkan sebuah pesan bantuan dan keluar.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Tampilkan informasi versi.
+.SH "STATUS KELUAR"
+.TP 
+.if  !'po4a'hide' .B 0
+Eksekusi aplikasi sukses.
+.TP 
+.if  !'po4a'hide' .B 1
+Penggunaan, sintaks atau berkas konfigurasi error.
+.TP 
+.if  !'po4a'hide' .B 2
+Operasional error.
+.TP 
+.if  !'po4a'hide' .B 16
+Tidak ditemukan apapun yang cocok dengan kriteria yang dispesifikasikan.
+.SH LINGKUNGAN
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+Jika $\fBSYSTEM\fP telah diset, ini akan memiliki efek sama seperti jika ini
+telah dispesifikasikan sebagai argumen ke pilihan \fB\-m\fP.
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Jika $\fBMANPATH\fP telah diset, nilainya diinterpretasikan sebagai struktur
+jalur pencarian halaman buku panduan dipisahkan dengan kolon untuk
+digunakan.
+
+See the \fBSEARCH PATH\fP section of \fBmanpath\fP(5)  for the default behaviour
+and details of how this environment variable is handled.
+.TP 
+.if  !'po4a'hide' .B MANWIDTH
+If $\fBMANWIDTH\fP is set, its value is used as the terminal width (see the
+\fB\-\-long\fP option).  If it is not set, the terminal width will be calculated
+using the value of $\fBCOLUMNS\fP, and \fBioctl\fP(2)  if available, or falling
+back to 80 characters if all else fails.
+.TP 
+.if  !'po4a'hide' .B POSIXLY_CORRECT
+Jika $\fBPOSIXLY_CORRECT\fP diset, meskipun ke sebuah nilai null, pencarian
+baku \fBapropos\fP akan berupa sebuah ekstensi regex (\fB\-r\fP). Saat ini, ini
+adalah perilaku baku.
+.SH BERKAS
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/index.(bt\^|\^db\^|\^dir\^|\^pag)
+Sebuah persediaan basis data \fIindeks\fP menyeluruh tradisional.
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt\^|\^db\^|\^dir\^|\^pag)
+Sebuah persediaan basis data \fIindeks\fP menyeluruh sesuai dengan FHS.
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/\|.\|.\|.\|/whatis
+Sebuah basis data teks \fBwhatis\fP tradisional.
+.SH "LIHAT JUGA"
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR whatis (1),
+.if  !'po4a'hide' .BR mandb (8)
+.SH PENGARANG
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BUGS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

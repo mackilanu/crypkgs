@@ -1,0 +1,209 @@
+'\" t
+.\" Man page for mandb
+.\"
+.\" Copyright (C) 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Tue Apr 26 12:56:44 BST 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANDB 8 2024-04-05 2.12.1 "Utilitaires de l'afficheur des pages de manuel"
+.SH NOM
+mandb \- Créer ou mettre à jour les bases de données d'indexation des pages
+de manuel
+.SH SYNOPSIS
+\fBmandb\fP [\|\fB\-dqsucpt?V\fP\|] [\|\fB\-C\fP \fIfichier\fP\|]
+[\|\fIchemin_vers_man\fP\|]
+.br
+\fBmandb\fP [\|\fB\-dqsut\fP\|] [\|\fB\-C\fP \fIfichier\fP\|] \fB\-f\fP \fInom_de_fichier\fP\ \&.\|.\|.
+.SH DESCRIPTION
+\fBmandb\fP est employé pour initialiser ou mettre à jour manuellement les
+\fBbases de données d'indexation\fP. Ces bases de données forment un «\ cache\ » du système de fichiers qui contient les pages de manuel. Elles contiennent
+l'état actuel du système de pages de manuel ainsi que les informations qui y
+sont stockées. Elles sont exploitées par les utilitaires de man\-db pour
+accroître leur vitesse et leurs fonctionnalités.
+
+Lors de la création ou de la mise à jour d'une \fBbase de données d'indexation\fP, \fBmandb\fP avertira des mauvaises requêtes ROFF .so, des noms
+de fichier erronés et des pages de manuel depuis lesquelles la partie
+\fBwhatis\fP ne peut pas être analysée.
+
+On peut préciser à \fBmandb\fP une liste de structures hiérarchiques de pages
+de manuel. Les éléments de la liste sont délimités par «\ :\ ». Cette liste
+remplacera celle du système, déterminée à partir des informations trouvées
+dans le fichier de configuration de man\-db.
+.SH "BASE DE DONNÉES D'INDEXATION"
+\fBmandb\fP peut être compilé pour gérer un des types suivants de bases de
+données.
+
+.TS
+tab (@);
+l l l.
+Nom@Async@Nom de fichier
+_
+Berkeley db@Oui@\fIindex.bt\fP
+GNU gdbm@Oui@\fIindex.db\fP
+UNIX ndbm@Non@\fIindex.(dir|pag)\fP
+.TE
+
+Les moteurs de bases de données qui gèrent les mises à jour asynchrones
+accroissent la vitesse au prix d'un risque de corruption en cas d'arrêt
+anormal. Dans le cas, peu probable, où cela se produirait, il serait
+nécessaire de réexécuter \fBmandb\fP avec l'option \fB\-c\fP pour recréer les
+bases de données à partir de zéro.
+.SH OPTIONS
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Affiche les informations de mise au point.
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Ne crée pas d'avertissement.
+.TP 
+.if  !'po4a'hide' .BR \-s ", " \-\-no-straycats
+Évite de perdre du temps à rechercher ou à ajouter, aux bases de données,
+des informations concernant les fichiers «\ cat\ » parasites.
+.TP 
+.if  !'po4a'hide' .BR \-p ", " \-\-no-purge
+Évite de perdre du temps à vérifier les pages de manuel supprimées et à les
+purger des bases de données.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-create
+Par défaut, \fBmandb\fP essaiera de mettre à jour les bases de données
+précédemment créées. Si une base de données n'existe pas, elle sera
+créée. Cette option force \fBmandb\fP à supprimer les bases de données
+existantes et à les recréer à partir de zéro. Cette option entraîne l'option
+\fB\-\-no\-purge\fP. Cela peut être nécessaire si une base de données est
+corrompue ou si un nouveau système de gestion de base de données est
+implanté à l'avenir.
+.TP 
+.if  !'po4a'hide' .BR \-u ", " \-\-user-db
+Crée seulement des bases de données «\ utilisateur\ », même si on possède
+les permissions d'écriture nécessaires pour créer des bases de données «\ système\ ».
+.TP 
+.if  !'po4a'hide' .BR \-t ", " \-\-test
+Exécute les contrôles de validité des pages de manuel de la liste des
+structures hiérarchiques du chemin de recherche. Avec cette option,
+\fBmandb\fP ne modifie pas les bases de données existantes.
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-filename
+Met à jour seulement les entrées correspondant au nom du fichier
+donné. Cette option n'est pas d'un usage courant. Elle est utilisée par
+\fBman\fP, lorsqu'il a été compilée avec l'option \fBMAN_DB_UPDATES\fP, et qu'il
+constate qu'une page n'est pas à jour. Cette option induit l'option \fB\-p\fP et
+annule les options \fB\-c\fP et \fB\-s\fP.
+.TP 
+\fB\-C\ \fP\fIfichier\fP,\ \fB\-\-config\-file=\fP\fIfichier\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Affiche un mode d'emploi puis s'arrête.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Affiche un court mode d'emploi et s'arrête.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Affiche la version puis s'arrête.
+.SH "CODE DE RETOUR"
+.TP 
+.if  !'po4a'hide' .B 0
+Programme exécuté sans erreur.
+.TP 
+.if  !'po4a'hide' .B 1
+Erreur d'utilisation, de syntaxe ou de fichier de configuration
+.TP 
+.if  !'po4a'hide' .B 2
+Erreur d'exécution.
+.TP 
+.if  !'po4a'hide' .B 3
+Un processus fils a échoué.
+.SH DIAGNOSTICS
+Les messages d'avertissement suivants peuvent être générés pendant la
+construction de la base de données.
+.TP 
+\fB<nom_de_fichier>: la recherche de whatis sur page(sec) a échoué\fP
+L'extraction de la ou des lignes de whatis à partir du
+<nom_de_fichier> indiqué a échoué. Ceci est habituellement dû à une
+page de manuel mal écrite, mais si beaucoup de messages de ce type sont
+émis, il est probable que le système contienne des pages de manuel non
+standard, incompatibles avec l'analyseur de whatis de man\-db. Consultez la
+section \fBANALYSE WHATIS\fP de \fBlexgrog\fP(1) pour plus d'informations.
+.TP 
+\fB<nom_de_fichier>: est un lien symbolique flottant\fP
+<nom_de_fichier> n'existe pas mais est pointé par un lien
+symbolique. Des informations complémentaires sont habituellement émises pour
+identifier le <nom_de_fichier> du lien «\ en l'air\ ».
+.TP 
+\fB<nom_de_fichier>: lien symbolique ou directive ROFF .so incorrect\fP
+<nom_de_fichier> est un lien symbolique, ou contient une requête
+ROFF, vers un fichier inexistant.
+.TP 
+\fB<nom_de_fichier>: nom de fichier erroné, ignoré\fP
+Le <nom_de_fichier> peut être ou non une page de manuel correcte,
+mais son nom est invalide. Cela est habituellement dû à une page de manuel
+appartenant à une section <x> stockée dans la section <y>
+des pages de manuel.
+.TP 
+\fB<nom_de_fichier_générique>: extentions en conflit\fP
+Le <nom_de_fichier_générique> n'a pas de correspondance unique. Ceci
+est habituellement provoqué par l'existence d'une version compressée et
+d'une version non compressée de la même page de manuel. Seul le plus récent
+des fichiers correspondant au <nom_de_fichier_générique> sera
+exploité.
+.SH FICHIERS
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+Fichier de configuration de man\-db.
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt|db|dir|pag)
+\fBBase de données d'indexation\fP globale, conforme à FHS.
+.PP
+Anciens emplacements du cache de la base de données :
+.TP 
+.if  !'po4a'hide' .I /usr/man/index.(bt|db|dir|pag)
+\fBBase de données d'indexation\fP globale habituelle.
+.TP 
+.if  !'po4a'hide' .I /var/catman/index.(bt|db|dir|pag)
+\fBBase de données d'indexation\fP globale de remplacement ou conforme à
+FSSTND.
+.SH "VOIR AUSSI"
+.if  !'po4a'hide' .BR lexgrog (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR catman (8)
+.PP
+La section \fBANALYSE WHATIS\fP autrefois incluse dans cette page de manuel est
+maintenant incorporée à \fBlexgrog\fP(1).
+.SH AUTEUR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BOGUES
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db
+.SH TRADUCTION
+Cette traduction est maintenue à l'aide de l'outil
+po4a <URL:https://po4a.org/> par l'équipe
+francophone de traduction de Debian.
+.PP
+Valéry Perrin <valery.perrin.debian@free.fr> le 2 janvier 2006.
+David Prévot <david@tilapin.org> et l'équipe francophone de traduction de Debian\ (2010).
+.PP
+Veuillez signaler toute erreur de traduction en écrivant à
+<debian\-l10n\-french@lists.debian.org> ou par un rapport de bogue sur
+le paquet man-db.
+.PP
+Vous pouvez toujours avoir accès à la version anglaise de ce document en
+utilisant la commande
+«\ \fBman\ \-L C\fR \fI<section>\fR\ \fI<page_de_man>\fR\ ».

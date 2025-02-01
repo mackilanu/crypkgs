@@ -1,0 +1,136 @@
+.\" Man page for whatis
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH WHATIS 1 2024-04-05 2.12.1 手册分页显示工具
+.SH 名称
+whatis \- 显示在线手册页说明
+.SH 概述
+\fBwhatis\fP [\|\fB\-dlv?V\fP\|] [\|\fB\-r\fP\||\|\fB\-w\fP\|] [\|\fB\-s\fP \fI列表\fP\|] [\|\fB\-m\fP
+\fI系统\fP\|[\|,.\|.\|.\|]\|] [\|\fB\-M\fP \fI路径\fP\|] [\|\fB\-L\fP \fI区域\fP\|] [\|\fB\-C\fP
+\fI文件\fP\|] \fI名称\fP \&.\|.\|.
+.SH 描述
+每个手册页中都有一个概述。\fBwhatis\fP 搜索手册页名称并显示任何与 \fI名称\fP 匹配的手册页描述。
+
+\fI名称\fP 可以包含通配符(\fB\-w\fP)或是正则表达式(\fB\-r\fP)。使用这些选项时，可能要给 \fI名称\fP 加引号或对特殊字符转义，以阻止 shell
+解释它们。
+
+\fB索引\fP 数据库在搜索时使用，它们由 \fBmandb\fP 程序更新。取决于您的安装方式，这可能是通过定期的 cron
+任务进行的，或者需要在安装新手册页后手动进行。要从相对 \fB索引\fP 数据库生成旧式的文本 \fBwhatis\fP 数据库，调用这个命令：
+
+\fBwhatis \-M\fP \fImanpath\fP \fB\-w '*' | sort >\fP \fImanpath/whatis\fP
+
+其中 \fImanpath\fP 是手册页层次结构，如 \fI/usr/man\fP。
+.SH 选项
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+打印调试信息。
+.TP 
+.if  !'po4a'hide' .BR \-v ", " \-\-verbose
+打印详细的警告消息。
+.TP 
+.if  !'po4a'hide' .BR \-r ", " \-\-regex
+将每个 \fI名称\fP 解释为正则表达式。如果 \fI名称\fP 匹配页面名称的任何部分，将视为一个匹配。该选项会使 \fBwhatis\fP
+略微变慢，这是由数据库搜索的原理导致的。
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-wildcard
+将每个 \fI名称\fP 解释为包含 shell 风格通配符的模式。要匹配，展开的 \fI名称\fP 要与整个页面名称匹配。该选项会使 \fBwhatis\fP
+略微变慢，这是由数据库搜索的原理导致的。
+.TP 
+.if  !'po4a'hide' .BR \-l ", " \-\-long
+不按终端宽度截断输出。通常会将输出截短为终端宽度，以免显示写得不好的 时显示混乱。
+.TP 
+\fB\-s\fP \fI列表\/\fP, \fB\-\-sections\fP \fI列表\/\fP, \fB\-\-section\fP \fI列表\fP
+只搜索指定的手册章节。\fI列表\fP 是由冒号或逗号分隔的章节列表。如果 \fI列表\fP
+中的指定的是简单的章节号，如“3”，则显示的描述列表将只包含“3”、“3perl”“3x”等章节中的页面；如果 \fI列表\fP
+中的章节号带扩展，如“3perl”，则显示的描述列表将只包含手册章节中对应部分的页面。
+.TP 
+\fB\-m\fP \fI系统\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fI系统\fP\|[\|,.\|.\|.\|]
+如果此系统可以访问其他操作系统的手册页层次结构，可以使用此选项访问它们。要搜索 NewOS 的手册页名称，使用 \fB\-m\fP \fBNewOS\fP 选项。
+
+指定的 \fI系统\fP 选项可以是逗号分隔的操作系统名称组合。要包括本地操作系统的手册页名称，可以在参数字符串中包含系统名 \fBman\fP。此选项会覆盖
+$\fBSYSTEM\fP 环境变量。
+.TP 
+\fB\-M\ \fP\fI路径\fP,\ \fB\-\-manpath=\fP\fI路径\fP
+另外指定一组以冒号分隔的手册页层次结构作为搜索路径。默认情况下 \fBwhatis\fP 会使用 $\fBMANPATH\fP
+环境变量作为搜索路径；如果该环境变量为空或未设置，程序会根据您的 $\fBPATH\fP 环境变量确定相应的手册路径。此选项会覆盖 $\fBMANPATH\fP
+环境变量的内容。
+.TP 
+\fB\-L\ \fP\fI区域\fP,\ \fB\-\-locale=\fP\fI区域\fP
+\fBwhatis\fP 通常会通过调用 C 语言函数 \fBsetlocale\fP(3) 来确定您的当前区域设置。该函数会查询多个环境变量，可能包括
+$\fBLC_MESSAGES\fP 和 $\fBLANG\fP。要临时覆盖检测到的值，请使用该选项直接向 \fBwhatis\fP 提供一个 \fI区域\fP
+字符串。注意，在搜索页面实际开始前它不会生效。帮助消息等输出将始终以检测到的区域语言显示。
+.TP 
+\fB\-C\ \fP\fI文件\fP,\ \fB\-\-config\-file=\fP\fI文件\fP
+使用此用户配置文件代替默认的 \fI\(ti/.manpath\fP。
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+打印帮助消息并退出。
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+打印简短的帮助消息并退出。
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+显示版本信息。
+.SH 退出状态
+.TP 
+.if  !'po4a'hide' .B 0
+程序成功执行。
+.TP 
+.if  !'po4a'hide' .B 1
+用法、语法或配置文件出错。
+.TP 
+.if  !'po4a'hide' .B 2
+操作出错。
+.TP 
+.if  !'po4a'hide' .B 16
+未找到符合指定条件的结果。
+.SH 环境
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+如果设置了 $\fBSYSTEM\fP 环境变量，其效果将与 \fB\-m\fP 选项的参数相同。
+.TP 
+.if  !'po4a'hide' .B MANPATH
+如果设置了 $\fBMANPATH\fP 环境变量，它的值将被解释为要使用的，以冒号分隔的手册页层次结构搜索路径。
+
+请参考 \fBmanpath\fP(5) 中的\fB搜索路径\fP一节以了解默认行为以及处理该环境变量的细节。
+.TP 
+.if  !'po4a'hide' .B MANWIDTH
+如果设置了 $\fBMANWIDTH\fP ，它的值将用作终端宽度(参阅 \fB\-\-long\fP 选项)。如果未设置它，终端宽度将通过 $\fBCOLUMNS\fP
+环境变量或调用 \fBioctl\fP(2)(如果有的话)计算。若都失败，将退回到 80 个字符。
+.SH 文件
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/index.(bt|db|dir|pag)
+传统的全局 \fI索引\fP 数据库缓存。
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt|db|dir|pag)
+与 FHS 兼容的全局 \fI索引\fP 数据库缓存。
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/\|.\|.\|.\|/whatis
+传统的 \fBwhatis\fP 文本数据库。
+.SH 亦见
+.if  !'po4a'hide' .BR apropos (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR mandb (8)
+.SH 作者
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BUGS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

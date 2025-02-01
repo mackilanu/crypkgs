@@ -1,0 +1,84 @@
+.\" Man page for man-recode
+.\"
+.\" Copyright (C) 2019 Colin Watson <cjwatson@debian.org>
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MAN-RECODE 1 2024-04-05 2.12.1 "Verktyg för sidvisning av manual"
+.SH NAMN
+man-recode \- konvertera manualsidor från en kodning till en annan
+.SH SYNOPSIS
+\fBman-recode\fP \fB\-t\fP \fItill\-kod\fP
+{\|\fB\-\-suffix=\fP\fIsuffix\/\fP\||\|\fB\-\-in\-place\fP\|} [\|\fB\-dqhV\fP\|]
+[\|\fIfilnamn\fP\|]
+.SH BESKRIVNING
+\fBman-recode\fP konverterar flera manualsidor från en kodning till en annan,
+medan en lämplig inmatningskodning gissas för var och en. Det är användbart
+när man permanent omkodar sidor skrivna i föråldrade teckenuppsättningar
+eller i byggsystem som måste koda om en uppsättning sidor till en gemensam
+kodning (vanligtvis UTF\-8) för installation. När man konverterar många sidor
+är detta programmet mycket snabbare än att köra \fBman \-\-recode\fP eller
+\fBmanconv\fP för varje sida.
+.PP
+Om en kodningsdeklaration hittas på första raden på en manualsida kommer den
+deklarationen att användas som inmatningskodning för den sidan. Om det
+misslyckas kommer inmatningskodningen att gissas baserat på filnamnet.
+.PP
+Kodningsdeklarationer har följande form:
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" \-*\- coding: UTF\-8 \-*\-
+.fi
+.RE
+.PP
+eller (om preprocessorer för manualsidans också ska deklareras):
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" t \-*\- coding: ISO\-8859\-1 \-*\-
+.fi
+.RE
+.SH FLAGGOR
+.TP 
+\fB\-t\fP \fIkodning\/\fP, \fB\-\-to\-code=\fP\fIkodning\fP
+Konvertera manualsidor till \fIkodning\fP.
+.TP 
+\fB\-\-suffix=\fP\fIsuffix\fP
+Skapa varje utdatafilnamn genom att lägga till \fIsuffix\fP på slutet av
+indatafilnamnet, efter att ha tagit bort eventuella kompressionsändelser.
+.TP 
+.if  !'po4a'hide' .B \-\-in\-place
+Skriv över varje indatafil med utdatan efter att ha tagit bort eventuella
+kompressionsändelser.
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Mata inte ut felmeddelanden när sidan inte kan konverteras.
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Skriver ut felsökningsinformation.
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+Skriv ut ett hjälpmeddelande och avsluta.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Visa versionsinformation.
+.SH "SE VIDARE"
+.if  !'po4a'hide' .IR iconv (1),
+.if  !'po4a'hide' .IR man (1),
+.if  !'po4a'hide' .IR manconv (1)
+.SH FEL
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db
+.SH UPPHOVSMAN
+.nf
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi

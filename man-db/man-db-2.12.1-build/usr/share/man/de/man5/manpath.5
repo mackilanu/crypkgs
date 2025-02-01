@@ -1,0 +1,171 @@
+.\" Man page for format of the manpath.config data file
+.\"
+.\" Copyright (C) 1994, 1995 Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANPATH 5 2024-04-05 2.12.1 /etc/man_db.conf
+.SH BEZEICHNUNG
+manpath \- das Format der Datei /etc/man_db.conf
+.SH BESCHREIBUNG
+Diese Konfigurationsdatei wird von den Handbuchseiten\-Hilfsprogrammen dazu
+benutzt, den Benutzer\-Handbuchpfad zur Laufzeit zu bestimmen,
+Handbuch\-Hierarchien (Manpaths) als systemweit zu erkennen und Verzeichnisse
+für die Speicherung von Cat\-Dateien zuzuordnen.
+
+Wenn die Umgebungsvariable $\fBMANPATH\fP schon gesetzt ist, wird die
+Information in /etc/man_db.conf die Variable nicht außer Kraft setzen.
+.SH SUCHPFAD
+Standardmäßig wertet man\-db die Umgebungsvariable $\fBPATH\fP des Benutzers
+aus. Für jeden gefundenen \fIPfad\-Bestandteil\fP wird ein
+\fIHierarchie\-Bestandteil\fP zum suchpfad hinzugefügt.
+
+Falls es in der Konfigurationsdatei für einen gegebenen \fIPfad\-Bestandteil\fP
+keine \fBMANPATH_MAP\fP\-Zeile gibt, dann wird alles der Formen
+\fIPfad\-Bestandteil/../man\fP, \fIPfad\-Bestandteil/man\fP und
+\fIPfad\-Bestandteil/share/man\fP, was als Verzeichnis existiert, zum Suchpfad
+hinzugefügt.
+
+Dann werden alle \fBMANDATORY_MANPATH\fP\-Einträge aus der Konfigurationsdatei
+zum Suchpfad hinzugefügt.
+
+Zum Schluss, sofern die Option \fB\-\-systems\fP verwendet wird oder die
+Umgebungsvariable $\fBSYSTEM\fP gesetzt ist, sollte es aus einer Folge von
+Betriebssystemnamen bestehen, die durch Kommata getrennt sind. Dies fungiert
+als Vorlage, wobei der Suchpfad erweitert wird, um auf die Handbuchseiten
+anderer Betriebssysteme zugreifen zu können: Für jeden Systemnamen sucht
+man\-db nach diesem Namen als Unterverzeichnis jedes der Einträge im Suchpfad
+und fügt, sofern er existiert, ihn zum finalen Suchpfad hinzu. Wenn der
+Suchpfad beispielsweise \fI/usr/share/man:/usr/local/man\fP wäre und $\fBSYSTEM\fP
+auf \fInewOS:man\fP gesetzt ist, wäre der finale Suchpfad
+\fI/usr/share/man/newOS:/usr/share/man:/usr/local/man/newOS:/usr/local/man\fP.
+
+Die Umgebungsvariable $\fBMANPATH\fP setzt die standardmäßigen
+Handbuchseiten\-Suchpfade von man\-db außer Kraft. Für die meisten Benutzer
+sollte es nicht notwendig sein, diese zu setzen. Deren Syntax ist ähnlich
+der Umgebungsvariable $\fBPATH\fP: Sie besteht aus einer Folge von
+Verzeichnisnamen, die durch Kommata getrennt sind. Sie setzt den vorstehend
+beschriebenen standardmäßigen Suchpfad außer Kraft.
+
+Wenn der Wert von $\fBMANPATH\fP mit einem Doppelpunkt beginnt, wird der
+standardmäßige Suchpfad am Anfang eingefügt. Endet der Wert mit einem
+Doppelpunkt, wird der standardmäßige Suchpfad am Ende angehängt. Enthält der
+wert von $\fBMANPATH\fP einen doppelten Doppelpunkt (\fB::\fP), dann wird der
+standardmäßige Suchpfad in der Mitte des Wertes zwischen den beiden
+Doppelpunkten eingefügt.
+.SH FORMAT
+Derzeit werden die folgenden Feldtypen erkannt:
+.TP 
+\fB#\fP\fI\ Kommentar\fP
+Leerzeilen und Zeilen, die mit einem \fB#\fP beginnen, werden als Kommentare
+behandelt und ignoriert.
+.TP 
+\fBMANDATORY_MANPATH\fP\fI\ geforderter Hierarchie\-Bestandteil\fP
+Zeilen dieser Form zeigen die Hierarchien an, die jede automatisch erzeugte
+$\fBMANPATH\fP\-Variable beinhalten sollte. Normalerweise gehört dazu /usr/man.
+.TP 
+\fBMANPATH_MAP\fP\fI\ Pfad\-Bestandteil\ Hierarchie\-Bestandteil\fP
+Zeilen dieser Form wandeln $\fBPATH\fP in die entsprechende $\fBMANPATH\fP\-Syntax
+um. Für jeden \fIPfad\-Bestandteil\fP im persönlichen $\fBPATH\fP wird ein
+\fIHierarchie\-Bestandteil\fP zu $\fBMANPATH\fP hinzugefügt.
+.TP 
+\fBMANDB_MAP \fP\fIHierarchie\-Bestandteil \fP\|[\| \fICat\-Hierarchie\-Bestandteil\fP \|]
+Zeilen dieser Form geben die systemweiten Hierarchien und optional den
+Speicherort ihrer Cat\-Dateien an. Dieser Feldtyp ist besonders wichtig, wenn
+\fBman\fP ein Setuid\-Programm ist und die System\-Konfigurationsdatei
+/etc/man_db.conf die persönliche Konfigurationsdatei .manpath
+überlagert. Das Feld gibt an, auf welche Hierarchien als Setuid\-Benutzer und
+auf welche als der aufrufende Benutzer zugegriffen wird.
+
+Die systemweiten Handbuch\-Hierarchien sind üblicherweise die unter \fI/usr\fP
+gespeicherten wie \fI/usr/man\fP, \fI/usr/local/man\fP und \fI/usr/X11R6/man\fP.
+
+Wenn Cat\-Seiten für einen \fIHierarchie\-Bestandteil\fP nicht oder am
+traditionellen Speicherort gespeichert werden sollen, kann der
+\fICat\-Hierarchie\-Bestandteil\fP weggelassen werden.
+
+Die traditionelle Platzierung der Cat\-Dateien wäre für nicht schreibbar
+eingebundene Handbuch\-Hierarchien unmöglich. Aus diesem Grund ist es
+möglich, beliebige gültige Verzeichnis\-Hierarchien als Speicherorte
+anzugeben. Zur Wahrung des \fBLinux FSSTND\fP kann das Schlüsselwort \fBFSSTND\fP
+anstelle eines vorhandenen Verzeichnisses verwendet werden.
+
+Leider müssen \fBalle\fP System\-Handbuchpfade angegeben werden, einschließlich
+derer von alternativen Betriebssystemen wie \fI/usr/man/sun\fP und aller Pfade
+für \fBNLS Locales\fP wie beispielsweise \fI/usr/man/de_DE.88591\fP.
+
+Da die Informationen Zeile für Zeile in der Schreibreihenfolge analysiert
+werden, müssen alle einer anderen untergeordneten Handbuch\-Hierarchien
+zuerst aufgeführt werden, damit falsche Zuordnungen ausgeschlossen
+werden. Beispielsweise muss \fI/usr/man/de_DE.88591\fP vor \fI/usr/man\fP
+aufgeführt werden.
+.TP 
+\fBDEFINE\fP\fI\ Schlüssel\ Wert\fP
+Zeilen dieser Form definieren verschiedene Konfigurationsvariablen. In der
+Standard\-Konfigurationsdatei werden die von den Handbuch\-Programmen
+verwendeten Variablen festgelegt. Dazu gehören Standard\-Pfade zu
+verschiedenen Programmen (wie \fIgrep\fP und \fItbl\fP) und Sätze von
+Standard\-Argumenten für diese Programme.
+.TP 
+\fBSECTION\fP \fIAbschnitt\fP .\|.\|.
+.RS
+Zeilen dieser Form bestimmen die Reihenfolge, in der Handbuch\-Abschnitte
+durchsucht werden sollen. Enthält die Konfigurationsdatei keinen
+\fBSECTION\fP\-Eintrag, ist der Standardwert:
+.PP
+.RS
+.nf
+.if  !'po4a'hide' SECTION 1 n l 8 3 0 2 3type 5 4 9 6 7
+.fi
+.RE
+.PP
+Sind mehrere \fBSECTION\fP\-Einträge vorhanden, werden deren Listen aneinander
+gehängt.
+.PP
+Wenn eine bestimmte Erweiterung (z.B. 1mh) nicht in dieser Liste eingetragen
+ist, werden die entsprechenden Seiten mit dem Rest des zugehörigen
+Abschnitts angezeigt. Der Effekt davon ist: Nur, wenn Sie eine bestimmte
+Reihenfolge erzwingen wollen, müssen Sie explizit eine Liste von
+Erweiterungen angeben. Abschnitte mit Erweiterungen sollten in der Regel den
+Hauptabschnitten benachbart sein (z.B. »1 1mh 8 ... «).
+.PP
+Als alternativer Name für diese Direktive wird \fBSECTIONS\fP akzeptiert.
+.RE
+.TP 
+\fBMINCATWIDTH\fP\fI\ Breite\fP
+Wenn die Terminalbreite kleiner als \fIBreite\fP ist, werden fehlende
+Cat\-Seiten nicht erzeugt und vorhandene nicht angezeigt. Der Standardwert
+ist 80.
+.TP 
+\fBMAXCATWIDTH\fP\fI\ Breite\fP
+Wenn die Terminalbreite größer als \fIBreite\fP ist, werden fehlende Cat\-Seiten
+nicht erzeugt und vorhandene nicht angezeigt. Der Standardwert ist 80.
+.TP 
+\fBCATWIDTH\fP\fI\ Breite\fP
+Wenn \fIBreite\fP von Null verschieden ist, werden die Cat\-Seiten für ein
+Terminal der vorgegebenen Breite formatiert, ungeachtet der Breite des
+aktuell verwendeten Terminals. Dies setzt \fIMINCATWIDTH\fP und \fIMAXCATWIDTH\fP
+außer Kraft.
+.TP 
+.if  !'po4a'hide' .B NOCACHE
+Dieses Option hält \fBman\fP von der automatischen Erzeugung von Cat\-Seiten
+ab.
+.SH FEHLER
+Wenn die oben angeführten Regeln nicht genau befolgt werden, werden sich die
+Handbuch\-Dienstprogramme nicht wie gewünscht verhalten. Die Regeln sind zu
+kompliziert.
+.PP
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

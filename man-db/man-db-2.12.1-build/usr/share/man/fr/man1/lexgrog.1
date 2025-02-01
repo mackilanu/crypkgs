@@ -1,0 +1,223 @@
+.if  !'po4a'hide' .ds mC CW
+.\" Man page for lexgrog
+.\"
+.\" Copyright (c) 2001 Colin Watson <cjwatson@debian.org>
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.if  t .if \n(.g .ds mC CR
+.if  n .ds mC R
+.
+.\" in an example (EX/EE)?
+.nr mE 0
+.
+.if  !\n(.g \{\
+.de EX
+.  br
+.  if !\\n(mE \{\
+.    nr mF \\n(.f
+.    nr mP \\n(PD
+.    nr PD 1v
+.    nf
+.    ft \\*(mC
+.    nr mE 1
+.  \}
+..
+.\}
+.
+.
+.if  !\n(.g \{\
+.de EE
+.  br
+.  if \\n(mE \{\
+.    ft \\n(mF
+.    nr PD \\n(mP
+.    fi
+.    nr mE 0
+.  \}
+..
+.\}
+.\" End example.
+.
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH LEXGROG 1 2024-04-05 2.12.1 "Utilitaires de l'afficheur des pages de manuel"
+.SH NOM
+lexgrog \- Analyser l'information contenue dans l'en\-tête des pages de manuel
+.SH SYNOPSIS
+\fBlexgrog\fP [\|\fB\-m\fP\||\|\fB\-c\fP\|] [\|\fB\-dfw?V\fP\|] [\|\fB\-E\fP \fIencodage\fP\|]
+\fIfichier\fP \&.\|.\|.
+.SH DESCRIPTION
+\fBlexgrog\fP est une implémentation de l'utilitaire traditionnel «\ groff
+guess\ » de \fBlex\fP. Il exploite chacun des fichiers indiqués sur sa ligne de
+commande, soit en tant que fichiers source de page de manuel, soit en tant
+que page «\ cat\ » préformatée. Il affiche leur nom et leur description
+selon le format employé par \fBapropos\fP et \fBwhatis\fP. La liste des filtres de
+prétraitement, exigés par la page de manuel avant cela, est passée à
+\fBnroff\fP ou à \fBtroff\fP, ou aux deux.
+.PP
+Si les données en entrée sont mal formatées, \fBlexgrog\fP affichera «\ parse
+failed\ ». Cela peut être utile pour les programmes externes qui doivent
+vérifier les pages de manuel. Si l'un des fichiers d'entrée de \fBlexgrog\fP
+est «\ \-\ », le programme lira l'entrée standard. Si un des fichiers analysé
+est compressé, une version décompressée sera exploitée automatiquement.
+.SH OPTIONS
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Affiche les informations de mise au point.
+.TP 
+.if  !'po4a'hide' .BR \-m ", " \-\-man
+Analyse l'entrée en tant que fichier source de page de manuel. C'est le
+comportement par défaut si ni \fB\-\-man\fP ni \fB\-\-cat\fP ne sont indiquées.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-cat
+Analyse l'entrée en tant que page de manuel préformatée (page «\ cat\ »)
+\fB\-\-man\fP et \fB\-\-cat\fP ne peuvent pas être indiquées simultanément.
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-whatis
+Affiche le nom et la description, tirés de l'en\-tête de la page de manuel,
+selon le format employé par \fBapropos\fP et par \fBwhatis\fP. C'est le
+comportement par défaut si ni \fB\-\-whatis\fP ni \fB\-\-filters\fP ne sont indiquées.
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-filters
+Affiche la liste des filtres requis pour prétraiter la page de manuel avant
+sa mise en forme par \fBnroff\fP ou \fBtroff\fP.
+.TP 
+\fB\-E\fP \fIencodage\fP, \fB\-\-encoding\fP \fIencodage\fP
+Force l'\fIencodage\fP à la place du jeu de caractères deviné pour la page.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Affiche un message d'aide et s'arrête.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Affiche un court mode d'emploi et s'arrête.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Affiche le numéro de version.
+.SH "CODE DE RETOUR"
+.TP 
+.if  !'po4a'hide' .B 0
+Programme exécuté sans erreur.
+.TP 
+.if  !'po4a'hide' .B 1
+Erreur d'exécution.
+.TP 
+.if  !'po4a'hide' .B 2
+\fBlexgrog\fP n'a pas réussi à analyser un ou plusieurs des fichiers d'entrée.
+.SH EXEMPLES
+.nf
+ $ lexgrog man.1
+ man.1: "man \- interface de consultation des manuels de référence du système"
+ $ lexgrog \-fw man.1
+ man.1 (t): "man \- interface de consultation des manuels de référence du système"
+ $ lexgrog \-c whatis.cat1
+ whatis.cat1: "whatis \- affiche la description des pages de manuel"
+ $ lexgrog broken.1
+ broken.1: parse failed
+.fi
+.SH "ANALYSE WHATIS"
+\fBmandb\fP (qui emploie le même code que \fBlexgrog\fP) analyse la section
+\fBNOM\fP en tête de chaque page de manuel et recherche le nom et la
+description de chaque fonction documentée. Bien que l'analyseur soit très
+tolérant, car il doit faire face aux différentes formes qui ont été
+historiquement employées, l'extraction de l'information recherchée reste
+parfois un échec.
+.PP
+Pour que les macros de \fIman\fP fonctionnent correctement, la section \fBNOM\fP
+doit ressembler à ceci\ :
+.PP
+.RS
+.EX
+\&.SH NAME
+foo \e\- program to do something
+.EE
+.RE
+.PP
+Certains afficheurs de pages de manuel exigent «\ \e\-\ » exactement comme
+indiqué. \fBmandb\fP est plus tolérant, mais pour assurer la compatibilité
+avec d'autres systèmes, il est conseillé de conserver la contre\-oblique
+(antislash).
+.PP
+À gauche, il peut y avoir plusieurs noms, séparés par des virgules. Les noms
+contenant des espaces seront ignorés pour éviter le comportement
+pathologique avec certaines sections \fBNOM\fP mal formées. Le texte à droite
+n'a pas de structure imposée et peut être écrit sur plusieurs lignes. Si
+plusieurs fonctions, avec des descriptions différentes sont documentées dans
+la même page de manuel, la forme suivante sera employée\ :
+.PP
+.RS
+.EX
+\&.SH NAME
+foo, bar \e\- programs to do something
+\&.br
+baz \e\- program to do nothing
+.EE
+.RE
+.PP
+(A macro which starts a new paragraph, like \fB.PP\fP, may be used instead of
+the break macro \fB.br\fP.)
+.PP
+Pour être utilisée avec les macros \fImdoc\fP, dérivées de BSD, la section
+\fBNOM\fP doit ressembler à ceci\ :
+.PP
+.RS
+.EX
+\&.Sh NAME
+\&.Nm foo
+\&.Nd program to do something
+.EE
+.RE
+
+Il y a plusieurs raisons habituelles pour lesquelles l'analyse whatis
+échoue. Parfois les auteurs des pages de manuel remplacent «\ .SH NOM\ » par
+«\ .SH MONPROGRAMME\ ». De ce fait \fBmandb\fP ne peut pas trouver la section
+dont il a besoin pour extraire l'information. Parfois les auteurs incluent
+une section NOM, mais y placent le texte descriptif sans respecter le format
+«\ nom \e\- description\ ». Cependant, n'importe quelle syntaxe ressemblant à
+ce qui précède devrait être acceptée.
+.SH "VOIR AUSSI"
+.if  !'po4a'hide' .IR apropos (1),
+.if  !'po4a'hide' .IR man (1),
+.if  !'po4a'hide' .IR whatis (1),
+.if  !'po4a'hide' .IR mandb (8)
+.SH "NOTA BENE"
+\fBlexgrog\fP essaie d'analyser les fichiers contenant des requêtes .so, mais
+il ne pourra le faire efficacement que si les fichiers sont correctement
+installés dans une structure hiérarchique de pages de manuel.
+.SH AUTEUR
+Le code utilisé dans \fBlexgrog\fP pour analyser les pages de manuel a été
+écrit par\ :
+.PP
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.PP
+Colin Watson a écrit l'interface de la ligne de commande actuelle ainsi que
+cette page de manuel.
+.SH BOGUES
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db
+.SH TRADUCTION
+Cette traduction est maintenue à l'aide de l'outil
+po4a <URL:https://po4a.org/> par l'équipe
+francophone de traduction de Debian.
+.PP
+Valéry Perrin <valery.perrin.debian@free.fr> le 2 janvier 2006.
+David Prévot <david@tilapin.org> et l'équipe francophone de traduction de Debian\ (2010).
+.PP
+Veuillez signaler toute erreur de traduction en écrivant à
+<debian\-l10n\-french@lists.debian.org> ou par un rapport de bogue sur
+le paquet man-db.
+.PP
+Vous pouvez toujours avoir accès à la version anglaise de ce document en
+utilisant la commande
+«\ \fBman\ \-L C\fR \fI<section>\fR\ \fI<page_de_man>\fR\ ».

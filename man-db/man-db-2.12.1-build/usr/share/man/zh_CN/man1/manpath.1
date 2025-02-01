@@ -1,0 +1,87 @@
+.\" Man page for manpath
+.\"
+.\" Copyright (C) 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the docs/COPYING.GPLv2 file that comes with the
+.\" man-db distribution.
+.\"
+.\" Sun Jan 22 22:15:17 GMT 1995 Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANPATH 1 2024-04-05 2.12.1 手册分页显示工具
+.SH 名称
+manpath \- 确定手册页的搜索路径
+.SH 概述
+\fBmanpath\fP [\|\fB\-qgdc?V\fP\|] [\|\fB\-m\fP \fI系统\fP\|[\|,.\|.\|.\|]\|] [\|\fB\-C\fP
+\fI文件\fP\|]
+.SH 描述
+如果设置了 $\fBMANPATH\fP，\fBmanpath\fP 只会显示其内容并显示一条警告。如果未设置，\fBmanpath\fP
+会确定一个合适的手册页层次结构搜索路径并显示结果。
+
+冒号分隔的路径使用由 man\-db 配置文件 \(en (\fI/etc/man_db.conf\fP) 和用户环境变量所得到的信息确定。
+.SH 选项
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+不显示警告。
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+打印调试信息。
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-catpath
+生成针对 manpath 的 catpath。一旦确定了 manpath，每个路径元素将转换为它的相对 catpath。
+.TP 
+.if  !'po4a'hide' .BR \-g ", " \-\-global
+在 man\-db 配置文件中生成一个名为“global”的，包含所有路径的 manpath。
+.TP 
+\fB\-m\fP \fI系统\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fI系统\fP\|[\|,.\|.\|.\|]
+如果此系统可以访问其他操作系统的手册页层次结构，可以使用此选项将它们包含在 \fBmanpath\fP 的输出中。要包含NewOS 的手册页层次结构，使用
+\fB\-m\fP \fBNewOS\fP 选项。
+
+指定的 \fI系统\fP 选项可以是逗号分隔的操作系统名称组合。要包括本地操作系统的手册页层次结构，可以在参数字符串中包含系统名 \fBman\fP。此选项会覆盖
+$\fBSYSTEM\fP 环境变量。
+.TP 
+\fB\-C\ \fP\fI文件\fP,\ \fB\-\-config\-file=\fP\fI文件\fP
+使用此用户配置文件代替默认的 \fI\(ti/.manpath\fP。
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+打印帮助消息并退出。
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+打印简短的帮助消息并退出。
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+显示版本信息。
+.SH 环境
+.TP 
+.if  !'po4a'hide' .B MANPATH
+如果设置了 $\fBMANPATH\fP，\fBmanpath\fP 将显示它的值，而不是在运行时确定它。
+
+请参考 \fBmanpath\fP(5) 中的\fB搜索路径\fP一节以了解默认行为以及处理该环境变量的细节。
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+如果设置了 $\fBSYSTEM\fP 环境变量，其效果将与 \fB\-m\fP 选项的参数相同。
+.SH 文件
+.TP  \w'/etc/man_db.conf'u+2n
+.if  !'po4a'hide' .I /etc/man_db.conf
+man\-db 配置文件。
+.SH 亦见
+.if  !'po4a'hide' .BR apropos (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR whatis (1)
+.SH 作者
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BUGS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

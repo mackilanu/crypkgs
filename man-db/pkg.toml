@@ -1,0 +1,13 @@
+[package]
+name = "man-db"
+version = "2.12.1"
+description = "description"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://download.savannah.gnu.org/releases/man-db/man-db-2.12.1.tar.xz"
+
+build = [
+    "BUILD",
+]

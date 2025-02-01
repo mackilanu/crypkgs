@@ -1,0 +1,65 @@
+.\" Man page for zsoelim
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Dec 10 19:33:32 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH ZSOELIM 1 2024-04-05 2.12.1 "Помагало страничара упутства"
+.SH НАЗИВ
+zsoelim \- задовољава „.so“ захтеве у улазу рофф\-а
+.SH УВОД
+\fBzsoelim\fP [\|\fB\-CVh\fP\|] [\|\fIдатотека\fP \&.\|.\|.\|]
+.SH ОПИС
+\fBzsoelim\fP обрађује аргументе \fIдатотеке\fP, или ако ниједан није наведен,
+њен стандардни улаз за редовима у облику:
+
+\&\fB.so\fP <\|\fIназив_датотеке\fP\|>
+
+Захтеви се замењују садржајем наведеног \fIназива_датотеке\fP.  Ако захтев не
+може бити задовољен, \fBzsoelim\fP тражи \fIназив_датотеке.ext\fP где \fI.ext\fP
+може бити \fB.gz\fP, \fB.Z\fP или \fB.z\fP.  Остале врсте проширења могу бити
+подржане зависно од опција за време превођења.  Ако захтев не може бити
+задовољен запакованом датотеком, ова датотека се распакује употребом
+одговарајућег распакивача а његов излаз се користи за задовољавање захтева.
+
+По обичају, програми \fBsoelim\fP се користе да допусте рофф предобрађивачима
+да буду у могућству да предобраде датотеке на које упућују захтеви.  Ово
+нарочито издање је написано да заобиђе проблеме које ствара подршка за
+сажете странице упутства.
+.SH ОПЦИЈЕ
+.TP 
+.if  !'po4a'hide' .BR \-C ", " \-\-compatible
+Ова опција је доступна због сагласности са другим \fBsoelim\fP програмима.
+Користи се за укључивање „.so“ захтева за којима следи нешто друго осим
+празнине.  Како је ово већ основно понашање, занемарује се.
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+Исписује поруку помоћи и излази.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Исписује податке о издању.
+.SH "ВИДЕТИ ТАКОЂЕ"
+.if  !'po4a'hide' .BR groff (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR nroff (1),
+.if  !'po4a'hide' .BR troff (1)
+.SH АУТОР
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH ГРЕШКЕ
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

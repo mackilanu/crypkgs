@@ -1,0 +1,102 @@
+.\" Man page for catman
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Dec 10 14:17:29 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH CATMAN 8 2024-04-05 2.12.1 "Penggunaan halaman buku panduan"
+.SH NAMA
+catman \- buat atau perbarui pre\-formatted halaman buku panduan
+.SH RINGKASAN
+\fBcatman\fP [\|\fB\-d?hV\fP\|] [\|\fB\-M\fP \fIjalur\fP\|] [\|\fB\-C\fP \fIberkas\fP\|]
+[\|\fIbagian\fP\|] \&.\|.\|.
+.SH DESKRIPSI
+\fBcatman\fP digunakan untuk membuat sebuah set terbaru dari preformat
+halaman buku panduan dikenal sebagai halaman cat. Halaman cat secara umum
+lebih cepat untuk ditampilkan daripada halaman buku panduan asli, tetapi
+membutuhkan ruang penyimpanan ekstra. Keputusan untuk mendukung halaman cat
+berada di administrator lokal, yang harus memberikan direktori yang sesuai
+untuk itu.
+
+Pilihan tersedia ke \fBcatman\fP adalah hierarki halaman buku panduan dan
+bagian untuk preformat. Hierarki baku yang dispesifikasikan sebagai hierarki
+sistem dalam berkas konfigurasi man\-db, dan bagian baku baik isi dipisahkan
+kolon dari variabel lingkungan $\fBMANSECT\fP atau set standar disusun kedalam
+\fBman\fP jika $\fBMANSECT\fP tidak terdefinisi. Diberikan \fBcatman\fP dengan
+sebuah set dari bagian nama dipisahkan spasi akan mengesampingkan kedua
+diatas.
+
+\fBcatman\fP membuat penggunaan dari persediaan basis data \fBindeks\fP
+diasosiasikan dengan setiap hierarki untuk menentukan berkas mana dibutuhkan
+untuk diformat.
+.SH PILIHAN
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Tampilkan informasi penelusuran.
+.TP 
+\fB\-M\ \fP\fIjalur\fP,\ \fB\-\-manpath=\fP\fIjalur\fP
+Spesifikasikan sebuah jalur pencarian alternatif hierarki halaman buku
+panduan dipisahkan kolon. Secara baku, jalur semua ini mengindikasikan
+sebagai hierarki sistem dalam berkas konfigurasi man\-db.
+.TP 
+\fB\-C\ \fP\fIberkas\fP,\ \fB\-\-config\-file=\fP\fIberkas\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Tampilkan sebuah pesan bantuan dan keluar.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Tampilkan sebuah pesan bantuan dan keluar.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Tampilkan informasi versi.
+.SH LINGKUNGAN
+.TP 
+.if  !'po4a'hide' .B MANSECT
+Jika $\fBMANSECT\fP diset, nilainya adalah sebuah daftar dipisahkan oleh kolon
+dari bagian dan ini digunakan untuk menentukan bagian buku panduan mana
+untuk dicari dan dalam urutan apa.
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Jika $\fBMANPATH\fP telah diset, nilainya diinterpretasikan sebagai struktur
+jalur pencarian halaman buku panduan dipisahkan dengan kolon untuk
+digunakan.
+
+See the \fBSEARCH PATH\fP section of \fBmanpath\fP(5)  for the default behaviour
+and details of how this environment variable is handled.
+.SH BERKAS
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+berkas konfigurasi man\-db.
+.TP 
+.if  !'po4a'hide' .I /usr/man/index.(bt|db|dir|pag)
+Sebuah persediaan basis data \fIindeks\fP menyeluruh tradisional.
+.TP 
+.if  !'po4a'hide' .I /var/catman/index.(bt|db|dir|pag)
+Sebuah persediaan basis data \fIindeks\fP menyeluruh alternatif atau sesuai
+dengan FSSTND.
+.SH "LIHAT JUGA"
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR mandb (8)
+.SH PENGARANG
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BUGS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

@@ -1,0 +1,142 @@
+.\" Man page for whatis
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH WHATIS 1 2024-04-05 2.12.1 "설명서 페이저 유틸리티"
+.SH 이름
+whatis \- 설명서 페이지 설명 한 줄을 표시합니다
+.SH 개요
+\fBwhatis\fP [\|\fB\-dlv?V\fP\|] [\|\fB\-r\fP\||\|\fB\-w\fP\|] [\|\fB\-s\fP \fI목록\fP\|] [\|\fB\-m\fP
+\fI시스템\fP\|[\|,.\|.\|.\|]\|] [\|\fB\-M\fP \fI경로\fP\|] [\|\fB\-L\fP \fI로캘\fP\|] [\|\fB\-C\fP
+\fI파일\fP\|] \fI이름\fP \&.\|.\|.
+.SH 설명
+각 설명서 페이지에는 간단한 설명이 들어있습니다.  \fBwhatis\fP는 설명서 페이지 이름을 검색하며, \fI이름\fP과 일치하는 설명서
+페이지 설명 부분을 출력합니다.
+
+\fI이름\fP에는 와일드카드(\fB\-w\fP)가 들어가거나 정규 표현식\fB\-r\fP)이 들어갑니다. 이 옵션을 활용하면, \fI이름\fP을 따옴표로
+둘러쌓거나 특수 문자를 이스케이핑(\e) 처리하여 셸에서 해석하거나 실행하지 못하게 막아야 합니다.
+
+\fB색인\fP 데이터베이스는 검색시 활용하며, \fBmandb\fP 프로그램에서 업데이트합니다.  설치 상태에 따라 크론 작업으로 주기적으로
+실행하거나 새 설명서 페이지를 설치한 후 직접 실행해야 합니다.  상대 \fB색인\fP 데이터베이스에서 구세대 방식 \fBwhatis\fP
+데이터베이스를 만들려면, 다음 명령을 실행합니다:
+
+\fBwhatis \-M\fP \fI맨_페이지_경로\fP \fB\-w '*' | sort >\fP \fI맨_페이지_경로/WHATIS\fP
+
+\fI맨_페이지_경로\fP는 \fI/usr/man\fP과 같은 설명서 페이지 계층입니다.
+.SH 옵션
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+디버깅 정보를 출력합니다.
+.TP 
+.if  !'po4a'hide' .BR \-v ", " \-\-verbose
+경고 메시지를 자세하게 출력합니다.
+.TP 
+.if  !'po4a'hide' .BR \-r ", " \-\-regex
+각 \fI이름\fP을 정규 표현식으로 해석합니다.  \fI이름\fP이 페이지 이름 일부와 일치하면, 일치 항목으로 간주합니다.  이 옵션은
+\fBwhatis\fP의 데이터베이스 검색 방식으로 인해 조금 느리게할 수 있습니다.
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-wildcard
+각 \fI이름\fP을 셸 방식 와일드카드 문자가 들어간 패턴으로 해석합니다.  일치 항목이 되려면, 확장 \fI이름\fP이 전체 페이지 이름과
+일치해야 합니다.  이 옵션은 \fBwhatis\fP의 데이터베이스 검색 방식으로 인해 조금 느리게할 수 있습니다.
+.TP 
+.if  !'po4a'hide' .BR \-l ", " \-\-long
+터미널 폭에 맞춰 출력을 자르지 않습니다.  보통, 정돈이 제대로 안된 \fBNAME\fP 섹션의 깔끔하지 못한 출력을 다듬을 목적으로 터미널
+폭으로 자릅니다.
+.TP 
+\fB\-s\fP \fI목록\/\fP, \fB\-\-sections=\fP\fI목록\/\fP, \fB\-\-section=\fP\fI목록\fP
+주어진 설명서 섹션에 대해서만 검색합니다.  \fI목록\fP은 콜론 또는 쉼표로 구분한 섹션 목록입니다.  \fI목록\fP의 항목이 "3"과 같은
+단순 섹션이라면, "3", "3perl", "3x" 과 같은 식으로 설명 목록이 페이지에 들어갑니다. \fI목록\fP에 들어간 항목이
+"3perl" 과 같은 확장자일 경우, 설명서 섹션의 정확한 페이지 부분만 목록에 들어갑니다.
+.TP 
+\fB\-m\fP \fI시스템\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fI시스템\fP\|[\|,.\|.\|.\|]
+시스템에서 다른 운영 체제의 설명서 페이지 이름에 접근할 수 있다면, 이 옵션으로 접근할 수 있습니다.  NewOS의 설명서 페이지
+이름을 검색하려면 \fB\-m\fP \fBNewOS\fP 옵션을 사용하십시오.
+
+\fI시스템\fP에는 쉼표로 구분한 여러 운영체제 이름을 지정할 수 있습니다.  자체 운영체제 설명서 페이지 이름의 검색 대상을 넣으려면
+시스템 이름 \fBman\fP을 인자 문자열에 반드시 넣어야합니다.  이 옵션은 $\fBSYSTEM\fP 환경 변수를 대체합니다.
+.TP 
+\fB\-M\ \fP\fI경로\fP,\ \fB\-\-manpath=\fP\fI경로\fP
+콜론으로 구분한 검색 대상 설명서 페이지 계층을 대신 지정합니다.  기본적으로 \fBwhatis\fP은 $\fBMANPATH\fP 환경 변수가
+비어있거나 설정하지 않는 한 이를 활용하는데, 비어 있거나 설정하지 않았을 경우에는 $\fBPATH\fP 환경 변수를 기반으로 적절한 맨
+페이지 경로를 지정합니다.  이 옵션은 $\fBMANPATH\fP 내용을 대신합니다.
+.TP 
+\fB\-L\ \fP\fI로캘\fP,\ \fB\-\-locale=\fP\fI로캘\fP
+\fBwhatis\fP은 보통 $\fBLC_MESSAGES\fP와 $\fBLANG\fP 같은 다양한 환경 변수를 조사하는 C 함수
+\fBsetlocale\fP(3)을 호출하여 현재 로캘을 결정합니다.  결정한 값을 임시로 대체 적용하려면 \fI로캘\fP 문자열을 바로
+\fBwhatis\fP에 전달하는 이 옵션을 사용하십시오.  참고로 페이지가 실제로 시작하는 부분을 검색하기 전까지는 아무런 영향을 주지
+않습니다.  도움말 메시지와 같은 출력 결과는 항상 로캘을 초기에 결정한 다음 나타납니다.
+.TP 
+\fB\-C\ \fP\fI파일\fP,\ \fB\-\-config\-file=\fP\fI파일\fP
+\fI\(ti/.manpath\fP 기본값 대신 사용자 설정 파일을 활용합니다.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+도움말 메시지를 출력하고 나갑니다.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+간단한 사용법 메시지를 출력하고 나갑니다.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+버전 정보를 출력합니다.
+.SH "종료 상태"
+.TP 
+.if  !'po4a'hide' .B 0
+프로그램 실행 성공.
+.TP 
+.if  !'po4a'hide' .B 1
+사용법, 문법, 구성 파일 오류.
+.TP 
+.if  !'po4a'hide' .B 2
+처리 오류.
+.TP 
+.if  !'po4a'hide' .B 16
+지정한 단어에 일치하는 요소를 찾지 못했습니다.
+.SH 환경
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+$\fBSYSTEM\fP을 설정했다면, \fB\-m\fP 옵션의 인자 지정과 같이 동작합니다.
+.TP 
+.if  !'po4a'hide' .B MANPATH
+$\fBMANPATH\fP를 설정했다면, 콜론으로 구분한 설명서 페이지 검색 경로로 값을 해석합니다.
+
+환경 변수 처리 방식의 기본 동작 및 자세한 내용은 \fBmanpath\fP(5)의 \fB검색 경로\fP 섹션을 살펴보십시오.
+.TP 
+.if  !'po4a'hide' .B MANWIDTH
+$\fBMANWIDTH\fP를 설정하면, 이 값을 터미널 폭으로 사용합니다(\fB\-\-long\fP 옵션 참조).  이 값을 설정하지 않으면 터미널
+폭을 $\fBCOLUMNS\fP 값으로 계산하며, 가능하다면 \fBioctl\fP(2) 값을 활용합니다. 앞서 두가지 방식의 처리에 실패하면
+80문자 폭으로 대체합니다.
+.SH 파일
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/index.(bt|db|dir|pag)
+전통 전역 \fI색인\fP 데이터베이스 캐시입니다.
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt|db|dir|pag)
+FHS 준수 전역 \fI색인\fP 데이터베이스 캐시입니다.
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/\|.\|.\|.\|/whatis
+전통 \fBWHATIS\fP 텍스트 데이터베이스입니다.
+.SH "추가 참조"
+.if  !'po4a'hide' .BR apropos (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR mandb (8)
+.SH 저작자
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH 버그
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

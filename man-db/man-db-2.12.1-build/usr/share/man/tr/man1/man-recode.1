@@ -1,0 +1,84 @@
+.\" Man page for man-recode
+.\"
+.\" Copyright (C) 2019 Colin Watson <cjwatson@debian.org>
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MAN-RECODE 1 2024-04-05 2.12.1 "Kılavuz sayfası yardımcıları"
+.SH AD
+man-recode \- kılavuz sayfalarını başka bir kodlamaya dönüştür
+.SH ÖZET
+\fBman-recode\fP \fB\-t\fP \fIto\-code\fP
+{\|\fB\-\-suffix=\fP\fIsonek\/\fP\||\|\fB\-\-in\-place\fP\|} [\|\fB\-dqhV\fP\|]
+[\|\fIdosyaadı\fP\|]
+.SH AÇIKLAMA
+\fBman-recode\fP, çoklu kılavuz sayfalarını bir kodlamadan başkasına herbiri
+için uygun girdi kodlamasını tahmin ederek dönüştürür.  Eski bir karakter
+kümesinde kodlanmış sayfaları yeniden kodlarken veya bir sayfa kümesini tek
+bir ortak kodlamaya (genellikle UTF\-8) kurulum için kodlaması gereken yapı
+sistemlerinde yararlıdır.  Bu program, çok sayıda kılavuz sayfasını
+dönüştürürken her bir sayfada \fBman \-\-recode\fP veya \fBmanconv\fP
+çalıştırılırsa çok daha hızlı işler.
+.PP
+Kılavuz sayfasının ilk satırında bir kodlama beyanı bulunursa o beyan o
+sayfa için girdi kodlaması olarak kullanılır.  Yapılamazsa girdi kodlaması
+dosya adına bakılarak tahmin edilmeye çalışılır.
+.PP
+Kodlama beyanları şu biçimlidir:
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" \-*\- coding: UTF\-8 \-*\-
+.fi
+.RE
+.PP
+veya (kılavuz sayfası önişlemcileri de bildirilecekse):
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" t \-*\- coding: ISO\-8859\-1 \-*\-
+.fi
+.RE
+.SH SEÇENEKLER
+.TP 
+\fB\-t\fP \fIkodlama\/\fP, \fB\-\-to\-code=\fP\fIkodlama\fP
+Kılavuz sayfalarını \fIkodlama\fP'ya dönüştür.
+.TP 
+\fB\-\-suffix=\fP\fIsonek\fP
+Her bir çıktı satırını girdi dosyası adına herhangi bir sıkıştırma
+uzantısını kaldırdıktan sonra \fIsonek\fP iliştirerek oluştur.
+.TP 
+.if  !'po4a'hide' .B \-\-in\-place
+Herhangi bir sıkıştırma uzantısını kaldırdıktan sonra her girdi dosyasının
+üzerine çıktıyı yaz.
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Sayfa dönüştürülemediğinde hata iletileri verme.
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Hata ayıklama bilgisini göster.
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+Bir yardım iletisi göster ve çık.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Sürüm bilgisini göster.
+.SH "AYRICA BAKINIZ"
+.if  !'po4a'hide' .IR iconv (1),
+.if  !'po4a'hide' .IR man (1),
+.if  !'po4a'hide' .IR manconv (1)
+.SH HATALAR
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db
+.SH YAZAR
+.nf
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi

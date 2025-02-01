@@ -1,0 +1,183 @@
+'\" t
+.\" Man page for mandb
+.\"
+.\" Copyright (C) 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Tue Apr 26 12:56:44 BST 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANDB 8 2024-04-05 2.12.1 "Kılavuz sayfası yardımcıları"
+.SH AD
+mandb \- kılavuz sayfası index önbellekleri oluştur veya güncelle
+.SH ÖZET
+\fBmandb\fP [\|\fB\-dqsucpt?V\fP\|] [\|\fB\-C\fP \fIdosya\fP\|] [\|\fImanpath\fP\|]
+.br
+\fBmandb\fP [\|\fB\-dqsut\fP\|] [\|\fB\-C\fP \fIdosya\fP\|] \fB\-f\fP \fIdosyaadı\fP\ .\|.\|.
+.SH AÇIKLAMA
+\fBmandb\fP genellikle \fBindex\fP veritabanı önbelleklerini başlatmak veya elle
+güncellemek için kullanılır.  Önbellekler, kılavuz sayfa sisteminin geçerli
+durumu ile ilgili bilgileri içerir ve içinde depolanan bilgiler, hızını ve
+işlevselliğini artırmak için man\-db yardımcı programları tarafından
+kullanılır.
+
+Bir \fBdizin\fP oluştururken veya güncellerken, \fBmandb\fP kötü ROFF .so
+istekleri, sahte kılavuz sayfası dosya adları ve \fBwhatis\fP'in
+çözümlenemediği manuel sayfalar konusunda uyarır.
+
+İsteğe bağlı iki nokta üstüste ile ayrılmış yolla \fBmandb\fP sağlanması,
+man\-db yapılandırma dosyası içinde bulunan bilgilerden belirlenen iç sistem
+kılavuz sayfa hiyerarşisi arama yolunu geçersiz kılacaktır.
+.SH "VERİTABANI ÖNBELLEKLERİ"
+\fBmandb\fP, aşağıdaki veritabanı türlerinden herhangi birinin desteği ile
+derlenebilir.
+
+.TS
+tab (@);
+l l l.
+Ad@Asenkron@Dosya Adı
+_
+Berkeley db@Evet@\fIindex.bt\fP
+GNU gdbm@Evet@\fIindex.db\fP
+UNIX ndbm@Hayır@\fIindex.(dir|pag)\fP
+.TE
+
+Eşzamansız güncellemeleri destekleyen bu veritabanı türleri, alışılmadık
+derecede fesih durumunda olası bozulmalar pahasına geliştirilmiş hız
+sağlar.  Bunun gerçekleştiği olağandışı bir durumda, veritabanlarını
+sıfırdan yeniden oluşturmak için \fBmandb\fP'ı \fB\-c\fP seçeneğiyle yeniden
+çalıştırmak gerekebilir.
+.SH SEÇENEKLER
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Hata ayıklama bilgisini göster.
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Hiç uyarı üretme.
+.TP 
+.if  !'po4a'hide' .BR \-s ", " \-\-no-straycats
+Başıboş cat'lar ilgili olarak veritabanlarına bakmak ya da bunlara zaman
+bulmak için harcama yapmayın.
+.TP 
+.if  !'po4a'hide' .BR \-p ", " \-\-no-purge
+Silinen kılavuz sayfalarını kontrol etmek ve veritabanlarından temizlemek
+için vakit harcamayın.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-create
+Öntanımlı olarak, \fBmandb\fP daha önce oluşturulan veritabanlarını
+güncelleştirmeye çalışacaktır.  Bir veritabanı yoksa onu oluşturur.  Bu
+seçenek, \fBmandb\fP'ı önceki veritabanlarını silmek ve sıfırdan tekrar
+oluşturmak için zorlar ve \fB\-\-no\-purge.\fP anlamına gelir. Bu, bir veritabanı
+bozulduysa veya gelecekte yeni bir veritabanı depolama şeması getirildiğinde
+gerekebilir.
+.TP 
+.if  !'po4a'hide' .BR \-u ", " \-\-user-db
+Sistem veritabanları oluşturmak için gereken yazma izinleri varsa bile
+yalnızca kullanıcı veritabanları oluştur.
+.TP 
+.if  !'po4a'hide' .BR \-t ", " \-\-test
+Hiyerarşi arama yolundaki kılavuz sayfaların doğruluğunu kontrol et.  Bu
+seçenekle, \fBmandb\fP mevcut veritabanlarını değiştirmez.
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-filename
+Yalnızca verilen dosya adına ait girdileri güncelleyin.  Bu seçenek genel
+kullanım için değildir; \fBMAN_DB_UPDATES\fP seçeneğiyle derlendiğinde dahili
+olarak \fBman\fP tarafından kullanılır ve bir sayfanın güncel olup olmadığını
+bulur.  \fB\-p\fP 'yi ima eder ve \fB\-c\fP ve \fB\-s\fP'yi devre dışı bırakır.
+.TP 
+\fB\-C\ \fP\fIdosya\fP,\ \fB\-\-config\-file=\fP\fIdosya\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Kullanım iletisini göster, sonra çık.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Kısa kullanım iletisini göster ve çık.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Sürümü göster, sonra çık.
+.SH "ÇIKIŞ DURUMU"
+.TP 
+.if  !'po4a'hide' .B 0
+Başarılı program çalıştırma.
+.TP 
+.if  !'po4a'hide' .B 1
+Kullanım, sözdizimi ve yapılandırma dosya hatası.
+.TP 
+.if  !'po4a'hide' .B 2
+İşlevsel hata.
+.TP 
+.if  !'po4a'hide' .B 3
+Bir alt süreç başarısız oldu.
+.SH TANILAR
+Veritabanı oluşturulurken aşağıdaki uyarı iletileri yayılabilir.
+.TP 
+\fB<filename>: whatis sayfa(böl) ayrıştırması başarısız\fP
+Verilen <filename> satırından satırları çıkarma denemesi başarısız
+oldu.  Bu genellikle kötü bir şekilde yazılmış bir kılavuz sayfadan
+kaynaklanır; ancak böyle birçok ileti gönderilirse sistemin man\-db whatis
+çözümleyici ile uyuşmayan standart olmayan kılavuz sayfaları ihtimali
+ihtimal dahilindedir.  Daha fazla bilgi için \fBlexgrog\fP(1)  bölümündeki
+\fBWHATIS PARSING\fP bölümüne bakın.
+.TP 
+\fB<filename>: sarkan bir sembolik bağdır\fP
+<filename> mevcut değil; ancak bir sembolik bağ tarafından
+başvuruluyor.  Erişen bağın <filename>ini tanımlayabilmek için daha
+fazla teşhiş yayılır.
+.TP 
+\fB<filename>: kötü sembolik bağ veya ROFF `.so' isteği\fP
+<filename> varolmayan bir dosyaya ya sembolik bir bağ ya da  ROFF
+dahil etme isteği içeriyor.
+.TP 
+\fB<filename>: sahte dosya adı yoksayılıyor\fP
+<filename> geçerli bir kılavuz sayfası olabilir veya olmayabilir;
+ancak adı geçersizdir.  Bu genellikle, <y> kılavuz sayfa bölümüne
+konan kesit uzantısı <x> olan bir kılavuz sayfaya bağlıdır.
+.TP 
+\fB<filename_mask>: rakip uzantılar\fP
+Joker karakter <filename_mask> benzersiz değil.  Bunun nedeni
+genellikle aynı kılavuz sayfanın sıkıştırılmış ve sıkıştırılmamış bir
+sürümünün varlığıdır.  En yeni olanlar hariç hepsi göz ardı edilir.
+.SH DOSYALAR
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+man\-db yapılandırma dosyası.
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt|db|dir|pag)
+FHS uyumlu bir global \fIindeks\fP veritabanı önbelleği.
+.PP
+Veritabanı önbelleği için eski konumlar şunları içerir:
+.TP 
+.if  !'po4a'hide' .I /usr/man/index.(bt|db|dir|pag)
+Geleneksel bir global \fIindeks\fP veritabanı önbelleği.
+.TP 
+.if  !'po4a'hide' .I /var/catman/index.(bt|db|dir|pag)
+Alternatif veya FSSTND uyumlu genel \fIindeks\fP veritabanı önbelleği.
+.SH "AYRICA BAKINIZ"
+.if  !'po4a'hide' .BR lexgrog (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR catman (8)
+.PP
+Daha önce bu kılavuz sayfasındaki \fBWHATIS PARSING\fP bölümü, artık
+\fBlexgrog\fP(1)'un bir parçasıdır.
+.SH YAZAR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH HATALAR
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

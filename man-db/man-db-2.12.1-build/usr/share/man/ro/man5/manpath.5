@@ -1,0 +1,175 @@
+.\" Man page for format of the manpath.config data file
+.\"
+.\" Copyright (C) 1994, 1995 Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANPATH 5 2024-04-05 2.12.1 /etc/man_db.conf
+.SH NUME
+manpath \- formatul fișierului /etc/man_db.conf
+.SH DESCRIERE
+Fișierul de configurare al rutei de manual(manpath) este utilizat de
+utilitarele paginilor de manual pentru a evalua rutele de manual ale
+utilizatorilor în timpul executării, pentru a indica ce ierarhii a paginilor
+de manual(manpaths) vor fi tratate ca ierarhii de sistem și pentru a le
+atribui directoare pentru a fi utilizate pentru stocarea fișierelor «cat».
+
+Dacă variabila de mediu $\fBMANPATH\fP este deja stabilită, informațiile
+conținute în /etc/man_db.conf nu o vor suprascrie.
+.SH "RUTA DE CĂUTARE"
+În mod implicit, man\-db examinează variabila de mediu $\fBPATH\fP a
+utilizatorului.  Pentru fiecare \fIelement_rută(path_element)\fP găsit acolo,
+acesta adaugă \fIelement_rută_manual(manpath_element)\fP la ruta de căutare.
+
+Dacă nu există o linie \fBMANPATH_MAP\fP în fișierul de configurare pentru un
+anumit \fIelement_rută\fP, atunci se adaugă toate \fIelement_rută/../man\fP,
+\fIelement_rută/man\fP, \fIelement_rută/../ share/man\fP și
+\fIelement_rută/share/man\fP care există ca directoare la ruta de căutare.
+
+Apoi adaugă orice intrări \fBMANDATORY_MANPATH\fP din fișierul de configurare
+la ruta de căutare.
+
+În cele din urmă, dacă este utilizată opțiunea \fB\-\-systems\fP sau este
+stabilită variabila de mediu $\fBSYSTEM\fP, atunci aceasta ar trebui să conțină
+o secvență de nume de sisteme de operare separate prin virgule sau două
+puncte.  Aceasta acționează ca un șablon, extinzând ruta de căutare încă o
+dată pentru a permite accesul la paginile de manual ale altor sisteme de
+operare: pentru fiecare nume de sistem, man\-db caută acel nume ca
+subdirector al fiecărei intrări din ruta de căutare și îl adaugă la ruta
+finală de căutare, dacă există.  Un nume de sistem \fBman\fP inserează ruta
+normală de căutare fără subdirectoare.  De exemplu, dacă ruta de căutare ar
+fi fost astfel: \fI/usr/share/man:/usr/local/man\fP, iar $\fBSYSTEM\fP este
+stabilită la \fInouSO:man\fP, atunci ruta finală de căutare va fi:
+\fI/usr/share/man/nouSO:/usr/share/man:/usr/local/man/nouSO:/usr/local/man\fP.
+
+Variabila de mediu $\fBMANPATH\fP suprascrie rutele implicite de căutare a
+paginilor de manual ale man\-db.  Majoritatea utilizatorilor nu ar trebui să
+aibă nevoie să o stabilească.  Sintaxa sa este similară cu variabila de
+mediu $\fBPATH\fP: constă dintr\-o secvență de nume de directoare separate prin
+două puncte.  Acesta suprascrie ruta de căutare implicită descrisă mai sus.
+
+Dacă valoarea lui $\fBMANPATH\fP începe cu două puncte, atunci ruta implicită
+de căutare este adăugată la început.  Dacă valoarea lui $\fBMANPATH\fP se
+termină cu două puncte, atunci ruta implicită de căutare este adăugată la
+sfârșitul acesteia.  Dacă valoarea lui $\fBMANPATH\fP conține două puncte duble
+(\fB::\fP), atunci ruta implicită de căutare este inserată în mijlocul valorii,
+între cele două două puncte.
+.SH FORMAT
+Următoarele tipuri de câmpuri sunt în prezent recunoscute:
+.TP 
+\fB#\fP\fI\ comentariu\fP
+Liniile goale sau cele care încep cu \fB#\fP vor fi tratate drept comentarii și
+vor fi ignorate.
+.TP 
+\fBMANDATORY_MANPATH\fP\fI\ element_rută_manual(manpath_element)\fP
+Liniile de această formă indică rutele ierarhice de manual pe care ar trebui
+să le conțină fiecare $\fBMANPATH\fP generat automat.  Aceasta va include de
+obicei \fI/usr/man\fP.
+.TP 
+\fBMANPATH_MAP\fP\fI\ element_rută(path_element)\ element_rută_manual(manpath_element)\fP
+Liniile de această formă stabilesc asocieri între $\fBPATH\fP și $\fBMANPATH\fP.
+Pentru fiecare \fIelement_rută\fP găsit în variabila $\fBPATH\fP a utilizatorului,
+va fi adăugat un \fIelement_rută_manual(manpath_element)\fP la $\fBMANPATH\fP.
+.TP 
+\fBMANDB_MAP \fP\fIelement_rută_manual(manpath_element) \fP\|[\| \fIelement_rută_cat(catpath_element)\fP \|]
+Liniile de această formă indică care rute de manual trebuie tratate precum
+rute de manual de sistem, și opțional unde ar trebui să fie stocate
+fișierele lor «cat».  Acest tip de câmp este deosebit de important dacă
+\fBman\fP este un program setuid, deoarece (când se află în fișierul de
+configurare a sistemului /etc/man_db.conf, mai degrabă decât în
+fișierul de configurare per utilizator .manpath), indică ce ierarhii de
+pagini de manual să acceseze ca utilizator setuid și care ca utilizator
+invocator.
+
+Ierarhiile de pagini de manual ale sistemului sunt de obicei cele stocate
+sub \fI/usr\fP precum \fI/usr/man\fP, \fI/usr/local/man\fP și \fI/usr/X11R6/man\fP.
+
+Dacă paginile «cat» dintr\-un anumit \fIelement_rută_manual\fP nu trebuie să fie
+stocate sau trebuie să fie stocate în locația tradițională,
+\fIelement(ul)_rută_cat\fP poate fi omis.
+
+Amplasarea tradițională de «cat» ar fi imposibilă pentru ierarhiile de
+pagini de manual montate pentru numai\- citire și din cauza asta este posibil
+să specificați orice ierarhie de director validă pentru stocarea acestora.
+Pentru a respecta \fBLinux FSSTND(Sistemul de fișiere standard de Linux)\fP,
+cuvântul cheie \fBFSSTND\fP poate fi utilizat în locul unui director actual.
+
+Din păcate, este necesar să specificați \fBtoate\fP rutele de arbori de manual
+ale sistemului, inclusiv rutele de sisteme de operare alternative precum
+\fI/usr/man/sun\fP și orice rute \fBNLS\fP locale, precum
+\fI/usr/man/ro_RO.88592\fP. NT: NLS = „Native Language Support” ⇛ Suport pentru
+limba nativă,maternă.
+
+Deoarece informațiile sunt analizate linie cu linie în ordinea scrisă, este
+necesar pentru orice rută de manual care este o sub\-ierarhie a altei
+ierarhii să fie prima listată, în caz contrar va fi făcută o potrivire
+incorectă.  Un exemplu este că \fI/usr/man/ro_RO.88592\fP trebuie să apară
+înaintea lui \fI/usr/man\fP.
+.TP 
+\fBDEFINE\fP\fI\ cheie\ valoare\fP
+Liniile de această formă definesc variabilele de configurație diversă;
+vedeți fișierul de configurare implicit pentru acele variabile utilizate de
+utilitarele paginatorului de manual.  Acestea includ rutele implicite către
+diferite programe (precum \fIgrep\fP și \fItbl\fP), și seturile de argumente
+implicite pentru acele programe.
+.TP 
+\fBSECTION\fP \fIsecțiune\fP .\|.\|.
+.RS
+Liniile de această formă definesc ordinea în care secțiunile de manual ar
+trebui să fie căutate.  Dacă nu există nicio directivă \fBSECTION\fP în
+fișierul de configurare, directiva implicită este:
+.PP
+.RS
+.nf
+.if  !'po4a'hide' SECTION 1 n l 8 3 0 2 3type 5 4 9 6 7
+.fi
+.RE
+.PP
+Dacă sunt date multiple directive \fBSECTION\fP, listele lor de secțiune vor fi
+concatenate.
+.PP
+Dacă o anumită extensie nu se află în această listă (să zicem, 1 mh),
+aceasta va fi afișată împreună cu restul secțiunii căreia îi aparține.
+Efectul acestui lucru este, că trebuie să enumerați în mod explicit
+extensiile, doar dacă doriți să forțați o anumită ordine.  Secțiunile cu
+extensii ar trebui să fie de obicei adiacente secțiunii lor principale (de
+exemplu, „1 1mh 8 ...”).
+.PP
+\fBSECTIONS\fP este acceptat ca un nume alternativ pentru această directivă.
+.RE
+.TP 
+\fBMINCATWIDTH\fP\fI\ lățime\fP
+Dacă lățimea terminalului este mai mică decât \fIlățimea\fP, paginile «cat» nu
+vor fi create (dacă lipsesc) sau afișate.  Lățimea implicită este 80.
+.TP 
+\fBMAXCATWIDTH\fP\fI\ lățime\fP
+Dacă lățimea terminalului este mai mare decât \fIlățime\fP, paginile «cat» nu
+vor fi create (dacă lipsesc) sau afișate.  Lățimea implicită este 80.
+.TP 
+\fBCATWIDTH\fP\fI\ lățime\fP
+Dacă \fIlățimea\fP este diferită de zero, paginile «cat» vor fi întotdeauna
+formatate pentru un terminal cu lățimea dată, indiferent de lățimea
+terminalului utilizat efectiv.  Acest lucru suprascrie intervalul stabilit
+de \fBMINCATWIDTH\fP și \fBMAXCATWIDTH\fP.
+.TP 
+.if  !'po4a'hide' .B NOCACHE
+Această opțiune evită ca \fBman\fP(1)  să creeze automat pagini «cat».
+.SH DEFECȚIUNI
+Dacă regulile de mai sus nu sunt urmate și respectate cu precizie,
+utilitarele paginatorului de manual nu vor funcționa așa cum este dorit.
+Regulile sunt extraordinar de complicate 👿.
+.PP
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

@@ -1,0 +1,100 @@
+.\" Man page for catman
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Dec 10 14:17:29 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH CATMAN 8 2024-04-05 2.12.1 "Utilidades do paginador do manual"
+.SH NOME
+catman \- cria ou actualiza as páginas do manual pré\-formatadas
+.SH SINOPSE
+\fBcatman\fP [\|\fB\-d?V\fP\|] [\|\fB\-M\fP \fIcaminho\fP\|] [\|\fB\-C\fP \fIficheiro\fP\|]
+[\|\fIsecção\fP\|] \&.\|.\|.
+.SH DESCRIÇÃO
+\fBcatman\fP é usado para criar um conjunto actualizador de páginas do manual
+pré\-formatadas, conhecidas como páginas cat. Estas são geralmente muito mais
+rápidas a mostrar do que as originais páginas do manual, mas requerem mais
+espaço de armazenagem. A decisão de suportar páginas cat pertence ao
+administrador local, que deverá fornecer pastas adequadas para as armazenar.
+
+As opções disponíveis para \fBcatman\fP são as hierarquias de páginas do
+manual e as secções a pré\-formatar. As hierarquias são as especificadas como
+hierarquias do sistema no ficheiro de configuração do man\-db e as secções
+predefinidas são ou o conteúdo separado por dois\-pontos da variável de
+ambiente $\fBMANSECT\fP ou o conjunto padrão compilado com \fBman\fP se
+$\fBMANSECT\fP for indefinida. Fornecer \fBcatman\fP com um conjunto de nomes de
+secções separados por espaços em branco sobrepõe\-se a ambas as opções acima.
+
+\fBcatman\fP utiliza a cache da base de dados \fBíndice\fP associada com cada
+hierarquia para determinar que ficheiros precisam de formatação.
+.SH OPÇÕES
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+imprime informação de depuração.
+.TP 
+\fB\-M\ \fP\fIcaminho\fP,\ \fB\-\-manpath=\fP\fIcaminho\fP
+Especifica um caminho de procura alternativo separado por dois\-pontos de
+hierarquia de páginas do manual. Por predefinição, são todos os caminhos
+indicados como hierarquias do sistema no ficheiro de configuração do man\-db.
+.TP 
+\fB\-C\ \fP\fIficheiro\fP,\ \fB\-\-config\-file=\fP\fIficheiro\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+mostra uma mensagem de ajuda e sai.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+mostra uma mensagem curta de uso e sai.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+mostra informação da versão.
+.SH AMBIENTE
+.TP 
+.if  !'po4a'hide' .B MANSECT
+Se $\fBMANSECT\fP estiver definida, o seu valor é uma lista de secções separada
+por dois\-pontos e é usada para determinar que secções do manual procurar e
+em que ordem. A predefinição é "1 n l 8 3 0 2 3type 5 4 9 6 7", a não ser que sobreposta pela
+directiva \fBSECTION\fP em \fI/etc/man_db.conf\fP.
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Se $\fBMANPATH\fP estiver definido, o seu valor é interpretado como caminho de
+procura delimitado por dois\-pontos de hierarquia de páginas do manual a
+usar.
+
+See the \fBSEARCH PATH\fP section of \fBmanpath\fP(5)  for the default behaviour
+and details of how this environment variable is handled.
+.SH FICHEIROS
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+ficheiro de configuração do man\-db.
+.TP 
+.if  !'po4a'hide' .I /usr/man/index.(bt|db|dir|pag)
+Uma cache de base de dados de \fIíndice\fP global tradicional.
+.TP 
+.if  !'po4a'hide' .I /var/catman/index.(bt|db|dir|pag)
+Uma cache de base de dados \fIíndice\fP alternativa ou respeitante FSSTND.
+.SH "VEJA TAMBÉM"
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR mandb (8)
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH ERROS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

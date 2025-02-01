@@ -1,0 +1,110 @@
+.\" Man page for catman
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Dec 10 14:17:29 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH CATMAN 8 2024-04-05 2.12.1 "Narzędzia przeglądarki stron podręcznika ekranowego"
+.SH NAZWA
+catman \- tworzy lub aktualizuje preformatowane strony podręcznika
+ekranowego
+.SH SKŁADNIA
+\fBcatman\fP [\|\fB\-d?V\fP\|] [\|\fB\-M\fP \fIścieżka\fP\|] [\|\fB\-C\fP \fIplik\fP\|]
+[\|\fIsekcja\fP\|] \&.\|.\|.
+.SH OPIS
+\fBcatman\fP służy do tworzenia i aktualizacji zestawu preformatowanych stron
+podręcznika znanych jako strony cat (cat pages). Wyświetlanie stron "cat"
+jest na ogół dużo szybsze niż wyświetlenie pierwotnych stron man, jednakże
+strony "cat" wymagają dodatkowego miejsca na ich składowanie. Decyzja o
+obsłudze stron "cat" należy do lokalnego administratora, który musi zapewnić
+odpowiednie katalogi do ich przechowywania.
+
+Opcje polecenia \fBcatman\fP opisują hierarchie stron podręcznika man oraz
+sekcje, które mają podlegać preformatowaniu. Domyślnymi hierarchiami
+(drzewami katalogów) są te, które określono jako systemowe w pliku
+konfiguracyjnym man\-db. Domyślne sekcje określa albo podzielona dwukropkami
+zawartość zmiennej środowiska $\fBMANSECT\fP, albo zestaw standardowy
+wkompilowany w \fBman\fP, jeżeli $\fBMANSECT\fP jest niezdefiniowana. Wywołanie
+\fBcatman\fP z zestawem rozdzielonych białymi znakami nazw sekcji nadpisuje
+powyższe ustawienia domyślne.
+
+\fBcatman\fP do ustalenia, które z plików powinny zostać sformatowane,
+korzysta z \fBindeksów\fP baz danych (index database cache) związanych z każdą
+z hierarchii.
+.SH OPCJE
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Wyświetla informację diagnostyczną (debug).
+.TP 
+\fB\-M\ \fP\fIścieżka\fP,\ \fB\-\-manpath=\fP\fIścieżka\fP
+Określa alternatywną, rozdzieloną dwukropkami, ścieżkę przeszukiwań
+hierarchii stron podręcznika (manpath). Domyślnie są to wszystkie ścieżki
+wskazane jako systemowe w pliku konfiguracyjnym man\-db.
+.TP 
+\fB\-C\ \fP\fIplik\fP,\ \fB\-\-config\-file=\fP\fIplik\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Wyświetla komunikat pomocy i kończy pracę.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Wyświetla krótki opis użycia programu i kończy pracę.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Wyświetla informację o wersji.
+.SH ŚRODOWISKO
+.TP 
+.if  !'po4a'hide' .B MANSECT
+Jeżeli ustawiona jest $\fBMANSECT\fP, to jej wartość jest listą oddzielonych
+dwukropkami sekcji i służy do określania, które sekcje podręcznika man i w
+jakiej kolejności będą przeszukiwane. Domyślną wartością jest "1 n l 8 3 0 2 3type 5 4 9 6 7",
+chyba że zostanie to nadpisane w polu \fBSECTION\fP pliku
+\fI/etc/man_db.conf\fP.
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Jeżeli ustawiona jest $\fBMANPATH\fP, to jej wartość jest interpretowana jako
+wskazana do użycia ścieżka przeszukiwań hierarchii stron man. Ścieżka
+zawiera rozdzielone dwukropkami nazwy hierarchii (katalogów).
+
+See the \fBSEARCH PATH\fP section of \fBmanpath\fP(5)  for the default behaviour
+and details of how this environment variable is handled.
+.SH PLIKI
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+Plik konfiguracyjny man\-db.
+.TP 
+.if  !'po4a'hide' .I /usr/man/index.(bt|db|dir|pag)
+Tradycyjny globalny \fIindeks\fP bazy danych.
+.TP 
+.if  !'po4a'hide' .I /var/catman/index.(bt|db|dir|pag)
+Alternatywny lub zgodny z FSSTND globalny \fIindeks\fP bazy danych.
+.SH "ZOBACZ TAKŻE"
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR mandb (8)
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BŁĘDY
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db
+.SH TŁUMACZENIE
+Wojciech Kotwica w 1999 roku przetłumaczył część stron podręcznika pakietu
+man-db i udostępnił je w ramach Projektu Tłumaczenia Manuali.
+.br
+Robert Luberda tłumaczenie zaktualizował i uzupełnił w roku 2008.

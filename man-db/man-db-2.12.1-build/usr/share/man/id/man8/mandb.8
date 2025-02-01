@@ -1,0 +1,188 @@
+'\" t
+.\" Man page for mandb
+.\"
+.\" Copyright (C) 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Tue Apr 26 12:56:44 BST 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANDB 8 2024-04-05 2.12.1 "Penggunaan halaman buku panduan"
+.SH NAMA
+mandb \- buat atau perbarui indeks persediaan halaman buku panduan
+.SH RINGKASAN
+\fBmandb\fP [\|\fB\-dqsucpt?V\fP\||\|\fB\-h\fP\||\|\fB\-V\fP\|] [\|\fB\-C\fP \fIberkas\fP\|]
+[\|\fIjalurman\fP\|]
+.br
+\fBmandb\fP [\|\fB\-dqsut\fP\|] [\|\fB\-C\fP \fIberkas\fP\|] \fB\-f\fP \fInama berkas\fP\ \&.\|.\|.
+.SH DESKRIPSI
+\fBmandb\fP is used to initialise or manually update \fBindex\fP database
+caches.  The caches contain information relevant to the current state of the
+manual page system and the information stored within them is used by the
+man\-db utilities to enhance their speed and functionality.
+
+Ketika membuat atau memperbarui sebuah \fBindeks\fP, \fBmandb\fP akan
+memperingatkan dari permintaan buruk .so ROFF, nama berkas halaman buku
+panduan palsu dan halaman buku panduan dari \fBwhatis\fP tidak dapat diambil.
+
+Memberikan \fBmandb\fP dengan sebuah sebuah jalur alternatif dipisahkan
+dengan tanda titik dua akan memaksa jalur pencarian internal hierarki sistem
+halaman buku panduan, yang ditentukan dari informasi yang ditemukan dalam
+berkas konfigurasi man\-db.
+.SH "PERSEDIAAN BASIS DATA"
+\fBmandb\fP dapat disusun dengan dukungan untuk tipe basis data apapun
+seperti berikut ini.
+
+.TS
+tab (@);
+l l l.
+Name@Async@Filename
+_
+Berkeley db@Yes@\fIindex.bt\fP
+GNU gdbm@Yes@\fIindex.db\fP
+UNIX ndbm@No@\fIindex.(dir|pag)\fP
+.TE
+
+Tipe basis data itu yang mendukung pembaruan asinkron memberikan kecepatan
+lebih dengan kemungkinan korupsi pada saat terjadi terminasi yang tidak
+biasa. Dalam kasus yang tidak biasa dimana ini telah terjadi, mungkin perlu
+untuk menjalankan kembali \fBmandb\fP dengan pilihan \fB\-c\fP untuk membuat
+kembali basis data dari awal.
+.SH PILIHAN
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Tampilkan informasi penelusuran.
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Tidak menghasilkan peringatan.
+.TP 
+.if  !'po4a'hide' .BR \-s ", " \-\-no-straycats
+Jangan habiskan waktu untuk mencari atau menambahkan informasi ke basis data
+mengenai berkas cat yang salah.
+.TP 
+.if  !'po4a'hide' .BR \-p ", " \-\-no-purge
+Jangan habiskan waktu untuk memeriksa halaman buku panduan yang terhapus dan
+hapus mereka dari basis data.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-create
+Secara baku, \fBmandb\fP akan mencoba memperbarui basis data yang dibuat
+sebelumnya. Jika sebuah basis data tidak ada, ini akan dibuat. Pilihan ini
+memaksa \fBmandb\fP untuk menghapus basis data sebelumnya dan membuat kembali
+dari awal, dan mengimplikasikan \fB\-\-no\-purge.\fP Ini mungkin diperlukan jika
+sebuah basis data telah terkorupsi atau jika sebuah skema penyimpanan basis
+data baru dikenalkan dalam masa depan.
+.TP 
+.if  !'po4a'hide' .BR \-u ", " \-\-user-db
+Buat basis data untuk pengguna saja, baik dengan ijin tulis yang dibutuhkan
+untuk membuat basis data sistem.
+.TP 
+.if  !'po4a'hide' .BR \-t ", " \-\-test
+Lakukan pemeriksaan kebenaran di halaman buku panduan dalam hierarki jalur
+pencarian. Dengan pilihan ini, \fBmandb\fP tidak akan mengubah basis data
+yang sudah ada.
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-filename
+Hanya perbarui masukan dari nama berkas yang diberikan. Pilihan ini tidak
+untuk penggunaan umum; ini digunakan secara internal oleh \fBman\fP ketika
+ini telah disusun dengan \fBMAN_DB_UPDATES\fP pilihan dan menemukan bahwa
+sebuah halaman telah kadaluarsa. Ini mengimplikasikan \fB\-p\fP dan
+menonaktifkan \fB\-c\fP dan \fB\-s\fP.
+.TP 
+\fB\-C\ \fP\fIberkas\fP,\ \fB\-\-config\-file=\fP\fIberkas\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Tampilkan pesan penggunaan, kemudian keluar.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Tampilkan sebuah pesan bantuan dan keluar.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Tampilkan versi, kemudian keluar.
+.SH "STATUS KELUAR"
+.TP 
+.if  !'po4a'hide' .B 0
+Eksekusi aplikasi sukses.
+.TP 
+.if  !'po4a'hide' .B 1
+Penggunaan, sintaks, atau berkas konfigurasi error.
+.TP 
+.if  !'po4a'hide' .B 2
+Operasional error.
+.TP 
+.if  !'po4a'hide' .B 3
+Sebuah proses anak gagal.
+.SH DIAGNOSA
+Pesan peringatan berikut dapat dikeluarkan selama pembuatan basis data.
+.TP 
+\fB<nama berkas>: whatis pengambilan untuk halaman(sec) gagal\fP
+Sebuah percobaan untuk mengekstrak baris whatis <dari nama berkas>
+yang diberikan gagal. Ini biasanya karena halaman buku panduan yang ditulis
+kurang lengkap, tetapi jika banyak pesan seperti itu yang dikeluarkan
+sepertinya sistem berisi halaman buku panduan yang tidak standar yang tidak
+sesuai dengan pengambil man\-db whatis. Lihat bagian \fBWHATIS PARSING\fP  dalam
+\fBlexgrog\fP(1) untuk informasi lebih lanjut.
+.TP 
+\fB<nama berkas>: adlaah sebuah simlink dangling\fP
+<nama berkas> tidak ada tetapi direferensikan oleh sebuah link
+simbolik. Diagnosa lebih lanjut biasanya dikeluarkan untuk
+mengidentifikasikan <nama berkas> dari offending link.
+.TP 
+\fB<nama berkas>: symlink buruk atau permintaan `.so' ROFF\fP
+<nama berkas> baik sebuak link simbolik ke, atau berisi sebuah ROFF
+termasuk permintaan ke, sebuah berkas yang tidak ada.
+.TP 
+\fB<nama berkas>: mengabaikan nama berkas palsu\fP
+<nama berkas> mungkin atau tidak mungkin berupa sebuah halaman buku
+panduan normal tetapi namanya tidak valid. Ini biasanya karena sebuah
+halaman buku panduan dengan ekstensi bagian <x> diletakan dalam
+bagian halaman buku panduan <y>.
+.TP 
+\fB<filename_mask>: ekstensi berkompetensi\fP
+Karakter bebas <filename_mask> tidak unik. Ini biasanya disebabkan
+oleh adanya baik versi terkompres dan tidak terkompres dari halaman buku
+panduan yang sama. Seluruh tetapi yang paling baru diabaikan.
+.SH BERKAS
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+berkas konfigurasi man\-db.
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt|db|dir|pag)
+Sebuah persediaan basis data \fIindeks\fP menyeluruh sesuai dengan FHS.
+.PP
+Lokasi lebih lama untuk persediaan basis data dimasukan:
+.TP 
+.if  !'po4a'hide' .I /usr/man/index.(bt|db|dir|pag)
+Sebuah persediaan basis data \fIindeks\fP menyeluruh tradisional.
+.TP 
+.if  !'po4a'hide' .I /var/catman/index.(bt|db|dir|pag)
+Sebuah persediaan basis data \fIindeks\fP menyeluruh alternatif atau sesuai
+dengan FSSTND.
+.SH "LIHAT JUGA"
+.if  !'po4a'hide' .BR lexgrog (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR catman (8)
+.PP
+\fBWHATIS PARSING\fP bagian sebelumnya dalam halaman buku panduan ini sekarang
+bagian dari \fBlexgrog\fP(1).
+.SH PENGARANG
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BUGS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

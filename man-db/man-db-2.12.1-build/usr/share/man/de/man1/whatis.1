@@ -1,0 +1,175 @@
+.\" Man page for whatis
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH WHATIS 1 2024-04-05 2.12.1 "Dienstprogramme für Handbuchseiten"
+.SH BEZEICHNUNG
+whatis \- durchsucht die Indexdatenbank nach Kurzbeschreibungen
+.SH ÜBERSICHT
+\fBwhatis\fP [\|\fB\-dlv?V\fP\|] [\|\fB\-r\fP\||\|\fB\-w\fP\|] [\|\fB\-s\fP \fIListe\fP\|]
+[\|\fB\-m\fP \fISystem\fP\|[\|,.\|.\|.\|]\|] [\|\fB\-M\fP \fIPfad\fP\|] [\|\fB\-L\fP
+\fILocale\fP\|] [\|\fB\-C\fP \fIDatei\fP\|] \fIName\fP \&.\|.\|.
+.SH BESCHREIBUNG
+Innerhalb jeder Handbuchseite ist eine Kurzbeschreibung
+vorhanden. \fBwhatis\fP durchsucht die Namen der Handbuchseiten und zeigt die
+Beschreibungen der gefundenen Seiten mit passendem \fINamen\fP an.
+
+Der \fIName\fP kann Platzhalter (Wildcards, \fB\-w\fP) oder reguläre Ausdrücke
+(\fB\-r\fP) enthalten. Bei der Nutzung dieser Optionen kann es erforderlich
+sein, den \fINamen\fP mit Anführungszeichen und Sonderzeichen mit
+Escape\-Sequenzen (\e) vor der Verarbeitung durch die Shell zu schützen.
+
+Während der Suche werden \fIIndex\fP\-Datenbanken verwendet, die von dem
+Programm \fBmandb\fP aktuell gehalten werden. Abhängig von Ihrer Installation
+wird die Datenbank periodisch per Cron\-Job aktualisiert \- oder Sie müssen
+nach der Installation neuer Handbuchseiten \fBmandb\fP manuell starten. Um
+aus der relativen \fBIndex\fP\-Datenbank eine althergebrachte
+\fBwhatis\fP\-Textdatenbank zu erzeugen, geben Sie den folgenden Befehl ein:
+
+\fBwhatis \-M\fP \fIPfad\fP \fB\-w '*' | sort >\fP \fIPfad/whatis\fP
+
+wobei \fIPfad\fP eine Handbuch\-Hierarchie wie z.B. \fI/usr/man\fP ist.
+.SH OPTIONEN
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Ausgabe von Debug\-Informationen
+.TP 
+.if  !'po4a'hide' .BR \-v ", " \-\-verbose
+Ausgabe ausführlicher Warnmeldungen
+.TP 
+.if  !'po4a'hide' .BR \-r ", " \-\-regex
+Interpretiert jeden \fINamen\fP als regulären Ausdruck. Wenn ein \fIName\fP
+irgendeinem Teil eines Seitennamens entspricht, wird dies als
+Übereinstimmung gewertet. Aus der Natur von Datenbankabfragen heraus macht
+diese Option \fBwhatis\fP etwas langsamer.
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-wildcard
+Interpretiert jeden \fINamen\fP als ein Muster, das Shell\-Platzhalter
+(Wildcards) enthält. Für einen Fund muss der ausgewertete \fIName\fP mit dem
+vollständigen Namen der Handbuchseite übereinstimmen. Aus der Natur von
+Datenbankabfragen heraus macht diese Option \fBwhatis\fP etwas langsamer.
+.TP 
+.if  !'po4a'hide' .BR \-l ", " \-\-long
+Die Ausgabe wird nicht auf die Terminalbreite beschnitten. Normalerweise
+wird die Ausgabe auf die Terminalbreite gestutzt, um hässliche Ergebnisse
+schlecht geschriebener \fBBEZEICHNUNGs\fP\-Abschnitte zu vermeiden.
+.TP 
+\fB\-s\fP \fIListe\/\fP, \fB\-\-sections=\fP\fIListe\/\fP, \fB\-\-section=\fP\fIListe\fP
+Durchsucht nur die vorgegebenen Abschnitte. \fIListe\fP ist eine durch Kommas
+oder Doppelpunkte gegliederte Liste von Abschnitten. Wenn ein Eintrag in
+\fIListe\fP ein einfacher Abschnitt ist (z. B. »3«), enthält das Ergebnis
+Seiten aus den Abschnitten »3«, »3perl«, »3x« usw. Wird \fIAbschnitt\fP mit
+Suffix angegeben (z. B. »3perl«), werden die Ergebnisse nur in diesem
+speziellen Unterabschnitt gesucht.
+.TP 
+\fB\-m\fP \fIsystem\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fISystem\fP\|[\|,.\|.\|.\|]
+Wenn Ihr System auch auf die Handbuchseiten eines anderen Betriebssystems
+zugreifen kann, können diese Seiten mit dieser Option durchsucht werden. Um
+die Beschreibungen der Handbuchseiten von NewOS zu durchsuchen, verwenden
+Sie die Option \fB\-m\fP \fBNewOS\fP.
+
+Das angegebene \fISystem\fP kann eine durch Kommas abgetrennte Aufzählung von
+Betriebssystemnamen sein. Um auch die Handbuchseiten des eigenen
+Betriebssystems mit zu durchsuchen, geben Sie auch den Systemnamen \fBman\fP
+als Argument mit ein. Diese Option überschreibt die Umgebungsvariable
+$\fBSYSTEM\fP.
+.TP 
+\fB\-M\ \fP\fIPfad\fP,\ \fB\-\-manpath=\fP\fIPfad\fP
+Legt mehrere durch Doppelpunkte getrennte alternative Handbuch\-Hierarchien
+fest, die durchsucht werden sollen. Standardmäßig verwendet \fBwhatis\fP die
+Umgebungsvariable $\fBMANPATH\fP. Wenn diese leer ist oder ihr kein Wert
+zugewiesen wurde, wird das Programm versuchen, auf Grundlage der
+Umgebungsvariablen $\fBPATH\fP einen geeigneten »Manpath« zu bestimmen. Diese
+Option überschreibt den Inhalt von $\fBMANPATH\fP.
+.TP 
+\fB\-L\ \fP\fILocale\fP,\ \fB\-\-locale=\fP\fILocale\fP
+\fBwhatis\fP wird in der Regel Ihre aktuelle Locale durch einen Aufruf der
+C\-Funktion \fBsetlocale\fP(3) bestimmen, welche verschiedene Umgebungsvariablen
+auswertet (darunter sind eventuell auch $\fBLC_MESSAGES\fP und $\fBLANG\fP). Um
+den ermittelten Wert vorübergehend außer Kraft zu setzen, können Sie
+\fBwhatis\fP mit dieser Option eine \fILocale\fP vorgeben. Beachten Sie, dass
+dieser Wert erst wirksam wird, wenn die Suche tatsächlich
+beginnt. Programm\-Meldungen wie Hilfe\-Nachrichten werden immer in der zu
+Anfang ermittelten Locale angezeigt werden.
+.TP 
+\fB\-C\ \fP\fIDatei\fP,\ \fB\-\-config\-file=\fP\fIDatei\fP
+Verwendung dieser benutzerspezifischen Konfigurationsdatei an Stelle der
+Vorgabe \fI\(ti/.manpath\fP
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Hilfetext anzeigen und beenden
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+zeigt eine kurze Anwendungszusammenfassung an und beendet das Programm.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Versionsinformation anzeigen und beenden
+.SH EXIT\-STATUS
+.TP 
+.if  !'po4a'hide' .B 0
+erfolgreiche Programmausführung
+.TP 
+.if  !'po4a'hide' .B 1
+Fehler beim Aufruf, in der Syntax oder in der Konfigurationsdatei
+.TP 
+.if  !'po4a'hide' .B 2
+betriebsbedingter Fehler
+.TP 
+.if  !'po4a'hide' .B 16
+keine Ergebnisse für die angegebenen Suchkriterien
+.SH UMGEBUNGSVARIABLEN
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+Wenn $\fBSYSTEM\fP gesetzt ist, hat das die gleiche Wirkung wie die Verwendung
+als Argument für die Option \fB\-m\fP.
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Wenn $MANPATH gesetzt ist, wird ihr Wert als der mit Kommas getrennte
+anzuwendende Hierarchie\-Suchpfad für Handbuchseiten interpretiert.
+
+Siehe den Abschnitt \fBSUCHPFAD\fP in der Handbuchseite \fBmanpath\fP(5) für das
+Standardverhalten und Details dazu, wie mit dieser Umgebungsvariable
+umgegangen wird.
+.TP 
+.if  !'po4a'hide' .B MANWIDTH
+Wenn $\fBMANWIDTH\fP gesetzt ist, wird ihr Wert als Terminalbreite verwendet
+(siehe die Option \fB \-\-long\fP). Ist sie nicht gesetzt, wird die
+Terminalbreite mittels \fBioctl\fP(2) oder mit dem Wert von $\fBCOLUMNS\fP
+ermittelt, wenn diese Variable gesetzt ist. Wenn alles fehlschlägt, werden
+80 Zeichen verwendet.
+.SH DATEIEN
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/index.(bt|db|dir|pag)
+ein traditioneller, globaler Zwischenspeicher für die \fIIndex\fP\-Datenbank
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt|db|dir|pag)
+ein FHS\-konformer, globaler Zwischenspeicher für die \fIIndex\fP\-Datenbank
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/\|.\|.\|.\|/whatis
+eine traditionelle \fBwhatis\fP\-Textdatenbank
+.SH "SIEHE AUCH"
+.if  !'po4a'hide' .BR apropos (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR mandb (8)
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH FEHLER
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

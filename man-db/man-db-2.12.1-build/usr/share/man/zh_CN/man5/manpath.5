@@ -1,0 +1,120 @@
+.\" Man page for format of the manpath.config data file
+.\"
+.\" Copyright (C) 1994, 1995 Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANPATH 5 2024-04-05 2.12.1 /etc/man_db.conf
+.SH 名称
+manpath \- 格式化 /etc/man_db.conf 文件
+.SH 描述
+manpath 配置文件是手册页工具程序用来在运行时访问用户的 manpath
+的。它指示了哪些手册页层次结构(manpath)应视为系统层次结构，并向它们分配用于保存 cat 文件的目录。
+
+如果已经设置了环境变量  $\fBMANPATH\fP，/etc/man_db.conf 中包含的信息不会覆盖它。
+.SH 搜索路径
+默认情况下，man\-db 检查用户的 $\fBPATH\fP。对每个找到的 \fIpath_element\fP，它会将 \fImanpath_element\fP
+添加至搜索路径。
+
+如果对于一个给定的 \fIpath_element\fP 在配置文件中不存在对应的 \fBMANPATH_MAP\fP 行，则它将添加
+\fIpath_element/../man\fP、\fIpath_element/man\fP、\fIpath_element/../share/man\fP 和
+\fIpath_element/share/man\fP 这些路径中所有存在的目录至搜索路径中。
+
+在此之后，它将添加配置文件中所有的 \fBMANDATORY_MANPATH\fP 条目至搜索路径中。
+
+最后，如果使用了 \fB\-\-systems\fP 选项或设置了 $\fBSYSTEM\fP
+环境变量，它们应该包含使用英文逗号或冒号分隔的操作系统名称的列表。它将作为模板，并再一次扩展为搜索路径以访问其它操作系统的手册页：对于每一个系统名称，man\-db
+将查找搜索路径下给定条目为名称的子目录，并在其存在的情况下将其添加到最终的搜索路径中。若系统名称为
+\fBman\fP，则将使用通常的、不带子目录的搜索路径。例如，如果搜索路径原先为 \fI/usr/share/man:/usr/local/man\fP 且
+$\fBSYSTEM\fP 被设置为 \fInewOS:man\fP，则最终的搜索路径将为
+\fI/usr/share/man/newOS:/usr/share/man:/usr/local/man/newOS:/usr/local/man\fP。
+
+$\fBMANPATH\fP 环境变量会覆盖 man\-db 的默认手册页搜索路径。大部分用户不应该需要对此进行设置。其语法类似 $\fBPATH\fP
+环境变量：它包含一个目录名称的序列，并使用冒号进行分隔。它会覆盖上文所述的默认搜索路径。
+
+如果 $\fBMANPATH\fP 使用冒号开头，则默认搜索路径将添加到其开头位置。如果 $\fBMANPATH\fP
+使用冒号结尾，则默认搜索路径将添加到其结束位置。如果变量的值包含双冒号（\fB::\fP），则默认搜索路径将插入到两个冒号之间。
+.SH 格式
+当前支持以下字段类型：
+.TP 
+\fB#\fP\fI\ 注释\fP
+空行或以 \fB#\fP 开头的行将视为注释并忽略。
+.TP 
+\fBMANDATORY_MANPATH\fP\fI\ manpath_element\fP
+这种形式的行指定每个自动生成的 $\fBMANPATH\fP 应包含的 manpath。它通常包含 \fI/usr/man\fP。
+.TP 
+\fBMANPATH_MAP\fP\fI\ path_element\ manpath_element\fP
+这种形式的行将设置 $\fBPATH\fP 到 $\fBMANPATH\fP 的映射。对于在用户 $\fBPATH\fP 中找到的每个
+\fIpath_element\fP，会将 \fImanpath_element\fP 添加到 $\fBMANPATH\fP。
+.TP 
+\fBMANDB_MAP \fP\fImanpath_element \fP\|[\| \fIcatpath_element\fP \|]
+这种形式的行指示哪些 manpath 视为系统 manpath，还可指定它们的 cat 文件保存在哪里。如果 \fBman\fP 是一个 setuid
+程序，此字段类型将尤为重要，因为(当在系统配置文件 /etc/man_db.conf 而不是每个用户配置文件 .manpath
+中时)它指示哪些手册页层次结构作为 setuid 用户访问，哪些作为调用用户访问。
+
+系统手册页层次结构通常保存在 \fI/usr\fP 下，如 \fI/usr/man\fP, \fI/usr/local/man\fP 和
+\fI/usr/X11R6/man\fP。
+
+如果来自某个特定 \fImanpath_element\fP 的 cat 页面不保存，或保存在传统位置，可以忽略 \fIcatpath_element\fP。
+
+传统的 cat 保存位置无法处理只读方式挂臷的手册页层次结构，因此(考虑到这种情况)，可以指定任何有效的目录层次结构来存储 cat。要观察
+\fBLinux FSSTND\fP，可以在实际目录的位置使用关键词“\fBFSSTND\fP”。
+
+不幸的是，需要指定 \fB所有\fP 系统 man 目录树的路径，包括替代的操作系统路径，如 \fI/usr/man/sun\fP 和任何的 \fBNLS 区域语言\fP
+路径，如 \fI/usr/man/de_DE.88591\fP。
+
+由于是按写的顺序逐行解析的，因此必须先列出作为另一层次结构的次级结构的
+manpath，否则会出现不正确的匹配。例如，\fI/usr/man/de_DE.88591\fP 应出现在 \fI/usr/man\fP 之前。
+.TP 
+\fBDEFINE\fP\fI\ 键\ 值\fP
+这种形式的行定义各种配置变量；请查看默认的配置文件了解手册分页工具使用了哪些变量。它们包括指向各种程序的路径(如 \fIgrep\fP 和
+\fItbl\fP)，和这些程序的默认参数集。
+.TP 
+\fBSECTION\fP \fI章节\fP .\|.\|.
+.RS
+这种形式的行定义手册章节的搜索顺序。如果配置文件中没有 \fBSECTION\fP 指令，默认为：
+.PP
+.RS
+.nf
+.if  !'po4a'hide' SECTION 1 n l 8 3 0 2 3type 5 4 9 6 7
+.fi
+.RE
+.PP
+如果给出了多个 \fBSECTION\fP 指令，它们的章节列表会被合并。
+.PP
+如果某个特定扩展不在列表中(像
+1mh)，它会和它所属章节的其他部分一起显示。这样的效果是，若要强制某种特定的顺序，您只需明确列出扩展。带扩展的章节通常应该与其主章节相邻(如“1
+1mh 8 ...)。
+.PP
+\fBSECTIONS\fP 是此指令的替代名称，也允许使用。
+.RE
+.TP 
+\fBMINCATWIDTH\fP\fI\ 宽度\fP
+如果终端宽度小于 \fI宽度\fP，将不会创建(若缺少)或显示 cat 页面。默认值为 80。
+.TP 
+\fBMAXCATWIDTH\fP\fI\ 宽度\fP
+如果终端宽度大于 \fI宽度\fP，将不会创建(若缺少)或显示 cat 页面。默认值为 80。
+.TP 
+\fBCATWIDTH\fP\fI\ 宽度\fP
+如果 \fI宽度\fP 是非零的，对指定宽度的终端将总是格式化 cat 页面，不管实际使用的终端宽度是多少。此数值将覆盖 \fBMINCATWIDTH\fP 和
+\fBMAXCATWIDTH\fP。
+.TP 
+.if  !'po4a'hide' .B NOCACHE
+此标志阻止 \fBman\fP(1) 自动创建 cat 页面。
+.SH BUGS
+除非完全准确的遵守了这些规则，否则手册分页工具会工作不正常。这些规则过于复杂了。
+.PP
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

@@ -1,0 +1,73 @@
+.\" Man page for zsoelim
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Dec 10 19:33:32 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH ZSOELIM 1 2024-04-05 2.12.1 "Narzędzia przeglądarki stron podręcznika ekranowego"
+.SH NAZWA
+zsoelim \- wypełnia żądania .so w wejściu roff
+.SH SKŁADNIA
+\fBzsoelim\fP [\|\fB\-CVh\fP\|] [\|\fIplik\fP \&.\|.\|.\|]
+.SH OPIS
+\fBzsoelim\fP analizuje zawartość \fIplików\fP, podanych jako argumenty, albo
+jeśli ich nie podano, swoje standardowe wejście, poszukując wierszy o
+postaci:
+
+\&\fB.so\fP <\|\fInazwa_pliku\fP\|>
+
+Żądania takie są zastępowane zawartością podanego \fIpliku\fP. Jeżeli żądanie
+nie może być spełnione, to \fBzsoelim\fP szuka \fIpliku.ext\fP gdzie \fI.ext\fP
+może być jednym z \fB.gz\fP, \fB.Z\fP lub \fB.z\fP.  W zależności od opcji ustalonych
+podczas kompilacji mogą być też obsługiwane inne typy rozszerzeń. Jeżeli
+żądanie spełnia plik skompresowany, to plik ten jest dekompresowany przy
+użyciu odpowiedniego programu dekompresującego, a jego wynik używany jest do
+wykonania żądania.
+
+Tradycyjnie programy \fBsoelim\fP używane były do umożliwienia preprocesorom
+roff przetwarzania plików wskazywanych przez żądania. Ta konkretna wersja
+została napisana, by obejść problemy stworzone przez obsługę skompresowanych
+stron podręczników man.
+.SH OPCJE
+.TP 
+.if  !'po4a'hide' .BR \-C ", " \-\-compatible
+Flaga ta istnieje dla zgodności z innymi programami \fBsoelim\fP.  Jej zadaniem
+jest włączanie przetwarzania żądań .so poprzedzonych czymś innym niż białe
+znaki (spacje, tabulatory, znaki nowej linii).  Ponieważ takie zachowanie
+jest już domyślne dla \fBzsoelim\fP, jest ona ignorowana.
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+Wyświetla komunikat pomocy i kończy pracę.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Wyświetla informację o wersji.
+.SH "ZOBACZ TAKŻE"
+.if  !'po4a'hide' .BR groff (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR nroff (1),
+.if  !'po4a'hide' .BR troff (1)
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BŁĘDY
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db
+.SH TŁUMACZENIE
+Wojciech Kotwica w 1999 roku przetłumaczył część stron podręcznika pakietu
+man-db i udostępnił je w ramach Projektu Tłumaczenia Manuali.
+.br
+Robert Luberda tłumaczenie zaktualizował i uzupełnił w roku 2008.

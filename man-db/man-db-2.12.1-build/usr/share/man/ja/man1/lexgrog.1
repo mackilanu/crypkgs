@@ -1,0 +1,203 @@
+.if  !'po4a'hide' .ds mC CW
+.\" Man page for lexgrog
+.\"
+.\" Copyright (c) 2001 Colin Watson <cjwatson@debian.org>
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.if  t .if \n(.g .ds mC CR
+.if  n .ds mC R
+.
+.\" in an example (EX/EE)?
+.nr mE 0
+.
+.if  !\n(.g \{\
+.de EX
+.  br
+.  if !\\n(mE \{\
+.    nr mF \\n(.f
+.    nr mP \\n(PD
+.    nr PD 1v
+.    nf
+.    ft \\*(mC
+.    nr mE 1
+.  \}
+..
+.\}
+.
+.
+.if  !\n(.g \{\
+.de EE
+.  br
+.  if \\n(mE \{\
+.    ft \\n(mF
+.    nr PD \\n(mP
+.    fi
+.    nr mE 0
+.  \}
+..
+.\}
+.\" End example.
+.
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH LEXGROG 1 2024-04-05 2.12.1 マニュアルページユーティリティー
+.SH 名前
+lexgrog \- マニュアルページのヘッダー情報を解釈する
+.SH 書式
+\fBlexgrog\fP [\|\fB\-m\fP\||\|\fB\-c\fP\|] [\|\fB\-dfw?V\fP\|] [\|\fB\-E\fP \fIencoding\fP\|]
+\fIfile\fP \&.\|.\|.
+.SH 説明
+\fBlexgrog\fP is an implementation of the traditional \(lqgroff guess\(rq
+utility in \fBlex\fP.  It reads the list of files on its command line as either
+man page source files or preformatted \(lqcat\(rq pages, and displays their
+name and description as used by \fBapropos\fP and \fBwhatis\fP, the list of
+preprocessing filters required by the man page before it is passed to
+\fBnroff\fP or \fBtroff\fP, or both.
+.PP
+If its input is badly formatted, \fBlexgrog\fP will print \(lqparse failed\(rq;
+this may be useful for external programs that need to check man pages for
+correctness.  If one of \fBlexgrog\fP's input files is \(lq\-\(rq, it will read
+from standard input; if any input file is compressed, a decompressed version
+will be read automatically.
+.SH オプション
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+デバッグ情報を表示します。
+.TP 
+.if  !'po4a'hide' .BR \-m ", " \-\-man
+Parse input as man page source files.  This is the default if neither
+\fB\-\-man\fP nor \fB\-\-cat\fP is given.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-cat
+Parse input as preformatted man pages (\(lqcat pages\(rq).  \fB\-\-man\fP and
+\fB\-\-cat\fP may not be given simultaneously.
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-whatis
+Display the name and description from the man page's header, as used by
+\fBapropos\fP and \fBwhatis\fP.  This is the default if neither \fB\-\-whatis\fP nor
+\fB\-\-filters\fP is given.
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-filters
+Display the list of filters needed to preprocess the man page before
+formatting with \fBnroff\fP or \fBtroff\fP.
+.TP 
+\fB\-E\fP \fIencoding\fP, \fB\-\-encoding\fP \fIencoding\fP
+Override the guessed character set for the page to \fIencoding\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+ヘルプメッセージを表示して終了します。
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Print a short usage message and exit.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+バージョン情報を表示します。
+.SH 終了ステータス
+.TP 
+.if  !'po4a'hide' .B 0
+プログラムが正常に実行されました。
+.TP 
+.if  !'po4a'hide' .B 1
+Usage error.
+.TP 
+.if  !'po4a'hide' .B 2
+\fBlexgrog\fP failed to parse one or more of its input files.
+.SH 例
+.nf
+  $ lexgrog man.1
+  man.1: "man \- an interface to the system reference manuals"
+  $ lexgrog \-fw man.1
+  man.1 (t): "man \- an interface to the system reference manuals"
+  $ lexgrog \-c whatis.cat1
+  whatis.cat1: "whatis \- display manual page descriptions"
+  $ lexgrog broken.1
+  broken.1: parse failed
+.fi
+.SH 処理されるデータ
+\fBmandb\fP (which uses the same code as \fBlexgrog\fP)  parses the \fBNAME\fP
+section at the top of each manual page looking for names and descriptions of
+the features documented in each.  While the parser is quite tolerant, as it
+has to cope with a number of different forms that have historically been
+used, it may sometimes fail to extract the required information.
+.PP
+When using the traditional \fIman\fP macro set, a correct \fBNAME\fP section looks
+something like this:
+.PP
+.RS
+.EX
+\&.SH NAME
+foo \e\- program to do something
+.EE
+.RE
+.PP
+Some manual pagers require the \(oq\e\-\(cq to be exactly as shown;
+\fBmandb\fP is more tolerant, but for compatibility with other systems it is
+nevertheless a good idea to retain the backslash.
+.PP
+On the left\-hand side, there may be several names, separated by commas.
+Names containing whitespace will be ignored to avoid pathological behaviour
+on certain ill\-formed \fBNAME\fP sections.  The text on the right\-hand side is
+free\-form, and may be spread over multiple lines.  If several features with
+different descriptions are being documented in the same manual page, the
+following form is therefore used:
+.PP
+.RS
+.EX
+\&.SH NAME
+foo, bar \e\- programs to do something
+\&.br
+baz \e\- program to do nothing
+.EE
+.RE
+.PP
+(A macro which starts a new paragraph, like \fB.PP\fP, may be used instead of
+the break macro \fB.br\fP.)
+.PP
+When using the BSD\-derived \fImdoc\fP macro set, a correct \fBNAME\fP section
+looks something like this:
+.PP
+.RS
+.EX
+\&.Sh NAME
+\&.Nm foo
+\&.Nd program to do something
+.EE
+.RE
+
+There are several common reasons why whatis parsing fails.  Sometimes
+authors of manual pages replace \(oq.SH NAME\(cq with \(oq.SH MYPROGRAM\(cq,
+and then \fBmandb\fP cannot find the section from which to extract the
+information it needs.  Sometimes authors include a NAME section, but place
+free\-form text there rather than \(oqname \e\- description\(cq.  However, any
+syntax resembling the above should be accepted.
+.SH 関連項目
+.if  !'po4a'hide' .IR apropos (1),
+.if  !'po4a'hide' .IR man (1),
+.if  !'po4a'hide' .IR whatis (1),
+.if  !'po4a'hide' .IR mandb (8)
+.SH 備考
+\fBlexgrog\fP attempts to parse files containing .so requests, but will only be
+able to do so correctly if the files are properly installed in a manual page
+hierarchy.
+.SH 著者
+The code used by \fBlexgrog\fP to scan man pages was written by:
+.PP
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.PP
+Colin Watson wrote the current incarnation of the command\-line front\-end, as
+well as this man page.
+.SH バグ
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

@@ -1,0 +1,180 @@
+.\" Man page for apropos
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH APROPOS 1 2024-04-05 2.12.1 "Kılavuz sayfası yardımcıları"
+.SH AD
+apropos \- kılavuz sayfası adları ve açıklamalarında ara
+.SH ÖZET
+\fBapropos\fP [\|\fB\-dalv?V\fP\|] [\|\fB\-e\fP\||\|\fB\-w\fP\||\|\fB\-r\fP\|] [\|\fB\-s\fP
+\fIliste\fP\|] [\|\fB\-m\fP \fIsistem\fP\|[\|,.\|.\|.\|]\|] [\|\fB\-M\fP \fIyol\fP\|]
+[\|\fB\-L\fP \fIdil\fP\|] [\|\fB\-C\fP \fIdosya\fP\|] \fIanahtarsözcük\fP \&.\|.\|.
+.SH AÇIKLAMA
+Her kılavuz sayfası, içinde kısa bir açıklama barındırır.  \fBapropos\fP,
+\fIanahtarsözcük\fP örneği için açıklamaları arar.
+
+\fIanahtarsözcük\fP, (\fB\-r\fP)  kullanımındaki gibi genellikle bir düzenli
+ifadedir veya özel karakterler içerebilir (\fB\-w\fP) veya tam anahtar sözlüğü
+eşleyebilir (\fB\-e\fP).  Bu seçenekleri kullanarak, \fIanahtarsözcük\fP anahtar
+sözcüğünü tırnak içine almak veya özel karakterlerde kaçış kullanmak (\e),
+kabuğun bunları yorumlamasını önlemek için gerekli olabilir.
+
+Standart eşleşme kuralları, açıklama içindeki sayfa adı ve sözcük
+sınırlarına karşı yapılacak eşleşmelere izin verir.
+
+Veritabanı \fBapropos\fP ile aratılır ve \fBmandb\fP programı ile
+güncellenir.  Kurulumunuza bağlı olmakla birlikte, düzenli olarak bir cron
+görevi ile çalışabilir veya yeni kılavuz sayfaları yüklendikten sonra el ile
+çalıştırılması gerekebilir.
+.SH SEÇENEKLER
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Hata ayıklama bilgisini göster.
+.TP 
+.if  !'po4a'hide' .BR \-v ", " \-\-verbose
+Ayrıntılı uyarı iletilerini göster.
+.TP 
+.if  !'po4a'hide' .BR \-r ", " \-\-regex
+Her bir anahtar sözcüğü düzenli bir ifade olarak yorumlayın.  Öntanımlı
+davranış budur.  Her bir anahtar sözcük sayfa adlarına ve açıklamalara
+bağımsız olarak eşleştirilir.   Herhangi bir kısmıyla eşleşebilir.  Eşleşme
+sözcük sınırlarıyla sınırlı değildir.
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-wildcard
+Her bir anahtar sözcüğü kabuk stili joker karakterleri içeren bir dizgi
+olarak yorumlayın.  Her bir anahtar sözcük sayfa adlarına ve açıklamalara
+bağımsız olarak eşleştirilir.  \fB\-\-exact\fP de kullanılırsa yalnızca geniş bir
+anahtar sözcük tüm bir açıklama veya sayfa adıyla eşleşiyorsa bir eşleşme
+bulunacaktır.  Aksi halde, anahtar sözcüğün açıklamadaki sözcük sınırlarıyla
+eşleşmesine izin verilir.
+.TP 
+.if  !'po4a'hide' .BR \-e ", " \-\-exact
+Her bir anahtar sözcük, sayfa adlarına ve açıklamalara karşı tam olarak
+eşleştirilir.
+.TP 
+.if  !'po4a'hide' .BR \-a ", " \-\-and
+Yalnızca sağlanan tüm anahtar sözcüklerle eşleşen ögeleri görüntüleyin.
+Öntanımlı, herhangi bir anahtar sözcükle eşleşen ögeleri görüntülemektir.
+.TP 
+.if  !'po4a'hide' .BR \-l ", " \-\-long
+Çıktıyı uçbirim genişliğine kırpma.  Normalde çıktı, kötü yazılmış \fBAD\fP
+bölümlerinden çirkin sonuçlardan kaçınmak için uçbirim genişliğine kesilir.
+.TP 
+\fB\-s\fP \fIliste\/\fP, \fB\-\-sections=\fP\fIliste\/\fP, \fB\-\-section=\fP\fIliste\fP
+Yalnızca verilen klavuz bölümlerinde arama yapın.  \fIliste\fP, bölümlerin
+virgül veya virgül ile ayrılmış bir listesidir.  \fIliste\fP içindeki bir
+girdi, örneğin "3" gibi basit bir bölümse görüntülenen açıklamalar
+listesinde "3", "3perl", "3x" ve benzeri bölümlerdeki sayfalar bulunur;
+\fIliste\fP içindeki bir girdi, örneğin "3perl" gibi bir uzantıya sahipse liste
+el kitabının tam kısmında yalnızca sayfaları içerecektir.
+.TP 
+\fB\-m\fP \fIsistem\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fIsistem\fP\|[\|,.\|.\|.\|]
+Bu sistemin diğer işletim sisteminin kılavuz sayfa tanımlarına erişimi varsa
+bu seçenek kullanılarak aranabilir.   NewOS'un kılavuz sayfa açıklamalarını
+aramak için \fB\-m\fP \fBNewOS\fP seçeneğini kullanın.
+
+Belirtilen \fIsistem\fP, virgülle ayrılmış işletim sistemi adlarının birleşimi
+olabilir.  Yerel işletim sisteminin \fBwhatis\fP açıklamalarını aramak için,
+argüman dizgesine \fBman\fP sistem adını ekleyin.  Bu seçenek, $\fBSYSTEM\fP çevre
+değişkenini geçersiz kılacaktır.
+.TP 
+\fB\-M\ \fP\fIyol\fP,\ \fB\-\-manpath=\fP\fIyol\fP
+Aranacak şekilde iki nokta üst üstü ile ayrılmış kılavuz sayfa hiyerarşileri
+dizisi belirtin.  Öntanımlı olarak, \fBapropos\fP, boş veya ayarlanmamışsa
+$\fBMANPATH\fP çevre değişkenini kullanır; bu durumda, $\fBPATH\fP çevre
+değişkeninize dayalı uygun bir kılavuz yolu belirleyecektir.  Bu seçenek,
+$\fBMANPATH\fP içeriğini geçersiz kılar.
+.TP 
+\fB\-L\ \fP\fIyerel\fP,\ \fB\-\-locale=\fP\fIyerel\fP
+\fBapropos\fP normalde mevcut yerel ayarınızı, muhtemelen $\fBLC_MESSAGES\fP ve
+$\fBLANG\fP ögelerini de içeren çeşitli çevre değişkenlerini sorgulayan C
+işlevi \fBsetlocale\fP (3) çağrısı ile belirleyecektir.  Belirlenen değeri
+geçici olarak geçersiz kılmak için doğrudan bir \fIlocale\fP dizesini
+\fBapropos\fP 'a sunmak için bu seçeneği kullanın.  Sayfalar için arama
+gerçekten başlayıncaya kadar etkili olmayacağını unutmayın.  Yardım iletisi
+gibi çıktı her zaman başlangıçta belirlenen yerel ayraçta görüntülenir.
+.TP 
+\fB\-C\ \fP\fIdosya\fP,\ \fB\-\-config\-file=\fP\fIdosya\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Bir yardım iletisi göster ve çık.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Kısa kullanım iletisini göster ve çık.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Sürüm bilgisini göster.
+.SH "ÇIKIŞ DURUMU"
+.TP 
+.if  !'po4a'hide' .B 0
+Başarılı program çalıştırma.
+.TP 
+.if  !'po4a'hide' .B 1
+Kullanım, sözdizim ve yapılandırma dosya hatası.
+.TP 
+.if  !'po4a'hide' .B 2
+İşlevsel hata.
+.TP 
+.if  !'po4a'hide' .B 16
+Belirtilen kriterle eşleşen hiçbir şey bulunamadı.
+.SH ÇEVRE
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+$\fBSYSTEM\fP ayarlanmışsa \fB\-m\fP seçeneğine argüman olarak belirtilmişçesine
+aynı etkiyi verecektir.
+.TP 
+.if  !'po4a'hide' .B MANPATH
+$\fBMANPATH\fP ayarlanmışsa değeri iki nokta ile ayrılmış kullanılacak kılavuz
+sayfa arama yolu olarak yorumlanır.
+
+Bu çevre değişkeninin nice işlendiğinin ayrıntılarına ve öntanımlı
+davranışına bakmak için \fBmanpath\fP(5)'in \fBSEARCH PATH\fP bölümüne bakın.
+.TP 
+.if  !'po4a'hide' .B MANWIDTH
+$\fBMANWIDTH\fP ayarlanmışsa değeri uçbirim genişliği olarak kullanılır
+(bkz. \fB\-\-long\fP seçeneği).  Belirlenmemişse uçbirim genişliği $\fBCOLUMNS\fP ve
+\fBioctl\fP (2) değerini kullanarak veya başka herhangi bir şey başarısız
+olursa 80 karaktere geri düşerek hesaplanır.
+.TP 
+.if  !'po4a'hide' .B POSIXLY_CORRECT
+$\fBPOSIXLY_CORRECT\fP, boş bir değere bile ayarlanmışsa öntanımlı \fBapropos\fP
+araması, genişletilmiş bir normal ifade (\fB\-r\fP) olacaktır.  Günümüzde
+öntanımlı davranış budur.
+.SH DOSYALAR
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/index.(bt\^|\^db\^|\^dir\^|\^pag)
+Geleneksel bir global \fIindeks\fP veritabanı önbelleği.
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt\^|\^db\^|\^dir\^|\^pag)
+FHS uyumlu bir global \fIindeks\fP veritabanı önbelleği.
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/\|.\|.\|.\|/whatis
+Geleneksel bir \fBwhatis\fP metin veritabanı.
+.SH "AYRICA BAKINIZ"
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR whatis (1),
+.if  !'po4a'hide' .BR mandb (8)
+.SH YAZAR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH HATALAR
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

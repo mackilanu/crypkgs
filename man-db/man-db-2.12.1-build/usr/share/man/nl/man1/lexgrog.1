@@ -1,0 +1,208 @@
+.if  !'po4a'hide' .ds mC CW
+.\" Man page for lexgrog
+.\"
+.\" Copyright (c) 2001 Colin Watson <cjwatson@debian.org>
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.if  t .if \n(.g .ds mC CR
+.if  n .ds mC R
+.
+.\" in an example (EX/EE)?
+.nr mE 0
+.
+.if  !\n(.g \{\
+.de EX
+.  br
+.  if !\\n(mE \{\
+.    nr mF \\n(.f
+.    nr mP \\n(PD
+.    nr PD 1v
+.    nf
+.    ft \\*(mC
+.    nr mE 1
+.  \}
+..
+.\}
+.
+.
+.if  !\n(.g \{\
+.de EE
+.  br
+.  if \\n(mE \{\
+.    ft \\n(mF
+.    nr PD \\n(mP
+.    fi
+.    nr mE 0
+.  \}
+..
+.\}
+.\" End example.
+.
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH LEXGROG 1 2024-04-05 2.12.1 "Hulpprogramma's paginaopmaker"
+.SH NAAM
+lexgrog \- hoofdinginformatie in manpagina's ontleden
+.SH SAMENVATTING
+\fBlexgrog\fP [\|\fB\-m\fP\||\|\fB\-c\fP\|] [\|\fB\-dfw?V\fP\|] [\|\fB\-E\fP \fIencoding\fP\|]
+\fIfile\fP \&.\|.\|.
+.SH BESCHRIJVING
+\fBlexgrog\fP is een implementatie van het traditionele \(lqgroff
+guess\(rq\-hulpprogramma in \fBlex\fP. Het leest de bestandslijst in de
+opdrachtregel als man\-paginabronbestanden of als gestructureerde
+\(lqcat\(rq\-pagina's, en toont hun naam en beschrijving zoals deze in
+\fBapropos\fP en \fBwatis\fP gebruikt worden.o  De lijst bevat
+preprocessingfilters die vereist zijn door de man\-pagina, voor het
+doorgegeven wordt aan \fBnroff\fP of \fBtroff\fP of aan beide.
+.PP
+Als de invoer slecht gestructureerd is, dan zal \fBlexgrog\fP \(lqparse
+failed\(rq tonen; dit kan nuttig zijn voor externe programma's die de
+man\-pagina's op juistheid controleren.  Wanneer één van \fBlexgrog\fP's
+invoerbestanden (lq\-\(rq is, dan wordt uit de standaardinvoer gelezen; als
+enig invoerbestand gecomprimeerd is, dan zal een gedecomprimeerde versie
+automatisch worden ingelezen.
+.SH OPTIES
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Foutinformatie tonen.
+.TP 
+.if  !'po4a'hide' .BR \-m ", " \-\-man
+Invoer als man\-paginabronbestanden ontleden.  Dit is de standaard als
+\fB\-\-man\fP noch \fB\-\-cat\fP is opgegeven.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-cat
+Invoer als voorgestructureerde man\-pagina's ontleden (\(lqcat pages\(rq).
+\fB\-\-man\fP en \fB\-\-cat\fP hoeven niet gelijktijdig opgegeven te worden.
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-whatis
+De naam en beschrijving van de hoofding van man\-pagina's tonen zoals deze
+worden gebruikt door \fBapropos\fP and \fBwatis\fP. Dit is de standaard als
+\fB\-\-whatis\fP noch \fB\-\-filters\fP opgegeven is.
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-filters
+De lijst met filters tonen die nodig zijn om de man\-pagina voor te bewerken
+voordat \fBnroff\fP of \fBtroff\fP deze opmaakt.
+.TP 
+\fB\-E\fP \fIcodering\fP, \fB\-\-encoding\fP \fIcodering\fP
+De gekozen karakterset voor de pagina forceren naar \fIcodering\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Een hulptekst tonen en stoppen.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Print a short usage message and exit.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Versieinformatie tonen.
+.SH STOPSTATUS
+.TP 
+.if  !'po4a'hide' .B 0
+Programma correct uitgevoerd.
+.TP 
+.if  !'po4a'hide' .B 1
+Gebruiksfout.
+.TP 
+.if  !'po4a'hide' .B 2
+\fBlexgrog\fP kon een of meer van de invoerpagina's niet ontleden.
+.SH VOORBEELDEN
+.nf
+  $ lexgrog man.1
+  man.1: "man \- an interface to the system reference manuals"
+  $ lexgrog \-fw man.1
+  man.1 (t): "man \- an interface to the system reference manuals"
+  $ lexgrog \-c whatis.cat1
+  whatis.cat1: "whatis \- display manual page descriptions"
+  $ lexgrog broken.1
+  broken.1: parse failed
+.fi
+.SH WATIS\-ONTLEDING
+\fBmandb\fP (die dezelfde broncode als \fBlexgrog\fP gebruikt) ontleedt het
+\fBNAAM\fP\-deel bovenaan iedere handleidingspagina, zoekend naar namen en
+beschrijvingen van de daarin gedocumenteerde functionaliteiten.  Hoewel de
+parser vrij soepel is omdat het rekening moet houden met een aantal
+historisch gegroeide vormen, kan het soms falen bij het ophalen van de
+vereiste informatie.
+.PP
+Bij gebruik van de traditionele \fIman\fP\-macroverzameling, ziet een correcte
+\fBNAAM\fP\-sectie er ongeveer als volgt uit:
+.PP
+.RS
+.EX
+\&.SH NAME
+foo \e\- program to do something
+.EE
+.RE
+.PP
+Sommige opmakers van man\-pagina's vereisen de \(oq\e\-\(cq precies zoals
+getoond; \fBmandb\fP is wat soepeler, maar vanwege compatibiliteit met andere
+systemen, is het toch een goed idee om de backslash te behouden.
+.PP
+Aan de linkerzijde zullen verschillende namen staan, gescheiden door
+komma's.  Namen die spaties bevatten worden genegeerd om pathologisch gedrag
+bij sommige, slecht\-opgemaakte \fBNAAM\fP\-secties te voorkomen.  De tekst aan
+de rechterzijde is vrij en kan verdeeld worden over meerdere regels.  Als
+meerdere functionaliteiten met verschillende beschrijvingen in dezelfde
+man\-pagina's zijn gedocumenteerd, wordt hiervoor de volgende vorm gebruikt:
+.PP
+.RS
+.EX
+\&.SH NAME
+foo, bar \e\- programs to do something
+\&.br
+baz \e\- program to do nothing
+.EE
+.RE
+.PP
+(A macro which starts a new paragraph, like \fB.PP\fP, may be used instead of
+the break macro \fB.br\fP.)
+.PP
+Bij het gebruik van een \fImdoc\fP\-macroverzameling die is afgeleid van het
+BSD, ziet een correcte \fBNAAM\fP\-sectie er als volgt uit:
+.PP
+.RS
+.EX
+\&.Sh NAME
+\&.Nm foo
+\&.Nd program to do something
+.EE
+.RE
+
+Er zijn meerdere, veelvoorkomende redenen waarom ontleden van watis
+mislukt.  Soms vervangen de auteurs van man\-pagina's \(oq.SH NAME\(cq door
+\(oq.SH MYPROGRAM\(cq, waardoor \fBmandb\fP het deel niet kan vinden waaruit
+de benodigde informatie moet worden gehaald.  Soms voegen auteurs wel de
+NAAM\-sectie toe, maar gebruiken daarbij vrije tekst in plaats van \(oqname
+\e\- description\(cq.  Echter, iedere syntax die met het bovenstaande
+overeenkomt moet geaccepteerd worden.
+.SH "ZIE OOK"
+.if  !'po4a'hide' .IR apropos (1),
+.if  !'po4a'hide' .IR man (1),
+.if  !'po4a'hide' .IR whatis (1),
+.if  !'po4a'hide' .IR mandb (8)
+.SH OPMERKINGEN
+\fBlexgrog\fP poogt alleen bestanden met .so\-verzoeken te ontleden, maar die
+kan dat alleen doen als de bestanden correct geïnstalleerd zijn in een
+man\-paginastructuur.
+.SH AUTEUR
+De broncode die gebruikt wordt door \fBlexgrog\fP om man\-pagina's te scannen is
+geschreven door:
+.PP
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.PP
+Colin Watson schreef de huidige reïncarnatie van de opdrachtregel\-frontend,
+en ook deze man\-pagina.
+.SH BUGS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

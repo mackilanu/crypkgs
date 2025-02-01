@@ -1,0 +1,191 @@
+.\" Man page for apropos
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH APROPOS 1 2024-04-05 2.12.1 "Dienstprogramme für Handbuchseiten"
+.SH BEZEICHNUNG
+apropos \- Suche in Handbuchseiten und deren Kurzbeschreibungen
+.SH ÜBERSICHT
+\fBapropos\fP [\|\fB\-dalv?V\fP\|] [\|\fB\-e\fP\||\|\fB\-w\fP\||\|\fB\-r\fP\|] [\|\fB\-s\fP
+\fIListe\fP\|] [\|\fB\-m\fP \fISystem\fP\|[\|,.\|.\|.\|]\|] [\|\fB\-M\fP \fIPfad\fP\|]
+[\|\fB\-L\fP \fILocale\fP\|] [\|\fB\-C\fP \fIDatei\fP\|] \fISchlüsselwort\fP \&.\|.\|.
+.SH BESCHREIBUNG
+Jede Handbuchseite enthält eine kurze Beschreibung. \fBapropos\fP durchsucht
+diese Beschreibungen nach dem Vorkommen von \fISchlüsselwort\fP.
+
+Das \fISchlüsselwort\fP ist gewöhnlich ein regulärer Ausdruck und hat den
+gleichen Effekt wie (\fB\-r\fP). Es kann außerdem nach einer bestimmten
+Zeichenkette (\fB\-e\fP) oder nach Zeichenketten mit Platzhaltern (Wildcards,
+\fB\-w\fP) gesucht werden. Bei Nutzung dieser Optionen kann es erforderlich
+sein, für das \fISchlüsselwort\fP und Sonderzeichen eine Verarbeitung durch die
+Shell zu vermeiden. Für \fISchlüsselwörter\fP werden dafür Anführungszeichen
+und für Sonderzeichen Escape\-Sequenzen (\e) verwendet.
+
+Die Regeln für die Standardsuche ermöglichen den Abgleich des Suchbegriffs
+mit dem Namen der Handbuchseite und Wortgrenzen in der Beschreibung.
+
+Bei der Suche wertet \fBapropos\fP die von \fBmandb\fP gepflegte Datenbank
+aus. Abhängig von Ihrer Installation wird die Datenbank periodisch per
+Cron\-Job aktualisiert \- oder Sie müssen nach der Installation neuer
+Handbuchseiten \fBmandb\fP manuell starten.
+.SH OPTIONEN
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Ausgabe von Debug\-Informationen
+.TP 
+.if  !'po4a'hide' .BR \-v ", " \-\-verbose
+Ausgabe ausführlicher Warnmeldungen
+.TP 
+.if  !'po4a'hide' .BR \-r ", " \-\-regex
+Interpretiert jedes Schlüsselwort als regulären Ausdruck. Dies ist das
+Standardverhalten. Jedes Schlüsselwort wird unabhängig voneinander in den
+Befehlsnamen und in den Beschreibungen gesucht. Die Suche liefert auch
+Treffer über Wortgrenzen hinweg.
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-wildcard
+Interpretiert jedes Schlüsselwort als Muster, das Shell\-Platzhalter
+enthält. Jedes Schlüsselwort wird unabhängig voneinander in den Befehlsnamen
+und in den Beschreibungen gesucht. Wird außerdem \fB\-\-exact\fP vorgegeben, wird
+nur die Übereinstimmung des Schlüsselworts nach Ersetzung des regulären
+Ausdrucks mit der vollständigen Beschreibung oder dem Namen einer
+Handbuchseite als Treffer gewertet. Anderenfalls gelten auch einzelne Wörter
+in der Beschreibung als Treffer.
+.TP 
+.if  !'po4a'hide' .BR \-e ", " \-\-exact
+Jedes Schlüsselwort wird genau mit den Seitennamen und den Beschreibungen
+verglichen.
+.TP 
+.if  !'po4a'hide' .BR \-a ", " \-\-and
+Zeigt nur Einträge an, die alle angegebenen Schlüsselwörter
+enthalten. Standardverhalten ist die Anzeige aller Einträge, die irgendeines
+der Schlüsselwörter enthalten.
+.TP 
+.if  !'po4a'hide' .BR \-l ", " \-\-long
+Die Ausgabe wird nicht auf die Terminalbreite beschnitten. Normalerweise
+wird die Ausgabe auf die Terminalbreite gestutzt, um hässliche Ergebnisse
+schlecht geschriebener \fBBEZEICHNUNGs\fP\-Abschnitte zu vermeiden.
+.TP 
+\fB\-s\fP \fIListe\/\fP, \fB\-\-sections=\fP\fIListe\/\fP, \fB\-\-section=\fP\fIListe\fP
+Durchsucht nur die vorgegebenen Abschnitte. \fIListe\fP ist eine durch Kommas
+oder Doppelpunkte gegliederte Liste von Abschnitten. Wenn ein Eintrag in
+\fIListe\fP ein einfacher Abschnitt ist (z. B. »3«), enthält das Ergebnis
+Seiten aus den Abschnitten »3«, »3perl«, »3x« usw. Wird \fIAbschnitt\fP mit
+Suffix angegeben (z. B. »3perl«), werden die Ergebnisse nur in diesem
+speziellen Unterabschnitt gesucht.
+.TP 
+\fB\-m\fP \fIsystem\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fISystem\fP\|[\|,.\|.\|.\|]
+Wenn Ihr System auch auf die Handbuchseiten eines anderen Betriebssystems
+zugreifen kann, können diese mit dieser Option durchsucht werden. Um die
+Beschreibungen der Handbuchseiten von NewOS zu durchsuchen, verwenden Sie
+die Option \fB\-m\fP \fBNewOS\fP.
+
+Für \fISystem\fP können Sie eine mit Kommas getrennte Liste von
+Betriebssystem\-Namen eingeben. Um auch in den \fBwhatis\fP\-Beschreibungen des
+eigenen Systems zu suchen, verwenden Sie beim Aufruf des Programms den
+Systemnamen \fBman\fP als zusätzliches Argument. Diese Option setzt die
+Umgebungsvariable $\fBSYSTEM\fP außer Kraft.
+.TP 
+\fB\-M\ \fP\fIPfad\fP,\ \fB\-\-manpath=\fP\fIPfad\fP
+Legt mehrere durch Doppelpunkte getrennte alternative Handbuch\-Hierarchien
+fest, die durchsucht werden sollen. Standardmäßig verwendet \fBapropos\fP die
+Umgebungsvariable $\fBMANPATH\fP. Wenn diese leer ist oder ihr kein Wert
+zugewiesen wurde, wird das Programm versuchen, auf Grundlage der
+Umgebungsvariablen $\fBPATH\fP einen geeigneten »Manpath« zu bestimmen. Diese
+Option überschreibt den Inhalt von $\fBMANPATH\fP.
+.TP 
+\fB\-L\ \fP\fILocale\fP,\ \fB\-\-locale=\fP\fILocale\fP
+\fBapropos\fP wird in der Regel Ihre aktuelle Locale durch einen Aufruf der
+C\-Funktion \fBsetlocale\fP(3) bestimmen, welche verschiedene Umgebungsvariablen
+auswertet (darunter sind eventuell auch $\fBLC_MESSAGES\fP und $\fBLANG\fP). Um
+den ermittelten Wert vorübergehend außer Kraft zu setzen, können Sie
+\fBapropos\fP mit dieser Option eine \fILocale\fP vorgeben. Beachten Sie, dass
+dieser Wert erst wirksam wird, wenn die Suche tatsächlich
+beginnt. Programm\-Meldungen wie Hilfe\-Nachrichten werden immer in der zu
+Anfang ermittelten Locale angezeigt werden.
+.TP 
+\fB\-C\ \fP\fIDatei\fP,\ \fB\-\-config\-file=\fP\fIDatei\fP
+Verwendung dieser benutzerspezifischen Konfigurationsdatei an Stelle der
+Vorgabe \fI\(ti/.manpath\fP
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Hilfetext anzeigen und beenden
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+zeigt eine kurze Anwendungszusammenfassung an und beendet das Programm.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Versionsinformation anzeigen und beenden
+.SH EXIT\-STATUS
+.TP 
+.if  !'po4a'hide' .B 0
+erfolgreiche Programmausführung
+.TP 
+.if  !'po4a'hide' .B 1
+Fehler beim Aufruf, in der Syntax oder in der Konfigurationsdatei
+.TP 
+.if  !'po4a'hide' .B 2
+betriebsbedingter Fehler
+.TP 
+.if  !'po4a'hide' .B 16
+keine Ergebnisse für die angegebenen Suchkriterien
+.SH UMGEBUNGSVARIABLEN
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+Wenn $\fBSYSTEM\fP gesetzt ist, hat das die gleiche Wirkung wie die Verwendung
+als Argument für die Option \fB\-m\fP.
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Wenn $MANPATH gesetzt ist, wird ihr Wert als der mit Kommas getrennte
+anzuwendende Hierarchie\-Suchpfad für Handbuchseiten interpretiert.
+
+Siehe den Abschnitt \fBSUCHPFAD\fP in der Handbuchseite \fBmanpath\fP(5) für das
+Standardverhalten und Details dazu, wie mit dieser Umgebungsvariable
+umgegangen wird.
+.TP 
+.if  !'po4a'hide' .B MANWIDTH
+Wenn $\fBMANWIDTH\fP gesetzt ist, wird ihr Wert als Terminalbreite verwendet
+(siehe die Option \fB \-\-long\fP). Ist sie nicht gesetzt, wird die
+Terminalbreite mittels \fBioctl\fP(2) oder mit dem Wert von $\fBCOLUMNS\fP
+ermittelt, wenn diese Variable gesetzt ist. Wenn alles fehlschlägt, werden
+80 Zeichen verwendet.
+.TP 
+.if  !'po4a'hide' .B POSIXLY_CORRECT
+Wenn $\fBPOSIXLY_CORRECT\fP gesetzt ist, wobei sogar NULL erlaubt ist, wird die
+Standardsuche von \fBapropos\fP mit erweiterten regulären Ausdrücken (\fB\-r\fP)
+ausgeführt. Heutzutage ist dies sowieso das Standardverhalten.
+.SH DATEIEN
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/index.(bt\^|\^db\^|\^dir\^|\^pag)
+ein traditioneller, globaler Zwischenspeicher für die \fIIndex\fP\-Datenbank
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt\^|\^db\^|\^dir\^|\^pag)
+ein FHS\-konformer, globaler Zwischenspeicher für die \fIIndex\fP\-Datenbank
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/\|.\|.\|.\|/whatis
+eine traditionelle \fBwhatis\fP\-Textdatenbank
+.SH "SIEHE AUCH"
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR whatis (1),
+.if  !'po4a'hide' .BR mandb (8)
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH FEHLER
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

@@ -1,0 +1,174 @@
+.if  !'po4a'hide' .ds mC CW
+.\" Man page for lexgrog
+.\"
+.\" Copyright (c) 2001 Colin Watson <cjwatson@debian.org>
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.if  t .if \n(.g .ds mC CR
+.if  n .ds mC R
+.
+.\" in an example (EX/EE)?
+.nr mE 0
+.
+.if  !\n(.g \{\
+.de EX
+.  br
+.  if !\\n(mE \{\
+.    nr mF \\n(.f
+.    nr mP \\n(PD
+.    nr PD 1v
+.    nf
+.    ft \\*(mC
+.    nr mE 1
+.  \}
+..
+.\}
+.
+.
+.if  !\n(.g \{\
+.de EE
+.  br
+.  if \\n(mE \{\
+.    ft \\n(mF
+.    nr PD \\n(mP
+.    fi
+.    nr mE 0
+.  \}
+..
+.\}
+.\" End example.
+.
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH LEXGROG 1 2024-04-05 2.12.1 手册分页显示工具
+.SH 名称
+lexgrog \- 解析 man 手册页的头部信息
+.SH 概述
+\fBlexgrog\fP [\|\fB\-m\fP\||\|\fB\-c\fP\|] [\|\fB\-dfw?V\fP\|] [\|\fB\-E\fP \fI编码\fP\|] \fI文件\fP
+\&.\|.\|.
+.SH 描述
+\fBlexgrog\fP 是传统的 \(lqgroff guess\(rq 工具的一个 \fBlex\fP 实现。它从命令行读取 man 手册源文件或预格式化的
+\(lqcat\(rq 页 文件列表，并显示 \fBapropos\fP 和 \fBwhatis\fP 所使用的手册名称和描述。在它之前 man
+页面需要的预处理过滤器列表会传递给 \fBnroff\fP 和/或 \fBtroff\fP。
+.PP
+如果它的输入错误，\fBlexgrog\fP 会打印 \(lqparse 失败\(rq；这有助于外部程序检查 man 页面是否正确。如果 \fBlexgrog\fP
+的某个输入文件是 \(lq\-\(rq，它会从标准输入读取；如果输入文件是压缩文件，将自动读取解压的版本。
+.SH 选项
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+打印调试信息。
+.TP 
+.if  !'po4a'hide' .BR \-m ", " \-\-man
+将输入当作 man 页面源文件来解析。如果指定了 \fB\-\-man\fP 或 \fB\-\-cat\fP，这将是默认值。
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-cat
+将输入当作预格式化的 man 页面来解析(\(lqcat 页面\(rq)。不能同时指定 \fB\-\-man\fP 和 \fB\-\-cat\fP。
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-whatis
+显示来自 man 页面头部的名称和描述(\fBapropos\fP 和 \fBwhatis\fP 就使用这些信息)。这是未指定 \fB\-\-whatis\fP 或
+\fB\-\-filters\fP 时的默认值。
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-filters
+显示在用 \fBnroff\fP 或 \fBtroff\fP 格式化之前对 man 页面预处理所需的过滤器列表。
+.TP 
+\fB\-E\fP \fI编码\fP, \fB\-\-encoding\fP \fI编码\fP
+将页面编码设置为 \fI编码\fP，而非自动推测的编码。
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+打印帮助消息并退出。
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+打印简短的帮助消息并退出。
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+显示版本信息。
+.SH 退出状态
+.TP 
+.if  !'po4a'hide' .B 0
+程序成功执行。
+.TP 
+.if  !'po4a'hide' .B 1
+用法错误。
+.TP 
+.if  !'po4a'hide' .B 2
+\fBlexgrog\fP 无法解析一个或多个输入文件。
+.SH 示例
+.nf
+  $ lexgrog man.1
+  man.1: "man \- an interface to the system reference manuals"
+  $ lexgrog \-fw man.1
+  man.1 (t): "man \- an interface to the system reference manuals"
+  $ lexgrog \-c whatis.cat1
+  whatis.cat1: "whatis \- display manual page descriptions"
+  $ lexgrog broken.1
+  broken.1: parse failed
+.fi
+.SH "WHATIS 解析"
+\fBmandb\fP(使用与 \fBlexgrog\fP 相同的代码)解析每个手册页顶部的 \fBNAME\fP 节来查找其中所说明对象的名称和描述。
+.PP
+在使用传统的 \fIman\fP 宏集时，正确的 \fBNAME\fP 节看起来是这样：
+.PP
+.RS
+.EX
+\&.SH NAME
+foo \e\- program to do something
+.EE
+.RE
+.PP
+一些手册分页程序要求 \(oq\e\-\(cq 与上面显示的完全相同；不过 \fBmandb\fP 更宽松。尽管如此，保留反斜杠可以更好地兼容其他系统。
+.PP
+在左侧可能有几个以冒号分隔的名称。包含空格的名称将被忽略以避免某些格式不太正确的 \fBNAME\fP
+节不正常。右侧的文字形式是任意的，可以占多行。如果同一手册页中叙述了几种不同的功能，将使用以下形式：
+.PP
+.RS
+.EX
+\&.SH NAME
+foo, bar \e\- programs to do something
+\&.br
+baz \e\- program to do nothing
+.EE
+.RE
+.PP
+(可以用一个开始新段落的宏，如 \fB.PP\fP 来代替换行的宏 \fB.br\fP。)
+.PP
+若使用 BSD 衍生的 \fImdoc\fP 宏集，正确的 \fBNAME\fP 节看起来是这样：
+.PP
+.RS
+.EX
+\&.Sh NAME
+\&.Nm foo
+\&.Nd program to do something
+.EE
+.RE
+
+whatis 解析失败可能有几种原因。有时文档作者将 \(oq.SH NAME\(cq 替换成了 \(oq.SH MYPROGRAM\(cq，导致
+\fBmandb\fP 找不到用来提取信息的这一节。有时作者包含了 NAME 节，但将 \(oqname \e\- description\(cq
+换成了普通的文本。不过任何遵循上面列出语法的用法都是可以授受的。
+.SH 亦见
+.if  !'po4a'hide' .IR apropos (1),
+.if  !'po4a'hide' .IR man (1),
+.if  !'po4a'hide' .IR whatis (1),
+.if  !'po4a'hide' .IR mandb (8)
+.SH 注
+\fBlexgrog\fP 试图解析包含 .so 请求的文件，但只有文件正确安装到手册页层次结构路径中时才能正确处理。
+.SH 作者
+\fBlexgrog\fP 所使用的扫描 man 页面的代码的作者：
+.PP
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.PP
+Colin Watson 编写了命令行前端的当前实现，以及本 man 手册页。
+.SH BUGS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

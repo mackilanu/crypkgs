@@ -1,0 +1,192 @@
+.\" Man page for format of the manpath.config data file
+.\"
+.\" Copyright (C) 1994, 1995 Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANPATH 5 2024-04-05 2.12.1 /etc/man_db.conf
+.SH NOM
+manpath \- Format du fichier /etc/man_db.conf
+.SH DESCRIPTION
+Le fichier de configuration de manpath est exploité par divers utilitaires
+dédiés aux pages de manuel. Il sert à déterminer, lors de l'exécution, les
+chemins d'accès personnels aux pages de manuel. Cela permet d'indiquer les
+structures hiérarchiques de pages de manuel (« manpaths ») devant être
+considérées comme des structures hiérarchiques «\ système\ » ainsi qu'à leur
+assigner les répertoires à employer pour le stockage des fichiers «\ cat\ ».
+
+Si la variable d'environnement $\fBMANPATH\fP est définie, l'information
+contenue dans /etc/man_db.conf ne la remplacera pas.
+.SH "SEARCH PATH"
+By default, man\-db examines the user's $\fBPATH\fP.  For each \fIpath_element\fP
+found there, it adds \fImanpath_element\fP to the search path.
+
+If there is no \fBMANPATH_MAP\fP line in the configuration file for a given
+\fIpath_element\fP, then it adds all of \fIpath_element/../man\fP,
+\fIpath_element/man\fP, \fIpath_element/../share/man\fP, and
+\fIpath_element/share/man\fP that exist as directories to the search path.
+
+It then adds any \fBMANDATORY_MANPATH\fP entries from the configuration file to
+the search path.
+
+Finally, if the \fB\-\-systems\fP option is used or the $\fBSYSTEM\fP environment
+variable is set, then that should consist of a sequence of operating system
+names separated by commas or colons.  This acts as a template, expanding the
+search path once more to allow access to other operating systems' manual
+pages: for each system name, man\-db looks for that name as a subdirectory of
+each entry in the search path, and adds it to the final search path if it
+exists.  A system name of \fBman\fP inserts the normal search path without
+subdirectories.  For example, if the search path would otherwise have been
+\fI/usr/share/man:/usr/local/man\fP, and $\fBSYSTEM\fP is set to \fInewOS:man\fP,
+then the final search path will be
+\fI/usr/share/man/newOS:/usr/share/man:/usr/local/man/newOS:/usr/local/man\fP.
+
+The $\fBMANPATH\fP environment variable overrides man\-db's default manual page
+search paths.  Most users should not need to set it.  Its syntax is similar
+to the $\fBPATH\fP environment variable: it consists of a sequence of directory
+names separated by colons.  It overrides the default search path described
+above.
+
+If the value of $\fBMANPATH\fP starts with a colon, then the default search
+path is added at its start.  If the value of $\fBMANPATH\fP ends with a colon,
+then the default search path is added at its end.  If the value of
+$\fBMANPATH\fP contains a double colon (\fB::\fP), then the default search path is
+inserted in the middle of the value, between the two colons.
+.SH FORMAT
+Les types de champs suivants sont actuellement reconnus\ :
+.TP 
+\fB#\fP\fI\ commentaire\fP
+Les lignes vides ou celles commençant par un \fB#\fP seront considérées comme
+des commentaires et ignorées.
+.TP 
+\fBMANDATORY_MANPATH\fP\fI\ structure_hiérarchique\fP
+Les lignes de ce type précisent les structures hiérarchiques de pages de
+manuel que doivent contenir tous les $\fBMANPATH\fP produits
+automatiquement. En général, cela inclut \fI/usr/man\fP.
+.TP 
+\fBMANPATH_MAP\fP\fI\ élément_de_chemin \ structure_hiérarchique\fP
+Les lignes de ce type établissent la correspondance entre un des éléments du
+chemin de recherche $\fBPATH\fP et la structure hiérarchique qui contient les
+pages de manuel correspondantes $\fBMANPATH\fP. Pour chaque
+\fIélément_de_chemin\fP trouvé dans le $\fBPATH\fP de l'utilisateur, la
+\fIstructure_hiérarchique\fP sera ajoutée au $\fBMANPATH\fP.
+.TP 
+\fBMANDB_MAP \fP\fIstructure_hiérarchique \fP\|[\| \fIélément_de_chemin_cat\fP \|]
+Les lignes de ce type indiquent quelles sont les structures hiérarchiques de
+pages de manuel qui doivent être traitées comme «\ système\ ». Éventuellement, elles précisent également le lieu de stockage des
+fichiers «\ cat\ » correspondant. Ce type de ligne est particulièrement
+important dans le cas où \fBman\fP s'exécute avec les droits du
+superutilisateur (setuid). En effet, quand le fichier de configuration
+système /etc/man_db.conf existe au lieu du fichier de configuration par
+utilisateur .manpath, il indique les structures hiérarchiques de pages de
+manuel auxquelles \fBman\fP accède en tant qu'utilisateur setuid et celles
+auxquelles il accède en tant qu'utilisateur normal.
+
+Les structures hiérarchiques de pages de manuel «\ système\ » sont celles
+habituellement stockées dans \fI/usr\fP ainsi que dans \fI/usr/man\fP,
+\fI/usr/local/man\fP et \fI/usr/X11R6/man\fP.
+
+Si les pages «\ cat\ » d'une \fIstructure_hiérarchique\fP ne doivent pas être
+stockées ou doivent être stockées à l'emplacement habituel,
+\fIélément_de_chemin_cat\fP peut être omis.
+
+L'emplacement habituel des pages «\ cat\ » serait inutilisable pour des
+structures hiérarchiques de pages de manuel montées en lecture seule. C'est
+pourquoi il est possible d'indiquer n'importe quel répertoire valide pour
+leur stockage. Pour respecter le \fBLinux FSSTND\fP le mot\-clé \fBFSSTND\fP peut
+être employé à la place d'un répertoire réel.
+
+Malheureusement, il est nécessaire d'indiquer \fBtous\fP les chemins vers les
+pages de manuel «\ système\ », y compris les chemins d'accès aux pages des
+autres systèmes d'exploitation tel que \fI/usr/man/sun\fP, ainsi que tous les
+chemins de localisation \fBNLS locale\fP comme \fI/usr/man/de_DE.88591\fP.
+
+Étant donné que l'information est analysée ligne par ligne, dans l'ordre
+d'écriture, il est nécessaire que chaque chemin d'accès aux pages de manuel
+forme une sous\-structure hiérarchique indiquée préalablement à la structure
+hiérarchique qui la contient, sinon un résultat incorrect surviendra. Par
+exemple \fI/usr/man/de_DE.88591\fP doit être indiqué avant \fI/usr/man\fP.
+.TP 
+\fBDEFINE\fP\fI\ clé\ valeur\fP
+Les lignes de ce type définissent diverses variables de
+configuration. Consultez le fichier de configuration par défaut pour
+connaître les variables employées par les utilitaires de pages de
+manuel. Ces variables incluent les chemins d'accès par défaut à divers
+programmes (tels que \fBgrep\fP et \fBtbl\fP), et fixent les valeurs par défaut
+des arguments de ces programmes.
+.TP 
+\fBSECTION\fP \fIsection\fP .\|.\|.
+.RS
+Les lignes de ce type définissent l'ordre dans lequel les sections de manuel
+devraient recherchées. S'il n'y a pas de directives \fBSECTION\fP dans le
+fichier de configuration, l'ordre par défaut est :
+.PP
+.RS
+.nf
+.if  !'po4a'hide' SECTION 1 n l 8 3 0 2 3type 5 4 9 6 7
+.fi
+.RE
+.PP
+Si plusieurs directives \fBSECTION\fP sont données, leurs listes de sections
+seront concaténées.
+.PP
+Si une extension spécifique n'est pas dans cette liste (par exemple 1mh),
+elle sera affichée avec le reste de la section à laquelle elle
+appartient. Par conséquent, il vous suffit d'expliciter la liste des
+extensions si vous voulez forcer un ordre en particulier. Les sections avec
+extension devrait habituellement être à côté de leur section principale (par
+exemple « 1 1mh 8 ... »).
+.PP
+\fBSECTIONS\fP est un nom équivalent pour cette directive.
+.RE
+.TP 
+\fBMINCATWIDTH\fP\fI\ largeur\fP
+Si la largeur du terminal est inférieure à \fIlargeur\fP, les pages « cat » ne
+seront ni créées ni affichées. La valeur par défaut est 80.
+.TP 
+\fBMAXCATWIDTH\fP\fI\ largeur\fP
+Si la largeur du terminal est supérieure à \fIlargeur\fP, les pages « cat » ne
+seront ni créées ni affichées. La valeur par défaut est 80.
+.TP 
+\fBCATWIDTH\fP\fI\ largeur\fP
+If \fIwidth\fP is non\-zero, cat pages will always be formatted for a terminal
+of the given width, regardless of the width of the terminal actually being
+used.  This overrides \fBMINCATWIDTH\fP and \fBMAXCATWIDTH\fP.
+.TP 
+.if  !'po4a'hide' .B NOCACHE
+Cet indicateur empêche \fBman\fP(1) de créer automatiquement les pages
+« cat ».
+.SH BOGUES
+Si les règles précédentes ne sont pas suivies et observées avec rigueur, les
+utilitaires d'affichage de pages de manuel ne fonctionneront pas comme
+prévu. Ces règles sont excessivement compliquées.
+.PP
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db
+.SH TRADUCTION
+Cette traduction est maintenue à l'aide de l'outil
+po4a <URL:https://po4a.org/> par l'équipe
+francophone de traduction de Debian.
+.PP
+Valéry Perrin <valery.perrin.debian@free.fr> le 2 janvier 2006.
+David Prévot <david@tilapin.org> et l'équipe francophone de traduction de Debian\ (2010).
+.PP
+Veuillez signaler toute erreur de traduction en écrivant à
+<debian\-l10n\-french@lists.debian.org> ou par un rapport de bogue sur
+le paquet man-db.
+.PP
+Vous pouvez toujours avoir accès à la version anglaise de ce document en
+utilisant la commande
+«\ \fBman\ \-L C\fR \fI<section>\fR\ \fI<page_de_man>\fR\ ».

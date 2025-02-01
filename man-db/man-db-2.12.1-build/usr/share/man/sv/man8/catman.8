@@ -1,0 +1,100 @@
+.\" Man page for catman
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Dec 10 14:17:29 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH CATMAN 8 2024-04-05 2.12.1 "Verktyg för sidvisning av manual"
+.SH NAMN
+catman \- skapa eller uppdatera de förformaterade manualsidorna
+.SH SYNOPSIS
+\fBcatman\fP [\|\fB\-d?V\fP\|] [\|\fB\-M\fP \fIsökväg\fP\|] [\|\fB\-C\fP \fIfil\fP\|]
+[\|\fIavsnitt\fP\|] \&.\|.\|.
+.SH BESKRIVNING
+\fBcatman\fP används för att skapa en uppdaterad uppsättning av
+förformaterade manualsidor, också kända som cat\-sidor.  cat\-sidor är
+generellt sett mycket snabbare att visa än de vanliga manualsidorna, men
+kräver extra lagringsutrymme.  Beslutet att ha stöd för cat\-sidor tas av den
+lokala administratören som måste tillhandahålla lämpliga kataloger som de
+kan ligga i.
+
+Inställningarna som finns tillgängliga för \fBcatman\fP är hierarkierna av
+manualsidor och avsnitt som ska förformateras.  Standardhierarkierna är de
+som angetts som systemhierarkier i konfigurationsfilen för man\-db, och
+standardavsnitten är antingen det kolonavgränsade innehållet i
+miljövariabeln $\fBMANSECT\fP eller standarduppsättningen som kompilerats in i
+\fBman\fP om $\fBMANSECT\fP är odefinierad.  Om en uppsättning av
+blankstegsavgränsade avsnittsnamn anges till \fBcatman\fP så åsidosätts de
+båda ovan.
+
+\fBcatman\fP använder \fBindex\fP\-databascachen som finns associerad med varje
+hierarki för att avgöra vilka filer som behöver formateras.
+.SH FLAGGOR
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Skriver ut felsökningsinformation.
+.TP 
+\fB\-M\ \fP\fIsökväg\fP,\ \fB\-\-manpath=\fP\fIsökväg\fP
+Ange en alternativ kolonavgränsad sökväg för hierarkier av manualsidor.  Som
+standard är detta alla sökvägar som indikerats som systemhierarkier i
+konfigurationsfilen för man\-db.
+.TP 
+\fB\-C\ \fP\fIfil\fP,\ \fB\-\-config\-file=\fP\fIfil\fP
+Använd denna användarkonfigurationsfil snarare än standard \fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Skriv ut ett hjälpmeddelande och avsluta.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Skriv ut ett kort användningsmeddelande och avsluta.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Visa versionsinformation.
+.SH MILJÖ
+.TP 
+.if  !'po4a'hide' .B MANSECT
+Om $\fBMANSECT\fP är satt är dess värde en kolonavgränsad lista över avsnitt
+och den används för att bestämma vilka manualavsnitt som ska genomsökas och
+i vilken ordning.  Standardvärdet är ”1 n l 8 3 0 2 3type 5 4 9 6 7” om det inte åsidosatts av
+direktivet \fBSECTION\fP i \fI/etc/man_db.conf\fP.
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Om $\fBMANPATH\fP är satt kommer dess värde att tolkas som den kolonavgränsade
+sökvägen för hierarkier av manualsidor som ska användas.
+
+Se avsnittet för \fBSÖKVÄG\fP i \fBmanpath\fP(5)  för standardbeteende och
+detaljer om hur denna miljövariabel hanteras.
+.SH FILER
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+man\-db\-konfigurationsfil.
+.TP 
+.if  !'po4a'hide' .I /usr/man/index.(bt|db|dir|pag)
+En traditionell global \fIindex\fP\-databascache.
+.TP 
+.if  !'po4a'hide' .I /var/catman/index.(bt|db|dir|pag)
+En alternativ eller FSSTND\-kompatibel global \fIindex\fP\-databascache.
+.SH "SE VIDARE"
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR mandb (8)
+.SH UPPHOVSMAN
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH FEL
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

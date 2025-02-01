@@ -1,0 +1,209 @@
+.if  !'po4a'hide' .ds mC CW
+.\" Man page for lexgrog
+.\"
+.\" Copyright (c) 2001 Colin Watson <cjwatson@debian.org>
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.if  t .if \n(.g .ds mC CR
+.if  n .ds mC R
+.
+.\" in an example (EX/EE)?
+.nr mE 0
+.
+.if  !\n(.g \{\
+.de EX
+.  br
+.  if !\\n(mE \{\
+.    nr mF \\n(.f
+.    nr mP \\n(PD
+.    nr PD 1v
+.    nf
+.    ft \\*(mC
+.    nr mE 1
+.  \}
+..
+.\}
+.
+.
+.if  !\n(.g \{\
+.de EE
+.  br
+.  if \\n(mE \{\
+.    ft \\n(mF
+.    nr PD \\n(mP
+.    fi
+.    nr mE 0
+.  \}
+..
+.\}
+.\" End example.
+.
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH LEXGROG 1 2024-04-05 2.12.1 "Penggunaan halaman buku panduan"
+.SH NAMA
+lexgrog \- ambil kepala informasi dalam halaman buku panduan
+.SH RINGKASAN
+\fBlexgrog\fP [\|\fB\-m\fP\||\|\fB\-c\fP\|] [\|\fB\-fhw?V\fP\|] [\|\fB\-E\fP \fIpengkodean\fP\|]
+\fIberkas\fP \&.\|.\|.
+.SH DESKRIPSI
+\fBlexgrog\fP adalah sebuah implementasi dari aplikasi tradisional \(lqgroff
+guess\(rq dalam \fBlex\fP. Ini membaca daftar dari berkas dalam baris perintah
+baik berkas sumber halaman buku panduan  atau preformatted \(lqcat\(rq
+pages, dan menampilkan nama dan deskripsinya seperti yang digunakan oleh
+\fBapropos\fP dan \fBwhatis\fP, daftar dari saringan pemrosesan dibutuhkan oleh
+halaman buku panduan sebelum ini dilewatkan ke \fBnroff\fP atau \fBtroff\fP, atau
+keduanya.
+.PP
+Jika masukannya terformat buruk, \fBlexgrog\fP akan menampilkan \(lqparse
+failed\(rq; ini mungkin berguna untuk program eksternal yang butuh
+pemeriksaan halaman buku panduan untuk pembenaran. Jika satu dari \fBlexgrog\fP
+berkas masukan adalah \(lq\-\(rq, ini akan dibaca dari standar masukan; jika
+berkas masukan apapun dikompress, sebuah versi tidak terkompress akan dibaca
+secara otomatis.
+.SH PILIHAN
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Tampilkan informasi penelusuran.
+.TP 
+.if  !'po4a'hide' .BR \-m ", " \-\-man
+Ambil masukan sebagai berkas sumber halaman buku panduan. Ini baku jika baik
+\fB\-\-man\fP ataupun \fB\-\-cat\fP tidak diberikan.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-cat
+Ambil masukan sebagai halaman buku panduan terformat (\(lqcat
+halaman\(rq). \fB\-\-man\fP dan \fB\-\-cat\fP mungkin tidak diberikan secara
+bersamaan.
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-whatis
+Tampilkan nama dan deskripsi dari kepala halaman buku panduan, seperti
+digunakan oleh \fBapropos\fP dan \fBwhatis\fP. Ini adalah baku jika bukan
+\fB\-\-whatis\fP ataupun \fB\-\-filters\fP diberikan.
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-filters
+Tampilkan daftar dari penyaring yang dibutuhkan untuk preproses halaman buku
+panduan sebelum memformatnya dengan \fBnroff\fP atau \fBtroff\fP.
+.TP 
+\fB\-E\fP \fIpengkodean\fP, \fB\-\-encoding\fP \fIpengkodean\fP
+Override set karakter yang diterka untuk halaman ke \fIpengkodean\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Tampilkan sebuah pesan bantuan dan keluar.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Tampilkan sebuah pesan bantuan dan keluar.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Tampilkan informasi versi.
+.SH "STATUS KELUAR"
+.TP 
+.if  !'po4a'hide' .B 0
+Eksekusi aplikasi sukses.
+.TP 
+.if  !'po4a'hide' .B 1
+Penggunaan error.
+.TP 
+.if  !'po4a'hide' .B 2
+\fBlexgrog\fP gagal untuk mengambil satu atau lebih dari berkas masukan.
+.SH CONTOH
+.nf
+  $ lexgrog man.1
+  man.1: "man \- an interface to the system reference manuals"
+  $ lexgrog \-fw man.1
+  man.1 (t): "man \- an interface to the system reference manuals"
+  $ lexgrog \-c whatis.cat1
+  whatis.cat1: "whatis \- display manual page descriptions"
+  $ lexgrog broken.1
+  broken.1: parse failed
+.fi
+.SH "PENGAMBILAN WHATIS"
+\fBmandb\fP (yang menggunakan kode sama seperti \fBlexgrog\fP) mengambil \fBNAMA\fP
+bagian di puncak dari setiap halaman buku panduan mencari untuk nama dan
+deskripsi dari features yang didokumentasikan. Walaupun pengambil cukup
+bertoleransi, karena ini harus melingkupi dengan berbagai bentuk yang
+berbeda yang  telah digunakan, ini mungkin kadang kadang gagal untuk
+mengekstrak informasi yang dibutuhkan.
+.PP
+Ketika menggunakan tradisional set makro \fIman\fP, sebuah bagian \fBNAMA\fP benar
+tampak seperti ini:
+.PP
+.RS
+.EX
+\&.SH NAME
+foo \e\- program to do something
+.EE
+.RE
+.PP
+Beberapa halaman buku panduan membutuhkan \(oq\e\-\(cq sama seperti yang
+terlihat; \fBmandb\fP yang lebih bertoleransi, tetapi untuk kompabilitas
+dengan sistem lain ini mungkin sebuah ide bagus untuk menjaga backslash.
+.PP
+Di sisi kiri, mungkin ada beberapa nama, dipisahkan dengan koma. Nama berisi
+ruang kosong akan diabaikan untuk menghindari perilaku pathologikal di
+beberapa bagian \fBNAMA\fP yang terbentuk buruk. Di sisi kanan mempunyai bentuk
+bebas, dan mungkin dipisahkan oleh beberapa baris. Jika beberapa fitur
+dengan beberapa deskripsi telah didokumentasikan dalam halaman buku panduan
+yang sama, bentuk berikut sebaiknya digunakan:
+.PP
+.RS
+.EX
+\&.SH NAME
+foo, bar \e\- programs to do something
+\&.br
+baz \e\- program to do nothing
+.EE
+.RE
+.PP
+(A macro which starts a new paragraph, like \fB.PP\fP, may be used instead of
+the break macro \fB.br\fP.)
+.PP
+Ketika menggunakan set makro turunan BSD \fImdoc\fP, sebuah bagian \fBNAMA\fP yang
+benar terlihat seperti ini:
+.PP
+.RS
+.EX
+\&.Sh NAME
+\&.Nm foo
+\&.Nd program to do something
+.EE
+.RE
+
+Ada beberapa sebab umum kenapa pengambilan whatis gagal. Kadang kadang
+pengarang dari halaman buku panduan mengganti \(oq.SH NAMA\(cq dengan
+\(oq.SH APLIKASIKU\(cq, dan kemudian \fBmandb\fP tidak dapat menemukan bagian
+dari itu untuk mengekstrak informasi yang dibutuhkan. Kadang kala pengarang
+memasukan sebuah bagian NAMA, tetapi menempatkan teks bebas disana daripada
+\(oqnama \e\- deskripsi\(cq. Intinya, sintaks apapun yang menyerupai diatas
+seharusnya diterima.
+.SH "LIHAT JUGA"
+.if  !'po4a'hide' .IR apropos (1),
+.if  !'po4a'hide' .IR man (1),
+.if  !'po4a'hide' .IR whatis (1),
+.if  !'po4a'hide' .IR mandb (8)
+.SH CATATAN
+\fBlexgrog\fP mencoba mengambil berkas berisi .so yang diminta, tetapi hanya
+dapat melakukan itu dengan benar jika berkas secara benar terpasang di
+susunan halaman buku panduan.
+.SH PENGARANG
+Kode digunakan oleh \fBlexgrog\fP untuk memindai halaman buku panduan ditulis
+oleh:
+.PP
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.PP
+Colin Watson menulis implementasi antar\-muka dari baris perintah sekarang,
+dan juga halaman buku panduan ini.
+.SH BUGS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

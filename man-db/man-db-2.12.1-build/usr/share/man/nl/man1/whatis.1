@@ -1,0 +1,168 @@
+.\" Man page for whatis
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH WHATIS 1 2024-04-05 2.12.1 "Hulpprogramma's paginaopmaker"
+.SH NAAM
+whatis \- display one\-line manual page descriptions
+.SH SAMENVATTING
+\fBwhatis\fP [\|\fB\-dlv?V\fP\|] [\|\fB\-r\fP\||\|\fB\-w\fP\|] [\|\fB\-s\fP \fIlist\fP\|]
+[\|\fB\-m\fP \fIsystem\fP\|[\|,.\|.\|.\|]\|] [\|\fB\-M\fP \fIpath\fP\|] [\|\fB\-L\fP
+\fIlocale\fP\|] [\|\fB\-C\fP \fIfile\fP\|] \fIname\fP \&.\|.\|.
+.SH BESCHRIJVING
+Each manual page has a short description available within it.  \fBwhatis\fP
+searches the manual page names and displays the manual page descriptions of
+any \fIname\fP matched.
+
+\fIname\fP may contain wildcards (\fB\-w\fP)  or be a regular expression (\fB\-r\fP).
+Using these options, it may be necessary to quote the \fIname\fP or escape (\e)
+the special characters to stop the shell from interpreting them.
+
+\fBindex\fP databases are used during the search, and are updated by the
+\fBmandb\fP program.  Depending on your installation, this may be run by a
+periodic cron job, or may need to be run manually after new manual pages
+have been installed.  To produce an old style text \fBwhatis\fP database from
+the relative \fBindex\fP database, issue the command:
+
+\fBwhatis \-M\fP \fImanpath\fP \fB\-w '*' | sort >\fP \fImanpath/whatis\fP
+
+where \fImanpath\fP is a manual page hierarchy such as \fI/usr/man\fP.
+.SH OPTIES
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Foutinformatie tonen.
+.TP 
+.if  !'po4a'hide' .BR \-v ", " \-\-verbose
+Uitgebreide waarschuwingsmeldingen tonen.
+.TP 
+.if  !'po4a'hide' .BR \-r ", " \-\-regex
+Interpret each \fIname\fP as a regular expression.  If a \fIname\fP matches any
+part of a page name, a match will be made.  This option causes \fBwhatis\fP
+to be somewhat slower due to the nature of database searches.
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-wildcard
+Interpret each \fIname\fP as a pattern containing shell style wildcards.  For a
+match to be made, an expanded \fIname\fP must match the entire page name.  This
+option causes \fBwhatis\fP to be somewhat slower due to the nature of
+database searches.
+.TP 
+.if  !'po4a'hide' .BR \-l ", " \-\-long
+Uitvoer niet afbreken op terminalbreedte.  Normaal zal uitvoer afgekapt
+worden op de breedte van de terminal om lelijke resultaten van
+slechtgeschreven \fBNAAM\fP\-secties te voorkomen.
+.TP 
+\fB\-s\fP \fIlist\/\fP, \fB\-\-sections=\fP\fIlist\/\fP, \fB\-\-section=\fP\fIlist\fP
+Search only the given manual sections.  \fIlist\fP is a colon\- or
+comma\-separated list of sections.  If an entry in \fIlist\fP is a simple
+section, for example "3", then the displayed list of descriptions will
+include pages in sections "3", "3perl", "3x", and so on; while if an entry
+in \fIlist\fP has an extension, for example "3perl", then the list will only
+include pages in that exact part of the manual section.
+.TP 
+\fB\-m\fP \fIsysteem\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fIsysteem\fP\|[\|,.\|.\|.\|]
+If this system has access to other operating systems' manual page names,
+they can be accessed using this option.  To search NewOS's manual page
+names, use the option \fB\-m\fP \fBNewOS\fP.
+
+The \fIsystem\fP specified can be a combination of comma delimited operating
+system names.  To include a search of the native operating system's manual
+page names, include the system name \fBman\fP in the argument string.  This
+option will override the $\fBSYSTEM\fP environment variable.
+.TP 
+\fB\-M\ \fP\fIpad\fP,\ \fB\-\-manpath=\fP\fIpad\fP
+Specificeer een alternatieve hiërarchie van man\-pagina's om te doorzoeken,
+gescheiden door dubbelepunten.  Standaard gebruikt \fBwhatis\fP de
+omgevingsvariabele $\fBMANPATH\fP, behalve als deze leeg of niet\-gedefinieerd
+is.  In die gevallen wordt een passend man\-pad bepaald op basis van uw
+omgevingsvariabele $\fBPATH\fP.  Deze optie gaat voor op de inhoud van
+$\fBMANPATH\fP.
+.TP 
+\fB\-L\ \fP\fItaalgebied\fP,\ \fB\-\-locale=\fP\fItaalgebied\fP
+\fBwhatis\fP zal normaal uw huidige taalgebied bepalen met een aanroep van
+de C\-functie \fBsetlocale\fP(3)  die verschillende omgevingsvariabelen
+bevraagt, waaronder mogelijk $\fBLC_MESSAGES\fP en $\fBLANG\fP.  Om de
+vastgestelde waarde tijdelijk te overschrijven gebruikt u deze optie om een
+\fItaalgebied\fP direct aan \fBwhatis\fP door te geven.  Merk op dat dit geen
+effect heeft totdat het zoeken naar de pagina's daadwerkelijk begint.
+Uitvoer zoals de hulptekst zal altijd getoond worden in de taal die in
+eerste instantie bepaald is.
+.TP 
+\fB\-C\ \fP\fIbestand\fP,\ \fB\-\-config\-file=\fP\fIbestand\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Een hulptekst tonen en stoppen.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Print a short usage message and exit.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Versieinformatie tonen.
+.SH STOPSTATUS
+.TP 
+.if  !'po4a'hide' .B 0
+Programma correct uitgevoerd.
+.TP 
+.if  !'po4a'hide' .B 1
+Gebruiks\-, syntax\- of configuratiebestandfout.
+.TP 
+.if  !'po4a'hide' .B 2
+Uitvoeringsfout.
+.TP 
+.if  !'po4a'hide' .B 16
+Er is niets gevonden dat overeenkomt met de opgegeven criteria.
+.SH OMGEVING
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+Wanneer $\fBSYSTEM\fP is opgegeven, heeft dit hetzelfde effect als het
+opgegeven van optie \fB\-m\fP als argument.
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Wanneer $\fBMANPATH\fP is opgegeven, wordt de waarde geïnterpreteerd als een
+zoekpad van dubbelepuntgescheiden hiërarchie van man\-pagina's.
+
+See the \fBSEARCH PATH\fP section of \fBmanpath\fP(5)  for the default behaviour
+and details of how this environment variable is handled.
+.TP 
+.if  !'po4a'hide' .B MANWIDTH
+If $\fBMANWIDTH\fP is set, its value is used as the terminal width (see the
+\fB\-\-long\fP option).  If it is not set, the terminal width will be calculated
+using the value of $\fBCOLUMNS\fP, and \fBioctl\fP(2)  if available, or falling
+back to 80 characters if all else fails.
+.SH BESTANDEN
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/index.(bt|db|dir|pag)
+Een traditionele, algemene \fIindex\fP\-database\-cache.
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt|db|dir|pag)
+Een algemene \fIindex\fP\-database\-cache, in overeenstemming met FHS.
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/\|.\|.\|.\|/whatis
+Een traditionele \fBwatis\fP\-tekstdatabase.
+.SH "ZIE OOK"
+.if  !'po4a'hide' .BR apropos (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR mandb (8)
+.SH AUTEUR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BUGS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

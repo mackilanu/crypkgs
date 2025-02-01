@@ -1,0 +1,76 @@
+.\" Man page for manconv
+.\"
+.\" Copyright (c) 2007, 2008 Colin Watson <cjwatson@debian.org>
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANCONV 1 2024-04-05 2.12.1 "Помагало страничара упутства"
+.SH НАЗИВ
+manconv \- претвара страницу упутства из једног кодирања у друго
+.SH УВОД
+\fBmanconv\fP \fB\-f\fP [\|\fIиз\-кода\fP\|[:\fIиз\-кода\fP\|.\|.\|.]\|] \fB\-t\fP \fIу\-код\fP
+[\|\fB\-dqhV\fP\|] [\|\fIназив_датотеке\fP\|]
+.SH ОПИС
+\fB%манконв%\fP претвара страницу упутства из једног кодирања у друго, као
+\fBиконв\fP.  Насупрот \fBиконв\fP\-у, може у низу да испроба више могућих улазних
+кодирања.  Ово је корисно за странице упутства инсталиране у директоријумима
+без изричите објаве кодирања, како оне могу бити у УТФ\-8 или у застарелом
+скупу знакова.
+.PP
+Ако је пронађена објава кодирања у првом реду странице упутства, та објава
+преписује свако улазно кодирање наведено на линији наредби \fB%манконв%\fP\-а.
+Објаве кодирања имају следећи облик:
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" \-*\- coding: UTF\-8 \-*\-
+.fi
+.RE
+.PP
+или (ако предобрађивачи странице упутства такође треба да се објаве):
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" t \-*\- coding: ISO\-8859\-1 \-*\-
+.fi
+.RE
+.SH ОПЦИЈЕ
+.TP 
+\fB\-f\fP \fIкодирања\fP, \fB\-\-from\-code\fP \fIкодирања\fP
+Проба свако од \fIкодирања\fP (списак раздвојен двотачком) у низу као улазно
+кодирање.  Основно је да приближно погоди улазна кодирања на основу назива
+датотеке.
+.TP 
+\fB\-t\fP \fIкодирање\fP, \fB\-\-to\-code\fP \fIкодирање\fP
+Претвара страницу упутства у \fIкодирање\fP.
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Не даје поруке грешке када страница не може бити претворено.
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Исписује податке прочишћавања.
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+Исписује поруку помоћи и излази.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Исписује податке о издању.
+.SH "ВИДЕТИ ТАКОЂЕ"
+.if  !'po4a'hide' .IR iconv (1),
+.if  !'po4a'hide' .IR man (1),
+.if  !'po4a'hide' .IR man-recode (1)
+.SH АУТОР
+.nf
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH ГРЕШКЕ
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

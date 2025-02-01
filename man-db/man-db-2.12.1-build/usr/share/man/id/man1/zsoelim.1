@@ -1,0 +1,65 @@
+.\" Man page for zsoelim
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Dec 10 19:33:32 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH ZSOELIM 1 2024-04-05 2.12.1 "Penggunaan halaman buku panduan"
+.SH NAMA
+zsoelim \- memenuhi permintaan .so dalam masukan roff
+.SH RINGKASAN
+\fBzsoelim\fP [\|\fB\-CVh\fP\|] [\|\fIberkas\fP \&.\|.\|.\|]
+.SH DESKRIPSI
+\fBzsoelim\fP mengambil argumen \fIberkas\fP, atau jika tidak dispesifikasikan,
+standar masukannya seperti baris dari bentuk dibawah:
+
+\&\fB.so\fP <\|\fInama berkas\fP\|>
+
+Permintaan ini digantikan oleh isi dari \fInama berkas\fP dispesifikan. Jika
+permintaan tidak dapat dipenuhi, \fBzsoelim\fP mencari untuk \fInama berkas.ext\fP dimana \fI.ext\fP dapat salah satu dari \fB.gz\fP, \fB.Z\fP atau
+\&\fB.z\fP. Tipe ekstensi lain mungkin didukung tergantung dari pilihan waktu
+kompilasi. Jika permintaan dapat dipenuhi oleh berkas terkompress, berkas
+ini didekompress menggunakan sebuah dekompressor yang sesuai dan keluarannya
+digunakan untuk memuaskan permintaan.
+
+Secara tradisional, aplikasi \fBsoelim\fP digunakan untuk mengijinkan pemroses
+awal roff untuk dapat mengawali pemrosesan berkas yang ditunjuk oleh
+permintaan. Versi ini telah ditulis untuk mengatasi masalah yang ada untuk
+mendukung halaman buku panduan terkompres.
+.SH PILIHAN
+.TP 
+.if  !'po4a'hide' .BR \-C ", " \-\-compatible
+Pilihan ini tersedia untuk kompabilitas dengan aplikasi \fBsoelim\fP lain. Ini
+digunakan untuk mengaktifkan permintaan .so diikuti oleh sesuatu selain
+ruang kosong. Hal ini telah menjadi perilaku baku, ini diabaikan.
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+Tampilkan sebuah pesan bantuan dan keluar.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Tampilkan informasi versi.
+.SH "LIHAT JUGA"
+.if  !'po4a'hide' .BR groff (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR nroff (1),
+.if  !'po4a'hide' .BR troff (1)
+.SH PENGARANG
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BUGS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

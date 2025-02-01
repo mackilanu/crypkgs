@@ -1,0 +1,84 @@
+.\" Man page for zsoelim
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Dec 10 19:33:32 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH ZSOELIM 1 2024-04-05 2.12.1 "Utilitaires de l'afficheur des pages de manuel"
+.SH NOM
+zsoelim \- Remplacer les entrées .so des fichiers «\ roff\ » par le contenu
+du fichier indiqué
+.SH SYNOPSIS
+\fBzsoelim\fP [\|\fB\-CVh\fP\|] [\|\fIfichier\fP \&.\|.\|.\|]
+.SH DESCRIPTION
+\fBzsoelim\fP analyse chaque \fIfichier\fP fourni en argument, ou analyse son
+entrée standard si aucun argument n'est indiqué, à la recherche de lignes de
+la forme\ :
+
+\&\fB.so\fP <\|\fInom_de_fichier\fP\|>
+
+Ces entrées sont remplacées par le contenu du fichier \fInom_de_fichier\fP
+indiqué. Si la substitution ne peut pas être réalisée, \fBzsoelim\fP
+recherche un fichier \fInom_de_fichier.ext\fP dans lequel \fI.ext\fP peut être
+\&\fB.gz\fP, \fB.Z\fP ou \fB.z\fP. D'autres extensions peuvent être prises en charge en
+fonction des options utilisées lors de la compilation. Si la substitution
+peut être réalisée grâce à un fichier compressé, celui\-ci est décompressé à
+la volée et utilisé pour la substitution.
+
+Habituellement, les programmes \fBsoelim\fP sont employés pour permettre aux
+préprocesseurs roff de traiter les fichiers à inclure. Cette version
+particulière a été écrite pour éviter des problèmes engendrés par la gestion
+des pages de manuel compressées.
+.SH OPTIONS
+.TP 
+.if  !'po4a'hide' .BR \-C ", " \-\-compatible
+Cet indicateur est disponible pour assurer la compatibilité avec d'autres
+programmes \fBsoelim\fP. Son utilisation rend possible les substitutions .so
+suivies d'autre chose que d'un blanc (whitespace). Comme c'est déjà le
+comportement par défaut, cet indicateur est ignoré.
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+Affiche un message d'aide et s'arrête.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Affiche le numéro de version.
+.SH "VOIR AUSSI"
+.if  !'po4a'hide' .BR groff (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR nroff (1),
+.if  !'po4a'hide' .BR troff (1)
+.SH AUTEUR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BOGUES
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db
+.SH TRADUCTION
+Cette traduction est maintenue à l'aide de l'outil
+po4a <URL:https://po4a.org/> par l'équipe
+francophone de traduction de Debian.
+.PP
+Valéry Perrin <valery.perrin.debian@free.fr> le 2 janvier 2006.
+David Prévot <david@tilapin.org> et l'équipe francophone de traduction de Debian\ (2010).
+.PP
+Veuillez signaler toute erreur de traduction en écrivant à
+<debian\-l10n\-french@lists.debian.org> ou par un rapport de bogue sur
+le paquet man-db.
+.PP
+Vous pouvez toujours avoir accès à la version anglaise de ce document en
+utilisant la commande
+«\ \fBman\ \-L C\fR \fI<section>\fR\ \fI<page_de_man>\fR\ ».

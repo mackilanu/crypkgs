@@ -1,0 +1,192 @@
+.\" Man page for apropos
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH APROPOS 1 2024-04-05 2.12.1 "Narzędzia przeglądarki stron podręcznika ekranowego"
+.SH NAZWA
+apropos \- przeszukiwanie nazw i opisów stron podręcznika ekranowego
+.SH SKŁADNIA
+\fBapropos\fP [\|\fB\-dalv?V\fP\|] [\|\fB\-e\fP\||\|\fB\-w\fP\||\|\fB\-r\fP\|] [\|\fB\-s\fP
+\fIlista\fP\|] [\|\fB\-m\fP \fIsystem\fP\|[\|,.\|.\|.\|]\|] [\|\fB\-M\fP \fIścieżka\fP\|]
+[\|\fB\-L\fP \fIustawienia_językowe\fP\|] [\|\fB\-C\fP \fIplik\fP\|] \fIsłowo_kluczowe\fP
+\&.\|.\|.
+.SH OPIS
+Każda strona podręcznika zawiera krótki opis. \fBapropos\fP przeszukuje te
+opisy, wyszukując podane \fIsłowo_kluczowe\fP.
+
+\fIsłowo_kluczowe\fP jest zazwyczaj wyrażeniem regularnym, tak jakby użyto
+opcji \fB\-r\fP, może także zawierać znaki dopasowania w stylu powłoki (\fB\-w\fP)
+lub być traktowane dosłownie (\fB\-e\fP). Podczas używanie tych opcji może być
+potrzebne ujęcie \fIsłowa_kluczowego\fP w cudzysłowy lub poprzedzenie znaków
+specjalnych znakiem odwrotnego ukośnika (\e), aby uniknąć ich
+interpretowania przez powłokę.
+
+Standardowe reguły dopasowania pozwalają na dopasowanie nazwy strony
+podręcznika i poszczególnych słów opisu.
+
+Baza danych przeszukiwana przez \fBapropos\fP jest aktualizowana przez
+program \fBmandb\fP. W zależności od instalacji, może być on uruchamiany
+okresowo przez program cron lub ręcznie przez administratora po
+zainstalowaniu nowych stron podręcznika.
+.SH OPCJE
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Wyświetla informację diagnostyczną (debug).
+.TP 
+.if  !'po4a'hide' .BR \-v ", " \-\-verbose
+Wyświetla szczegółowe ostrzeżenia.
+.TP 
+.if  !'po4a'hide' .BR \-r ", " \-\-regex
+Interpretuje każde słowo kluczowe jako wyrażenie regularne. Jest to
+zachowanie domyślne. Każde słowo kluczowe jest dopasowywane do nazw stron
+podręcznika lub opisów niezależnie. Może pasować do dowolnej części nazwy
+lub opisu. Dopasowanie nie jest ograniczone do granic słów.
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-wildcard
+Interpretuje każde słowo kluczowe jako wzorzec zawierający znaki dopasowania
+w stylu powłoki. Każde słowo kluczowe jest dopasowywane do nazw stron
+podręcznika lub opisów niezależnie. Jeśli podano również opcję \fB\-\-exact\fP,
+to dopasowanie będzie znalezione tylko wtedy, jeżeli rozwinięcie słowa
+kluczowego pasuje do całości opisu lub nazwy strony. W przeciwnym wypadku
+słowo kluczowe może być dopasowane do granic słów w opisie.
+.TP 
+.if  !'po4a'hide' .BR \-e ", " \-\-exact
+Każde słowo kluczowe będzie dokładnie dopasowane do nazw i opisów stron
+podręcznika.
+.TP 
+.if  !'po4a'hide' .BR \-a ", " \-\-and
+Wyświetla tylko te pozycje, które pasują do wszystkich podanych słów
+kluczowych. Domyślnie wyświetlane są pozycje pasujące do któregokolwiek ze
+słów kluczowych.
+.TP 
+.if  !'po4a'hide' .BR \-l ", " \-\-long
+Nie przycina wyjścia do szerokości terminalu. Normalnie, wyjście będzie
+skrócone do szerokości terminalu, aby uniknąć brzydkich efektów w przypadku
+źle napisanych sekcji \fBNAZWA\fP.
+.TP 
+\fB\-s\fP \fIlist\/\fP, \fB\-\-sections=\fP\fIlist\/\fP, \fB\-\-section=\fP\fIlist\fP
+Przeszukuje tylko podaną sekcje podręcznika. \fIlista\fP jest rozdzielona
+średnikami lub przecinkami listą sekcji. Jeśli element \fIlisty\fP jest sekcją
+prostą, na przykład "3", to wyświetlona lista opisów będzie zawierać strony
+w sekcjach "3", "3perl", "3x" itd., podczas gdy jeżeli element \fIlisty\fP
+zawiera rozszerzenie, na przykład "3perl", to lista będzie zawierać tylko i
+wyłącznie strony w tej sekcji podręcznika.
+.TP 
+\fB\-m\fP \fIsystem\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fIsystem\fP\|[\|,.\|.\|.\|]
+If this system has access to other operating systems' manual page
+descriptions, they can be searched using this option.  To search NewOS's
+manual page descriptions, use the option \fB\-m\fP \fBNewOS\fP.
+
+Podany \fIsystem\fP może być kombinacją oddzielonych przecinkami nazw systemów
+operacyjnych. Aby włączyć hierarchię stron man macierzystego systemu
+operacyjnego, należy użyć \fBman\fP jako nazwy systemu w łańcuchu
+argumentów. Niniejsza opcja nadpisuje ewentualne użycie zmiennej środowiska
+$\fBSYSTEM\fP.
+.TP 
+\fB\-M\ \fP\fIścieżka\fP,\ \fB\-\-manpath=\fP\fIścieżka\fP
+Określa alternatywny zbiór rozdzielonych dwukropkami hierarchii stron
+podręcznika do przeszukiwania. Domyślnie \fBapropos\fP używa wartości
+zmiennej środowiskowej $\fBMANPATH\fP, chyba że jest pusta, co spowoduje, że na
+podstawie wartości zmiennej środowiska $\fBPATH\fP określi odpowiednią ścieżkę
+poszukiwań man. Opcja ta nadpisuje zawartość zmiennej $\fBMANPATH\fP.
+.TP 
+\fB\-L\ \fP\fIustawienia_językowe\fP,\ \fB\-\-locale=\fP\fIustawienia_językowe\fP
+\fBapropos\fP zazwyczaj określa bieżące ustawienia językowa przez wywołanie
+systemowej funkcji C \fBsetlocale\fP(3), która określa je na podstawie różnych
+zmiennych środowiska, takich jak $\fBLC_MESSAGES\fP i $\fBLANG\fP. Aby tymczasowo
+nadpisać wartości ustalone  przez tę funkcję, można użyć tej opcji do
+bezpośredniego przekazania \fIustawień_językowych\fP do programu
+\fBapropos\fP. Uwaga: będzie to miało wpływ tylko na wyszukiwanie stron
+podręcznika, komunikaty takie jak informacje o pomocy, zawsze będą
+wyświetlane w języku określonym na początku działania.
+.TP 
+\fB\-C\ \fP\fIplik\fP,\ \fB\-\-config\-file=\fP\fIplik\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Wyświetla komunikat pomocy i kończy pracę.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Wyświetla krótki opis użycia programu i kończy pracę.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Wyświetla informację o wersji.
+.SH "KOD ZAKOŃCZENIA"
+.TP 
+.if  !'po4a'hide' .B 0
+Program zakończony bez żadnych błędów.
+.TP 
+.if  !'po4a'hide' .B 1
+Błąd użycia, składni lub pliku konfiguracyjnego.
+.TP 
+.if  !'po4a'hide' .B 2
+Błąd działania.
+.TP 
+.if  !'po4a'hide' .B 16
+Nie znaleziono niczego, co spełniałoby kryteria wyszukiwania.
+.SH ŚRODOWISKO
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+Jeżeli ustawiona jest zmienna $\fBSYSTEM\fP, to ma to taki sam skutek, jak
+przekazanie jej wartości jako argumentu opcji \fB\-m\fP.
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Jeżeli ustawiona jest $\fBMANPATH\fP, to jej wartość jest interpretowana jako
+wskazana do użycia ścieżka przeszukiwań hierarchii stron man. Ścieżka
+zawiera rozdzielone dwukropkami nazwy hierarchii (katalogów).
+
+See the \fBSEARCH PATH\fP section of \fBmanpath\fP(5)  for the default behaviour
+and details of how this environment variable is handled.
+.TP 
+.if  !'po4a'hide' .B MANWIDTH
+If $\fBMANWIDTH\fP is set, its value is used as the terminal width (see the
+\fB\-\-long\fP option).  If it is not set, the terminal width will be calculated
+using the value of $\fBCOLUMNS\fP, and \fBioctl\fP(2)  if available, or falling
+back to 80 characters if all else fails.
+.TP 
+.if  !'po4a'hide' .B POSIXLY_CORRECT
+Jeżeli ustawiono $\fBPOSIXLY_CORRECT\fP, nawet na pustą wartość, to domyślnie
+\fBapropos\fP  będzie wyszukiwał w trybie wyrażeń regularnych
+(\fB\-r\fP). Obecnie i tak to jest domyślne zachowanie.
+.SH PLIKI
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/index.(bt\^|\^db\^|\^dir\^|\^pag)
+Tradycyjny globalny \fIindeks\fP bazy danych.
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt\^|\^db\^|\^dir\^|\^pag)
+Zgodny z FHS globalny \fIindeks\fP bazy danych.
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/\|.\|.\|.\|/whatis
+Tradycyjna tekstowa baza danych \fBwhatis\fP.
+.SH "ZOBACZ TAKŻE"
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR whatis (1),
+.if  !'po4a'hide' .BR mandb (8)
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BŁĘDY
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db
+.SH TŁUMACZENIE
+Wojciech Kotwica w 1999 roku przetłumaczył część stron podręcznika pakietu
+man-db i udostępnił je w ramach Projektu Tłumaczenia Manuali.
+.br
+Robert Luberda tłumaczenie zaktualizował i uzupełnił w roku 2008.

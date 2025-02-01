@@ -1,0 +1,68 @@
+.\" Man page for zsoelim
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Dec 10 19:33:32 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH ZSOELIM 1 2024-04-05 2.12.1 "Dienstprogramme für Handbuchseiten"
+.SH BEZEICHNUNG
+zsoelim \- führt ».so«\-Anfragen in Roff\-Quellen aus
+.SH ÜBERSICHT
+\fBzsoelim\fP [\|\fB\-CVh\fP\|] [\|\fIDatei\fP \&.\|.\|.\|]
+.SH BESCHREIBUNG
+\fBzsoelim\fP sucht in seinen \fIDatei\fP\-Argumenten oder bei einem Aufruf ohne
+Argumente in der Standard\-Eingabe Zeilen der Form
+
+\&\fB.so\fP <\|\fIDateiname\fP\|>.
+
+Diese Anfragen werden durch den Inhalt der \fIDatei\fP ersetzt. Wenn die
+\fIDatei\fP nicht gefunden wird, sucht \fBzsoelim\fP nach \fIDatei.Typ\fP, wobei
+der \fITyp\fP entweder \fB.gz,\fP \fB.Z\fP oder \fB.z\fP sein kann. Abhängig von den
+Optionen beim Kompilieren des Programms können andere Typen unterstützt
+werden. Wenn eine komprimierte Datei gefunden wird, wird sie mit dem
+entsprechenden Programm dekomprimiert und dessen Ausgabe für die Anzeige
+verwendet.
+
+Traditionell wurden \fBsoelim\fP\-Programme dazu verwendet,
+»roff«\-Präprozessoren die Vorverarbeitung der in den Anforderungen genannten
+Dateien zu ermöglichen. Diese Spezialversion wurde geschrieben, um aus der
+Unterstützung für komprimierte Handbuchseiten entstehende Probleme zu
+umgehen.
+.SH OPTIONEN
+.TP 
+.if  !'po4a'hide' .BR \-C ", " \-\-compatible
+Dieser Schalter wird für die Kompatibilität mit anderen \fBSoelim\fP\-Programmen
+bereitgestellt. Es ermöglicht, ».so«\-Anfragen mit etwas anderem als
+Leerzeichen (Whitespace) abzuschließen. Da dies bereits das
+Standardverhalten ist, wird der Schalter ignoriert.
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+Hilfetext anzeigen und beenden
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Versionsinformation anzeigen und beenden
+.SH "SIEHE AUCH"
+.if  !'po4a'hide' .BR groff (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR nroff (1),
+.if  !'po4a'hide' .BR troff (1)
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH FEHLER
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

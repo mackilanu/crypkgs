@@ -1,0 +1,124 @@
+.\" Man page for catman
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Dec 10 14:17:29 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH CATMAN 8 2024-04-05 2.12.1 "Utilitaires de l'afficheur des pages de manuel"
+.SH NOM
+catman \- Créer ou mettre à jour les pages de manuel préformatées
+.SH SYNOPSIS
+\fBcatman\fP [\|\fB\-d?V\fP\|] [\|\fB\-M\fP \fIchemin\fP\|] [\|\fB\-C\fP \fIfichier\fP\|]
+[\|\fIsection\fP\|] \&.\|.\|.
+.SH DESCRIPTION
+\fBcatman\fP est utilisé pour créer et mettre à jour l'ensemble des pages de
+manuel préformatées, connues sous le nom de pages «\ cat\ ». Les pages «\ cat\ » sont, en général, plus rapides à afficher que les pages de manuel
+d'origine mais requièrent un espace de stockage supplémentaire. La décision
+de gérer, ou non, les pages «\ cat\ » est de la responsabilité de
+l'administrateur local qui doit créer les répertoires nécessaires à leur
+stockage.
+
+Les options de \fBcatman\fP permettent de préciser les structures
+hiérarchiques de pages de manuel, ainsi que les sections, à préformater. Les
+structures hiérarchiques des pages traitées par défaut sont celles
+spécifiées comme structures hiérarchiques «\ système\ » dans le fichier de
+configuration de man\-db. Les sections par défaut sont celles, séparées par
+des «\ :\ », contenues dans la variable d'environnement $\fBMANSECT\fP. Si
+$\fBMANSECT\fP n'est pas définie alors la liste standard, compilée dans
+\fBman\fP, sera utilisée. La présence de plusieurs sections, séparées par des
+blancs (whitespace), dans la commande \fBcatman\fP, remplacera les deux
+valeurs par défaut précédentes.
+
+\fBcatman\fP utilise la \fBbase de données d'indexation\fP, associée à chaque
+structure hiérarchique de pages de manuel, pour déterminer quels sont les
+fichiers qui doivent être formatés.
+.SH OPTIONS
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Affiche les informations de mise au point.
+.TP 
+\fB\-M\ \fP\fIliste_de_chemins\fP,\ \fB\-\-manpath=\fP\fIliste_de_chemins\fP
+Indique la liste des chemins d'accès aux structures hiérarchiques des pages
+de manuel. Les éléments de cette liste doivent être séparés par «\ :\ ». Par
+défaut, il s'agit de l'ensemble des chemins correspondants aux structures
+hiérarchiques «\ système\ », indiqués dans le fichier de configuration de
+man\-db.
+.TP 
+\fB\-C\ \fP\fIfichier\fP,\ \fB\-\-config\-file=\fP\fIfichier\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Affiche un message d'aide et s'arrête.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Affiche un court mode d'emploi et s'arrête.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Affiche le numéro de version.
+.SH ENVIRONNEMENT
+.TP 
+.if  !'po4a'hide' .B MANSECT
+Si $\fBMANSECT\fP est définie, sa valeur est une liste de sections, séparées
+par des deux\-points. Cette liste est utilisée pour déterminer les sections
+de manuel, et l’ordre, utilisés pour la recherche. C’est « 1 n l 8 3 0 2 3type 5 4 9 6 7 » par
+défaut, à moins d’être écrasée par la directive \fBSECTION\fP dans
+\fI/etc/man_db.conf\fP.
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Si $\fBMANPATH\fP est définie, sa valeur est interprétée comme une liste
+d'éléments, séparés par des deux\-points, représentant les chemins d'accès
+aux structures hiérarchiques de pages de manuel.
+
+See the \fBSEARCH PATH\fP section of \fBmanpath\fP(5)  for the default behaviour
+and details of how this environment variable is handled.
+.SH FICHIERS
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+Fichier de configuration de man\-db.
+.TP 
+.if  !'po4a'hide' .I /usr/man/index.(bt|db|dir|pag)
+\fBBase de données d'indexation\fP globale habituelle.
+.TP 
+.if  !'po4a'hide' .I /var/catman/index.(bt|db|dir|pag)
+\fBBase de données d'indexation\fP globale de remplacement ou conforme à
+FSSTND.
+.SH "VOIR AUSSI"
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR mandb (8)
+.SH AUTEUR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BOGUES
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db
+.SH TRADUCTION
+Cette traduction est maintenue à l'aide de l'outil
+po4a <URL:https://po4a.org/> par l'équipe
+francophone de traduction de Debian.
+.PP
+Valéry Perrin <valery.perrin.debian@free.fr> le 2 janvier 2006.
+David Prévot <david@tilapin.org> et l'équipe francophone de traduction de Debian\ (2010).
+.PP
+Veuillez signaler toute erreur de traduction en écrivant à
+<debian\-l10n\-french@lists.debian.org> ou par un rapport de bogue sur
+le paquet man-db.
+.PP
+Vous pouvez toujours avoir accès à la version anglaise de ce document en
+utilisant la commande
+«\ \fBman\ \-L C\fR \fI<section>\fR\ \fI<page_de_man>\fR\ ».

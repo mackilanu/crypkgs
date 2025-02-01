@@ -1,0 +1,193 @@
+.\" Man page for whatis
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH WHATIS 1 2024-04-05 2.12.1 "Utilitaires de l'afficheur des pages de manuel"
+.SH NOM
+whatis \- Afficher une ligne de description des pages de manuel
+.SH SYNOPSIS
+\fBwhatis\fP [\|\fB\-dlv?V\fP\|] [\|\fB\-r\fP\||\|\fB\-w\fP\|] [\|\fB\-s\fP \fIliste\fP\|]
+[\|\fB\-m\fP \fIsystème\fP\|[\|,.\|.\|.\|]\|] [\|\fB\-M\fP \fIchemin\fP\|] [\|\fB\-L\fP
+\fIlocale\fP\|] [\|\fB\-C\fP \fIfichier\fP\|] \fInom\fP \&.\|.\|.
+.SH DESCRIPTION
+Chaque page de manuel comporte une description courte. \fBwhatis\fP recherche
+des pages de manuel dont le nom correspond à \fInom\fP et affiche leur
+description courte.
+
+\fInom\fP peut contenir des jokers (\fIwildcards\fP) avec l'option \fB\-w\fP ou être
+une expression rationnelle avec l'option \fB\-r\fP. Lors de l'utilisation de ces
+options, il peut être nécessaire de placer \fInom\fP entre guillemets ou de
+protéger par «\ \e\ » les caractères spéciaux afin d'empêcher l'interpréteur
+de commandes de les développer.
+
+Les \fBbases de données d'indexation\fP sont exploitées lors de la recherche,
+et sont mises à jour par le programme \fBmandb\fP. Suivant votre
+installation, ce peut être exécuté périodiquement à l'aide de cron, ou par
+vous\-même après l'installation de nouvelles pages de manuel. Pour créer une
+base de données texte \fBwhatis\fP conforme à l'ancien modèle, d'après la
+\fBbase de données d'indexation\fP correspondante, saisissez la commande\ :
+
+\fBwhatis \-M\fP \fIchemin_des_pages\fP \fB\-w '*' | sort >\fP
+\fIchemin_des_pages/whatis\fP
+
+Dans cette expression, \fIchemin_des_pages\fP est le chemin d'accès à la
+structure hiérarchique de pages de manuel, telle que \fI/usr/man\fP.
+.SH OPTIONS
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Affiche les informations de mise au point.
+.TP 
+.if  !'po4a'hide' .BR \-v ", " \-\-verbose
+Affiche des messages d'avertissement étendus.
+.TP 
+.if  !'po4a'hide' .BR \-r ", " \-\-regex
+Interprète chaque \fInom\fP comme une expression rationnelle. La recherche
+aboutit si \fInom\fP correspond à une partie quelconque du nom de la
+page. Cette option ralentit légèrement \fBwhatis\fP en raison de la méthode
+de recherche dans les \fBbases de données d'indexation\fP.
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-wildcard
+Interprète chaque \fInom\fP comme un motif contenant des jokers (\fIwildcards\fP)
+compréhensibles par l'interpréteur de commandes. Pour qu'une correspondance
+soit trouvée, le motif \fInom\fP doit correspondre au nom complet de la page de
+manuel. Cette option ralentit légèrement \fBwhatis\fP en raison de la méthode
+de recherche dans les \fBbases de données d'indexation\fP.
+.TP 
+.if  !'po4a'hide' .BR \-l ", " \-\-long
+Ne réduit pas l'affichage à la largeur du terminal. Normalement la sortie
+sera tronquée à la largeur du terminal pour éviter des résultats déplaisants
+avec des sections \fBNOM\fP mal écrites.
+.TP 
+\fB\-s\fP \fIliste\/\fP, \fB\-\-sections=\fP\fIliste\/\fP, \fB\-\-section=\fP\fIliste\fP
+La recherche est limitée aux sections de manuel indiquées. \fIliste\fP est une
+liste de sections séparées par des deux\-points ou des virgules. Si une des
+entrées de la \fIliste\fP est une section simple, par exemple «\ 3\ », alors la
+liste des descriptions affichées inclura les pages des sections «\ 3\ », «\ 3perl\ », «\ 3x\ », et ainsi de suite. Par contre, si une des entrées de la
+\fIliste\fP est plus précise, par exemple «\ 3perl\ », alors la liste n'inclura
+que les pages de cette partie de section.
+.TP 
+\fB\-m\fP \fIsystème\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fIsystème\fP\|[\|,.\|.\|.\|]
+If this system has access to other operating systems' manual page names,
+they can be accessed using this option.  To search NewOS's manual page
+names, use the option \fB\-m\fP \fBNewOS\fP.
+
+Le \fIsystème\fP indiqué peut être une suite de noms de systèmes
+d'exploitation, séparés par des virgules. Pour inclure une recherche sur le
+nom des pages de manuel du système natif, il faut inclure le nom système «\ \fBman\fP\ » dans la chaîne fournie en argument. Cette option remplacera la
+variable d'environnement $\fBSYSTEM\fP.
+.TP 
+\fB\-M\ \fP\fIliste_de_chemins\fP,\ \fB\-\-manpath=\fP\fIliste_de_chemins\fP
+Indique une liste de structures hiérarchiques de pages de manuel, séparées
+par des deux\-points, à utiliser lors des recherches. Par défaut,
+\fBwhatis\fP utilise la variable d'environnement $\fBMANPATH\fP, à moins
+qu'elle ne soit vide ou n'ait été supprimée. Dans ce cas, il détermine la
+liste appropriée des chemins d'accès aux pages de manuel en se basant sur la
+variable d'environnement $\fBPATH\fP. Cette option remplace le contenu de
+$\fBMANPATH\fP.
+.TP 
+\fB\-L\ \fP\fIlocale\fP,\ \fB\-\-locale=\fP\fIlocale\fP
+\fBwhatis\fP détermine habituellement la \fIlocale\fP (NdT\ : la langue ou le
+dialecte) actuelle par un appel à la fonction C \fBsetlocale\fP(3) qui consulte
+diverses variables d'environnement, y compris $\fBLC_MESSAGES\fP et
+$\fBLANG\fP. Pour remplacer temporairement la valeur définie, utilisez cette
+option. Elle fournit directement à \fBwhatis\fP la chaîne de caractères
+représentant la \fIlocale\fP. Notez que cette valeur ne prendra effet qu'à
+partir de la recherche des pages. Par conséquent, les autres affichages,
+tels que les messages d'aide, seront toujours montrés dans la langue
+initialement déterminée.
+.TP 
+\fB\-C\ \fP\fIfichier\fP,\ \fB\-\-config\-file=\fP\fIfichier\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Affiche un message d'aide et s'arrête.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Affiche un court mode d'emploi et s'arrête.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Affiche le numéro de version.
+.SH "CODE DE RETOUR"
+.TP 
+.if  !'po4a'hide' .B 0
+Programme exécuté sans erreur.
+.TP 
+.if  !'po4a'hide' .B 1
+Erreur d'utilisation, de syntaxe ou de fichier de configuration.
+.TP 
+.if  !'po4a'hide' .B 2
+Erreur d'exécution.
+.TP 
+.if  !'po4a'hide' .B 16
+Rien n'a été trouvé selon les critères indiqués.
+.SH ENVIRONNEMENT
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+Si $\fBSYSTEM\fP est définie, l'effet sera le même que si on l'avait indiquée
+comme argument de l'option \fB\-m\fP.
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Si $\fBMANPATH\fP est définie, sa valeur est interprétée comme une liste
+d'éléments, séparés par des deux\-points, représentant les chemins d'accès
+aux structures hiérarchiques de pages de manuel.
+
+See the \fBSEARCH PATH\fP section of \fBmanpath\fP(5)  for the default behaviour
+and details of how this environment variable is handled.
+.TP 
+.if  !'po4a'hide' .B MANWIDTH
+Si $\fBMANWIDTH\fP est définie, sa valeur est utilisée comme largeur de
+terminal (voir l'option \fB\-\-long\fP). Sinon, la largeur du terminal sera
+calculée d'après les valeurs de $\fBCOLUMNS\fP et \fBioctl\fP(2) s'il est
+disponible, soit à 80 colonnes si aucune indication n'est trouvée.
+.SH FICHIERS
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/index.(bt|db|dir|pag)
+\fBBase de données d'indexation\fP globale habituelle.
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt|db|dir|pag)
+\fBBase de données d'indexation\fP globale, conforme à FHS.
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/\|.\|.\|.\|/whatis
+Base de données texte \fBwhatis\fP traditionnelle.
+.SH "VOIR AUSSI"
+.if  !'po4a'hide' .BR apropos (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR mandb (8)
+.SH AUTEUR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BOGUES
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db
+.SH TRADUCTION
+Cette traduction est maintenue à l'aide de l'outil
+po4a <URL:https://po4a.org/> par l'équipe
+francophone de traduction de Debian.
+.PP
+Valéry Perrin <valery.perrin.debian@free.fr> le 2 janvier 2006.
+David Prévot <david@tilapin.org> et l'équipe francophone de traduction de Debian\ (2010).
+.PP
+Veuillez signaler toute erreur de traduction en écrivant à
+<debian\-l10n\-french@lists.debian.org> ou par un rapport de bogue sur
+le paquet man-db.
+.PP
+Vous pouvez toujours avoir accès à la version anglaise de ce document en
+utilisant la commande
+«\ \fBman\ \-L C\fR \fI<section>\fR\ \fI<page_de_man>\fR\ ».

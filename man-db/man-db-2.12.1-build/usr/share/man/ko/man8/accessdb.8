@@ -1,0 +1,50 @@
+.\" Man page for accessdb
+.\"
+.\" Copyright (c) 1998 Fabrizio Polacco <fpolacco@debian.org
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Tue, 24 Feb 1998 18:18:36 +0200
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH ACCESSDB 8 2024-04-05 2.12.1 "설명서 페이저 유틸리티"
+.SH 이름
+accessdb \- man\-db 데이터베이스 내용을 가독 형식으로 덤핑합니다
+.SH 개요
+\fB/usr/sbin/accessdb\fP [\|\fB\-d?V\fP\|] [\fI<색인_파일>\fP]
+.SH 설명
+\fBaccessdb\fP는 man\-db 데이터베이스에 들어간 데이터를 가독성 형식으로 출력합니다.  기본적으로
+\fB/var/cache/man/index.<db\-type>,\fP 데이터를 덤핑하는데 여기서 <db\-type>는
+사용하는 데이터베이스 라이브러리에 따라 다릅니다.
+
+accessdb에 인자를 지정하면 기본값 대신 활용합니다.
+.SH 옵션
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+디버깅 정보를 출력합니다.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+도움말 메시지를 출력하고 나갑니다.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+간단한 사용법 메시지를 출력하고 나갑니다.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+버전 정보를 출력합니다.
+.SH 저작자
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH 버그
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

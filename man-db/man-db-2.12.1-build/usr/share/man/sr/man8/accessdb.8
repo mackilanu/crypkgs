@@ -1,0 +1,52 @@
+.\" Man page for accessdb
+.\"
+.\" Copyright (c) 1998 Fabrizio Polacco <fpolacco@debian.org
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Tue, 24 Feb 1998 18:18:36 +0200
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH ACCESSDB 8 2024-04-05 2.12.1 "Помагало страничара упутства"
+.SH НАЗИВ
+accessdb \- исписује садржај ман\-дб базе података у запису који се може
+прочитати
+.SH УВОД
+\fB/usr/sbin/accessdb\fP [\|\fB\-d?V\fP\|] [\fI<датотека_пописа>\fP]
+.SH ОПИС
+\fBaccessdb\fP ће исписати податке садржане унутар ман\-дб базе података у
+запису погодном за читање.  По основи, избациће податке из
+\fB/var/cache/man/index.<врста\-бп>,\fP где је <врста\-бп>
+зависна од библиотеке базе података у употреби.
+
+Прилагање аргумента уз „accessdb“ ће преписати ово понашање.
+.SH ОПЦИЈЕ
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Исписује податке прочишћавања.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Исписује поруку помоћи и излази.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Исписује кратку поруку о коришћењу и излази.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Исписује податке о издању.
+.SH АУТОР
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH ГРЕШКЕ
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

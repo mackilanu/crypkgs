@@ -1,0 +1,211 @@
+.if  !'po4a'hide' .ds mC CW
+.\" Man page for lexgrog
+.\"
+.\" Copyright (c) 2001 Colin Watson <cjwatson@debian.org>
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.if  t .if \n(.g .ds mC CR
+.if  n .ds mC R
+.
+.\" in an example (EX/EE)?
+.nr mE 0
+.
+.if  !\n(.g \{\
+.de EX
+.  br
+.  if !\\n(mE \{\
+.    nr mF \\n(.f
+.    nr mP \\n(PD
+.    nr PD 1v
+.    nf
+.    ft \\*(mC
+.    nr mE 1
+.  \}
+..
+.\}
+.
+.
+.if  !\n(.g \{\
+.de EE
+.  br
+.  if \\n(mE \{\
+.    ft \\n(mF
+.    nr PD \\n(mP
+.    fi
+.    nr mE 0
+.  \}
+..
+.\}
+.\" End example.
+.
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH LEXGROG 1 2024-04-05 2.12.1 "Dienstprogramme für Handbuchseiten"
+.SH BEZEICHNUNG
+lexgrog \- wertet die Kopfzeilen\-Information von Handbuchseiten aus
+.SH ÜBERSICHT
+\fBlexgrog\fP [\|\fB\-m\fP\||\|\fB\-c\fP\|] [\|\fB\-dfw?V\fP\|] [\|\fB\-E\fP \fIKodierung\fP\|]
+\fIDatei\fP \&.\|.\|.
+.SH BESCHREIBUNG
+\fBlexgrog\fP ist eine \fILex\fP\-Implementierung des traditionellen
+Dienstprogramms »groff guess« für die Auswertung von Handbuch\-Quelldateien
+oder vorformatierten »Cat«\-Seiten. Es liest die Liste der Dateien in seiner
+Befehlszeile. Seine Ausgabe sind entweder die Namen und Beschreibungen in
+der Form, die \fBapropos\fP und \fBwhatis\fP verwenden oder die Liste der für die
+Seite erforderlichen  Vorverarbeitungs\-Filter für die Erzeugung von
+\fBNroff\fP/\fBTroff\fP oder aber beides.
+.PP
+Wenn seine Eingabe schlecht formatiert ist, wird \fBlexgrog\fP »parse failed«
+ausgeben. Das können externe Programme nutzen, die Handbuchseiten auf
+Fehlerfreiheit prüfen. Wenn einer der Eingabedateien von \fBlexgrog\fP »\-« ist,
+wird das Programm von der Standardeingabe lesen. Ist eine Eingabedatei
+komprimiert, wird sie automatisch dekomprimiert.
+.SH OPTIONEN
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Ausgabe von Debug\-Informationen
+.TP 
+.if  !'po4a'hide' .BR \-m ", " \-\-man
+Interpretiert die Eingabe als Handbuchseiten\-Quelltext. Sind weder \fB\-\-man\fP
+noch \fB\-\-cat\fP gewählt, greift diese Voreinstellung.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-cat
+Interpretiert die Eingabe als vorformatierte Handbuchseiten
+(»Cat\-Seiten«). Die Optionen \fB\-\-man\fP und \fB\-\-cat\fP schließen sich
+gegenseitig aus.
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-whatis
+Zeigt den Namen und die Beschreibung aus dem Kopf der Handbuchseite so an,
+wie sie von \fBapropos\fP und \fBwhatis\fP verwendet werden. Das ist die
+Voreinstellung, wenn weder \fB\-\-whatis\fP noch \fB\-\-filters\fP gewählt wurde.
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-filters
+Zeigt die Liste der erforderlichen Filter für die Aufbereitung der
+Handbuchseite vor der Formatierung mit \fBNroff\fP oder \fBTroff\fP.
+.TP 
+\fB\-E\fP \fIKodierung\fP, \fB\-\-encoding\fP \fIKodierung\fP
+Statt des vermuteten Zeichensatzes der Seite die \fIKodierung\fP verwenden.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Hilfetext anzeigen und beenden
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+zeigt eine kurze Anwendungszusammenfassung an und beendet das Programm.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Versionsinformation anzeigen und beenden
+.SH EXIT\-STATUS
+.TP 
+.if  !'po4a'hide' .B 0
+erfolgreiche Programmausführung
+.TP 
+.if  !'po4a'hide' .B 1
+Fehler beim Aufruf
+.TP 
+.if  !'po4a'hide' .B 2
+\fBLexgrog\fP konnte eine oder mehrere seiner Eingabedateien nicht auswerten.
+.SH BEISPIELE
+.nf
+  $ lexgrog man.1
+  man.1: "man \- an interface to the system reference manuals"
+  $ lexgrog \-fw man.1
+  man.1 (t): "man \- an interface to the system reference manuals"
+  $ lexgrog \-c whatis.cat1
+  whatis.cat1: "whatis \- display manual page descriptions"
+  $ lexgrog broken.1
+  broken.1: parse failed
+.fi
+.SH "WAS BEDEUTET PARSEN"
+Die Programme \fBmandb\fP und \fBlexgrog\fP verwenden den gleichen
+Code. \fBmandb\fP durchsucht den Abschnitt \fBBEZEICHNUNG\fP am Anfang jeder
+Handbuchseite nach den Namen und den jeweils beschriebenen
+Funktionen. Obwohl der Parser (das Auswerteprogramm) ziemlich tolerant ist,
+weil er sich mit etlichen verschiedenen, früher genutzten Formaten befassen
+muss, kann er ab und zu die gewünschte Information nicht entnehmen.
+.PP
+Wenn Sie die den traditionellen Makrosatz »\fIman\fP« verwenden, wird ein
+gültiger \fBBEZEICHNUNGs\fP\-Abschnitt ungefähr so aussehen:
+.PP
+.RS
+.EX
+\&.SH BEZEICHNUNG
+foo \e\- Programm, das etwas erledigt
+.EE
+.RE
+.PP
+Einige Handbuchanzeigeprogramme erfordern das \(oq\e\-\cq genau in dieser
+Reihenfolge. \fBmandb\fP ist toleranter, aber für die Kompatibilität mit
+anderen Systemen ist es dennoch eine gute Idee, den Backslash (umgekehrten
+Schrägstrich) beizubehalten.
+.PP
+Auf der linken Seite können verschiedene, durchs Kommas getrennte Namen
+stehen. Namen mit Leerzeichen werden ignoriert, um bestimmte »krankhafte«
+Verhaltensweisen bei schlecht formatierten \fBBEZEICHNUNGs\fP\-Abschnitten zu
+vermeiden. Der Text auf der rechten Seite unterliegt keinen Formvorschriften
+und kann sich über mehrere Zeilen erstrecken. Wenn in der Handbuchseite
+mehrere Merkmale mit unterschiedlichen Beschreibungen dokumentiert werden,
+wird das folgende Format verwendet:
+.PP
+.RS
+.EX
+\&.SH BEZEICHNUNG
+foo, bar \e\- Programme, die etwas erledigen
+\&.br
+baz \e\- Programm, das nichts tut
+.EE
+.RE
+.PP
+(Anstelle des Zeilenvorschub\-Makros \fB.br\fP kann auch ein Makro verwendet
+werden, das einen neuen Absatz beginnt, z.B. \fB.PP\fP.)
+.PP
+Wird der von BSD abgeleitete \fImdoc\fP\-Makrosatz verwendet, hat ein gültiger
+\fBBEZEICHNUNGs\fP\-Abschnitt ungefähr das folgende Aussehen:
+.PP
+.RS
+.EX
+\&.Sh BEZEICHNUNG
+\&.Nm foo
+\&.Nd Programm, das etwas erledigt
+.EE
+.RE
+
+Es gibt mehrere häufige Gründe dafür, dass die von Whatis durchgeführte
+Auswertung fehlschlägt. Manchmal ersetzen Autoren von Handbuchseiten \(oq.SH
+BEZEICHNUNG\(cq durch \(oq.SH MEINPROGRAMM\(cq. Dann kann \fBmandb\fP den
+Abschnitt nicht finden, aus dem es die benötigten Informationen entnehmen
+soll. Manchmal verfassen Autoren einen Abschnitt BEZEICHNUNG, aber
+platzieren dort anstelle von \(oqName \e\- Beschreibung\(cq. frei
+formatierten Text. Es sollten aber beliebige, dem oben Beschriebenen
+ähnliche Schreibweisen akzeptiert werden.
+.SH "SIEHE AUCH"
+.if  !'po4a'hide' .IR apropos (1),
+.if  !'po4a'hide' .IR man (1),
+.if  !'po4a'hide' .IR whatis (1),
+.if  !'po4a'hide' .IR mandb (8)
+.SH ANMERKUNGEN
+\fBLexgrog\fP versucht, Dateien mit ».so«\-Anfragen auszuwerten, hat aber nur
+dann Aussicht auf Erfolg, wenn die Seiten ordnungsgemäß in einer
+Handbuchseiten\-Hierarchie installiert sind.
+.SH AUTOR
+Der von \fBLexgrog\fP verwendete Code für die Auswertung von Handbuchseiten
+wurde geschrieben von:
+.PP
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.PP
+Colin Watson hat sowohl das aktuelle Befehlszeilen\-Frontend als auch die
+Handbuchseite geschrieben.
+.SH FEHLER
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

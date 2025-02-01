@@ -1,0 +1,52 @@
+.\" Man page for accessdb
+.\"
+.\" Copyright (c) 1998 Fabrizio Polacco <fpolacco@debian.org
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Tue, 24 Feb 1998 18:18:36 +0200
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH ACCESSDB 8 2024-04-05 2.12.1 "Kılavuz sayfası yardımcıları"
+.SH AD
+accessdb \- man\-db veritabanının içeriğini insan tarafından okunabilir bir
+biçimde dök
+.SH ÖZET
+\fB/usr/sbin/accessdb\fP [\|\fB\-d?V\fP\|] [\fI<index\-file>\fP]
+.SH AÇIKLAMA
+\fBaccessdb\fP bir man\-db veritabanında bulunan verileri insan tarafından
+okunabilir bir biçimde çıktılar.  Öntanımlı olarak, verileri
+\fB/var/cache/man/index.<db\-type>,\fP alanlarından dökecektir; burada
+<db\-type>, kullanılan veritabanı kitaplığına bağımlıdır.
+
+accessdb'ye bir argüman vermek bu öntanımlı değerin üzerine yazılacaktır.
+.SH SEÇENEKLER
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Hata ayıklama bilgisini göster.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Bir yardım iletisi göster ve çık.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Kısa kullanım iletisini göster ve çık.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Sürüm bilgisini göster.
+.SH YAZAR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH HATALAR
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

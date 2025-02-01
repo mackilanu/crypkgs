@@ -1,0 +1,181 @@
+'\" t
+.\" Man page for mandb
+.\"
+.\" Copyright (C) 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Tue Apr 26 12:56:44 BST 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANDB 8 2024-04-05 2.12.1 "Hulpprogramma's paginaopmaker"
+.SH NAAM
+mandb \- create or update the manual page index caches
+.SH SAMENVATTING
+\fBmandb\fP [\|\fB\-dqsucpt?V\fP\|] [\|\fB\-C\fP \fIfile\fP\|] [\|\fImanpath\fP\|]
+.br
+\fBmandb\fP [\|\fB\-dqsut\fP\|] [\|\fB\-C\fP \fIfile\fP\|] \fB\-f\fP \fIfilename\fP\ .\|.\|.
+.SH BESCHRIJVING
+\fBmandb\fP is used to initialise or manually update \fBindex\fP database
+caches.  The caches contain information relevant to the current state of the
+manual page system and the information stored within them is used by the
+man\-db utilities to enhance their speed and functionality.
+
+When creating or updating an \fBindex\fP, \fBmandb\fP will warn of bad ROFF .so
+requests, bogus manual page filenames and manual pages from which the
+\fBwhatis\fP cannot be parsed.
+
+Supplying \fBmandb\fP with an optional colon\-delimited path will override the
+internal system manual page hierarchy search path, determined from
+information found within the man\-db configuration file.
+.SH "DATABASE CACHES"
+\fBmandb\fP can be compiled with support for any one of the following
+database types.
+
+.TS
+tab (@);
+l l l.
+Name@Async@Filename
+_
+Berkeley db@Yes@\fIindex.bt\fP
+GNU gdbm@Yes@\fIindex.db\fP
+UNIX ndbm@No@\fIindex.(dir|pag)\fP
+.TE
+
+Those database types that support asynchronous updates provide enhanced
+speed at the cost of possible corruption in the event of unusual
+termination.  In an unusual case where this has occurred, it may be
+necessary to rerun \fBmandb\fP with the \fB\-c\fP option to re\-create the
+databases from scratch.
+.SH OPTIES
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Foutinformatie tonen.
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Produce no warnings.
+.TP 
+.if  !'po4a'hide' .BR \-s ", " \-\-no-straycats
+Do not spend time looking for or adding information to the databases
+regarding stray cats.
+.TP 
+.if  !'po4a'hide' .BR \-p ", " \-\-no-purge
+Do not spend time checking for deleted manual pages and purging them from
+the databases.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-create
+By default, \fBmandb\fP will try to update any previously created databases.
+If a database does not exist, it will create it.  This option forces
+\fBmandb\fP to delete previous databases and re\-create them from scratch, and
+implies \fB\-\-no\-purge.\fP This may be necessary if a database becomes corrupt
+or if a new database storage scheme is introduced in the future.
+.TP 
+.if  !'po4a'hide' .BR \-u ", " \-\-user-db
+Create user databases only, even with write permissions necessary to create
+system databases.
+.TP 
+.if  !'po4a'hide' .BR \-t ", " \-\-test
+Perform correctness checks on manual pages in the hierarchy search path.
+With this option, \fBmandb\fP will not alter existing databases.
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-filename
+Update only the entries for the given filename.  This option is not for
+general use; it is used internally by \fBman\fP when it has been compiled
+with the \fBMAN_DB_UPDATES\fP option and finds that a page is out of date.  It
+implies \fB\-p\fP and disables \fB\-c\fP and \fB\-s\fP.
+.TP 
+\fB\-C\ \fP\fIbestand\fP,\ \fB\-\-config\-file=\fP\fIbestand\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Show the usage message, then exit.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Print a short usage message and exit.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Show the version, then exit.
+.SH STOPSTATUS
+.TP 
+.if  !'po4a'hide' .B 0
+Programma correct uitgevoerd.
+.TP 
+.if  !'po4a'hide' .B 1
+Usage, syntax, or configuration file error.
+.TP 
+.if  !'po4a'hide' .B 2
+Uitvoeringsfout.
+.TP 
+.if  !'po4a'hide' .B 3
+A child process failed.
+.SH DIAGNOSTICS
+The following warning messages can be emitted during database building.
+.TP 
+\fB<filename>: whatis parse for page(sec) failed\fP
+An attempt to extract whatis line(s) from the given <filename>
+failed.  This is usually due to a poorly written manual page, but if many
+such messages are emitted it is likely that the system contains non\-standard
+manual pages which are incompatible with the man\-db whatis parser.  See the
+\fBWHATIS PARSING\fP section in \fBlexgrog\fP(1)  for more information.
+.TP 
+\fB<filename>: is a dangling symlink\fP
+<filename> does not exist but is referenced by a symbolic link.
+Further diagnostics are usually emitted to identify the <filename>
+of the offending link.
+.TP 
+\fB<filename>: bad symlink or ROFF `.so' request\fP
+<filename> is either a symbolic link to, or contains a ROFF include
+request to, a non existent file.
+.TP 
+\fB<filename>: genegeerde onzin bestandsnaam\fP
+ <filename> kan een al dan niet geldige man\-pagina zijn, maar de
+naam is ongeldig.  Dit wordt meestal veroorzaakt door een man\-pagina met een
+uitbreiding van de sectie  <x> die in de man\-paginasectie
+<y> is gestopt.
+.TP 
+\fB<filename_mask>: strijdende extensies\fP
+Het jokerteken <filename_mask> is niet uniek.  Dit wordt meestal
+veroorzaakt door het bestaan van zowel een gecomprimeerde als een
+gedecomprimeerde versie van dezelfde man\-pagina.  Alle behalve de meeste
+recente versie worden genegeerd.
+.SH BESTANDEN
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+man\-db\-configuratiebestand.
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt|db|dir|pag)
+Een algemene \fIindex\fP\-database\-cache, in overeenstemming met FHS.
+.PP
+Oudere locaties van de database\-cache bestaan uit:
+.TP 
+.if  !'po4a'hide' .I /usr/man/index.(bt|db|dir|pag)
+Een traditionele, algemene \fIindex\fP\-database\-cache.
+.TP 
+.if  !'po4a'hide' .I /var/catman/index.(bt|db|dir|pag)
+An alternate or FSSTND compliant global \fIindex\fP database cache.
+.SH "ZIE OOK"
+.if  !'po4a'hide' .BR lexgrog (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR catman (8)
+.PP
+De voormalige sectie \fBWAT IS ONTLEDEN\fP is nu onderdeel van \fBlexgrog\fP(1).
+.SH AUTEUR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BUGS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

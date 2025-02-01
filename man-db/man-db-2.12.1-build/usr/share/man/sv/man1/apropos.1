@@ -1,0 +1,181 @@
+.\" Man page for apropos
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH APROPOS 1 2024-04-05 2.12.1 "Verktyg för sidvisning av manual"
+.SH NAMN
+apropos \- genomsök namn och beskrivningar av manualsidor
+.SH SYNOPSIS
+\fBapropos\fP [\|\fB\-dalv?V\fP\|] [\|\fB\-e\fP\||\|\fB\-w\fP\||\|\fB\-r\fP\|] [\|\fB\-s\fP
+\fIlista\fP\|] [\|\fB\-m\fP \fIsystem\fP\|[\|,.\|.\|.\|]\|] [\|\fB\-M\fP \fIsökväg\fP\|]
+[\|\fB\-L\fP \fIlokal\fP\|] [\|\fB\-C\fP \fIfil\fP\|] \fInyckelord\fP \&.\|.\|.
+.SH BESKRIVNING
+Varje manualsida har en kort beskrivning.  \fBapropos\fP söker genom
+beskrivningarna efter \fInyckelord\fP.
+
+\fInyckelord\fP är vanligtvis ett reguljärt uttryck, som om (\fB\-r\fP) använts,
+eller kan innehålla jokertecken (\fB\-w\fP), eller matcha det exakta nyckelordet
+(\fB\-e\fP).  När dessa flaggor används kan det vara nödvändigt att sätta
+\fInyckelordet\fP inom citationstecken eller införa escape\-tecken (\e) för
+speciella tecken för att förhindra skalet från att tolka dem.
+
+Standardmatchningsreglerna tillåter matchningar att göras mot sidnamn och
+ordgränser i beskrivningen.
+
+Databasen som genomsöks av \fBapropos\fP uppdateras av programmet
+\fBmandb\fP.  Beroende på din installation kan detta köras som ett periodiskt
+cron\-jobb eller måste köras manuellt efter att nya manualsidor har
+installerats.
+.SH FLAGGOR
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Skriver ut felsökningsinformation.
+.TP 
+.if  !'po4a'hide' .BR \-v ", " \-\-verbose
+Skriver ut utförliga varningsmeddelanden.
+.TP 
+.if  !'po4a'hide' .BR \-r ", " \-\-regex
+Tolka varje nyckelord som ett reguljärt uttryck.  Detta är
+standardbeteendet.  Varje nyckelord kommer att oberoende matchas mot
+sidnamnen och beskrivningarna.  Det kan matcha vilken del som helst av
+vilken som.  Matchningen är inte begränsad till ordgränser.
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-wildcard
+Tolka varje nyckelord som ett mönster som innehåller skalliknande
+jokertecken.  Varje nyckelord kommer att oberoende matchas mot sidnamnen och
+beskrivningarna.  Om \fB\-\-exact\fP också används, kommer en matchning bara att
+hittas om ett expanderat nyckelord matchar en hel beskrivning eller helt
+sidnamn.  Annars tillåts nyckelordet också att matcha på ordgränser i
+beskrivningen.
+.TP 
+.if  !'po4a'hide' .BR \-e ", " \-\-exact
+Varje nyckelord kommer att matchas mot sidnamnen och beskrivningarna.
+.TP 
+.if  !'po4a'hide' .BR \-a ", " \-\-and
+Visa bara objekt som matchar alla angivna nyckelord.  Standard är att visa
+objekt som matchar vilket nyckelord som helst.
+.TP 
+.if  !'po4a'hide' .BR \-l ", " \-\-long
+Justera inte utmatningen till terminalbredden.  Normalt kommer utmatningar
+att trunkeras med avseende på terminalbredden för att undvika fula resultat
+från dåligt skrivna \fBNAMN\fP\-avsnitt.
+.TP 
+\fB\-s\fP \fIlista\/\fP, \fB\-\-sections=\fP\fIlista\/\fP, \fB\-\-section=\fP\fIlista\fP
+Genomsök bara de angivna manualavsnitten.  \fIlista\fP är en kolon\- eller
+kommaseparerad lista av sektioner.  Om en post i \fIlista\fP är ett enstaka
+avsnitt, till exempel ”3” så kommer den visade listan över beskrivningar att
+inkludera sidor i avsnitt ”3”, ”3perl”, ”3x”, och så vidare; men om en post
+i \fIlista\fP har en ändelse, till exempel ”3perl”, så kommer listan bara att
+inkludera sidor i den exakta delen av manualavsnittet.
+.TP 
+\fB\-m\fP \fIsystem\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fIsystem\fP\|[\|,.\|.\|.\|]
+Om detta system har tillgång till andra operativsystems beskrivningar av
+manualsidor kan de genomsökas via denna flagga.  För att genomsöka
+beskrivningarna för manualsidorna för NyttOS, använd flaggan \fB\-m\fP
+\fBNyttOS\fP.
+
+Det \fIsystem\fP som anges kan vara en kombination av kommaavgränsade
+operativsystemsnamn.  För att inkludera en genomsökning av det underliggande
+operativsystemets \fBwhatis\fP\-beskrivningar, inkludera systemnamnet \fBman\fP i
+argumentsträngen.  Denna flagga kommer att åsidosätta miljövariabeln
+$\fBSYSTEM\fP.
+.TP 
+\fB\-M\ \fP\fIsökväg\fP,\ \fB\-\-manpath=\fP\fIsökväg\fP
+Ange en alternativ mängd av kolonavgränsade hierarkier av manualsidor att
+genomsöka.  Som standard använder \fBapropos\fP miljövariabeln $\fBMANPATH\fP,
+om den inte är tom eller ej satt, i vilket fall en lämplig manualsökväg
+bestäms baserad på din $\fBPATH\fP\-miljövariabel.  Denna flagga åsidosätter
+innehållet i $\fBMANPATH\fP.
+.TP 
+\fB\-L\ \fP\fIlokal\fP,\ \fB\-\-locale=\fP\fIlokal\fP
+\fBapropos\fP kommer normalt att avgöra din aktuella lokal genom att anrop
+till C\-funktionen \fBsetlocale\fP(3)  som kontrollerar diverse miljövariabler,
+som eventuellt $\fBLC_MESSAGES\fP och $\fBLANG\fP.  För att tillfälligt åsidosätta
+det framtagna värdet, använd denna flagga för att ange en \fIlokal\fP\-sträng
+direkt till \fBapropos\fP.  Notera att det inte får någon effekt förrän
+sökningen efter sidor faktiskt påbörjas.  Utmatning så som hjälpmeddelandet
+kommer alltid att visas enligt den först bestämda lokalen.
+.TP 
+\fB\-C\ \fP\fIfil\fP,\ \fB\-\-config\-file=\fP\fIfil\fP
+Använd denna användarkonfigurationsfil snarare än standard \fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Skriv ut ett hjälpmeddelande och avsluta.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Skriv ut ett kort användningsmeddelande och avsluta.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Visa versionsinformation.
+.SH SLUTSTATUS
+.TP 
+.if  !'po4a'hide' .B 0
+Framgångsrik programexekvering.
+.TP 
+.if  !'po4a'hide' .B 1
+Användnings\-, syntax\- eller konfigurationsfilsfel.
+.TP 
+.if  !'po4a'hide' .B 2
+Funktionsfel.
+.TP 
+.if  !'po4a'hide' .B 16
+Inget hittades som matchade det kriterium som angivits.
+.SH MILJÖ
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+Om $\fBSYSTEM\fP är satt kommer den att ha samma effekt som om den hade angetts
+som argument till flaggan \fB\-m\fP.
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Om $\fBMANPATH\fP är satt kommer dess värde att tolkas som den kolonavgränsade
+sökvägen för hierarkier av manualsidor som ska användas.
+
+Se avsnittet för \fBSÖKVÄG\fP i \fBmanpath\fP(5)  för standardbeteende och
+detaljer om hur denna miljövariabel hanteras.
+.TP 
+.if  !'po4a'hide' .B MANWIDTH
+Om $\fBMANWIDTH\fP är satt kommer dess värde att användas som terminalbredden
+(se flaggan \fB\-\-long\fP).  Om den inte är satt kommer terminalbredden att
+räknas ut från värdet i $\fBCOLUMNS\fP, och \fBioctl\fP(2) om den finns
+tillgänglig, eller falla tillbaka på 80 tecken om allt annat misslyckas.
+.TP 
+.if  !'po4a'hide' .B POSIXLY_CORRECT
+Om $\fBPOSIXLY_CORRECT\fP är satt, även till ett null\-värde, kommer
+standardsökningen för \fBapropos\fP att göras som ett utökat reguljärt
+uttryck (\fB\-r\fP).  Numera är detta standardbeteendet.
+.SH FILER
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/index.(bt\^|\^db\^|\^dir\^|\^pag)
+En traditionell global \fIindex\fP\-databascache.
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt\^|\^db\^|\^dir\^|\^pag)
+En FHS\-kompatibel global \fIindex\fP\-databascache.
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/\|.\|.\|.\|/whatis
+En traditionell \fBwhatis\fP\-textdatabas.
+.SH "SE VIDARE"
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR whatis (1),
+.if  !'po4a'hide' .BR mandb (8)
+.SH UPPHOVSMAN
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH FEL
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

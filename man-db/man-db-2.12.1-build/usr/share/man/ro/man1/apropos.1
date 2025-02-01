@@ -1,0 +1,192 @@
+.\" Man page for apropos
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH APROPOS 1 2024-04-05 2.12.1 "Utilitare ale paginatorului de manual"
+.SH NUME
+apropos \- caută numele și descrierile paginii manualului
+.SH REZUMAT
+\fBapropos\fP [\|\fB\-dalv?V\fP\|] [\|\fB\-e\fP\||\|\fB\-w\fP\||\|\fB\-r\fP\|] [\|\fB\-s\fP
+\fIlistă\fP\|] [\|\fB\-m\fP \fIsistem\fP\|[\|,.\|.\|.\|]\|] [\|\fB\-M\fP \fIruta\fP\|]
+[\|\fB\-L\fP \fIidentificator_localizare\fP\|] [\|\fB\-C\fP \fIfișier\fP\|]
+\fIcuvânt_cheie\fP \&.\|.\|.
+.SH DESCRIERE
+Fiecare pagină de manual are o descriere scurtă disponibilă înăuntrul
+acesteia.  \fBapropos\fP caută descrierile pentru instanțe ale
+\fIcuvânt_cheie\fP.
+
+\fIcuvânt(ul)_cheie\fP este de obicei o expresie regulată, ca și cum ar fi fost
+utilizat (\fB\-r\fP)  , sau poate să conțină metacaractere (\fB\-w\fP), sau să se
+potrivească exact cu cuvântul cheie (\fB\-e\fP).  Utilizând aceste opțiuni,
+poate fi necesar să citați \fIcuvânt(ul)_cheie\fP sau să eludați (\e)
+caracterele speciale, pentru a prevenii interpretarea lor, de către «shell».
+
+Regulile standard de potrivire, permit ca potrivirile să fie făcute cu
+numele paginii și limitele cuvintelor din descriere.
+
+Baza de date căutată de \fBapropos\fP este actualizată de programul
+\fBmandb\fP.  În funcție de instalarea dvs., acesta poate fi executat
+printr\-o lucrare periodică «cron», sau poate fi necesar să fie executat
+manual ,după ce au fost instalate noi pagini de manual.
+.SH OPȚIUNI
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Imprimă informațiile de depanare.
+.TP 
+.if  !'po4a'hide' .BR \-v ", " \-\-verbose
+Imprimă mesaje de avertisment detaliate.
+.TP 
+.if  !'po4a'hide' .BR \-r ", " \-\-regex
+Interpretează fiecare cuvânt cheie ca o expresie regulată.  Acesta este
+comportamentul implicit.  Fiecare cuvânt cheie va fi corelat cu numele
+paginilor și descrierilor în mod independent.  Se poate potrivi cu orice
+parte dintre ele.  Potrivirea nu este limitată la limitele de cuvinte.
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-wildcard
+Interpretează fiecare cuvânt cheie ca un model care conține metacaractere în
+stilul «shell».  Fiecare cuvânt cheie va fi corelat cu numele paginilor și
+descrierilor în mod independent.  Dacă \fB\-\-exact\fP este, de asemenea,
+utilizat, o potrivire va fi găsită doar dacă un cuvânt cheie expandat se
+potrivește cu numele complet al paginii sau cu întreaga descriere.  În caz
+contrar, cuvântul cheie poate să se potrivească și în limitele cuvintelor
+din descriere.
+.TP 
+.if  !'po4a'hide' .BR \-e ", " \-\-exact
+Fiecare cuvânt cheie va fi corelat exact cu numele paginilor și
+descrierilor.
+.TP 
+.if  !'po4a'hide' .BR \-a ", " \-\-and
+Afișează doar elemente care se potrivesc cu cuvintele cheie specificate.  În
+mod implicit, sunt afișate elementele care se potrivesc oricărui cuvânt
+cheie.
+.TP 
+.if  !'po4a'hide' .BR \-l ", " \-\-long
+Nu reduce ieșirea la lățimea terminalului.  În mod normal, ieșirea va fi
+trunchiată la lățimea terminalului pentru a evita rezultate nedorite din
+secțiunile \fBNUME\fP scrise greșit.
+.TP 
+\fB\-s\fP \fIlistă\/\fP, \fB\-\-sections=\fP\fIlistă\/\fP, \fB\-\-section=\fP\fIlistă\fP
+Caută doar secțiunile de manual specificate.  \fIlistă\fP, este o listă de
+secțiuni separate prin două puncte sau virgulă.  Dacă o intrare din \fIlistă\fP
+este o secțiune simplă, de exemplu „3”, atunci lista de descrieri afișată va
+include pagini din secțiunile „3”, „3perl”, „3x”, și așa mai departe; în
+timp ce, dacă o intrare din \fIlistă\fP are o extensie, de exemplu „3perl”,
+atunci lista va include doar paginile din acea parte exactă a secțiunii de
+manual.
+.TP 
+\fB\-m\fP \fIsistem\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fIsistem\fP\|[\|,.\|.\|.\|]
+Dacă acest sistem are acces la descrierile paginilor de manual ale altor
+sisteme de operare, acestea pot fi căutate utilizând această opțiune.
+Pentru a căuta în descrierile paginilor de manual ale «Noului_SO», utilizați
+opțiunea \fB\-m\fP \fB«Nou_SO»\fP.
+
+\fISistemul\fP specificat poate fi o combinație de nume de sisteme de operare
+delimitate de virgule.  Pentru a include o căutare a descrierilor \fBwhatis\fP
+ale sistemului de operare nativ, includeți numele sistemului \fBman\fP în șirul
+de argumente.  Această opțiune va suprascrie variabila de mediu $\fBSYSTEM\fP.
+.TP 
+\fB\-M\ \fP\fIruta\fP,\ \fB\-\-manpath=\fP\fIruta\fP
+Specificați un set alternativ de ierarhii de pagini de manual, delimitate de
+două puncte, pentru căutare.  În mod implicit, \fBapropos\fP utilizează
+variabila de mediu $\fBMANPATH\fP, cu excepția cazului în care aceasta este
+goală sau nestabilită, caz în care va determina o rută adecvată către
+paginile de manual, pe baza variabilei de mediu $\fBPATH\fP.  Această opțiune
+suprascrie conținutul lui $\fBMANPATH\fP.
+.TP 
+\fB\-L\ \fP\fIidentificator_localizare\fP,\ \fB\-\-locale=\fP\fIidentificator_localizare\fP
+\fBapropos\fP va determina în mod normal localizarea curentă printr\-un apel
+la funcția C \fBsetlocale\fP(3)  care interoghează diverse variabile de mediu,
+inclusiv $\fBLC_MESSAGES\fP și $\fBLANG\fP.  Pentru a suprascrie temporar valoarea
+determinată, utilizați această opțiune pentru a furniza un șir
+\fIidentificator_localizare\fP direct către \fBapropos\fP. Rețineți că aceasta
+nu va avea efect până când căutarea paginilor nu începe efectiv.  Ieșirea
+precum mesajul de ajutor va fi întotdeauna afișată în localizarea
+determinată inițial.
+.TP 
+\fB\-C\ \fP\fIfișier\fP,\ \fB\-\-config\-file=\fP\fIfișier\fP
+Utilizează acest fișier de configurare al utilizatorului, mai degrabă decât
+cel implicit din \fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Imprimă un mesaj de ajutor și iese.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Imprimă un mesaj scurt de utilizare și iese.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Afișează informații despre versiune.
+.SH "STARE DE IEȘIRE"
+.TP 
+.if  !'po4a'hide' .B 0
+Executarea programului s\-a încheiat fără erori.
+.TP 
+.if  !'po4a'hide' .B 1
+Eroare de utilizare, de sintaxă sau de fișier de configurare.
+.TP 
+.if  !'po4a'hide' .B 2
+Eroare operațională.
+.TP 
+.if  !'po4a'hide' .B 16
+Nu s\-a găsit nimic care să se potrivească cu criteriile specificate.
+.SH MEDIU
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+Dacă $\fBSYSTEM\fP este stabilit, acesta va avea același efect ca și cum ar fi
+fost specificat ca argument la opțiunea \fB\-m\fP.
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Dacă $\fBMANPATH\fP este stabilită, valoarea acesteia va fi interpretată ca
+fiind ruta de căutare a ierarhiei paginilor de manual delimitată prin două
+puncte care trebuie utilizată.
+
+Consultați secțiunea \fBRUTA DE CĂUTARE\fP din \fBmanpath\fP(5) pentru
+comportamentul implicit și detalii despre modul în care este gestionată
+această variabilă de mediu.
+.TP 
+.if  !'po4a'hide' .B MANWIDTH
+Dacă $\fBMANWIDTH\fP este stabilită, valoarea acesteia este utilizată ca
+lățimea terminalului (consultați opțiunea \fB\-\-long\fP).  Dacă nu este
+stabilită, lățimea terminalului va fi calculată utilizând valoarea de
+$\fBCOLUMNS\fP, și \fBioctl\fP(2)  dacă este disponibilă, sau se revine la 80 de
+caractere dacă orice altceva eșuează.
+.TP 
+.if  !'po4a'hide' .B POSIXLY_CORRECT
+Dacă $\fBPOSIXLY_CORRECT\fP este stabilită, chiar la o valoare null, căutarea
+implicită  \fBapropos\fP va fi ca o expresie regulată extinsă (\fB\-r\fP).  În
+prezent, acesta este oricum comportamentul implicit.
+.SH FIȘIERE
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/index.(bt\^|\^db\^|\^dir\^|\^pag)
+Memorie tampon a bazei de date \fIindex\fP globală tradițională.
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt\^|\^db\^|\^dir\^|\^pag)
+Memorie tampon a bazei de date \fIindex\fP globală conform cu FHS.
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/\|.\|.\|.\|/whatis
+O bază de date text \fBwhatis\fP tradițională.
+.SH "CONSULTAȚI ȘI"
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR whatis (1),
+.if  !'po4a'hide' .BR mandb (8)
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH DEFECȚIUNI
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

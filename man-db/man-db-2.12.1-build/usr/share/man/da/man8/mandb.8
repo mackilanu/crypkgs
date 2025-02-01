@@ -1,0 +1,181 @@
+'\" t
+.\" Man page for mandb
+.\"
+.\" Copyright (C) 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Tue Apr 26 12:56:44 BST 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANDB 8 2024-04-05 2.12.1 "Værktøjer til manualsider"
+.SH NAVN
+mandb \- opret eller opdater manualsidernes indeksmellemlagre
+.SH SYNOPSIS
+\fBmandb\fP [\|\fB\-dqsucpt?V\fP\|] [\|\fB\-C\fP \fIfil\fP\|] [\|\fImanualsti\fP\|]
+.br
+\fBmandb\fP [\|\fB\-dqsut\fP\|] [\|\fB\-C\fP \fIfil\fP\|] \fB\-f\fP \fIfilnavn\fP\ .\|.\|.
+.SH BESKRIVELSE
+\fBmandb\fP is used to initialise or manually update \fBindex\fP database
+caches.  The caches contain information relevant to the current state of the
+manual page system and the information stored within them is used by the
+man\-db utilities to enhance their speed and functionality.
+
+When creating or updating an \fBindex\fP, \fBmandb\fP will warn of bad ROFF .so
+requests, bogus manual page filenames and manual pages from which the
+\fBwhatis\fP cannot be parsed.
+
+Supplying \fBmandb\fP with an optional colon\-delimited path will override the
+internal system manual page hierarchy search path, determined from
+information found within the man\-db configuration file.
+.SH DATABASE\-MELLEMLAGRE
+\fBmandb\fP kan kompileres med understøttelse for enhver af de følgende
+databasetyper.
+
+.TS
+tab (@);
+l l l.
+Navn@Asynk.@Filnavn
+_
+Berkeley db@Ja@\fIindex.bt\fP
+GNU gdbm@Ja@\fIindex.db\fP
+UNIX ndbm@Nej@\fIindex.(dir|pag)\fP
+.TE
+
+De databasetyper som understøtter asynkrone opdateringer tilbyder forbedret
+hastighed på bekostning af muligheden for korruption i tilfælde af
+usædvanlig afslutning. I et usædvanligt tilfælde, hvor dette er opstået, kan
+det være nødvendigt at genkøre \fBmandb\fP med tilvalget \fB\-c\fP for at
+genskabe databaserne fra bunden af.
+.SH TILVALG
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Vis fejlsøgningsinformation.
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Lav ingen advarsler.
+.TP 
+.if  !'po4a'hide' .BR \-s ", " \-\-no-straycats
+Brug ikke tid på at kigge efter eller tilføje information til databaserne
+angående vildfarne katalogsider.
+.TP 
+.if  !'po4a'hide' .BR \-p ", " \-\-no-purge
+Brug ikke tid på at kontrollere for slettede manualsider og fjerne dem fra
+databaserne.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-create
+By default, \fBmandb\fP will try to update any previously created databases.
+If a database does not exist, it will create it.  This option forces
+\fBmandb\fP to delete previous databases and re\-create them from scratch, and
+implies \fB\-\-no\-purge.\fP This may be necessary if a database becomes corrupt
+or if a new database storage scheme is introduced in the future.
+.TP 
+.if  !'po4a'hide' .BR \-u ", " \-\-user-db
+Opret kun brugerdatabaser, selv med skriverettigheder nødvendige for at
+oprette systemdatabaser.
+.TP 
+.if  !'po4a'hide' .BR \-t ", " \-\-test
+Udfør kontrol af korrekthed på manualsider i søgestien for hierarkiet. Med
+dette tilvalg vil \fBmandb\fP ikke ændre eksisterende databaser.
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-filename
+Update only the entries for the given filename.  This option is not for
+general use; it is used internally by \fBman\fP when it has been compiled
+with the \fBMAN_DB_UPDATES\fP option and finds that a page is out of date.  It
+implies \fB\-p\fP and disables \fB\-c\fP and \fB\-s\fP.
+.TP 
+\fB\-C\ \fP\fIfil\fP,\ \fB\-\-config\-file=\fP\fIfil\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Vis brugsbeskeden, afslut så.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Vis en kort hjælpebesked og afslut.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Vis versionen og afslut.
+.SH AFSLUT\-STATUS
+.TP 
+.if  !'po4a'hide' .B 0
+Programkørsel endt uden fejl.
+.TP 
+.if  !'po4a'hide' .B 1
+Brugs\- syntaks\- eller konfigurationsfilfejl.
+.TP 
+.if  !'po4a'hide' .B 2
+Operationel fejl.
+.TP 
+.if  !'po4a'hide' .B 3
+En underproces mislykkedes.
+.SH DIAGNOSTICS
+De følgende advarselsbeskeder kan udelades under opbygning af database.
+.TP 
+\fB<filename>: whatis\-fortolkning for page(sec) mislykkedes\fP
+An attempt to extract whatis line(s) from the given <filename>
+failed.  This is usually due to a poorly written manual page, but if many
+such messages are emitted it is likely that the system contains non\-standard
+manual pages which are incompatible with the man\-db whatis parser.  See the
+\fBWHATIS PARSING\fP section in \fBlexgrog\fP(1)  for more information.
+.TP 
+\fB<filename>: is a dangling symlink\fP
+<filename> does not exist but is referenced by a symbolic link.
+Further diagnostics are usually emitted to identify the <filename>
+of the offending link.
+.TP 
+\fB<filename>: ugyldig symbolsk henvisning eller ROFF ».so«\-forespørgsel\fP
+<filename> er enten en symbolsk henvisning til, eller indeholder en
+ROFF include\-forespørgsel til, en ikkeeksisterende fil.
+.TP 
+\fB<filnavn>: ignorerer falske filnavne\fP
+The <filename> may or may not be a valid manual page but its name is
+invalid.  This is usually due to a manual page with sectional extension
+<x> being put in manual page section <y>.
+.TP 
+\fB<filename_mask>: konkurrerende udvidelser\fP
+Jokertegnet <filename_mask> er ikke unik. Dette skyldes normalt
+eksistensen af både en pakket og udpakket version af den samme
+manualside. Alle undtagen de seneste ignoreres
+.SH FILER
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+konfigurationsfil for man\-db.
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt|db|dir|pag)
+Et FHS\-overholdende globalt \fIindex\fP\-databasemellemlager.
+.PP
+Tidligere placeringer for databasens mellemlager inkluderede:
+.TP 
+.if  !'po4a'hide' .I /usr/man/index.(bt|db|dir|pag)
+Et traditionelt globalt \fIindex\fP\-databasemellemlager.
+.TP 
+.if  !'po4a'hide' .I /var/catman/index.(bt|db|dir|pag)
+Et alternativt eller FSSTND\-overholdende globalt
+\fIindex\fP\-databasemellemlager.
+.SH "SE OGSÅ"
+.if  !'po4a'hide' .BR lexgrog (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR catman (8)
+.PP
+\fBWHATIS PARSING\fP\-afsnittet tidligere på denne manualside er nu en del af
+\fBlexgrog\fP(1).
+.SH FORFATTER
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH FEJL
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

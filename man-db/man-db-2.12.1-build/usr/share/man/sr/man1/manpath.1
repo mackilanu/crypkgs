@@ -1,0 +1,100 @@
+.\" Man page for manpath
+.\"
+.\" Copyright (C) 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the docs/COPYING.GPLv2 file that comes with the
+.\" man-db distribution.
+.\"
+.\" Sun Jan 22 22:15:17 GMT 1995 Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANPATH 1 2024-04-05 2.12.1 "Помагало страничара упутства"
+.SH НАЗИВ
+manpath \- одређује путању претраге за странице упутства
+.SH УВОД
+\fBmanpath\fP [\|\fB\-qgdc?V\fP\|] [\|\fB\-m\fP \fIсистем\fP\|[\|,.\|.\|.\|]\|] [\|\fB\-C\fP
+\fIдатотека\fP\|]
+.SH ОПИС
+Ако је постављено $\fBMANPATH\fP, \fBmanpath\fP ће једноставно приказати њене
+садржаје и дати упозорење.  Ако није, \fBmanpath\fP ће одредити пригодну
+путању претраге хијерархије странице упутства и приказати резултате.
+
+Путања ограничена двотачком је одређена коришћењем података добијених у
+датотеци подешавања ман\-дб\-а \(en (\fI/etc/man_db.conf\fP) и корисничког
+окружења.
+.SH ОПЦИЈЕ
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Не користи упозорења.
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Исписује податке прочишћавања.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-catpath
+Ствара кат\-путању као наспрамну ман\-путањи.  Када се одреди ман\-путања,
+сваки састојак путање се претвара у одговарајућу кат\-путању.
+.TP 
+.if  !'po4a'hide' .BR \-g ", " \-\-global
+Ствара ман\-путању која се састоји од свих путања именованих као „опште“
+унутар датотеке подешавања ман\-дб\-а.
+.TP 
+\fB\-m\fP \fIсистем\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fIсистем\fP\|[\|,.\|.\|.\|]
+Ако овај систем има приступ до хијерархија упутства других оперативних
+система, ова опција може бити коришћена за њихово укључивање у излаз
+\fBmanpath\fPа.  Да укључите хијерархије странице упутства НовихОС\-ова
+користите опцију \fB\-m\fP \fBNewOS\fP.
+
+Наведени \fIсистем\fP може бити комбинација назива оператвиних система
+раздвојених зарезом.  Да укључите хијерархије страница упутства изворног
+оперативног система, мора бити укључен \fBман\fP назив система у ниску
+аргумента.  Ова опција ће преписати променљиву система $\fBSYSTEM\fP.
+.TP 
+\fB\-C\ \fP\fIдатотека\fP,\ \fB\-\-config\-file=\fP\fIдатотека\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Исписује поруку помоћи и излази.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Исписује кратку поруку о коришћењу и излази.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Исписује податке о издању.
+.SH ОКРУЖЕЊЕ
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Ако је $\fBMANPATH\fP остављено, \fBmanpath\fP приказује њену вредност уместо да
+је одређује у лету.
+
+Видите одељак \fBSEARCH PATH\fP \fBmanpath\fP\-а(5) за основно понашање и
+појединости о томе како се ради са овом променљивом окружења.
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+Ако је подешено $\fBSYSTEM\fP, имаће исто дејство као да је наведено као
+аргумент опције „\fB\-m\fP“.
+.SH ДАТОТЕКЕ
+.TP  \w'/etc/man_db.conf'u+2n
+.if  !'po4a'hide' .I /etc/man_db.conf
+Датотека подешавања ман\-дб\-а.
+.SH "ВИДЕТИ ТАКОЂЕ"
+.if  !'po4a'hide' .BR apropos (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR whatis (1)
+.SH АУТОР
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH ГРЕШКЕ
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

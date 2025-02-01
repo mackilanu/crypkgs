@@ -1,0 +1,812 @@
+'\" t
+.\" ** The above line should force tbl to be a preprocessor **
+.\" Man page for man
+.\"
+.\" Copyright (C) 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MAN 1 2024-04-05 2.12.1 "Kılavuz sayfası yardımcıları"
+.SH AD
+man \- sistem başvuru kılavuzları için bir arayüz
+.SH ÖZET
+.\" The general command line
+.\" The apropos command line
+\fBman\fP [\|\fIman seçenekleri\fP\|] [\|[\|\fIbölüm\fP\|] \fIsayfa\fP\ \|.\|.\|.\|]\ \&.\|.\|.\&
+.br
+.\" The --global-apropos command line
+\fBman\fP \fB\-k\fP [\|\fIapropos seçenekleri\fP\|] \fIdüzenliifade\fP \&.\|.\|.\&
+.br
+.\" The whatis command line
+\fBman\fP \fB\-K\fP [\|\fIman seçenekleri\fP\|] [\|\fIbölüm\fP\|] \fIuçbirim\fP\ .\|.\|.\&
+.br
+.\" The --local command line
+\fBman\fP \fB\-f\fP [\|\fIwhatis\fP \fIseçenekler\fP\|] \fIsayfa\fP \&.\|.\|.\&
+.br
+.\" The --where/--where-cat command line
+\fBman\fP \fB\-l\fP [\|\fIman seçenekleri\fP\|] \fIdosya\fP \&.\|.\|.\&
+.br
+\fBman\fP \fB\-w\fP\||\|\fB\-W\fP [\|\fIman seçenekleri\fP\|] \fIsayfa\fP \&.\|.\|.\&
+.SH AÇIKLAMA
+\fBman\fP, sistemin kılavuz sayfalayıcısıdır.  \fBman\fP komutuna verilen her
+\fIsayfa\fP argümanı genellikle programın, yardımcının veya bir işlevin
+adıdır.  Bir \fIbölüm\fP'ü, sağlanmışsa \fBman\fP uygulamasının kılavuz içinde
+yalnızca ilgili \fIbölüm\fP'de aramasını sağlar.  Öntanımlı eylem önceden
+tanımlanmış sıralamayı takip ederek (\fI/etc/man_db.conf\fP içindeki
+\fBSECTION\fP yönergesi ile üzerine yazılmadığı takdirde, öntanımlı olarak
+"1 n l 8 3 0 2 3type 5 4 9 6 7") tüm kullanılabilir \fIbölümler\fP içinde aramak ve birden fazla
+\fIsayfa\fP bulunsa bile bulunan ilk \fIsayfa\fP'yı göstermektir.
+
+Aşağıdaki tablo içerdikleri sayfa türleri ile birlikte \fIbölüm\fP numaralarını
+göstermektedir.
+
+.TS
+tab (@);
+l lx.
+1@T{
+Çalıştırılabilir programlar veya kabuk komutları
+T}
+2@T{
+Sistem çağrıları (çekirdek tarafından sağlanmış işlevler)
+T}
+3@T{
+Kitaplık çağrıları (program kitaplıkları içindeki işlevler)
+T}
+4@T{
+Özel dosyalar (genellikle \fI/dev\/\fP içinde bulunur)
+T}
+5@T{
+Dosya biçimi ve düzenler; örn.\& \fI/etc/passwd\fP
+T}
+6@T{
+Oyunlar
+T}
+7@T{
+Çeşitli (makro paketleri ve düzenler dahil olmak üzere),
+örn.\& \fBman\fP(7), \fBgroff\fP(7), \fBman\-pages\fP(7)
+T}
+8@T{
+Sistem yönetim komutları (genellikle yalnızca kök kullanıcı için)
+T}
+9@T{
+Çekirdek yordamları [\ Standart olmayan\|]
+T}
+.TE
+
+Bir kılavuz \fIsayfa\fP'sı birkaç bölüm içerir.
+
+Conventional section names include \fBNAME\fP, \fBSYNOPSIS\fP, \fBCONFIGURATION\fP,
+\fBDESCRIPTION\fP, \fBOPTIONS\fP, \fBEXIT\ STATUS\fP, \fBRETURN\ VALUE\fP, \fBERRORS\fP,
+\fBENVIRONMENT\fP, \fBFILES\fP, \fBVERSIONS\fP, \fBSTANDARDS\fP, \fBNOTES\fP, \fBBUGS\fP,
+\fBEXAMPLE\fP, \fBAUTHORS\fP, and \fBSEE\ ALSO\fP.
+
+Aşağıdaki düzenler \fBÖZET\fP bölümüne uygulanır ve diğer bölümlerde rehber
+olarak kullanılabilir.
+
+.TS
+tab (@);
+l lx.
+\fBkalın metin\fP@T{
+gösterildiği gibi yazın.
+T}
+\fIeğik yazı\fP@T{
+ilgili argüman ile yer değiştirin.
+T}
+[\|\fB\-abc\fP\|]@T{
+[ ] arasındaki herhangi veya tüm argümanlar isteğe bağlı.
+T}
+\fB\-a\|\fP|\|\fB\-b\fP@T{
+| ile ayrılmış seçenekler birlikte kullanılamaz.
+T}
+\fIargüman\fP .\|.\|.@T{
+\fIargüman\fP tekrar edilebilir.
+T}
+[\|\fIifade\fP\|] .\|.\|.@T{
+[ ] içindeki tüm \fIifade\fP\ tekrarlanabilir.
+T}
+.TE
+
+Asıl derleme çıktı aygıtına göre değişebilir.  Örneğin, man genellikle bir
+uçbirim içinde eğik metinleri gösteremez ve bunun yerine altı çizili ya da
+renkli metin gösterir.
+
+Komut veya işlev gösterimi tüm olası çağrımlar ile eşleşmesi gereken bir
+şablondur. Bazı durumlarda, bu kılavuz sayfasının \fBÖZET\fP kısmında
+gösterilen çeşitli özel çağrımları göstermek önerilir.
+.SH ÖRNEKLER
+.TP  \w'man\ 'u
+\fBman\fP\fI\ ls\fP
+\fIöge\fP (program) \fIls\fP için kılavuz sayfasını göster.
+.TP 
+\fBman\fP \fIman\fP.\fI7\fP
+Bölüm \fI7\fP'den makro paketi \fIman\fP için kılavuz sayfasını göster.  (Bu,
+"\fBman\fP \fI7 man\fP"ın değişik başka bir yazımıdır.)
+.TP 
+\fBman '\fP\fIman\fP(\fI7\fP)'
+\fIman\fP makro paketi için \fI7\fP bölümünden kılavuz sayfasını görüntüle.  (Bu,
+"\fBman\fP \fI7 man\fP"in alternatif bir yazımıdır.  Kılavuz sayfalarına çapraz
+başvuruları kopyalama ve yapıştırmadan daha kolay olabilir.  Parantezlerin,
+onları kabuktan korumak için tırnak içine alınması gerektiğine dikkat edin.)
+.TP 
+\fBman\ \-a\fP\fI\ giriş\fP
+Kılavuzda yer alan mevcut tüm \fIintro\fP kılavuz sayfalarını arka arkaya
+görüntüle.  Ardışık görüntüler arasında çıkmak veya herhangi birini atlamak
+olanaklıdır.
+.TP 
+\fBman \-t \fP\fIbash \fP|\fI lpr \-Pps\fP
+\fIbash\fP'ın kılavuz sayfasını öntanımlı \fBtroff\fP veya \fBgroff\fP biçiminde yap
+ve \fIps\fP adlı yazıcıya veriyolu ile gönder.  \fBgroff\fP'un öntanımlı çıktısı
+genelde PostScript'tir.  \fBman \-\-help\fP, hangi işlemcinin \fB\-t\fP seçeneğine
+bağımlı olduğunu genelde anlatır.
+.TP 
+\fBman \-l \-T\fP\fIdvi ./foo.1x.gz\fP\fB > \fP\fI./foo.1x.dvi\fP
+Bu komut, nroff \fI./foo.1x.gz\fP kaynak kılavuz sayfası sıkıştırmasını açacak
+ve bir \fBaygıttan bağımsız (dvi)\fP dosyasına biçimlendirecektir.  Yeniden
+yönlendirme, \fB\-T\fP bayrağı çıktının bir sayfalayıcı olmadan \fBstdout\fP'a
+yönlendirilmesine neden olduğundan gereklidir.  Çıktı, \fBxdvi\fP gibi bir
+programla görüntülenebilir veya \fBdvips\fP gibi bir programla PostScript
+olarak işlenebilir.
+.TP 
+\fBman\ \-k\fP\fI\ printf\fP
+\fIprintf\fP anahtar sözcüğünün kısa açıklamalarını ve kılavuz sayfa adlarını
+normal ifade olarak arayın. Herhangi bir eşleşme olduğunda çıktı
+verir. \fBapropos\fP\fI\ printf\fP\fB.\fP ile eşdeğerdir
+.TP 
+\fBman\ \-f\fP\fI\ smail\fP
+\fIsmail\fP tarafından atıf yapılan kılavuz sayfalarını ara ve bulunan herhangi
+bir ögenin kısa açıklamalarını yazdır. \fBwhatis\fP\fI\ smail\fP\fB.\fP ile
+eşdeğerdir.
+.SH ÖZET
+Kullanıcıya mümkün olduğunca fazla esneklik kazandırması için \fBman\fP
+içinde birçok seçenek mevcuttur. Arama yolu, bölüm sırası, çıktı işlemcisi
+ve aşağıda ayrıntılı olarak açıklanan diğer davranışlar ve işlemler üzerinde
+değişiklikler yapılabilir.
+
+Ayarlanmışsa \fBman\fP işlemini belirlemek için çeşitli çevre değişkenleri
+sorgulanır.  "catch\-all" değişkeni $\fBMANOPT\fP'un komut satırı biçiminde
+herhangi bir diziye ayarlamak olanaklıdır; ancak seçeneğin argümanındaki her
+bir kullanılan boşluğun kaçırılması gerekmektedir (öncesinde ters eğik çizgi
+getirerek).  \fBman\fP, $\fBMANOPT\fP'u kendi komut satırını ayrıştırmadan önce
+ayrıştıracaktır.  Bir argüman gerektiren seçenekler, komut satırında bulunan
+aynı argümanlar tarafından geçersiz kılınacaktır. $\fBMANOPT\fP içinde ayarlı
+tüm seçenekleri sıfırlamak için, ilk komut satırı seçeneği olarak
+belirtilebilir.  Bu, man'ın $\fBMANOPT\fP içinde tanımlı seçenekleri
+"unutmasına" izin verir; ancak yine de geçerli olmalıdırlar.
+
+Kılavuz sayfaları normalde \fBnroff\fP(1) biçiminde \fI/usr/share/man\fP gibi bir
+dizin içinde depolanırlar.  Bazı kurulumlarda başarımı artırmak için
+önbiçimlendirilmiş \fIcat sayfaları\fP olabilir.  Bu dosyaların nerede
+depolandığı hakkında ayrıntılar için bkz. \fBmanpath\fP(5).
+
+Bu paket, \fIlocale\fP tarafından denetlenen bir biçimde birden çok dilde
+kılavuz sayfalarını destekler.  Eğer sisteminiz bunu kendiliğinden
+ayarlamamışsa $\fBLC_MESSAGES\fP, $\fBLANG\fP veya başka sisteme bağımlı çevre
+değişkenini \fBPOSIX\fP biçiminde belirtildiği üzere yeğlediğiniz yerel ayara
+değiştirmeniz gerekebilir:
+
+<\fIdil\fP>[\|\fB_\fP<\fIbölge\fP>\|[\|\fB.\fP<\fIkarakter\-kümesi\fP>\|[\|\fB,\fP<\fIsürüm\fP>\|]\|]\|]
+
+İstediğiniz sayfa kendi \fIdil\fP sayfanızda bulunuyorsa standart (genellikle
+Amerikan İngilizcesi) sayfasının yerine görüntülenir.
+
+Bu paketle birlikte sağlanan çeviriler ana dilinizde yoksa ve onları
+çevirmek isterseniz lütfen bu etkinlikleri koordine eden proje sorumlusu ile
+iletişime geçin.
+
+Bireysel kılavuz sayfaları genelde programın, işlevin veya diğer konunun
+bakımcıları tarafından yazılır ve güncellenir.  Eğer bir kılavuz sayfasının
+eksik veya yetersiz olduğunu düşünüyorsanız o paketin
+geliştiricilerine/bakımcılarına rapor edin.
+
+Bu kılavuz sayfalayıcısında bulunan diğer özellikler ve uzantılar ile ilgili
+bilgi için, lütfen paketle birlikte verilen belgeleri okuyun.
+.SH ÖNTANIMLILAR
+Aranacak bölümlerin sırası $\fBMANSECT\fP çevre değişkeni tarafından veya
+\fI/etc/man_db.conf\fP içindeki \fBSECTION\fP direktifi tarafından geçersiz
+kılınabilir.  Öntanımlı olarak şöyledir:
+
+.RS
+.if  !'po4a'hide' 1 n l 8 3 0 2 3type 5 4 9 6 7
+.RE
+
+Biçimlendirilen kılavuz sayfaları bir \fIsayfalayıcı\fP kullanarak
+görüntülenir.  Bu, birkaç biçimde belirtilebilir veya bir öntanımlıya geri
+dönecektir (Ayrıntılar için \fB\-P\fP seçeneğine bakın).
+
+Süzgeçler çeşitli yöntemlerle deşifre edilir.  Öncelikle, komut satırı
+seçeneği \fB\-p\fP veya çevre değişkeni $\fBMANROFFSEQ\fP sorgulanır.  \fB\-p\fP
+kullanılmıyor ve çevre değişkeni ayarlanmamışsa bir önişlemci karakter
+dizisi için nroff dosyasının ilk satırı ayrıştırılır.  Geçerli bir önişlemci
+karakter dizisi içermek için, ilk satır benzemek zorundadır
+
+\&\fB'\e"\fP <\fBstring\fP>
+
+burada \fBdizi\fP aşağıdaki \fB\-\-p\fP seçeneği tarafından tanımlanan herhangi bir
+harf kombinasyonu olabilir.
+
+Yukarıdaki yöntemlerden hiçbiri süzgeç bilgisi sağlamıyorsa öntanımlı bir
+küme kullanılır.
+
+.\" ********************************************************************
+Süzgeçlerden ve birincil biçimlendiriciden (\fBnroff\fP veya [\fBtg\fP]\fBroff\fP,
+\fB\-t\fP ile) bir biçimlendirme hattı oluşturuldu ve çalıştırıldı.  Alternatif
+olarak, çalıştırılabilir bir program \fImandb_nfmt\fP (veya \fB\-t\fP içeren
+\fImandb_tfmt\fP) kılavuz ağacı kökünde varsa bunun yerine çalıştırılır.
+Kılavuz kaynak dosyası, önişlemci dizesi ve isteğe bağlı olarak \fB\-T\fP veya
+\fB\-E\fP ile argüman olarak belirtilen aygıttan geçilir.
+.SH SEÇENEKLER
+Komut satırında veya $\fBMANOPT\fP içinde yinelenen argüman olmayan seçenekleri
+zararlı değildir.  Bir argüman gerektiren seçenekler için, her bir yineleme
+bir önceki argüman değerini geçersiz kılacaktır.
+.SS "Genel seçenekler"
+.TP 
+\fB\-C\ \fP\fIdosya\fP,\ \fB\-\-config\-file=\fP\fIdosya\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Hata ayıklama bilgisini göster.
+.TP 
+.if  !'po4a'hide' .BR \-D ", " \-\-default
+Bu seçenek normalde ilk seçenek olarak verilir ve \fBman's\fP davranışını
+öntanımlı değerine sıfırlar.  Kullanımı, $\fBMANOPT\fP'da ayarlanmış olabilecek
+seçenekleri sıfırlamaktır.  \fB\-D\fP'yi takip eden tüm seçenekler normal etkiye
+sahiptir.
+.TP 
+\fB\-\-warnings\fP[=\fIuyarılar\/\fP]
+Enable warnings from \fIgroff\fP.  This may be used to perform sanity checks on
+the source text of manual pages.  \fIwarnings\fP is a comma\-separated list of
+warning names; if it is not supplied, the default is "mac".  To disable a
+\fIgroff\fP warning, prefix it with "!": for example, \fB\-\-warnings=mac,!break\fP
+enables warnings in the "mac" category and disables warnings in the "break"
+category.  See the \(lqWarnings\(rq node in \fBinfo groff\fP for a list of
+available warning names.
+.SS "Ana işlem kipleri"
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-whatis
+Approximately equivalent to \fBwhatis\fP.  Display a short description from
+the manual page, if available.  See \fBwhatis\fP(1)  for details.
+.TP 
+.if  !'po4a'hide' .BR \-k ", " \-\-apropos
+Approximately equivalent to \fBapropos\fP.  Search the short manual page
+descriptions for keywords and display any matches.  See \fBapropos\fP(1)  for
+details.
+.TP 
+.if  !'po4a'hide' .BR \-K ", " \-\-global\-apropos
+Tüm kılavuz sayfalarında metin arayın.  Bu kaba kuvvet araması ve muhtemelen
+biraz zaman alır; yapabiliyorsanız aranması gereken sayfa sayısını azaltmak
+için bir bölüm belirtmelisiniz.  Arama terimleri basit karakter dizileri
+(öntanımlı) veya \fB\-\-regex\fP seçeneği kullanılıyorsa düzenli ifadeler
+olabilir.
+.IP
+Note that this searches the \fIsources\fP of the manual pages, not the rendered
+text, and so may include false positives due to things like comments in
+source files, or false negatives due to things like hyphens being written as
+"\e\-" in source files.  Searching the rendered text would be much slower.
+.TP 
+.if  !'po4a'hide' .BR \-l ", " \-\-local\-file
+.\" Compressed nroff source files with a supported compression
+.\" extension will be decompressed by man prior to being displaying via the
+.\" usual filters.
+Activate "local" mode.  Format and display local manual files instead of
+searching through the system's manual collection.  Each manual page argument
+will be interpreted as an nroff source file in the correct format.  No cat
+file is produced.  If '\-' is listed as one of the arguments, input will be
+taken from stdin.
+.IP
+If this option is not used, then \fBman\fP will also fall back to
+interpreting manual page arguments as local file names if the argument
+contains a "/" character, since that is a good indication that the argument
+refers to a path on the file system.
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-where ", " \-\-path ", " \-\-location
+Kılavuz sayfasını özünde görüntüleme; ancak biçimlendirilecek nroff
+dosyasının konumunu yazdır.  Eğer \fB\-a\fP seçeneği de kullanılmışsa o zaman
+arama kriteri ile eşleşen tüm kaynak dosyaların konumlarını yazdır.
+.TP 
+.if  !'po4a'hide' .BR \-W ", " \-\-where\-cat ", " \-\-location\-cat
+Kılavuz sayfasını özünde görüntüleme; ancak görüntülenecek
+önbiçimlendirilmiş cat dosyasının konumunu yazdır.  Eğer \fB\-a\fP seçeneği de
+kullanılmışsa o zaman arama kriteri ile eşleşen tüm önbiçimlendirilmiş cat
+dosyalarının konumunu yazdır.
+.IP
+Hem \fB\-w\fP ve hem \fB\-W\fP kullanılıyorsa o zaman kaynak dosyası ve cat
+dosyasını bir boşlukla ayırarak yazdır.  Eğer \fB\-w\fP, \fB\-W\fP ve \fB\-a\fP'nın
+hepsi kullanılıyorsa bunu her olası eşleşme için yap.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-catman
+Bu seçenek genel kullanım amaçlı değildir ve yalnızca \fBcatman\fP programı
+tarafından kullanılmalıdır.
+.TP 
+\fB\-R\ \fP\fIencoding\fP,\ \fB\-\-recode\fP=\fIencoding\fP
+Elle sayfayı her zamanki gibi biçimlendirmek yerine, kaynaklarını belirtilen
+\fIencoding\fP'ya dönüştürülmüş olarak çıktıla.  Kaynak dosyanın kodlamasını
+zaten biliyorsanız  doğrudan \fBmanconv\fP(1) değerini kullanabilirsiniz.
+Bununla birlikte, bu seçenek, el ile bir sayfa hiyerarşisine benzer bir
+yapıya zaten kurulmuş olmaları koşuluyla, birkaç kılavuz sayfasını tek bir
+kodlamaya dönüştürmenizi sağlar; bu kodlamaların her ikisini de açıkça
+belirtmek zorunda kalmazsınız.
+.IP
+Birden çok kılavuz sayfasını dönüştürmek yerine \fBman-recode\fP kullanın;
+çünkü toplu dönüştürme için bir arayüzü vardır ve çok daha hızlı olabilir.
+.SS "Kılavuz sayfalarında arama"
+.TP 
+\fB\-L\ \fP\fIyerel\fP,\ \fB\-\-locale=\fP\fIyerel\fP
+\fBman\fP normalde mevcut yerel ayarınızı, muhtemelen $\fBLC_MESSAGES\fP ve
+$\fBLANG\fP ögelerini de içeren çeşitli çevre değişkenlerini sorgulayan C
+işlevi \fBsetlocale\fP (3) çağrısı ile belirleyecektir.  Belirlenen değeri
+geçici olarak geçersiz kılmak için doğrudan bir \fIlocale\fP dizesini
+\fBman\fP 'a sunmak için bu seçeneği kullanın.  Sayfalar için arama
+gerçekten başlayıncaya kadar etkili olmayacağını unutmayın.  Yardım iletisi
+gibi çıktı her zaman başlangıçta belirlenen yerel ayraçta görüntülenir.
+.TP 
+\fB\-m\fP \fIsistem\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fIsistem\fP\|[\|,.\|.\|.\|]
+Eğer bu sistemin diğer işletim sistemlerinin kılavuz sayfalarına erişimi
+varsa bu seçeneği kullanarak erişebilir.  NewOS'in kılavuz sayfası
+koleksiyonunda bir kılavuz sayfası aramak için \fB\-m\fP \fBNewOS\fP seçeneğini
+kullanın.
+
+Belirtilen \fIsystem\fP, virgülle sınırlandırılmış işletim sistemi adlarının
+birleşimi olabilir.  Yerel işletim sisteminin kılavuz sayfalarını aramak
+için, argüman karakter dizisine \fBman\fP sistem adını ekleyin.  Bu seçenek,
+$\fBSYSTEM\fP çevre değişkeninin üzerine yazacaktır.
+.TP 
+\fB\-M\ \fP\fIyol\fP,\ \fB\-\-manpath=\fP\fIyol\fP
+Kullanmak için alternatif bir kılavuz yolu belirtin.  Öntanımlı olarak,
+\fBman\fP, arama yolunu belirlemek için \fBmanpath\fP türetilmiş kodunu
+kullanır.  Bu seçenek $\fBMANPATH\fP çevre değişkenini geçersiz kılar ve \fB\-m\fP
+seçeneğinin yoksayılmasına neden olur.
+
+Bir kılavuz yolu olarak belirtilen bir yol, man\-db el kitabında ("Kılavuz
+sayfa sistemi" başlığı altında) açıklandığı gibi bölümlere yapılandırılmış
+bir kılavuz sayfa hiyerarşisinin kökü olmalıdır.  Bu gibi hiyerarşiler
+dışında kılavuz sayfaları görüntülemek için \fB\-l\fP seçeneğine bakın.
+.TP 
+\fB\-S\fP \fIliste\/\fP, \fB\-s\fP \fIliste\/\fP, \fB\-\-sections=\fP\fIliste\/\fP
+Verilen \fIliste\fP, bölümlerin iki nokta veya virgülle ayrılmış, hangi kılavuz
+bölümlerinin hangi sırada aranacağını belirlemek için kullanılır.  Bu
+seçenek $\fBMANSECT\fP çevre değişkenini geçersiz kılar.  (\fB\-s\fP yazımı System
+V uyumluluğu içindir.)
+.TP 
+\fB\-e\ \fP\fIsub\-extension\fP,\ \fB\-\-extension=\fP\fIsub\-extension\fP
+Bazı sistemler çok fazla sayıda kılavuz sayfası sunarlar; örneğin ana
+kılavuz sayfası hiyerarşisi ile tümleşen \fBTcl\fP paketine eşlik edenler
+gibi.  Aynı ada iye iki kılavuz sayfası (örn. \fBexit\fP(3)) sorununu aşmak
+için, \fBTcl\fP sayfaları genelde bölüm \fBl\fP'ye atanmışlardır.  Artık sayfaları
+doğru bölüme koymak ve onlara belirli bir "uzantı" atamak olanaklıdır;
+örneğin bu durumda \fBexit\fP(3tcl) olur.  Olağan işlemde, \fBman\fP,
+\fBexit\fP(3tcl) yerine \fBexit\fP(3) görüntülemeyi tercih eder.  Bu sorunun
+üstesinden gelmek için ve gerek duyduğunuz kılavuz sayfasının hangi bölümde
+konakladığını bilmeye gerek kalmaması için artık \fBman\fP'a sayfanın hangi
+pakete ait olduğunu belirten bir \fIalt\-uzantı\fP vermek olanaklıdır.
+Yukarıdaki örneği kullanarak, \fB\-e\ tcl\fP seçeneğini \fBman\fP'a vermek sayfa
+aramasını \fB*tcl\fP'ye sınırlar.
+.TP 
+.if  !'po4a'hide' .BR \-i ", " \-\-ignore\-case
+Kılavuz sayfaları ararken BÜYÜK/küçük harf duyarsız arama yap.  Bu ayar
+öntanımlıdır.
+.TP 
+.if  !'po4a'hide' .BR \-I ", " \-\-match\-case
+Kılavuz sayfalarını BÜYÜK/küçük harf duyarlı ara.
+.TP 
+.if  !'po4a'hide' .B \-\-regex
+\fBapropos\fP(1)'de olduğu gibi, tüm sayfaları adlarının ya da açıklamalarının
+herhangi bir parçası olan her \fIpage\fP argümanına eşleşen düzenli ifadeler
+olarak gösterin.  Normal bir ifade ararken "en iyi" sayfayı seçmek için
+genellikle makul bir yol bulunmadığından, bu seçenek \fB\-a\fP anlamına gelir.
+.TP 
+.if  !'po4a'hide' .B \-\-wildcard
+\fBapropos\fP(1) \fB\-\-wildcard\fP ile olduğu gibi kabuk stili joker karakterleri
+kullanarak her sayfanın herhangi bir kısmıyla ya da açıklamaların her
+birinin \fIpage\fP argümanıyla eşleşen tüm sayfaları gösterin.  \fIpage\fP
+bağımsız değişkeni tüm ad veya açıklama ile eşleşmeli veya açıklamadaki
+sözcük sınırlarıyla eşleşmelidir.  Bir joker karakter ararken bir "en iyi"
+sayfa seçmenin makul bir yolu genellikle bulunmadığından, bu seçenek \fB\-a\fP
+anlamına gelir.
+.TP 
+.if  !'po4a'hide' .B \-\-names\-only
+\fB\-\-regex\fP veya \fB\-\-wildcard\fP seçeneği kullanılıyorsa \fBwhatis\fP(1)'de olduğu
+gibi sadece sayfa tanımlarıyla değil sayfa adlarıyla eşleşir.  Aksi takdirde
+etki yaratmaz.
+.TP 
+.if  !'po4a'hide' .BR \-a ", " \-\-all
+Öntanımlı olarak, bulduğu en uygun kılavuz sayfası görüntüledikten sonra
+\fBman\fP çıkacaktır.  Bu seçeneği kullanmak \fBman\fP ögesini, arama
+ölçütleriyle eşleşen tüm kılavuz sayfalarını görüntülemeye zorlar.
+.TP 
+.if  !'po4a'hide' .BR \-u ", " \-\-update
+Bu seçenek \fBman\fP'ın kurulu kılavuz sayfalarının veritabanı önbelleğini
+güncellemesini sağlar.  Bu yalnızca nadir görülen durumlarda gereklidir ve
+bunun yerine \fBmandb\fP kullanmak daha iyidir.
+.TP 
+.if  !'po4a'hide' .B \-\-no\-subpages
+Öntanımlı olarak, \fBman\fP, komut satırında verilen kılavuz sayfa adlarının
+çiftlerini, kısa çizgi veya alt çizgi içeren tek bir kılavuz sayfası adına
+eşdeğer olarak yorumlamaya çalışacaktır.  Bu, alt komutların kendilerini
+çağırmak için kullanılacak benzer sözdizimini kullanarak erişilebilen her
+birine kılavuz sayfalar sunmalarına izin veren bir takım alt komutları
+uygulayan ortak program modelini destekler.  Örneğin:
+
+.nf
+.if  !'po4a'hide' \&  $ man \-aw git diff
+.if  !'po4a'hide' \&  /usr/share/man/man1/git\-diff.1.gz
+.fi
+
+Bu davranışı devre dışı bırakmak için \fB\-\-no\-subpages\fP seçeneğini kullanın.
+
+.nf
+.if  !'po4a'hide' \&  $ man \-aw \-\-no\-subpages git diff
+.if  !'po4a'hide' \&  /usr/share/man/man1/git.1.gz
+.if  !'po4a'hide' \&  /usr/share/man/man3/Git.3pm.gz
+.if  !'po4a'hide' \&  /usr/share/man/man1/diff.1.gz
+.fi
+.SS "Biçimlendirilmiş çıktı denetleniyor"
+.TP 
+\fB\-P\ \fP\fIsayfalayıcı\fP,\ \fB\-\-pager=\fP\fIsayfalayıcı\fP
+Hangi çıktı sayfalayıcısının kullanılacağını belirt.  Öntanımlı olarak,
+\fBman\fP, \fBless\fP kullanır ve bulunamazsa veya çalıştırılabilir değilse
+\fBcat\fP'i yedekte tutar.  Bu seçenek, $\fBMANPAGER\fP çevre değişkenini
+geçersiz kılar.  \fB\-f\fP veya \fB\-k\fP ile birlikte kullanılmaz.
+
+Değer, basit bir komut adı veya bağımsız değişkenler içeren bir komut
+olabilir ve kabuk alıntılama (ters eğik çizgi, tek tırnak veya çift tırnak
+imi) kullanabilir.  Birden fazla komutu bağlamak için boruları kullanamaz;
+buna ihtiyaç duyarsanız dosyayı bir bağımsız değişken olarak veya standart
+girdi olarak görüntülemek üzere alabilecek bir sarıcı komut dosyası
+kullanın.
+.TP 
+\fB\-r\ \fP\fIistem\fP,\ \fB\-\-prompt=\fP\fIistem\fP
+Sayfalayıcı olarak \fBless\fPin bir son sürümü kullanılıyorsa \fBman\fP istemini
+ve mantıklı bazı seçeneklerini belirlemeye çalışacaktır.  Öntanımlı komut
+istemi şöyle
+
+\fB Kılavuz sayfası\fP\fI ad\fP\fB(\fP\fIsaniye\fP\fB) satır\fP\fI x\fP
+
+.\"The default options are
+.\".BR \-six8 .
+.\"The actual default will depend on your chosen
+.\".BR locale .
+burada \fIad\fP klavuz sayfa adını belirtir, \fIbölüm\fP altındaki bölümü ve \fIx\fP
+geçerli satır numarasını gösterir.  Bu, $\fBLESS\fP çevre değişkenini
+kullanarak gerçekleştirilir.
+
+.\"You may need to do this if your
+.\"version of
+.\".B less
+.\"rejects the default options or if you prefer a different prompt.
+\fB\-r\fP'ı bir dizi ile birlikte vermek bu öntanımlıyı geçersiz kılar.  Dizi,
+geçerli kılavuz sayfasının adına ve "(" ve ")" ile çevrili bölüm adına
+genişletilecek \fB$MAN_PN\fP metnini içerebilir.  Öntanımlı üretmek için
+kullanılan dizi şu şekilde ifade edilebilir
+
+\fB\e\ Kılavuz\e\ sayfası\e\ \e$MAN_PN\e\ ?ltsatır\e\ %lt?L/%L.:\fP
+.br
+\fBbayt\e\ %bB?s/%s..?\e\ (END):?pB\e\ %pB\e\e%..\fP
+.br
+\fB(yardım için h'ye veya çıkmak için q'ya basın)\fP
+
+Sadece okunabilirlik uğruna burada üç satıra ayrılmıştır.  Anlamı için
+\fBless\fP(1)  kılavuz sayfasını inceleyin.  Komut karakter katarı önce kabuk
+tarafından değerlendirilir.  Komut satırındaki tüm çift tırnak işaretleri,
+geri tırnak işaretleri ve ters eğik çizgiler bir önceki ters eğik çizgi ile
+öne çıkartılmalıdır.  Komut istemi karakter katarı, less için daha fazla
+seçenek izleyebilen kaçışlı bir $ ile bitebilir.  Öntanımlı olarak \fBman\fP,
+\fB\-ix8\fP seçeneklerini ayarlar.
+
+Aşağıda açıklanan $\fBMANLESS\fP çevre değişkeni, komut satırında hiçbiri
+sağlanmazsa bir öntanımlı istem karakter katarını ayarlamak için
+kullanılabilir.
+.TP 
+.if  !'po4a'hide' .BR \-7 ", " \-\-ascii
+7 bit terminal veya terminal emülatöründe saf bir \fIascii\fP(7) kılavuz
+sayfasını görüntülerken, \fBGNU\fP \fBnroff\fP ile \fIlatin1\fP(7) aygıt açıklaması
+kullanılırken bazı karakterler doğru görüntülenmeyebilir.  Bu seçenek saf
+\fIascii\fP kılavuz sayfalarının \fIascii\fP'de \fIlatin1\fP aygıtıyla
+görüntülenmesine izin verir.  Herhangi bir \fIlatin1\fP metnini tercüme etmez.
+Aşağıdaki tabloda yapılan çeviriler gösterilmektedir: \fBGNU\fP \fBnroff\fP'un
+\fIlatin1\fP(7) aygıtı kullanılırken bazı kısımları düzgün bir şekilde
+görüntülenebilir.
+
+.ie  c \[shc] \
+.  ds softhyphen \[shc]
+.el \
+.  ds softhyphen \(hy
+.na
+.TS
+tab (@);
+l c c c.
+Açıklama@Sekizli@latin1@ascii
+_
+T{
+devam tire
+T}@255@\*[softhyphen]@-
+T{
+madde imi (orta nokta)
+T}@267@\(bu@o
+T{
+tiz vurgu
+T}@264@\(aa@'
+T{
+çarpma imi
+T}@327@\(mu@x
+.TE
+.ad
+
+\fIlatin1\fP sütun doğru görüntülenirse terminaliniz \fIlatin1\fP karakterleri
+için ayarlanmış olabilir ve bu seçenek gerekli değildir.  \fIlatin1\fP ve
+\fIascii\fP sütunları aynı ise bu seçeneği kullanarak bu sayfayı okuyorsunuz
+veya \fBman\fP bu sayfayı \fIlatin1\fP aygıt açıklamasıyla biçimlendirmedi.
+\fIlatin1\fP sütun eksik veya bozuksa bu seçenekle kılavuz sayfaları
+görüntülemeniz gerekebilir.
+
+Bu seçenek, \fB\-t\fP, \fB\-H\fP, \fB\-T\fP veya \fB\-Z\fP seçeneklerini kullanırken göz
+ardı edilir ve \fBnroff\fP için \fBGNU's\fP dışında işe yaramayabilir.
+.TP 
+\fB\-E\ \fP\fIkodlama\fP,\ \fB\-\-encoding\fP=\fIkodlama\fP
+Öntanımlıdan farklı bir karakter kodlaması çıktısı oluşturun.  Geriye dönük
+uyumluluk için, \fIkodlama\fP, \fBASCII\fP, \fBlatin1\fP veya \fButf8\fP gibi \fBnroff\fP
+aygıtlarının yanı sıra \fBUTF\-8\fP gibi gerçek bir karakter kodlaması olabilir.
+.TP 
+.if  !'po4a'hide' .BR \-\-no\-hyphenation ", " \-\-nh
+Normalde, \fBnroff\fP satır aralarında, kısa çizgiler içermeyen sözcüklerde
+bile metinleri otomatik olarak tirelendirir; bunu, aşırı boşluk bırakmadan
+bir satıra sözcükler yerleştirmek için yapmak gerekliyse yapar.  Bu seçenek
+otomatik tirelemeyi devre dışı bırakır, bu nedenle sözcükler yalnızca
+tireler içeriyorsa tireleme yapılır.
+
+Kılavuz sayfası yazıyorsanız ve \fBnroff\fP'un uygun olmayan bir noktadaki
+tirelemesini engellemek istiyorsanız bu seçeneği kullanmayın, bunun yerine
+\fBnroff\fP belgelerine bakın; örneğin, o noktada tireleyebileceğini belirtmek
+için bir sözcüğün içine "\e%" koyabilir veya tirelenmemesi için bir sözcüğün
+başlangıcına "\e%" koyabilirsiniz.
+.TP 
+.if  !'po4a'hide' .BR \-\-no\-justification ", " \-\-nj
+Normalde \fBnroff\fP metni her iki kenar boşluğa otomatik olarak yaslı
+gösterecektir.  Bu seçenek tam ayraçlamayı devre dışı bırakır ve yalnızca
+"soluk\-sağ" metin olarak adlandırılan sol kenar boşluğuna dayandırarak
+bırakır.
+
+Kılavuz sayfası yazıyorsanız ve sadece \fBnroff\fP'un belirli paragraflarının
+haklı çıkmasını önlemek istiyorsanız bu seçeneği kullanmayın, bunun yerine
+\fBnroff\fP belgelerine bakın; örneğin, ".na", ".nf", ".fi" ve ".ad"
+isteklerini geçici olarak ayarlamayı ve doldurmayı devre dışı bırakmak için
+kullanabilirsiniz.
+.TP 
+\fB\-p\ \fP\fIdizi\fP,\ \fB\-\-preprocessor=\fP\fIdizi\fP
+\fBnroff\fP veya \fBtroff\fP/\fBgroff\fP'den önce çalıştırılacak önişlemcilerin
+sırasını belirtin.  Tüm kurulumlar tam önişlemci setine sahip olmaz.
+Önişlemcilerden bazıları ve bunları belirlemek için kullanılan harfler
+şunlardır: \fBeqn\fP (\fBe\fP), \fBgrap\fP (\fBg\fP), \fBpic\fP (\fBp\fP), \fBtbl\fP (\fBt\fP),
+\fBvgrind\fP (\fBv\fP), \fBrefer\fP (\fBr\fP).  Bu seçenek, $\fBMANROFFSEQ\fP çevre
+değişkeninin üzerine yazılır.  \fBzsoelim\fP her zaman ilk önişlemci olarak
+çalıştırılır.
+.TP 
+.if  !'po4a'hide' .BR \-t ", " \-\-troff
+Kılavuz sayfasını stdout için biçimlendirirken \fIgroff \-mandoc\fP kullanın.  Bu
+seçenek, \fB\-H\fP, \fB\-T\fP veya \fB\-Z\fP ile birlikte gerekli değildir.
+.TP 
+\fB\-T\fP[\fIdevice\/\fP], \fB\-\-troff\-device\fP[=\fIdevice\/\fP]
+This option is used to change \fBgroff\fP (or possibly \fBtroff's\fP)  output to
+be suitable for a device other than the default.  It implies \fB\-t\fP.
+Examples (as of groff 1.23.0) include \fBdvi\fP, \fBlatin1\fP, \fBpdf\fP, \fBps\fP,
+\fButf8\fP, \fBX75\fP and \fBX100\fP.
+.TP 
+\fB\-H\fP[\fItarayıcı\/\fP], \fB\-\-html\fP[=\fItarayıcı\/\fP]
+Bu seçenek \fBgroff\fP'un HTML çıktısı üretmesine neden olur ve bu çıktıyı bir
+web tarayıcısında görüntüler.  Tarayıcı seçimi, isteğe bağlı bir \fIbrowser\fP
+argümanı varsa $\fBBROWSER\fP çevre değişkeni tarafından belirlenir veya
+ayarlanmamışsa derleme zamanı öntanımlıyı (genellikle \fBlynx\fP) ile
+belirlenir.  Bu seçenek \fB\-t\fP ima eder ve yalnızca \fBGNU\fP \fBtroff\fP ile
+çalışır.
+.TP 
+\fB\-X\fP[\fIdpi\/\fP], \fB\-\-gxditview\fP[=\fIdpi\/\fP]
+Bu seçenek \fBgroff\fP programının çıktısını grafiksel bir pencerede
+\fBgxditview\fP programıyla gösterir.  \fIdpi\fP (inç başına nokta) 75, 75\-12, 100
+veya 100\-12 olabilir, öntanımlı olarak 75 olur; \-12 varyantları 12 punto baz
+font kullanır.  Bu seçenek, sırasıyla X75, X75\-12, X100 veya X100\-12
+aygıtında \fB\-T\fP anlamına gelmektedir.
+.TP 
+.if  !'po4a'hide' .BR \-Z ", " \-\-ditroff
+\fBgroff\fP, \fBtroff\fP komutunu çalıştırıp seçilen aygıt için uygun çıktı
+üretmek için uygun bir post\-işlemci kullanacaktır.  Eğer \fIgroff \-mandoc\fP,
+\fBgroff\fP ise bu seçenek \fBgroff\fP'e geçirilir ve bir post\-işlemcinin
+kullanımını bastırır.  Bu, \fB\-t\fP ima eder.
+.SS "Yardım alma"
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Bir yardım iletisi göster ve çık.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Kısa kullanım iletisini göster ve çık.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Sürüm bilgisini göster.
+.SH "ÇIKIŞ DURUMU"
+.TP 
+.if  !'po4a'hide' .B 0
+Başarılı program çalıştırma.
+.TP 
+.if  !'po4a'hide' .B 1
+Kullanım, sözdizim ve yapılandırma dosya hatası.
+.TP 
+.if  !'po4a'hide' .B 2
+İşlevsel hata.
+.TP 
+.if  !'po4a'hide' .B 3
+Bir alt süreç sıfır\-olmayan bir çıkış durumu döndü.
+.TP 
+.if  !'po4a'hide' .B 16
+Sayfalar/dosyalar/anahtar sözcüklerden en az bir tanesi yok veya uyuşmadı.
+.SH ÇEVRE
+.\".TP \w'MANROFFSEQ\ \ 'u
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Eğer $\fBMANPATH\fP ayarlanmışsa yolu kılavuz sayfalarını aramak için
+kullanılır.
+
+Bu çevre değişkeninin nice işlendiğinin ayrıntılarına ve öntanımlı
+davranışına bakmak için \fBmanpath\fP(5)'in \fBSEARCH PATH\fP bölümüne bakın.
+.TP 
+.if  !'po4a'hide' .B MANROFFOPT
+\fBman\fP'ın biçimlendiriciyi çağırdığı her zaman (\fBnroff\fP, \fBtroff\fP veya
+\fBgroff\fP), $\fBMANROFFOPT\fP'un içeriğini biçimlendiricinin komut satırına
+ekler.
+
+For example, \fBMANROFFOPT=\-P\-i\fP tells the formatter to use italic text
+(which is only supported by some terminals) rather than underlined text.
+.TP 
+.if  !'po4a'hide' .B MANROFFSEQ
+$\fBMANROFFSEQ\fP ayarlanmışsa değeri her kılavuz sayfasını geçmek için
+önişlemci kümesini belirlemede kullanılır.  Öntanımlı önişlemci listesi
+sisteme bağlıdır.
+.TP 
+.if  !'po4a'hide' .B MANSECT
+$\fBMANSECT\fP ayarlandıysa değeri kolonlarla ayrılmış bir bölüm listesidir ve
+hangi kılavuz bölümlerin hangi sırada bulunacağını belirlemek için
+kullanılır.  \fI/etc/man_db.conf\fP içindeki \fBSECTION\fP yönergesi
+tarafından geçersiz kılınmadıkça öntanımlı "% sections%"dir.
+.TP 
+.if  !'po4a'hide' .BR MANPAGER , " PAGER"
+$\fBMANPAGER\fP veya $\fBPAGER\fP ayarlanmışsa ($\fBMANPAGER\fP yeğlenir) değeri
+kılavız sayfayı görüntülemek için kullanılan programın adı olarak
+kullanılır.  Öntanımlı olarak \fBless\fP kullanılır; bulunamazsa veya
+çalıştırılabilir değilse \fBcat\fP yedekte tutulur.
+
+Değer, basit bir komut adı veya bağımsız değişkenler içeren bir komut
+olabilir ve kabuk alıntılama (ters eğik çizgi, tek tırnak veya çift tırnak
+imi) kullanabilir.  Birden fazla komutu bağlamak için boruları kullanamaz;
+buna ihtiyaç duyarsanız dosyayı bir bağımsız değişken olarak veya standart
+girdi olarak görüntülemek üzere alabilecek bir sarıcı komut dosyası
+kullanın.
+.TP 
+.if  !'po4a'hide' .B MANLESS
+$\fBMANLESS\fP ayarlanırsa değeri \fBless\fP sayfalayıcı için öntanımlı istem
+karakter katarı olarak kullanılır, sanki \fB\-r\fP seçeneğini kullanarak
+geçirilmiş gibi olur (böylece \fB$ MAN_PN\fP aynı şekilde genişletilecektir).
+Örneğin, istem karakter katarını koşulsuz olarak \(lqbenim istem karater
+katarım\(rq olarak ayarlamak istiyorsanız $\fBMANLESS\fP'i \(oq\fB\-Psbenim\ istem\ karakter katarım\fP\(cq olarak ayarlayın.  \fB\-r\fP seçeneğini kullanmak
+bu çevre değişkenini geçersiz kılar.
+.TP 
+.if  !'po4a'hide' .B BROWSER
+$\fBBROWSER\fP değeri ayarlanmışsa değeri her biri iki nokta üst üste ile
+ayrılmış komut listesidir ve bunların her biri sırasıyla \fBman\fP \fB\-\-html\fP
+için bir web tarayıcısı başlatmaya çalışmak için kullanılır.  Her komutta,
+\fI%s\fP, \fBgroff\fP'dan HTML çıktısını içeren bir dosya adı ile değiştirilir;
+\fI%%\fP yerine tek bir yüzde işareti (%) gelir ve \fI%c\fP, bir iki nokta (:)
+tarafından değiştirilir.
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+$\fBSYSTEM\fP ayarlanmışsa \fB\-m\fP seçeneğine argüman olarak belirtilmişçesine
+aynı etkiyi verecektir.
+.TP 
+.if  !'po4a'hide' .B MANOPT
+$\fBMANOPT\fP ayarlanmışsa \fBman's\fP komut satırından önce ayrıştırılır ve
+benzer bir biçimde olması beklenir.  Diğer \fBman\fP özgül çevre değişkenleri
+komut satırı seçenekleri olarak ifade edilebilir ve bu nedenle $\fBMANOPT\fP'ye
+dahil olmanın adayları oldukları için bunların geçersiz sayılacakları
+umulmaktadır.  N.B.  Bir seçeneğin argümanının parçası olarak yorumlanacak
+tüm alanlardan kaçınılmalıdır.
+.TP 
+.if  !'po4a'hide' .B MANWIDTH
+$\fBMANWIDTH\fP ayarlıysa değeri kılavuz sayfalarının biçimlendirilmesi gereken
+satır uzunluğu olarak kullanılır.  Ayarlanmamışsa kılavuz sayfaları mevcut
+uçbirime uygun bir satır uzunluğuyla biçimlendirilir (varsa $\fBCOLUMNS\fP veya
+\fBioctl\fP(2) kullanabilir; ikisi de yoksa 80 karaktere geri düşecektir).  Cat
+sayfaları yalnızca, öntanımlı biçimlendirme kullanılabilir olduğunda, yani
+uçbirim çizgisi uzunluğu 66 ile 80 karakter arasında olduğunda kaydedilir.
+.TP 
+.if  !'po4a'hide' .B MAN_KEEP_FORMATTING
+Normalde, çıktı bir terminale yönlendirilmediğinde (dosya ya da boru gibi),
+biçimlendirme karakterleri, özel araçlar olmadan sonucu okumayı
+kolaylaştırmak için atılır.  Bununla birlikte, $\fBMAN_KEEP_FORMATTING\fP boş
+olmayan herhangi bir değere ayarlanırsa bu biçimlendirme karakterleri
+korunur.  Bu, biçimlendirme karakterlerini yorumlayabilen \fBman\fP
+çevresindeki sarmalayıcılar için yararlı olabilir.
+.TP 
+.if  !'po4a'hide' .B MAN_KEEP_STDERR
+Normal olarak, çıktı bir uçbirime yönlendirildiğinde (genellikle bir
+sayfalayıcıya), kılavuz sayfalarınını biçimlendirilmiş sürümlerini üretmek
+için kullanılan komuttan gelen herhangi bir hata çıktısı, sayfalayıcının
+ekranına müdahale etmekten kaçınmak için atılır.  \fBgroff\fP gibi programlar
+genellikle, kılavuz sayfası ile birlikte görüntülendiğinde, çirkin olan ve
+genel olarak kafa karıştırıcı olan zayıf hizalama gibi tipografik sorunlar
+hakkında nispeten küçük hata iletileri üretir.  Bununla birlikte, bazı
+kullanıcılar bunları yine de görmek istiyor, bu nedenle, $\fBMAN_KEEP_STDERR\fP
+boş olmayan herhangi bir değere ayarlanırsa hata çıkışı her zamanki gibi
+görüntülenir.
+.TP 
+.if  !'po4a'hide' .B MAN_DISABLE_SECCOMP
+Linux üzerinde, \fBman\fP normalde güvenilmeyen veriyi işleyen alt süreçleri
+bir \fBseccomp\fP(2) kum havuzu kullanarak sınırlar.  Bu, karmaşık ayrıştırma
+kodunu gelişigüzel kılavuz sayfaları üzerinde çalıştırmayı daha güvenli
+yapar.  Eğer bu, görüntülenen kılavuz sayfasının içeriğinden bağımsız bir
+biçimde yanlış giderse kum havuzunu devre dışı bırakmak için
+$\fBMAN_DISABLE_SECCOMP\fP'u ayarlayabilirsiniz.
+.TP 
+.if  !'po4a'hide' .B PIPELINE_DEBUG
+Eğer $\fBPIPELINE_DEBUG\fP çevre değişkeni "1"e ayarlanırsa o halde \fBman\fP,
+çalıştırdığı her alt süreci standart hata'ya hata ayıklama iletileri
+yazdıracaktır.
+.TP 
+.if  !'po4a'hide' .BR LANG , " LC_MESSAGES"
+Sisteme ve uygulamaya bağlı olarak, $\fBLANG\fP ve $\fBLC_MESSAGES\fP
+seçeneklerinden birinin veya ikisinin de geçerli ileti yerel ayarı için
+sorgulanması gerekir.  \fBman\fP iletilerini bu yerel ayraçta görüntüler
+(varsa).  Kesin ayrıntılar için  bkz. \fBsetlocale\fP(3).
+.SH DOSYALAR
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+man\-db yapılandırma dosyası.
+.TP 
+.if  !'po4a'hide' .I /usr/share/man
+Global bir kılavuz sayfa hiyerarşisi.
+.SH STANDARDS
+POSIX.1\-2001, POSIX.1\-2008, POSIX.1\-2017.
+.SH "AYRICA BAKINIZ"
+.if  !'po4a'hide' .BR apropos (1),
+.if  !'po4a'hide' .BR groff (1),
+.if  !'po4a'hide' .BR less (1),
+.if  !'po4a'hide' .BR manpath (1),
+.if  !'po4a'hide' .BR nroff (1),
+.if  !'po4a'hide' .BR troff (1),
+.if  !'po4a'hide' .BR whatis (1),
+.if  !'po4a'hide' .BR zsoelim (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR man (7),
+.if  !'po4a'hide' .BR catman (8),
+.if  !'po4a'hide' .BR mandb (8)
+.PP
+Kimi paketlerin belgelendirmesi başka biçimlerde kullanılabilir olabilir;
+örneğin \fBinfo\fP(1) veya HTML.
+.SH GEÇMİŞ
+1990, 1991 \(en John W. \& Eaton (jwe@che.utexas.edu) tarafından
+yazılmıştır.
+
+23 Aralık 1992: Rik Faith (faith@cs.unc.edu), Willem Kasdorp tarafından
+sağlanan hata düzeltmelerini uyguladı (wkasdo@nikhefk.nikef.nl).
+
+30 Nisan 1994 \(en 23 Şubat 2000: Wilf.\& (G.Wilford@ee.surrey.ac.uk), bu
+paketi birkaç kendini adamış kişiyle birlikte geliştiriyor ve ayakta
+tutuyor.
+
+30 Ekim 1996 \(en 30 Mart 2001: Fabrizio Polacco
+<fpolacco@debian.org>), bu paketi Debian projesi için bütün
+topluluğun yardımıyla sürdürdü ve geliştirdi.
+
+31 Mart 2001 \(en bugünkü gün: Colin Watson <cjwatson@debian.org>,
+şimdi man\-db'yi geliştiriyor ve sürdürüyor.
+.SH HATALAR
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

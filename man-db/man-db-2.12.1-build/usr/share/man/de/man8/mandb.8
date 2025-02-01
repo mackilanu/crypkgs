@@ -1,0 +1,192 @@
+'\" t
+.\" Man page for mandb
+.\"
+.\" Copyright (C) 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Tue Apr 26 12:56:44 BST 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANDB 8 2024-04-05 2.12.1 "Dienstprogramme für Handbuchseiten"
+.SH BEZEICHNUNG
+mandb \- Zwischenspeicher für Handbuchseiten\-Indizes erzeugen oder
+aktualisieren
+.SH ÜBERSICHT
+\fBmandb\fP [\|\fB\-dqsucpt?V\fP\|] [\|\fB\-C\fP \fIDatei\fP\|] [\|\fIPfad\fP\|]
+.br
+\fBmandb\fP [\|\fB\-dqsut\fP\|] [\|\fB\-C\fP \fIDatei\fP\|] \fB\-f\fP \fIDateiname\fP\ .\|.\|.
+.SH BESCHREIBUNG
+\fBmandb\fP wird für die Initialisierung und die manuelle Aktualisierung der
+\fBIndex\fP\-Datenbank\-Zwischenspeicher verwendet. Die Zwischenspeicher
+enthalten wichtige Informationen zum aktuellen Zustand des
+Handbuchseitensystems. Die dort gespeicherten Informationen verwenden die
+Man\-db\-Programme, um ihre Geschwindigkeit zu erhöhen und Funktionalität zu
+verbessern.
+
+Beim Erzeugen oder Aktualisieren eines \fBIndex\fP wird \fBmandb\fP vor
+schlechten ROFF\-.so\-Anfragen, merkwürdigen Dateinamen für Handbuchseiten
+oder Handbuchseiten, bei denen \fBwhatis\fP nicht ausgewertet werden kann,
+warnen.
+
+Wenn \fBmandb\fP beim Aufruf ein optionaler, durch Doppelpunkte gegliederter
+Pfad übergeben wird, so hebt dieser den internen, in der
+Man\-db\-Konfigurationsdatei festgelegten systemweiten
+Handbuchhierarchie\-Suchpfad auf.
+.SH DATENBANK\-ZWISCHENSPEICHER
+\fBmandb\fP kann mit Unterstützung für jeden der folgenden Datenbanktypen
+kompiliert werden.
+
+.TS
+tab (@);
+l l l.
+Name@asynch@Dateiname
+_
+Berkeley\-Datenbank@Ja@\fIindex.bt\fP
+GNU gdbm@Ja@\fIindex.db\fP
+UNIX ndbm@Nein@\fIindex.(dir|pag)\fP
+.TE
+
+Diejenigen Datenbanktypen, die asynchrone Aktualisierungen unterstützen,
+ermöglichen eine höhere Geschwindigkeit. Der höheren Geschwindigkeit
+gegenüber steht das Risiko, dass die Datenbank bei einer unüblichen
+Beendigung des Programms beschädigt wird. Dann kann es erforderlich sein,
+\fBmandb\fP mit der Option \fB\-c\fP zu starten, um die Datenbanken von Grund auf
+neu zu erstellen.
+.SH OPTIONEN
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Ausgabe von Debug\-Informationen
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+keine Warnmeldungen erzeugen
+.TP 
+.if  !'po4a'hide' .BR \-s ", " \-\-no-straycats
+Nicht Informationen über Stray Cats (Cat\-Seiten ohne Quelltext) suchen oder
+in die Datenbank aufnehmen.
+.TP 
+.if  !'po4a'hide' .BR \-p ", " \-\-no-purge
+Nicht nach gelöschten Handbuchseiten suchen und diese vollständig aus der
+Datenbank löschen.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-create
+Standardmäßig versucht \fBmandb\fP zunächst, eine bestehende Datenbank zu
+aktualisieren. Ist keine Datenbank vorhanden, wird sie erstellt. Diese
+Option zwingt \fBmandb\fP dazu, die Datenbank von Grund auf neu zu erstellen
+und impliziert \fB\-\-no\-purge\fP. Dieses kann notwendig sein, wenn eine
+Datenbank beschädigt oder das Datenbank\-Schema geändert wird.
+.TP 
+.if  !'po4a'hide' .BR \-u ", " \-\-user-db
+Erzeugt nur benutzereigene Datenbanken, selbst wenn Schreibrechte auf
+systemweite Handbuchhierarchien bestehen.
+.TP 
+.if  !'po4a'hide' .BR \-t ", " \-\-test
+Überprüft Handbuchseiten im Hierarchie\-Suchpfad auf Fehlerfreiheit. Mit
+dieser Option wird \fBmandb\fP keine existierenden Datenbanken ändern.
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-filename
+Aktualisiert nur die Einträge für den angegebenen Dateinamen. Diese Option
+ist nicht für den Allgemeingebrauch, sondern wird intern von \fBman\fP
+verwendet, wenn es mit der Option \fBMAN_DB_UPDATES\fP kompiliert wurde und die
+Seite als veraltet betrachtet. Diese Option impliziert \fB\-p\fP und schaltet
+\fB\-c\fP und \fB\-s\fP ab.
+.TP 
+\fB\-C\ \fP\fIDatei\fP,\ \fB\-\-config\-file=\fP\fIDatei\fP
+Verwendung dieser benutzerspezifischen Konfigurationsdatei an Stelle der
+Vorgabe \fI\(ti/.manpath\fP
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Gebrauchsanweisung anzeigen und beenden.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+zeigt eine kurze Anwendungszusammenfassung an und beendet das Programm.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Programmversion anzeigen und beenden.
+.SH EXIT\-STATUS
+.TP 
+.if  !'po4a'hide' .B 0
+erfolgreiche Programmausführung
+.TP 
+.if  !'po4a'hide' .B 1
+Verwendungs\-, Syntax\- oder Konfigurationsdateien\-Fehler.
+.TP 
+.if  !'po4a'hide' .B 2
+betriebsbedingter Fehler
+.TP 
+.if  !'po4a'hide' .B 3
+Ein Kindprozess ist fehlgeschlagen.
+.SH DIAGNOSE
+Die folgenden Warnmeldungen können bei der Erstellung der Datenbank
+auftreten.
+.TP 
+\fB<Dateiname>: Whatis\-Auswertung für Seite(Abschnitt) fehlgeschlagen\fP
+Ein Versuch, die Whatis\-Zeile(n) aus dem angegebenen <Dateinamen> zu
+entnehmen, ist fehlgeschlagen. Das liegt in der Regel an einer schlecht
+geschriebenen Handbuchseite, aber wenn die Meldung öfters auftritt, kann es
+sein, dass das System nicht standardkonforme Handbuchseiten enthält, die
+nicht mit dem Parser (Auswerteprogramm) der Man\-db\-Implementierung von
+Whatis kompatibel sind. Weitere Informationen finden Sie im Abschnitt \fBWAS BEDEUTET PARSEN\fP in \fBlexgrog\fP(1).
+.TP 
+\fB<Dateiname>: Ist ein toter symbolischer Link\fP
+<Dateiname> existiert nicht, aber ein symbolischer Link weist
+dorthin. Die folgenden Diagnosemeldungen dienen der Identifizierung des
+<Dateinamens> des betreffenden Links.
+.TP 
+\fB<Dateiname>: Schlechter symbolischer Link oder schlechte ROFF».so«\-Anfrage\fP
+<Dateiname> ist entweder ein symbolischer Link oder enthält eine
+ROFF\-haltige Anfrage zu einer nicht existierenden Datei.
+.TP 
+\fB<Dateiname>: Schein\-Dateiname ignoriert\fP
+Der <Dateiname> könnte eine gültige Handbuchseite sein, aber ihr
+Name ist nicht gültig. Das liegt in der Regel an einer Handbuchseite mit
+abschnittsweiser Erweiterung <x>, die in den Handbuchseitenabschnitt
+<y> eingefügt wurde.
+.TP 
+\fB<filename_mask>: Konkurrierende Erweiterungen\fP
+Der Platzhalter <filename_mask> ist nicht einzigartig. Das liegt
+normalerweise daran, dass eine komprimierte und eine unkomprimierte Version
+der selben Handbuchseite nebeneinander existieren. Alle außer der jüngsten
+werden ignoriert.
+.SH DATEIEN
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+Konfigurationsdatei für Man\-db
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt|db|dir|pag)
+ein FHS\-konformer, globaler Zwischenspeicher für die \fIIndex\fP\-Datenbank
+.PP
+Frühere Speicherorte für den Datenbankzwischenspeicher waren unter anderem:
+.TP 
+.if  !'po4a'hide' .I /usr/man/index.(bt|db|dir|pag)
+ein traditioneller, globaler Zwischenspeicher für die \fIIndex\fP\-Datenbank
+.TP 
+.if  !'po4a'hide' .I /var/catman/index.(bt|db|dir|pag)
+ein alternativer oder FSSTND\-konformer, globaler
+\fIIndex\fP\-Datenbankzwischenspeicher
+.SH "SIEHE AUCH"
+.if  !'po4a'hide' .BR lexgrog (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR catman (8)
+.PP
+Der frühere Abschnitt \fBWAS BEDEUTET PARSEN\fP ist jetzt Teil von
+\fBlexgrog\fP(1).
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH FEHLER
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

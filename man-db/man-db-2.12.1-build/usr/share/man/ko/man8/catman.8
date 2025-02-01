@@ -1,0 +1,88 @@
+.\" Man page for catman
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Dec 10 14:17:29 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH CATMAN 8 2024-04-05 2.12.1 "설명서 페이저 유틸리티"
+.SH 이름
+catman \- 사전 서식처리한 설명서 페이지를 만들거나 업데이트합니다
+.SH 개요
+\fBcatman\fP [\|\fB\-d?V\fP\|] [\|\fB\-M\fP \fI경로\fP\|] [\|\fB\-C\fP \fI파일\fP\|] [\|\fI섹션\fP\|]
+\&.\|.\|.
+.SH 설명
+\fBcatman\fP은 캣 페이지로 알려진 사전 서식화 설명서 페이지 모음을 최신판으로 만드는데 활용합니다.  캣 페이지는 보통 원조
+설명서 페이지보다는 표시가 훨씬 빠르지만,  추가 저장 공간이 필요합니다.  캣 페이지 지원 결정은 로컬 관리자의 몫이며, 캣 페이지를
+넣을 적절한 디렉터리를 제공해야합니다.
+
+\fBcatman\fP에서 활용할 수 있는 옵션은 사전 서식화할 설명서 페이지 계층과 섹션입니다.  기본 계층은 man\-db 설정 파일의
+시스템 계층으로 지정하며, 기본 섹션은 $\fBMANSECT\fP 환경 변수에 콜론으로 구분한 내용이거나, 이 변수가 없을 경우
+\fBman\fP에 컴파일하여 넣은 기본 세트 값입니다.  \fBcatman\fP에 공백으로 구분한 여러 섹션 이름을 넣으면 위 값보다
+우선하여 활용합니다.
+
+\fBcatman\fP은 각 계층에 연동한 \fB색인\fP 데이터베이스 캐시를 활용하여 어떤 파일을 서식화해야 하는지 판단합니다.
+.SH 옵션
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+디버깅 정보를 출력합니다.
+.TP 
+\fB\-M\ \fP\fI경로\fP,\ \fB\-\-manpath=\fP\fI경로\fP
+콜론으로 구분한 설명서 페이지 계층 검색 경로를 지정합니다.  기본적으로, man\-db 설정 파일의 시스템 계층으로 나타나는 모든
+경로입니다.
+.TP 
+\fB\-C\ \fP\fI파일\fP,\ \fB\-\-config\-file=\fP\fI파일\fP
+\fI\(ti/.manpath\fP 기본값 대신 사용자 설정 파일을 활용합니다.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+도움말 메시지를 출력하고 나갑니다.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+간단한 사용법 메시지를 출력하고 나갑니다.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+버전 정보를 출력합니다.
+.SH 환경
+.TP 
+.if  !'po4a'hide' .B MANSECT
+$\fBMANSECT\fP를 설정하면, 이 값은 콜론 구분 섹션 목록이며, 어떤 설명서 섹션을 어떤 순서로 검색할 지 결정하는데 활용합니다.
+기본은 \fI/etc/man_db.conf\fP 파일의 \fBSECTION\fP 지시자에서 우선적으로 값을 적용하지 않는 한,
+"1 n l 8 3 0 2 3type 5 4 9 6 7"입니다.
+.TP 
+.if  !'po4a'hide' .B MANPATH
+$\fBMANPATH\fP를 설정했다면, 콜론으로 구분한 설명서 페이지 검색 경로로 값을 해석합니다.
+
+환경 변수 처리 방식의 기본 동작 및 자세한 내용은 \fBmanpath\fP(5)의 \fB검색 경로\fP 섹션을 살펴보십시오.
+.SH 파일
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+man\-db 구성 파일.
+.TP 
+.if  !'po4a'hide' .I /usr/man/index.(bt|db|dir|pag)
+전통 전역 \fI색인\fP 데이터베이스 캐시입니다.
+.TP 
+.if  !'po4a'hide' .I /var/catman/index.(bt|db|dir|pag)
+대체 또는 FSSTND 준수 전역 \fI색인\fP 데이터베이스 캐시입니다.
+.SH "추가 참조"
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR mandb (8)
+.SH 저작자
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH 버그
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

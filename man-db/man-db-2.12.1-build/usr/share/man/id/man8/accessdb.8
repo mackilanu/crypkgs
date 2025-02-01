@@ -1,0 +1,53 @@
+.\" Man page for accessdb
+.\"
+.\" Copyright (c) 1998 Fabrizio Polacco <fpolacco@debian.org
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Tue, 24 Feb 1998 18:18:36 +0200
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH ACCESSDB 8 2024-04-05 2.12.1 "Penggunaan halaman buku panduan"
+.SH NAMA
+accessdb \- keluarkan isi dari sebuah basis data man\-db dalam format yang
+mudah dibaca.
+.SH RINGKASAN
+\fB/usr/sbin/accessdb\fP [\|\fB\-d?V\fP\|] [\fI<indeks\-file>\fP]
+.SH DESKRIPSI
+\fBaccessdb\fP akan mengeluarkan data berisi dalam sebuah basis data man\-db
+dalam sebuah bentuk yang mudah dibaca. Secara baku, ini akan mengeluarkan
+data dari \fB/var/cache/man/index.<db\-type>,\fP dimana
+<db\-type> tergantung dari perpustakaan basis data yang digunakan.
+
+Memberikan sebuah argumen ke accessdb akan mengesampingkan perilaku baku
+ini.
+.SH PILIHAN
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Tampilkan informasi penelusuran.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Tampilkan sebuah pesan bantuan dan keluar.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Tampilkan sebuah pesan bantuan dan keluar.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Tampilkan informasi versi.
+.SH PENGARANG
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BUGS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

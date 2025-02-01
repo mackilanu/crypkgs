@@ -1,0 +1,69 @@
+.\" Man page for accessdb
+.\"
+.\" Copyright (c) 1998 Fabrizio Polacco <fpolacco@debian.org
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Tue, 24 Feb 1998 18:18:36 +0200
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH ACCESSDB 8 2024-04-05 2.12.1 "Utilitaires de l'afficheur des pages de manuel"
+.SH NOM
+accessdb \- Afficher le contenu d'une base de données man\-db dans un format
+lisible par l'homme
+.SH SYNOPSIS
+\fB/usr/sbin/accessdb\fP [\|\fB\-d?V\fP\|] [\fI<fichier\-index>\fP]
+.SH DESCRIPTION
+\fBaccessdb\fP affiche les données contenues dans une base de données man\-db
+sous une forme lisible par l'homme. Par défaut, ce résultat est obtenu à
+partir du contenu de \fB/var/cache/man/index.<type\-de\-db>,\fP où
+<type\-de\-db> est fonction de la bibliothèque de base de données
+utilisée.
+
+La présence d'un argument dans la commande \fBaccessdb\fP remplacera la valeur
+par défaut.
+.SH OPTIONS
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Affiche les informations de mise au point.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Affiche un message d'aide et s'arrête.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Affiche un court mode d'emploi et s'arrête.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Affiche le numéro de version.
+.SH AUTEUR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BOGUES
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db
+.SH TRADUCTION
+Cette traduction est maintenue à l'aide de l'outil
+po4a <URL:https://po4a.org/> par l'équipe
+francophone de traduction de Debian.
+.PP
+Valéry Perrin <valery.perrin.debian@free.fr> le 2 janvier 2006.
+David Prévot <david@tilapin.org> et l'équipe francophone de traduction de Debian\ (2010).
+.PP
+Veuillez signaler toute erreur de traduction en écrivant à
+<debian\-l10n\-french@lists.debian.org> ou par un rapport de bogue sur
+le paquet man-db.
+.PP
+Vous pouvez toujours avoir accès à la version anglaise de ce document en
+utilisant la commande
+«\ \fBman\ \-L C\fR \fI<section>\fR\ \fI<page_de_man>\fR\ ».

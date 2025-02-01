@@ -1,0 +1,66 @@
+.\" Man page for zsoelim
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Dec 10 19:33:32 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH ZSOELIM 1 2024-04-05 2.12.1 "Утилиты просмотра справочных страниц"
+.SH НАЗВАНИЕ
+zsoelim \- выполняет .so запросы для входящих данных roff
+.SH СИНТАКСИС
+\fBzsoelim\fP [\|\fB\-CVh\fP\|] [\|\fIфайл\fP \&.\|.\|.\|]
+.SH ОПИСАНИЕ
+\fBzsoelim\fP анализирует параметры \fIфайл\fP или, если ничего не указано,
+строки из стандартного входного потока в виде:
+
+\&\fB.so\fP <\|\fIимя файла\fP\|>
+
+Эти запросы заменяются содержимым указанного \fIфайла\fP. Если запрос не может
+быть удовлетворён, то \fBzsoelim\fP ищет \fIимя_файла.расширение\fP, где
+\&\fI.расширение\fP может быть одним из \fB.gz\fP, \fB.Z\fP или \fB.z\fP. Могут
+поддерживаться другие типы расширений в зависимости от параметров компиляции
+программы. Если запрос решён с помощью сжатого файла, то данный файл
+расжимается с помощью соответствующей программы, и результат используется
+для удовлетворения запроса.
+
+Обычно, \fBsoelim\fP\-программы используются, чтобы позволить препроцессорам
+roff обрабатывать файлы, указанные в запросах. Данная версия была написана,
+чтобы обойти проблемы, созданные поддержкой сжатых справочных страниц.
+.SH ПАРАМЕТРЫ
+.TP 
+.if  !'po4a'hide' .BR \-C ", " \-\-compatible
+Данный параметр введён для совместимости с другими программами \fBsoelim\fP. Он
+позволяет использовать для отделения имени файла в .so запросах символы,
+отличные от пробелов. Так как это является поведением по умолчанию, то
+данный параметр игнорируется.
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+Показать справочное сообщение и закончить работу.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Показать информацию о версии.
+.SH "СМОТРИТЕ ТАКЖЕ"
+.if  !'po4a'hide' .BR groff (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR nroff (1),
+.if  !'po4a'hide' .BR troff (1)
+.SH АВТОР
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH ОШИБКИ
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

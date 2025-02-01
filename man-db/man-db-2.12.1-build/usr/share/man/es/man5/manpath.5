@@ -1,0 +1,172 @@
+.\" Man page for format of the manpath.config data file
+.\"
+.\" Copyright (C) 1994, 1995 Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANPATH 5 2024-04-05 2.12.1 /etc/man_db.conf
+.SH NOMBRE
+manpath \- formato del archivo /etc/man_db.conf
+.SH DESCRIPCIÓN
+El archivo de configuración de manpath lo emplean las utilidades de páginas
+de manual para evaluar las manpath de los usuarios en tiempo de ejecución,
+para indicar qué jerarquías de páginas de manual (manpaths) van a tratarse
+como jerarquías del sistema y para asignarles directorios que se utilizarán
+para almacenar archivos cat.
+
+Si la variable de entorno $\fBMANPATH\fP ya está establecida, la información
+contenida en /etc/man_db.conf no la anulará.
+.SH "RUTA DE BÚSQUEDA"
+Por defecto, man\-db busca en la variable $\fBPATH\fP del usuario. Por cada
+\fIpath_element\fP encontrado, agrega \fImanpath_element\fP a la ruta de búsqueda.
+
+Si no hay una línea \fBMANPATH_MAP\fP en el archivo de configuración para un
+\fIpath_element\fP en particular, entonces agrega todos los
+\fIpath_element/../man\fP, \fIpath_element/man\fP, \fIpath_element/../share/man\fP y
+\fIpath_element/share/man\fP que existan como directorios a la ruta de
+búsqueda.
+
+Después agrega todas las entradas \fBMANDATORY_MANPATH\fP del archivo de
+configuración a la ruta de búsqueda.
+
+Por último, si se utiliza la opción \fB\-\-systems\fP, o si la variable de
+entorno $\fBSYSTEM\fP está establecida, entonces esta debería consistir en una
+secuencia de nombres de sistemas operativos separados por comas o por el
+signo de dos puntos. Esto actúa como una plantilla, expandiendo la ruta de
+búsqueda otra vez para permitir acceso a páginas de manual de otros sistemas
+operativos: por cada nombre de sistema, man\-db busca ese nombre como un
+subdirectorio de cada entrada en la ruta de búsqueda, y lo agrega a la ruta
+de búsqueda, si existe. El nombre de sistema \fBman\fP agrega la ruta de
+búsqueda normal sin subdirectorios. Por ejemplo, si la ruta de búsqueda
+hubiera sido \fI/usr/share/man:/usr/local/man\fP, y $\fBSYSTEM\fP está establecida
+a \fInewOS:man\fP, entonces la ruta de búsqueda final será
+\fI/usr/share/man/newOS:/usr/share/man:/usr/local/man/newOS:/usr/local/man\fP.
+
+La variable de entorno $\fBMANPATH\fP anula las rutas de búsqueda por defecto
+de la página de manual de man\-db. La mayoría de los usuarios no deberían
+necesitar establecerla. Su sintaxis es similar a la variable de entorno
+$\fBPATH\fP: consiste en una secuencia de nombres de directorio separados por
+el símbolo de dos puntos. Anula la ruta de búsqueda por defecto descrita
+arriba.
+
+Si el valor de $\fBMANPATH\fP comienza con el signo de dos puntos, la ruta de
+búsqueda predeterminada se le agrega al principio. Si el valor de
+$\fBMANPATH\fP termina con el signo de dos puntos, la ruta de búsqueda
+predeterminada se le agrega al final. Si el valor de $\fBMANPATH\fP contiene el
+signo de dobles dos puntos (\fB::\fP), la ruta de búsqueda predeterminada es
+agregada enmedio del valor, entre los signos de dos puntos.
+.SH FORMATO
+Los siguientes tipos de campos son actualmente reconocidos:
+.TP 
+\fB#\fP\fI\ comentario\fP
+Las líneas en blanco o las que comienzan con un \fB#\fP serán tratadas como
+comentarios e ignoradas.
+.TP 
+\fBMANDATORY_MANPATH\fP\fI\ elemento_rutaman\fP
+Las líneas de esta forma indican rutas de manual que todo $\fBMANPATH\fP
+generado automáticamente debería contener.  Típicamente incluye \fI/usr/man\fP.
+.TP 
+\fBMANPATH_MAP\fP\fI\ elemento_ruta\ elemento_rutaman\fP
+Las líneas de esta forma establecen asociaciones entre $\fBPATH\fP y
+$\fBMANPATH\fP.  Por cada \fIelemento_ruta\fP encontrado en la $\fBPATH\fP del
+usuario, un \fIelemento_rutaman\fP se añadirá al $\fBMANPATH\fP.
+.TP 
+\fBMANDB_MAP \fP\fIelemento_rutaman \fP\|[\| \fIelemento_rutacat\fP \|]
+Las líneas de esta forma indican qué rutas de manual van a tratarse como
+rutas de manual del sistema y opcionalmente dónde deberían almacenarse sus
+archivos cat.  Este tipo de campo es particularmente importante si \fBman\fP es
+un porgrama setuid, pues (cuando en el archivo de configuración del sistema
+/etc/man_db.conf en vez del archivo de configuración por cada usuario
+\&.manpath)  indica a qué jerarquías de páginas de manual acceder como usuario
+setuid y a cuáles como el usuario que invoca.
+
+Las jerarquías de página de manual de sistema normalmente son aquellas que
+están almacenadas bajo \fI/usr\fP, tales como \fI/usr/man\fP, \fI/usr/local/man\fP y
+\fI/usr/X11R6/man\fP.
+
+Si las páginas cat de un \fIelemento_rutaman\fP concreto no van a almacenarse o
+van a almacenarse en la ubicación tradicional, \fIelemento_rutacat\fP puede
+omitirse.
+
+La ubicación tradicional de cat sería imposible para jerarquías de páginas
+de manual montadas para solo lectura, por lo que es posible especificar
+cualquier jerarquía de directorios para su almacenamento.  Para respetar el
+\fBLinux FSSTND\fP puede utilizarse la palabra clave \fBFSSTND\fP en lugar de un
+directorio real.
+
+Desafortunadamente, es necesario especificar \fBtodas\fP las rutas de árboles
+de man del sistema, incluso las rutas de sistemas operativos alternativos
+como \fI/usr/man/sun\fP y cualesquier rutas de \fBlocalización NLS\fP como
+\fI/usr/man/es_ES.88591\fP.
+
+Como la información se analiza línea a línea en el orden de escritura, es
+necesario para cualquier ruta de manual que sea una sub\-jerarquía de otra
+jerarquía, estar listada antes; de otro modo, se detectará una coincidencia
+incorrecta.  Un ejemplo es que \fI/usr/man/de_DE.88591\fP debe venir antes que
+\fI/usr/man\fP.
+.TP 
+\fBDEFINE\fP\fI\ clave\ valor\fP
+Las líneas de esta forma definen variables de configuración diversas; véase
+el archivo de configuración predeterminado para aquellas variables
+utilizadas para las utilidades del paginador del manual, que incluyen rutas
+predefinidas a varios programas (tales como \fIgrep\fP y \fItbl\fP), y conjuntos
+predefinidos de argumentos para dichos programas.
+.TP 
+\fBSECTION\fP \fIsección\fP .\|.\|.
+.RS
+Las líneas de esta forma definen el orden de búsqueda de las secciones del
+manual.  Si no hay ninguna directiva \fBSECTION\fP en el archivo de
+configuración, la predeterminada es:
+.PP
+.RS
+.nf
+.if  !'po4a'hide' SECTION 1 n l 8 3 0 2 3type 5 4 9 6 7
+.fi
+.RE
+.PP
+Si hay múltiples directivas \fBSECTION\fP, sus listas de secciones serán
+concatenadas.
+.PP
+Si una extensión determinada no está en esta lista (digamos, 1mh) se
+mostrará con el resto de la sección a la que pertenece.  El efecto de esto
+es que solo hace falta enlistar extensiones explícitamente si se desea
+forzar un orden determinado.  Las secciones con extensiones normalmente
+deberían ser adyacentes a su sección principal (p.e. «1 1mh 8 ...»).
+.PP
+\fBSECTIONS\fP se acepta como nombre alternativo para esta directiva.
+.RE
+.TP 
+\fBMINCATWIDTH\fP\fI\ anchura\fP
+Si la anchura del terminal es menor que \fIanchura\fP, las páginas cat no se
+crean (si faltan) ni se muestran.  La predeterminada es 80.
+.TP 
+\fBMAXCATWIDTH\fP\fI\ anchura\fP
+Si la anchura del terminal es mayor que \fIanchura\fP, las páginas cat no se
+crean (si falta) ni se muestran.  La predeterminada es 80.
+.TP 
+\fBCATWIDTH\fP\fI\ anchura\fP
+If \fIwidth\fP is non\-zero, cat pages will always be formatted for a terminal
+of the given width, regardless of the width of the terminal actually being
+used.  This overrides \fBMINCATWIDTH\fP and \fBMAXCATWIDTH\fP.
+.TP 
+.if  !'po4a'hide' .B NOCACHE
+Esta opción evita que \fBman\fP(1)  cree páginas cat automáticamente.
+.SH DEFECTOS
+A menos que las reglas anteriores se respeten escrupulosamente, las
+utilidades del paginador del manual no funcionarán como es debido.  Las
+reglas son tremendamente complicadas.
+.PP
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

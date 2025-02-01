@@ -1,0 +1,77 @@
+.\" Man page for manconv
+.\"
+.\" Copyright (c) 2007, 2008 Colin Watson <cjwatson@debian.org>
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANCONV 1 2024-04-05 2.12.1 "Utilitários de paginação de manual"
+.SH NOME
+manconv \- converte página de manual de uma codificação para outra
+.SH SINOPSE
+\fBmanconv\fP \fB\-f\fP [\|\fIda\-codificação\fP\|[:\fIda\-codificação\fP\|.\|.\|.]\|]
+\fB\-t\fP \fIpara\-codificação\fP [\|\fB\-dqhV\fP\|] [\|\fInome\-de\-arquivo\fP\|]
+.SH DESCRIÇÃO
+\fBmanconv\fP converte uma página de manual de uma codificação para outra,
+como \fBiconv\fP. Ao contrário de \fBiconv\fP, ele pode tentar várias codificações
+de entradas possíveis em sequência. Isso é útil para páginas de manual
+instaladas em diretórios sem declaração explícita de codificação, já que
+elas podem estar UTF\-8 ou em um conjunto de caracteres legado.
+.PP
+Se uma declaração de codificação for localizada na primeira linha da página
+de manual, aquela declaração sobrescreve quaisquer codificações de entrada
+especificadas na linha de comando do \fBmanconv\fP. Declarações de
+codificação podem ter a seguinte forma:
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" \-*\- coding: UTF\-8 \-*\-
+.fi
+.RE
+.PP
+ou (se pré\-processadores de página de manual também estiverem declarados):
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" t \-*\- coding: ISO\-8859\-1 \-*\-
+.fi
+.RE
+.SH OPÇÕES
+.TP 
+\fB\-f\fP \fIcodificações\fP, \fB\-\-from\-code\fP \fIcodificações\fP
+Tenta cada uma das \fIcodificações\fP (uma lista separada por caractere de dois
+pontos) em sequência como a codificação de entrada. O padrão é adivinhar
+prováveis codificações de entrada com base no nome de arquivo.
+.TP 
+\fB\-t\fP \fIcodificação\fP, \fB\-\-to\-code\fP \fIcodificação\fP
+Converte a página de manual para \fIcodificação\fP.
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Não emite mensagens quando a página não puder ser convertida.
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Emite mensagens de depuração.
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+Imprime uma mensagem de ajuda e sai.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Exibe informação da versão.
+.SH "VEJA TAMBÉM"
+.if  !'po4a'hide' .IR iconv (1),
+.if  !'po4a'hide' .IR man (1),
+.if  !'po4a'hide' .IR man-recode (1)
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH PROBLEMAS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

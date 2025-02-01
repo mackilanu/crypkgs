@@ -1,0 +1,67 @@
+.\" Man page for zsoelim
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Dec 10 19:33:32 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH ZSOELIM 1 2024-04-05 2.12.1 "Utilitare ale paginatorului de manual"
+.SH NUME
+zsoelim \- satisface solicitările .so în intrarea roff
+.SH REZUMAT
+\fBzsoelim\fP [\|\fB\-CVh\fP\|] [\|\fIfișier\fP \&.\|.\|.\|]
+.SH DESCRIERE
+\fBzsoelim\fP analizează argumentele \fIfișier\fP, sau dacă nu este specificat
+niciunul, intrarea ei standard pentru linii de forma:
+
+\&\fB.so\fP <\|\fInume\-fișier\fP\|>
+
+Aceste solicitări sunt înlocuite cu conținutul \fInume\-fișier\fP specificat.
+Dacă cererea nu poate fi îndeplinită, \fBzsoelim\fP caută după
+\fIfilename.ext\fP unde \fI.ext\fP poate fi unul dintre \fB.gz\fP, \fB.Z\fP sau \fB.z\fP.
+Alte tipuri de extensii pot fi suportate în funcție de opțiunile din timpul
+compilării.  Dacă cererea poate fi îndeplinită de un fișier comprimat, acest
+fișier este decomprimat utilizând un decomprimator adecvat și ieșirea sa
+este folosită pentru a satisface cererea.
+
+În mod tradițional, programele \fBsoelim\fP au fost utilizate pentru a permite
+preprocesoarelor roff să poată preprocesa fișierele la care se referă
+cererile.  Această versiune particulară a fost scrisă pentru a evita
+problemele create de suportul pentru paginile de manual comprimate.
+.SH OPȚIUNI
+.TP 
+.if  !'po4a'hide' .BR \-C ", " \-\-compatible
+Această opțiune este disponibilă pentru compatibilitate cu alte programe
+\fBsoelim\fP.  Este utilizată pentru a activa cererile .so urmate de altceva
+decât spații albe.  Deoarece acesta este deja comportamentul implicit, este
+ignorată.
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+Imprimă un mesaj de ajutor și iese.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Afișează informații despre versiune.
+.SH "CONSULTAȚI ȘI"
+.if  !'po4a'hide' .BR groff (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR nroff (1),
+.if  !'po4a'hide' .BR troff (1)
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH DEFECȚIUNI
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

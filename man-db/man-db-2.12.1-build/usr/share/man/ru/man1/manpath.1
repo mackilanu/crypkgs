@@ -1,0 +1,100 @@
+.\" Man page for manpath
+.\"
+.\" Copyright (C) 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the docs/COPYING.GPLv2 file that comes with the
+.\" man-db distribution.
+.\"
+.\" Sun Jan 22 22:15:17 GMT 1995 Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANPATH 1 2024-04-05 2.12.1 "Утилиты просмотра справочных страниц"
+.SH НАЗВАНИЕ
+manpath \- определяет путь поиска справочных страниц
+.SH СИНТАКСИС
+\fBmanpath\fP [\|\fB\-qgdc?V\fP\|] [\|\fB\-m\fP \fIсистема\fP\|[\|,.\|.\|.\|]\|]
+[\|\fB\-C\fP \fIфайл\fP\|]
+.SH ОПИСАНИЕ
+Если установлена переменная окружения $\fBMANPATH\fP, то \fBmanpath\fP просто
+покажет её значение и выдаст предупреждение. Если нет, то \fBmanpath\fP
+определит подходящий путь поиска иерархии справочных страниц и отобразит
+результаты.
+
+Список путей поиска (через двоеточие) определяется по данным файла настройки
+man\-db (\fI/etc/man_db.conf\fP) и пользовательского окружения.
+.SH ПАРАМЕТРЫ
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Не выдавать предупреждения.
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Показывать отладочную информацию.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-catpath
+Вывести catpath, а не manpath. После того, как определён manpath, каждый
+элемент преобразуется в соответствующий catpath.
+.TP 
+.if  !'po4a'hide' .BR \-g ", " \-\-global
+Вывести manpath, состоящий из всех путей, отмеченных как «глобальные» в
+файле настройки man\-db.
+.TP 
+\fB\-m\fP \fIсистема\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fIсистема\fP\|[\|,.\|.\|.\|]
+Если эта система имеет доступ к иерархиям справочных страниц других
+операционных систем, то с помощью этого параметра можно включить их в вывод
+\fBmanpath\fP. Чтобы включить иерархии справочных страниц для операционной
+системы NewOS, укажите \fB\-m\fP \fBNewOS\fP.
+
+В значении \fIсистема\fP можно указать несколько названий операционных систем
+через запятую. Чтобы включить иерархии родной операционной системы, в
+значение параметра нужно добавить системное название \fBman\fP. Этот параметр
+заменяет значение переменной окружения $\fBSYSTEM\fP.
+.TP 
+\fB\-C\ \fP\fIфайл\fP,\ \fB\-\-config\-file=\fP\fIфайл\fP
+Использовать указанный пользовательский файл настройки вместо значения по
+умолчанию \fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Показать справочное сообщение и закончить работу.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Показать короткое сообщение об использовании и завершить работу.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Показать информацию о версии.
+.SH ОКРУЖЕНИЕ
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Если задана переменная $\fBMANPATH\fP, то \fBmanpath\fP выведет её значение, а
+не будет определять её в процессе работы.
+
+О том, как используется эта переменная окружения и поведение по умолчанию,
+смотрите раздел \fBПУТЬ ПОИСКА\fP в \fBmanpath\fP(5).
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+Установка значения переменной окружения $\fBSYSTEM\fP равносильна указанию
+параметра \fB\-m\fP.
+.SH ФАЙЛЫ
+.TP  \w'/etc/man_db.conf'u+2n
+.if  !'po4a'hide' .I /etc/man_db.conf
+Файл настройки man\-db.
+.SH "СМОТРИТЕ ТАКЖЕ"
+.if  !'po4a'hide' .BR apropos (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR whatis (1)
+.SH АВТОР
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH ОШИБКИ
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

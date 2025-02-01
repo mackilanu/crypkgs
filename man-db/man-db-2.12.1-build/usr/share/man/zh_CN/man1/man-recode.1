@@ -1,0 +1,75 @@
+.\" Man page for man-recode
+.\"
+.\" Copyright (C) 2019 Colin Watson <cjwatson@debian.org>
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MAN-RECODE 1 2024-04-05 2.12.1 手册分页显示工具
+.SH 名称
+man-recode \- 将手册页转换为另一种编码
+.SH 概述
+\fBman-recode\fP \fB\-t\fP \fI目标编码\fP
+{\|\fB\-\-suffix=\fP\fIsuffix\/\fP\||\|\fB\-\-in\-place\fP\|} [\|\fB\-dqhV\fP\|] [\|\fI文件名\fP\|]
+.SH 描述
+\fBman-recode\fP
+可将多个手册页从一种编码转换至另一种编码，并猜测每一个手册页的合适的输入编码。它在永久性对过时字符集编写的页面进行转码时很有用，或者也可以在构建系统需要将一组手册页转码为单一的通用编码（通常为
+UTF\-8）时起到作用。在转换多个手册页时，该程序要远快于对每个页面运行 \fBman \-\-recode\fP 或 \fBmanconv\fP。
+.PP
+如果在手册页的第一行找到了编码声明，该声明将作为处理该手册页所使用的编码。否则将基于文件名猜测输入的编码方式。
+.PP
+编码的声明应使用如下的格式：
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" \-*\- coding: UTF\-8 \-*\-
+.fi
+.RE
+.PP
+或(如果手册页预处理器也要声明)：
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" t \-*\- coding: ISO\-8859\-1 \-*\-
+.fi
+.RE
+.SH 选项
+.TP 
+\fB\-t\fP \fIencoding\/\fP, \fB\-\-to\-code=\fP\fI编码\fP
+将手册页转换为制定 \fI编码\fP。
+.TP 
+\fB\-\-suffix=\fP\fI后缀\fP
+在移除任何压缩扩展名后，将输出文件名设置为输入文件名并添加 \fIsuffix\fP 后缀。
+.TP 
+.if  !'po4a'hide' .B \-\-in\-place
+在移除任何压缩扩展名后，将输入的每个文件使用输出覆写。
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+在页面无法转换时不显示错误消息。
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+打印调试信息。
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+打印帮助消息并退出。
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+显示版本信息。
+.SH 亦见
+.if  !'po4a'hide' .IR iconv (1),
+.if  !'po4a'hide' .IR man (1),
+.if  !'po4a'hide' .IR manconv (1)
+.SH BUGS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db
+.SH 作者
+.nf
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi

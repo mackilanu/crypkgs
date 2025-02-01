@@ -1,0 +1,101 @@
+.\" Man page for man-recode
+.\"
+.\" Copyright (C) 2019 Colin Watson <cjwatson@debian.org>
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MAN-RECODE 1 2024-04-05 2.12.1 "Utilitaires de l'afficheur des pages de manuel"
+.SH NOM
+man-recode \- Convertit des pages de manuel vers d'autres encodages
+.SH SYNOPSIS
+\fBman-recode\fP \fB\-t\fP \fIencodage\-cible\fP
+{\|\fB\-\-suffix=\fP\fIsuffixe\/\fP\||\|\fB\-\-in\-place\fP\|} [\|\fB\-dqhV\fP\|]
+[\|\fInom\-de\-fichier\fP\|]
+.SH DESCRIPTION
+\fBman-recode\fP  convertit plusieurs pages de manuel d'un encodage vers un
+autre en devinant l'encodage d'entrée approprié pour chacun d'eux. Il est
+utile pour le réencodage de pages écrites dans d'anciens encodages, ou pour
+les systèmes de compilation qui réencodent toutes les pages dans en seul
+encodage (le plus souvent UTF\-8) avant pour une installation. Pour une
+conversion de pages de manuel ce programme est plus rapide que d'exécuter
+\fBman \-\-recode\fP ou \fBmanconv\fP pour chaque page.
+.PP
+Si une déclaration d'encodage est trouvée sur la première ligne d'une page
+de manuel, cette déclaration est utilisée comme l'encodage d'entrée de cette
+page. En cas d'échec, l'encodage d'entrée est deviné à partir du nom du
+fichier.
+.PP
+Les déclarations d'encodage doivent respecter le format :
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" \-*\- coding: UTF\-8 \-*\-
+.fi
+.RE
+.PP
+ou (si les préprocesseurs de page de manuel sont aussi à déclarer) :
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" t \-*\- coding: ISO\-8859\-1 \-*\-
+.fi
+.RE
+.SH OPTIONS
+.TP 
+\fB\-t\fP \fIencodage\/\fP, \fB\-\-to\-code=\fP\fIencodage\fP
+Convertit les pages de manuel en \fIencodage\fP.
+.TP 
+\fB\-\-suffix=\fP\fIsuffixe\fP
+Détermine le nom du fichier de sortie en ajoutant \fIsuffixe\fP au nom du
+fichier d'entrée après avoir supprimé tout extension de compression.
+.TP 
+.if  !'po4a'hide' .B \-\-in\-place
+Écrase chaque fichier d'entrée avec la sortie après avoir supprimé tout
+extension de compression.
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Ne renvoie pas de messages d'erreur quand la page ne peut pas être
+convertie.
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Affiche les informations de mise au point.
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+Affiche un message d'aide et s'arrête.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Affiche le numéro de version.
+.SH "VOIR AUSSI"
+.if  !'po4a'hide' .IR iconv (1),
+.if  !'po4a'hide' .IR man (1),
+.if  !'po4a'hide' .IR manconv (1)
+.SH BOGUES
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db
+.SH AUTEUR
+.nf
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH TRADUCTION
+Cette traduction est maintenue à l'aide de l'outil
+po4a <URL:https://po4a.org/> par l'équipe
+francophone de traduction de Debian.
+.PP
+Valéry Perrin <valery.perrin.debian@free.fr> le 2 janvier 2006.
+David Prévot <david@tilapin.org> et l'équipe francophone de traduction de Debian\ (2010).
+.PP
+Veuillez signaler toute erreur de traduction en écrivant à
+<debian\-l10n\-french@lists.debian.org> ou par un rapport de bogue sur
+le paquet man-db.
+.PP
+Vous pouvez toujours avoir accès à la version anglaise de ce document en
+utilisant la commande
+«\ \fBman\ \-L C\fR \fI<section>\fR\ \fI<page_de_man>\fR\ ».

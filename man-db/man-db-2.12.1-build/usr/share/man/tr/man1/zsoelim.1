@@ -1,0 +1,65 @@
+.\" Man page for zsoelim
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Dec 10 19:33:32 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH ZSOELIM 1 2024-04-05 2.12.1 "Kılavuz sayfası yardımcıları"
+.SH AD
+zsoelim \- roff girdisindeki .so istekleri yerine getir
+.SH ÖZET
+\fBzsoelim\fP [\|\fB\-CVh\fP\|] [\|\fIdosya\fP \&.\|.\|.\|]
+.SH AÇIKLAMA
+\fBzsoelim\fP, \fIdosya\fP bağımsız değişkenlerini ayrıştırır veya hiçbiri
+belirtilmezse formun satırları için standart girdisini alır:
+
+\&\fB.so\fP <\|\fIdosyaadı\fP\|>
+
+Bu isteklerin yerini, belirtilen \fIdosyaadı\fP içeriği alır.  İstek
+karşılanamazsa \fBzsoelim\fP \fIdosyaadı.uzantı\fP arar; burada \fI.ext\fP, \fB.gz\fP,
+\&\fB.Z\fP veya \fB.z\fP olabilir.  Diğer uzantı türleri, derleme süresi
+seçeneklerine bağlı olarak desteklenebilir.  İstek bir sıkıştırılmış dosya
+tarafından karşılanabiliyorsa bu dosya uygun bir açıcı kullanılarak açılır
+ve çıktıyı isteği karşılamak için kullanılır.
+
+Geleneksel olarak, \fBsoelim\fP programları, roff önişlemcilerinin istek
+tarafından belirtilen dosyaların önişlemini yapabilmelerini sağlamak için
+kullanılmıştır.  Bu özel sürüm, sıkıştırılmış kılavuz sayfaları için destek
+tarafından yaratılan sorunları önlemek için yazılmıştır.
+.SH SEÇENEKLER
+.TP 
+.if  !'po4a'hide' .BR \-C ", " \-\-compatible
+Bu bayrak, diğer \fBsoelim\fP programlarıyla uyumluluk için kullanılabilir.
+Kullanımı, .so isteklerini boşluk haricinde başka bir şey izleyerek
+etkinleştirmektir.  Bu zaten öntanımlı davranış olduğundan, yok sayılır.
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+Bir yardım iletisi göster ve çık.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Sürüm bilgisini göster.
+.SH "AYRICA BAKINIZ"
+.if  !'po4a'hide' .BR groff (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR nroff (1),
+.if  !'po4a'hide' .BR troff (1)
+.SH YAZAR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH HATALAR
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

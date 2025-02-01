@@ -1,0 +1,102 @@
+.\" Man page for manpath
+.\"
+.\" Copyright (C) 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the docs/COPYING.GPLv2 file that comes with the
+.\" man-db distribution.
+.\"
+.\" Sun Jan 22 22:15:17 GMT 1995 Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANPATH 1 2024-04-05 2.12.1 "Verktyg för sidvisning av manual"
+.SH NAMN
+manpath \- bestäm sökvägen för manualsidor
+.SH SYNOPSIS
+\fBmanpath\fP [\|\fB\-qgdc?V\fP\|] [\|\fB\-m\fP \fIsystem\fP\|[\|,.\|.\|.\|]\|] [\|\fB\-C\fP
+\fIfil\fP\|]
+.SH BESKRIVNING
+Om $\fBMANPATH\fP är satt kommer \fBmanpath\fP helt enkelt att visa dess
+innehåll och mata ut en varning.  Om inte så kommer \fBmanpath\fP att
+bestämma en lämplig sökväg för hierarkier av manualsidor och visa
+resultaten.
+
+Den kolonavgränsade sökvägen bestäms med information som hämtats från
+konfigurationsfilen för man\-db \en (\fI/etc/man_db.conf\fP) och
+användarens miljö.
+.SH FLAGGOR
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Mata inte ut varningar.
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Skriver ut felsökningsinformation.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-catpath
+Producera en cat\-sökväg till skillnad från en man\-sökväg.  När man\-sökvägen
+är bestämd kommer varje element i sökvägen att konverteras till dess
+relativa cat\-sökväg.
+.TP 
+.if  !'po4a'hide' .BR \-g ", " \-\-global
+Producera en man\-sökväg som består av alla sökvägar som benämnts som
+”globala” i konfigurationsfilen för man\-db.
+.TP 
+\fB\-m\fP \fIsystem\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fIsystem\fP\|[\|,.\|.\|.\|]
+Om detta system har tillgång till andra operativsystems hierarkier av
+manualsidor kan denna flagga användas för inkludera dem i utmatningen från
+\fBmanpath\fP.  För att inkludera hierarkierna av manualsidor för NyttOS
+använd flaggan \fB\-m\fP \fBNyttOS\fP.
+
+Det angivna \fIsystem\fP\-et kan vara en kombination av kommaavgränsade
+operativsystemsnamn.  För att inkludera det aktuella operativsystemets
+hierarkier av manualsidor måste systemnamnet \fBman\fP inkluderas i
+argumentsträngen.  Denna flagga kommer att åsidosätta miljövariabeln
+$\fBSYSTEM\fP.
+.TP 
+\fB\-C\ \fP\fIfil\fP,\ \fB\-\-config\-file=\fP\fIfil\fP
+Använd denna användarkonfigurationsfil snarare än standard \fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Skriv ut ett hjälpmeddelande och avsluta.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Skriv ut ett kort användningsmeddelande och avsluta.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Visa versionsinformation.
+.SH MILJÖ
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Om $\fBMANPATH\fP är satt kommer \fBmanpath\fP att visa dess värde snarare än
+att bestämma det i farten.
+
+Se avsnittet för \fBSÖKVÄG\fP i \fBmanpath\fP(5)  för standardbeteende och
+detaljer om hur denna miljövariabel hanteras.
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+Om $\fBSYSTEM\fP är satt kommer den att ha samma effekt som om den hade angetts
+som argument till flaggan \fB\-m\fP.
+.SH FILER
+.TP  \w'/etc/man_db.conf'u+2n
+.if  !'po4a'hide' .I /etc/man_db.conf
+man\-db\-konfigurationsfil.
+.SH "SE VIDARE"
+.if  !'po4a'hide' .BR apropos (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR whatis (1)
+.SH UPPHOVSMAN
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH FEL
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

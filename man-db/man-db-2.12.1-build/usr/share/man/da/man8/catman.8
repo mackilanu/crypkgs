@@ -1,0 +1,100 @@
+.\" Man page for catman
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Dec 10 14:17:29 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH CATMAN 8 2024-04-05 2.12.1 "Værktøjer til manualsider"
+.SH NAVN
+catman \- opret eller opdater de på forhånd formaterede manualsider
+.SH SYNOPSIS
+\fBcatman\fP [\|\fB\-d?V\fP\|] [\|\fB\-M\fP \fIsti\fP\|] [\|\fB\-C\fP \fIfil\fP\|]
+[\|\fIafsnit\fP\|] \&.\|.\|.
+.SH BESKRIVELSE
+\fBcatman\fP is used to create an up to date set of pre\-formatted manual
+pages known as cat pages.  Cat pages are generally much faster to display
+than the original manual pages, but require extra storage space.  The
+decision to support cat pages is that of the local administrator, who must
+provide suitable directories to contain them.
+
+The options available to \fBcatman\fP are the manual page hierarchies and
+sections to pre\-format.  The default hierarchies are those specified as
+system hierarchies in the man\-db configuration file, and the default
+sections are either the colon\-delimited contents of the environment variable
+$\fBMANSECT\fP or the standard set compiled into \fBman\fP if $\fBMANSECT\fP is
+undefined.  Supplying \fBcatman\fP with a set of whitespace\-delimited section
+names will override both of the above.
+
+\fBcatman\fP makes use of the \fBindex\fP database cache associated with each
+hierarchy to determine which files need to be formatted.
+.SH TILVALG
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Vis fejlsøgningsinformation.
+.TP 
+\fB\-M\ \fP\fIsti\fP,\ \fB\-\-manpath=\fP\fIsti\fP
+Specify an alternate colon\-delimited manual page hierarchy search path.  By
+default, this is all paths indicated as system hierarchies in the man\-db
+configuration file.
+.TP 
+\fB\-C\ \fP\fIfil\fP,\ \fB\-\-config\-file=\fP\fIfil\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Vis en hjælpebesked og afslut.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Vis en kort hjælpebesked og afslut.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Vis versionsinformation.
+.SH MILJØ
+.TP 
+.if  !'po4a'hide' .B MANSECT
+If $\fBMANSECT\fP is set, its value is a colon\-delimited list of sections and
+it is used to determine which manual sections to search and in what order.
+The default is "1 n l 8 3 0 2 3type 5 4 9 6 7", unless overridden by the \fBSECTION\fP directive
+in \fI/etc/man_db.conf\fP.
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Hvis $\fBMANPATH\fP er angivet, dets værdi er fortolket som den kolonafgrænsede
+manualsides hierarkisøgesti at anvende.
+
+See the \fBSEARCH PATH\fP section of \fBmanpath\fP(5)  for the default behaviour
+and details of how this environment variable is handled.
+.SH FILER
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+konfigurationsfil for man\-db.
+.TP 
+.if  !'po4a'hide' .I /usr/man/index.(bt|db|dir|pag)
+Et traditionelt globalt \fIindex\fP\-databasemellemlager.
+.TP 
+.if  !'po4a'hide' .I /var/catman/index.(bt|db|dir|pag)
+Et alternativt eller FSSTND\-overholdende globalt
+\fIindex\fP\-databasemellemlager.
+.SH "SE OGSÅ"
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR mandb (8)
+.SH FORFATTER
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH FEJL
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

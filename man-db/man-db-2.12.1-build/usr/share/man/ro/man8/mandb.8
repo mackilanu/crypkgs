@@ -1,0 +1,191 @@
+'\" t
+.\" Man page for mandb
+.\"
+.\" Copyright (C) 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Tue Apr 26 12:56:44 BST 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANDB 8 2024-04-05 2.12.1 "Utilitare ale paginatorului de manual"
+.SH NUME
+mandb \- creează sau actualizează memoriile tampon de index ale paginilor
+de manual
+.SH REZUMAT
+\fBmandb\fP [\|\fB\-dqsucpt?V\fP\|] [\|\fB\-C\fP \fIfișier\fP\|] [\|\fIrută\-manual\fP\|]
+.br
+\fBmandb\fP [\|\fB\-dqsut\fP\|] [\|\fB\-C\fP \fIfișier\fP\|] \fB\-f\fP \fInume\-fișier\fP\ \&.\|.\|.
+.SH DESCRIERE
+\fBmandb\fP este utilizat pentru a inițializa sau actualiza manual memoriile
+tampon ale bazelor de date \fBindex\fP.  Memoriile tampon conțin informații
+relevante pentru starea curentă paginilor de manual ale sistemului, și
+informațiile stocate în ele sunt utilizate de utilitarele «man\-db» pentru a
+le îmbunătăți viteza și funcționalitatea.
+
+Când se creează sau se actualizează un \fBindex\fP, \fBmandb\fP va avertiza cu
+privire la cererile .so ROFF defectuoase, nume de fișiere ale paginilor de
+manual false, și pagini de manual din care \fBwhatis\fP nu poate fi analizat.
+
+Furnizarea lui \fBmandb\fP cu o rută opțională delimitată de două puncte va
+suprascrie ruta de căutare a ierarhiei paginilor de manual a sistemului
+internă, determinată din informațiile găsite în fișierul de configurare
+«man\-db».
+.SH "MEMORII TAMPON BAZĂ DE DATE"
+\fBmandb\fP poate fi compilat cu suport pentru oricare dintre următoarele
+tipuri de baze de date.
+
+.TS
+tab (@);
+l l l.
+Nume@Asincron@Numele fișierului
+_
+Bază de date Berkeley@Da@\fIindex.bt\fP
+GNU gdbm@Da@\fIindex.db\fP
+UNIX ndbm@Nu@\fIindex.(dir|pag)\fP
+.TE
+
+Acele tipuri de baze de date care suportă actualizări asincrone oferă o
+viteză sporită cu prețul unei posibile coruperi în cazul de terminare
+neobișnuită.  Într\-un caz neobișnuit în care s\-a întâmplat acest lucru,
+poate fi necesar să rulați din nou \fBmandb\fP cu opțiunea \fB\-c\fP pentru a
+recrea bazele de date de la zero.
+.SH OPȚIUNI
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Imprimă informațiile de depanare.
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Nu produce avertismente.
+.TP 
+.if  !'po4a'hide' .BR \-s ", " \-\-no-straycats
+Nu pierdeți timp căutând sau adăugând informații în bazele de date cu
+privire la fișierele «cat» pierdute.
+.TP 
+.if  !'po4a'hide' .BR \-p ", " \-\-no-purge
+Nu pierdeți timp verificând pentru pagini de manual șterse și curățarea lor
+de la bazele de date.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-create
+În mod implicit, \fBmandb\fP va încerca să actualizeze orice bază de date
+creată anterior.  Dacă o bază de date nu există, o va crea.  Această opțiune
+forțează \fBmandb\fP să șteargă bazele de date anterioare și să le recreeze
+de la zero și implică \fB\-\-no\-purge\fP.  Acest lucru poate fi necesar dacă o
+bază de date devine coruptă, sau dacă o nouă schemă de stocare a bazei de
+date este introdusă în viitor.
+.TP 
+.if  !'po4a'hide' .BR \-u ", " \-\-user-db
+Creează doar bazele de date de utilizator, chiar și cu permisiunile de
+scriere necesare pentru a crea baze de date de sistem.
+.TP 
+.if  !'po4a'hide' .BR \-t ", " \-\-test
+Efectuează verificările de corectare a paginilor de manual din ruta de
+căutare ierarhică.  Cu această opțiune, \fBmandb\fP nu va modifica bazele de
+date existente.
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-filename
+Actualizează doar intrările pentru numele de fișier dat.  Această opțiune nu
+este pentru uz general; este utilizată intern de \fBman\fP când a fost
+compilat cu opțiunea \fBMAN_DB_UPDATES\fP și găsește că o pagină nu este
+actualizată.  Implică \fB\-p\fP și dezactivează \fB\-c\fP și \fB\-s\fP.
+.TP 
+\fB\-C\ \fP\fIfișier\fP,\ \fB\-\-config\-file=\fP\fIfișier\fP
+Utilizează acest fișier de configurare al utilizatorului, mai degrabă decât
+cel implicit din \fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Afișează mesajul de utilizare, apoi iese.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Imprimă un mesaj scurt de utilizare și iese.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Arată versiunea, apoi iese.
+.SH "STARE DE IEȘIRE"
+.TP 
+.if  !'po4a'hide' .B 0
+Executarea programului s\-a încheiat fără erori.
+.TP 
+.if  !'po4a'hide' .B 1
+Eroare de utilizare, de sintaxă sau de fișier de configurare.
+.TP 
+.if  !'po4a'hide' .B 2
+Eroare operațională.
+.TP 
+.if  !'po4a'hide' .B 3
+Un proces copil a eșuat.
+.SH DIAGNOSTICARE
+Următoarele mesaje de avertisment pot fi emise în timpul construirii bazei
+de date.
+.TP 
+\fB<nume\-fișier>: analizarea whatis pentru pagina(secțiunea) a eșuat\fP
+O încercare de a extrage linia/liniile «whatis» din
+<nume(le)\-fișier(ului)> specificat, a eșuat.   Acest lucru se
+datorează de obicei, unei pagini de manual scrise greșit, dar dacă sunt
+emise multe astfel de mesaje, este posibil ca sistemul să conțină pagini de
+manual non\-standard, care sunt incompatibile cu analizatorul «whatis» al
+«man\-db».  Consultați secțiunea \fBWHATIS PARSING\fP din \fBlexgrog\fP(1)  pentru
+mai multe informații.
+.TP 
+\fB<nume\-fișier>: este o legătură simbolică suspendată(ruptă)\fP
+<nume\-fișier> nu există, dar o legătură simbolică face referire la
+el.  Mai multe diagnosticări sunt de obicei emise pentru a identifica
+<nume\-fișier> al legăturii defecte.
+.TP 
+\fB<nume\-fișier>: legătură simbolică sau cerere „.so” ROFF greșită\fP
+<nume\-fișier> este ori o legătură simbolică la un fișier care nu
+există, ori conține o cerere de includere ROFF la un fișier care nu există.
+.TP 
+\fB<nume\-fișier>: se ignoră numele de fișier fals\fP
+<nume\-fișier> poate să fie sau poate să nu fie o pagină de manual
+validă dar numele său nu este valid.  Acest lucru este de obicei din cauza
+unei pagini de manual cu extensia secțională <x> care a fost plasată
+în secțiunea paginii de manual <y>.
+.TP 
+\fB<mască_nume\-fișier>: extensii în conflict\fP
+Metacaracterul <mască_nume\-fișier> nu este unic.  Acest lucru este
+cauzat de obicei de existența atât a unei versiuni comprimate, cât și a unei
+versiuni necomprimate ale aceleiași pagini de manual.  Toate, în afară de
+cea mai recentă, sunt ignorate.
+.SH FIȘIERE
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+fișier de configurare man\-db.
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt|db|dir|pag)
+Memorie tampon a bazei de date \fIindex\fP globală conform cu FHS.
+.PP
+Locațiile mai vechi pentru memoria tampon a bazei de date includ:
+.TP 
+.if  !'po4a'hide' .I /usr/man/index.(bt|db|dir|pag)
+Memorie tampon a bazei de date \fIindex\fP globală tradițională.
+.TP 
+.if  !'po4a'hide' .I /var/catman/index.(bt|db|dir|pag)
+O memorie tampon a bazei de date \fIindex\fP global, compatibil sau alternativ
+cu FSSTND.   NT: FSSTND = Sistemul de fișiere standard.
+.SH "CONSULTAȚI ȘI"
+.if  !'po4a'hide' .BR lexgrog (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR catman (8)
+.PP
+Secțiunea \fBWHATIS PARSING\fP care în trecut, făcea parte din această pagină
+de manual, acum face parte din \fBlexgrog\fP(1).
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH DEFECȚIUNI
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

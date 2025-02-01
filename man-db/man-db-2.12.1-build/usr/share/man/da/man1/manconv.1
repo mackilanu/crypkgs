@@ -1,0 +1,76 @@
+.\" Man page for manconv
+.\"
+.\" Copyright (c) 2007, 2008 Colin Watson <cjwatson@debian.org>
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANCONV 1 2024-04-05 2.12.1 "Værktøjer til manualsider"
+.SH NAVN
+manconv \- konverter manualside fra en kodning til en anden
+.SH SYNOPSIS
+\fBmanconv\fP \fB\-f\fP [\|\fIfrom\-code\fP\|[:\fIfrom\-code\fP\|.\|.\|.]\|] \fB\-t\fP
+\fIto\-code\fP [\|\fB\-dqhV\fP\|] [\|\fIfilename\fP\|]
+.SH BESKRIVELSE
+\fBmanconv\fP converts a manual page from one encoding to another, like
+\fBiconv\fP.  Unlike \fBiconv\fP, it can try multiple possible input encodings in
+sequence.  This is useful for manual pages installed in directories without
+an explicit encoding declaration, since they may be in UTF\-8 or in a legacy
+character set.
+.PP
+Hvis en kodningsdeklaraton findes på den første linje af manualsiden, så
+overstyrer den deklaration alle inddatakodninger specificeret på
+\fBmanconv\fP's kommandolinje. Kodningsdeklarationer har den følgende form:
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" \-*\- coding: UTF\-8 \-*\-
+.fi
+.RE
+.PP
+eller (hvis manualsideforbehandlere også skal deklareres):
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" t \-*\- coding: ISO\-8859\-1 \-*\-
+.fi
+.RE
+.SH TILVALG
+.TP 
+\fB\-f\fP \fIKodninger\fP, \fB\-\-from\-code\fP \fIKodninger\fP
+Try each of \fIencodings\fP (a colon\-separated list) in sequence as the input
+encoding.  The default is to guess likely input encodings based on the file
+name.
+.TP 
+\fB\-t\fP \fIkodning\fP, \fB\-\-to\-code\fP \fIkodning\fP
+Konverter manualsiden til \fIkodning\fP.
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Vis ikke fejlbeskeder når siden ikke kan konverteres.
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Vis fejlsøgningsinformation.
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+Vis en hjælpebesked og afslut.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Vis versionsinformation.
+.SH "SE OGSÅ"
+.if  !'po4a'hide' .IR iconv (1),
+.if  !'po4a'hide' .IR man (1),
+.if  !'po4a'hide' .IR man-recode (1)
+.SH FORFATTER
+.nf
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH FEJL
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

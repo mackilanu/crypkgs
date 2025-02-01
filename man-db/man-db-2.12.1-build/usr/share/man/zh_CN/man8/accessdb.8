@@ -1,0 +1,50 @@
+.\" Man page for accessdb
+.\"
+.\" Copyright (c) 1998 Fabrizio Polacco <fpolacco@debian.org
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Tue, 24 Feb 1998 18:18:36 +0200
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH ACCESSDB 8 2024-04-05 2.12.1 手册分页显示工具
+.SH 名称
+accessdb \- 以易读的格式转储 man\-db 数据库的内容
+.SH 概述
+\fB/usr/sbin/accessdb\fP [\|\fB\-d?V\fP\|] [\fI<索引文件>\fP]
+.SH 描述
+\fBaccessdb\fP 会以易读的格式输出 man\-db 数据库中包含的内容。它默认转储来自
+\fB/var/cache/man/index.<db\-type>\fP 的数据，其中 <db\-type>
+由所使用的数据库的库确定。
+
+给 accessdb 提供参数会覆盖这一默认值。
+.SH 选项
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+打印调试信息。
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+打印帮助消息并退出。
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+打印简短的帮助消息并退出。
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+显示版本信息。
+.SH 作者
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BUGS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

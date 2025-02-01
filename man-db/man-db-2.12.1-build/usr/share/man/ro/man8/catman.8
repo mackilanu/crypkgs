@@ -1,0 +1,104 @@
+.\" Man page for catman
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Dec 10 14:17:29 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH CATMAN 8 2024-04-05 2.12.1 "Utilitare ale paginatorului de manual"
+.SH NUME
+catman \- creează sau actualizează paginile de manual preformatate
+.SH REZUMAT
+\fBcatman\fP [\|\fB\-d?V\fP\|] [\|\fB\-M\fP \fIruta\fP\|] [\|\fB\-C\fP \fIfișier\fP\|]
+[\|\fIsecțiune\fP\|] \&.\|.\|.
+.SH DESCRIERE
+\fBcatman\fP este utilizată pentru a crea un set actualizat de pagini de
+manual preformatate cunoscut ca pagini «cat».  Paginile «cat» sunt în
+general mult mai rapid de afișat decât paginile de manual originale, dar
+necesită spațiu de stocare extra.  Decizia de a da suport paginilor «cat»,
+este aceea a administratorului local, care trebuie să furnizeze directoare
+potrivite pentru a le conține.
+
+Opțiunile disponibile pentru \fBcatman\fP sunt ierarhiile de pagini de manual
+și secțiunile de preformatat.  Ierarhiile implicite sunt cele specificate ca
+ierarhii de sistem în fișierul de configurare «man\-db», iar secțiunile
+implicite sunt fie conținutul delimitat de două puncte ale variabilei de
+mediu $\fBMANSECT\fP , fie setul standard compilat în \fBman\fP dacă $\fBMANSECT\fP
+nu este definit.  Furnizarea lui \fBcatman\fP cu un set de nume de secțiuni
+delimitate de spații albe, va suprascrie cele două variabile de mai sus.
+
+\fBcatman\fP utilizează memoria tampon a bazei de date \fBindex\fP asociată
+fiecărei ierarhii, pentru a determina ce fișiere trebuie formatate.
+.SH OPȚIUNI
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Imprimă informațiile de depanare.
+.TP 
+\fB\-M\ \fP\fIruta\fP,\ \fB\-\-manpath=\fP\fIruta\fP
+Specificați o rută alternativă de căutare în ierarhia paginilor de manual,
+delimitată de două puncte.  În mod implicit, acestea sunt toate rutele
+indicate ca ierarhii de sistem în fișierul de configurare «man\-db».
+.TP 
+\fB\-C\ \fP\fIfișier\fP,\ \fB\-\-config\-file=\fP\fIfișier\fP
+Utilizează acest fișier de configurare al utilizatorului, mai degrabă decât
+cel implicit din \fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Imprimă un mesaj de ajutor și iese.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Imprimă un mesaj scurt de utilizare și iese.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Afișează informații despre versiune.
+.SH MEDIU
+.TP 
+.if  !'po4a'hide' .B MANSECT
+Dacă $\fBMANSECT\fP este stabilită, valoarea acesteia este o listă de secțiuni
+delimitată de două puncte și este utilizată pentru a determina care secțiuni
+din manual să se caute și în ce ordine.   Valoarea implicită este
+„1 n l 8 3 0 2 3type 5 4 9 6 7”, dacă nu este suprascrisă de directiva \fBSECȚIUNE\fP din
+\fI/etc/man_db.conf\fP.
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Dacă $\fBMANPATH\fP este stabilită, valoarea acesteia va fi interpretată ca
+fiind ruta de căutare a ierarhiei paginilor de manual delimitată prin două
+puncte care trebuie utilizată.
+
+Consultați secțiunea \fBRUTA DE CĂUTARE\fP din \fBmanpath\fP(5) pentru
+comportamentul implicit și detalii despre modul în care este gestionată
+această variabilă de mediu.
+.SH FIȘIERE
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+fișier de configurare man\-db.
+.TP 
+.if  !'po4a'hide' .I /usr/man/index.(bt|db|dir|pag)
+Memorie tampon a bazei de date \fIindex\fP globală tradițională.
+.TP 
+.if  !'po4a'hide' .I /var/catman/index.(bt|db|dir|pag)
+O memorie tampon a bazei de date \fIindex\fP global, compatibil sau alternativ
+cu FSSTND.   NT: FSSTND = Sistemul de fișiere standard.
+.SH "CONSULTAȚI ȘI"
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR mandb (8)
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH DEFECȚIUNI
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

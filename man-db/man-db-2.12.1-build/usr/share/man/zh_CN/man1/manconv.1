@@ -1,0 +1,69 @@
+.\" Man page for manconv
+.\"
+.\" Copyright (c) 2007, 2008 Colin Watson <cjwatson@debian.org>
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANCONV 1 2024-04-05 2.12.1 手册分页显示工具
+.SH 名称
+manconv \- 将手册页从一种编码转换到另一种
+.SH 概述
+\fBmanconv\fP \fB\-f\fP [\|\fI源编码\fP\|[:\fI源编码\fP\|.\|.\|.]\|] \fB\-t\fP \fI目标编码\fP
+[\|\fB\-dqhV\fP\|] [\|\fI文件名\fP\|]
+.SH 描述
+\fBmanconv\fP 将手册页从一种编码转换到另一种，类似 \fBiconv\fP。与 \fBiconv\fP
+不同的是，它可以依次尝试多个可能的输入编码。这对安装在未明确指明编码的目录中的手册页很有用，因为这些手册页可能是 UTF\-8 编码或某种传统字符集编码。
+.PP
+如果在手册页的第一行找到了编码声明，该声明会覆盖 \fBmanconv\fP 命令行中指定的任何输入编码。编码声明格式如下：
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" \-*\- coding: UTF\-8 \-*\-
+.fi
+.RE
+.PP
+或(如果手册页预处理器也要声明)：
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" t \-*\- coding: ISO\-8859\-1 \-*\-
+.fi
+.RE
+.SH 选项
+.TP 
+\fB\-f\fP \fI编码\fP, \fB\-\-from\-code\fP \fI编码\fP
+依次尝试每种 \fI编码\fP（冒号分隔的列表）作为输入编码。默认行为是根据文件名猜测可能的输入编码。
+.TP 
+\fB\-t\fP \fI编码\fP, \fB\-\-to\-code\fP \fI编码\fP
+将手册转换为 \fI编码\fP。
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+在页面无法转换时不显示错误消息。
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+打印调试信息。
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+打印帮助消息并退出。
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+显示版本信息。
+.SH 亦见
+.if  !'po4a'hide' .IR iconv (1),
+.if  !'po4a'hide' .IR man (1),
+.if  !'po4a'hide' .IR man-recode (1)
+.SH 作者
+.nf
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BUGS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

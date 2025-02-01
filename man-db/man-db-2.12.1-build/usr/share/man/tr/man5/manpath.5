@@ -1,0 +1,164 @@
+.\" Man page for format of the manpath.config data file
+.\"
+.\" Copyright (C) 1994, 1995 Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANPATH 5 2024-04-05 2.12.1 /etc/man_db.conf
+.SH AD
+manpath \- /etc/man_db.conf dosyasının biçimi
+.SH AÇIKLAMA
+Manpath yapılandırma dosyası kılavuz sayfa yardımcı programları tarafından,
+hangi kılavuz sayfa hiyerarşilerinin (manpaths) sistem hiyerarşileri olarak
+ele alınacağını ve cat dosyalarının depolanması için kullanılacak dizinleri
+atamak için çalışma zamanında kullanıcıların manpath'lerini değerlendirmek
+için kullanılır.
+
+Çevre değişkeni $\fBMANPATH\fP önceden ayarlanmışsa /etc/man_db.conf
+içindeki bilgi onun üzerine yazılmaz.
+.SH "ARAMA YOLU"
+Öntanımlı olarak, man\-db kullanıcının $\fBPATH\fP'ini inceler.  Orada bulunan
+her \fIpath_element\fP için arama yoluna \fImanpath_element\fP ekler.
+
+Verilen bir \fIyol_ögesi\fP için yapılandırma dosyasında bir \fBMANPATH_MAP\fP
+yoksa arama yoluna bir dizin olarak var olan tüm \fIyol_ögesi/../man\fP,
+\fIyol_ögesi/man\fP, \fIyol_ögesi/../share/man\fP ve \fIyol_ögesi/share/man\fP
+yollarını ekler.
+
+Sonrasında arama yoluna yapılandırma dosyasından tüm \fBMANDATORY_MANPATH\fP
+girdilerini ekler.
+
+Son olarak, \fB\-\-systems\fP seçeneği kullanılmışsa veya $\fBSYSTEM\fP çevre
+değişkeni ayarlıysa virgülle veya iki nokta ile ayrılan bir işletim sistemi
+adları sıralamasından oluşmalıdır.  Bu, arama yolunu diğer işletim
+sistemlerinin kılavuz sayfalarına erişime izin vermek için genişleten bir
+şablon olarak davranır: Her ber sistem adı için, man\-db o adı arama
+yolundaki her bir girdinin alt girdisi olarak arar ve eğer varsa final arama
+yoluna ekler.  \fBman\fP'in bir sistem adı, normal arama yolunu alt dizinler
+olmadan ekler.  Örneğin, arama yolu başka bir durumda
+\fI/usr/share/man:/usr/local/man\fP olsaydı ve $\fBSYSTEM\fP, \fInewOS:man\fP olarak
+ayarlı olsaydı final arama yolu
+\fI/usr/share/man/newOS:/usr/share/man:/usr/local/man/newOS:/usr/local/man\fP
+olurdu.
+
+$\fBMANPATH\fP çevre değişkeni man\-db'nin öntanımlı kılavuz sayfası arama
+yollarını geçersiz kılar.  Çoğu kullanıcının bunu ayarlamasına gerek
+yoktur.  Sözdizimi $\fBPATH\fP çevre değişkenininkine benzerdir: İki nokta ile
+ayrılan bir dizin adları sıralamasıdır.  Yukarıda açıklanan öntanımlı arama
+yolunu geçersiz kılar.
+
+$\fBMANPATH\fP'in değeri bir iki nokta ile başlıyorsa öntanımlı arama yolu
+başlangıcına eklenir.  $\fBMANPATH\fP'in değeri bir iki nokta ile bitiyorsa
+öntanımlı arama yolu bitişine eklenir.  $\fBMANPATH\fP'in değeri iki tane iki
+nokta içeriyorsa (\fB::\fP) öntanımlı arama yolu iki iki noktanın arasına,
+değerin ortasında eklenir.
+.SH BİÇİM
+Aşağıdaki alan türleri mevcut olarak tanınmaktadır:
+.TP 
+\fB#\fP\fI\ yorum\fP
+Boş veya \fB#\fP ile başlayan satırlar açıklamalar olarak değerlendirilir ve
+yok sayılır.
+.TP 
+\fBMANDATORY_MANPATH\fP\fI\ manpath_element\fP
+Bu formun satırları, otomatik olarak üretilen $\fBMANPATH\fP'ın içermesi
+gereken kılavuz yollarını belirtir.  Bu genelde \fI/usr/man\fP'yi içerir.
+.TP 
+\fBMANPATH_MAP\fP\fI\ path_element\ manpath_element\fP
+Bu formun satırları $\fBPATH\fP'i $\fBMANPATH\fP eşlemelerine ayarladı.
+Kullanıcının $\fBPATH\fP içinde bulunan her \fIpath_element\fP için, $\fBMANPATH\fP'a
+\fImanpath_element\fP eklenecektir.
+.TP 
+\fBMANDB_MAP \fP\fImanpath_element \fP\|[\| \fIcatpath_element\fP \|]
+Bu formun satırları hangi kılavuz yollarına sistem kılavuz yolları olarak
+muamele edileceğini ve isteğe bağlı olarak cat dosyalarının nerede
+saklanacağını belirtir.  Eğer \fBman\fP bir setuid uygulama ise (kullanıcıya
+özel yapılandırma dosyası .manpath yerine sistem yapılandırma dosyasında
+/etc/man_db.confda olduğunda)  hangi kılavuz hiyerarşilerine setuid
+kullanıcısı olarak erişileceğini ve hangilerine çağıran kullanıcı olarak
+erişileceğini belirttiği için bu alan türü özellikle önemlidir.
+
+Sistem kılavuz sayfası hiyerarşileri genellikle \fI/usr/man\fP,
+\fI/usr/local/man\fP ve \fI/usr/X11R6/man\fP gibi \fI/usr\fP altında saklanan
+hiyerarşilerdir.
+
+Belirli bir \fImanpath_element\fP'ten cat sayfaları depolanmayacak veya
+geleneksel konumda saklanacaksa \fIcatpath_element\fP iptal edilebilir.
+
+Geleneksel cat yerleştirmesi, saltokunur bağlı kılavuz sayfası hiyerarşileri
+için olanaksızdır ve bundan dolayı onların depolamaları için herhangi bir
+geçerli dizin hiyerarşisi belirtilebilir.  \fBLinux FSSTND\fP'yi gözlemlemek
+için, gerçek bir dizinin yerine \fBFSSTND\fP anahtar sözcüğü kullanılabilir.
+
+Ne yazık ki \fI/usr/man/sun\fP ve \fI/usr/man/de_DE.88591\fP gibi herhangi bir
+\fBNLS yereli\fP yerel ayarı yolu gibi alternatif işletim sistemi yolları da
+dahil olmak üzere \fBall\fP sistem adam ağaç yollarını belirtmek gereklidir.
+
+Bilgiler, yazıldıkları sırayla ayrıştırıldığından, başka bir hiyerarşinin
+alt hiyerarşisi olan herhangi bir kılavuz yolunun önce listelenmesi gerekir,
+aksi halde yanlış bir eşleşme yapılacaktır.  Bunun bir örneği,
+\fI/usr/man/de_DE.88591\fP'nin \fI/usr/man\fP'dan önce gelmesi gerektiğidir.
+.TP 
+\fBDEFINE\fP\fI\ anahtar\ değer\fP
+Bu formun satırları, çeşitli yapılandırma değişkenlerini tanımlar; kılavuz
+sayfalayıcı yardımcı programları tarafından kullanılan bu değişkenler için
+öntanımlı yapılandırma dosyasına bakın.  Çeşitli programlara (\fIgrep\fP ve
+\fItbl\fP gibi) öntanımlı yollar ve bu programlara öntanımlı argümanlar
+kümeleri içerirler.
+.TP 
+\fBSECTION\fP \fIbölüm\fP .\|.\|.
+.RS
+Bu formun satırları, kılavuz bölümlerinin arama sırasını tanımlar.
+Yapılandırma dosyasında \fBSECTION\fP yönergesi yoksa öntanımlı değer şudur:
+.PP
+.RS
+.nf
+.if  !'po4a'hide' SECTION 1 n l 8 3 0 2 3type 5 4 9 6 7
+.fi
+.RE
+.PP
+Birden fazla \fBSECTION\fP yönergesi verilirse bölüm listeleri birleştirilir.
+.PP
+Belirli bir uzantı bu listede yoksa (örneğin 1mh), ait olduğu bölümün geri
+kalanıyla birlikte görüntülenir.  Bunun etkisi, belirli bir sırayı zorlamak
+istiyorsanız yalnızca açıkça uzantıları listelemek zorunda kalmanızdır.
+Uzantıya sahip bölümler genellikle ana bölüme bitişik olmalıdır (ör. "1 1mh
+8 ...").
+.PP
+\fBSECTIONS\fP bu yönerge için alternatif bir ad olarak kabul edilmektedir.
+.RE
+.TP 
+\fBMINCATWIDTH\fP\fI\ genişlik\fP
+Terminal genişliği \fIgenişlik\fP'ten azsa cat sayfaları (eksikse) oluşturulmaz
+veya görüntülenmez.  Öntanımlı değer 80'dir.
+.TP 
+\fBMAXCATWIDTH\fP\fI\ genişlik\fP
+Terminal genişliği \fIgenişlik\fP'ten büyükse cat sayfaları (eksikse)
+oluşturulmaz veya görüntülenmez.  Öntanımlı değer 80'dir.
+.TP 
+\fBCATWIDTH\fP\fI\ genişlik\fP
+Eğer \fIgenişlik\fP sıfırdan farklıysa fiilen kullanılan uçbirimin genişliğine
+bakılmaksızın, cat sayfaları her zaman verilen genişlikte bir uçbirim için
+biçimlendirilir.  Bu, \fBMINCATWIDTH\fP'i ve \fBMAXCATWIDTH\fP'i geçersiz kılar.
+.TP 
+.if  !'po4a'hide' .B NOCACHE
+Bu bayrak, \fBman\fP(1)  tarafından otomatik olarak cat sayfaları
+oluşturulmasını önler.
+.SH HATALAR
+Yukarıdaki kurallara uyulmadığı ve tam olarak gözlemlenmediği sürece,
+kılavuz sayfalayıcılar istenildiği gibi çalışmayacaktır.  Kurallar aşırı
+karmaşıktır.
+.PP
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

@@ -1,0 +1,100 @@
+.\" Man page for manpath
+.\"
+.\" Copyright (C) 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the docs/COPYING.GPLv2 file that comes with the
+.\" man-db distribution.
+.\"
+.\" Sun Jan 22 22:15:17 GMT 1995 Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANPATH 1 2024-04-05 2.12.1 "Penggunaan halaman buku panduan"
+.SH NAMA
+manpath \- menentukan jalur pencarian untuk halaman buku panduan
+.SH RINGKASAN
+\fBmanpath\fP [\|\fB\-qgdc?hV\fP\|] [\|\fB\-m\fP \fIsistem\fP\|[\|,.\|.\|.\|]\|]
+[\|\fB\-C\fP \fIberkas\fP\|]
+.SH DESKRIPSI
+Jika $\fBMANPATH\fP diset, \fBmanpath\fP akan secara sederhana menampilkan
+isinya dan mengisukan peringatan. Jika tidak, \fBmanpath\fP akan menentukan
+sebuah hierarki jalur pencarian halaman buku panduan yang sesuai dan
+menampilkan hasilnya.
+
+The colon\-delimited path is determined using information gained from the
+man\-db configuration file \(en (\fI/etc/man_db.conf\fP)  and the user's
+environment.
+.SH PILIHAN
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Jangan isukan peringatan.
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Tampilkan informasi penelusuran.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-catpath
+Hasilkan sebuah jalur cat daripada ke sebuah jalur man. Sekali jalur man
+ditentukan, setiap elemen jalur diubah ke relatif jalur cat.
+.TP 
+.if  !'po4a'hide' .BR \-g ", " \-\-global
+Produce a manpath consisting of all paths named as "global" within the
+man\-db configuration file.
+.TP 
+\fB\-m\fP \fIsistem\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fIsistem\fP\|[\|,.\|.\|.\|]
+If this system has access to other operating systems' manual hierarchies,
+this option can be used to include them in the output of \fBmanpath\fP.  To
+include NewOS's manual page hierarchies use the option \fB\-m\fP \fBNewOS\fP.
+
+\fIsistem\fP spesifikasi dapat berupa sebuah kombinasi dari nama sistem operasi
+dipisahkan koma. Untuk memasukan hierarki halaman buku panduan sistem
+operasi native, nama sistem \fBman\fP harus dimasukan dalam argumen
+string. Pilihan ini akan mengesampingkan variabel lingkungan $\fBSYSTEM\fP.
+.TP 
+\fB\-C\ \fP\fIberkas\fP,\ \fB\-\-config\-file=\fP\fIberkas\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Tampilkan sebuah pesan bantuan dan keluar.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Tampilkan sebuah pesan bantuan dan keluar.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Tampilkan informasi versi.
+.SH LINGKUNGAN
+.TP 
+.if  !'po4a'hide' .B MANPATH
+If $\fBMANPATH\fP is set, \fBmanpath\fP displays its value rather than
+determining it on the fly.
+
+See the \fBSEARCH PATH\fP section of \fBmanpath\fP(5)  for the default behaviour
+and details of how this environment variable is handled.
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+Jika $\fBSYSTEM\fP telah diset, ini akan memiliki efek sama seperti jika ini
+telah dispesifikasikan sebagai argumen ke pilihan \fB\-m\fP.
+.SH BERKAS
+.TP  \w'/etc/man_db.conf'u+2n
+.if  !'po4a'hide' .I /etc/man_db.conf
+berkas konfigurasi man\-db.
+.SH "LIHAT JUGA"
+.if  !'po4a'hide' .BR apropos (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR whatis (1)
+.SH PENGARANG
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BUGS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

@@ -1,0 +1,94 @@
+.\" Man page for manconv
+.\"
+.\" Copyright (c) 2007, 2008 Colin Watson <cjwatson@debian.org>
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANCONV 1 2024-04-05 2.12.1 "Utilitaires de l'afficheur des pages de manuel"
+.SH NOM
+manconv \- Convertir une page de manuel d'un encodage à l'autre
+.SH SYNOPSIS
+\fBmanconv\fP \fB\-f\fP
+[\|\fIencodage\-d\-origine\fP\|[:\fIencodage\-d\-origine\fP\|.\|.\|.]\|] \fB\-t\fP
+\fIencodage\-résultant\fP [\|\fB\-dqhV\fP\|] [\|\fInom\-de\-fichier\fP\|]
+.SH DESCRIPTION
+\fBmanconv\fP convertit une page de manuel d'un encodage à l'autre, comme
+\fBiconv\fP. Contrairement à \fBiconv\fP, il peut essayer à la suite plusieurs
+encodages possibles en entrée. C'est utile pour les pages de manuel
+installées dans des répertoires sans déclaration explicite de l'encodage,
+car elles peuvent être en UTF\-8 ou dans un jeu de caractères obsolète.
+.PP
+Si une déclaration d'encodage est trouvée sur la première ligne de la page
+de manuel, cette déclaration écrase tout encodage en entrée indiqué sur la
+ligne de commande de \fBmanconv\fP. Les déclaration d'encodage ont la forme
+suivante :
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" \-*\- coding: UTF\-8 \-*\-
+.fi
+.RE
+.PP
+ou (si les préprocesseurs de page de manuel sont aussi à déclarer) :
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" t \-*\- coding: ISO\-8859\-1 \-*\-
+.fi
+.RE
+.SH OPTIONS
+.TP 
+\fB\-f\fP \fIencodages\fP, \fB\-\-from\-code\fP \fIencodages\fP
+Essaye chacun des \fIencodages\fP à la suite (une liste séparée par des
+deux\-points) comme encodage d'entrée. Pas défaut essaye de deviner
+l'encodage d'entrée à partir du nom de fichier.
+.TP 
+\fB\-t\fP \fIencodage\fP, \fB\-\-to\-code\fP \fIencodage\fP
+Convertit la page de manuel en \fIencodage\fP.
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Ne renvoie pas de messages d'erreur quand la page ne peut pas être
+convertie.
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Affiche les informations de mise au point.
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+Affiche un message d'aide et s'arrête.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Affiche le numéro de version.
+.SH "VOIR AUSSI"
+.if  !'po4a'hide' .IR iconv (1),
+.if  !'po4a'hide' .IR man (1),
+.if  !'po4a'hide' .IR man-recode (1)
+.SH AUTEUR
+.nf
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BOGUES
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db
+.SH TRADUCTION
+Cette traduction est maintenue à l'aide de l'outil
+po4a <URL:https://po4a.org/> par l'équipe
+francophone de traduction de Debian.
+.PP
+Valéry Perrin <valery.perrin.debian@free.fr> le 2 janvier 2006.
+David Prévot <david@tilapin.org> et l'équipe francophone de traduction de Debian\ (2010).
+.PP
+Veuillez signaler toute erreur de traduction en écrivant à
+<debian\-l10n\-french@lists.debian.org> ou par un rapport de bogue sur
+le paquet man-db.
+.PP
+Vous pouvez toujours avoir accès à la version anglaise de ce document en
+utilisant la commande
+«\ \fBman\ \-L C\fR \fI<section>\fR\ \fI<page_de_man>\fR\ ».

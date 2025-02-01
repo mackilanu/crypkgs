@@ -1,0 +1,57 @@
+.\" Man page for accessdb
+.\"
+.\" Copyright (c) 1998 Fabrizio Polacco <fpolacco@debian.org
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Tue, 24 Feb 1998 18:18:36 +0200
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH ACCESSDB 8 2024-04-05 2.12.1 "Narzędzia przeglądarki stron podręcznika ekranowego"
+.SH NAZWA
+accessdb \- wyświetla zawartość bazy danych man\-db w formacie czytelnym dla
+ludzi
+.SH SKŁADNIA
+\fB/usr/sbin/accessdb\fP [\|\fB\-d?V\fP\|] [\fI<plik\-indeksu>\fP]
+.SH OPIS
+\fBaccessdb\fP wyświetli dane zawarte w bazie danych man\-db w formacie
+czytelnym dla ludzi. Domyślnie będą to dane z pliku
+\fB/var/cache/man/index.<typ_bazy>\fP, gdzie <typ_bazy> zależy
+od używanej biblioteki obsługi baz danych.
+
+Argument przekazany do accessdb nadpisze tę wartość domyślną.
+.SH OPCJE
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Wyświetla informację diagnostyczną (debug).
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Wyświetla komunikat pomocy i kończy pracę.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Wyświetla krótki opis użycia programu i kończy pracę.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Wyświetla informację o wersji.
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BŁĘDY
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db
+.SH TŁUMACZENIE
+Wojciech Kotwica w 1999 roku przetłumaczył część stron podręcznika pakietu
+man-db i udostępnił je w ramach Projektu Tłumaczenia Manuali.
+.br
+Robert Luberda tłumaczenie zaktualizował i uzupełnił w roku 2008.

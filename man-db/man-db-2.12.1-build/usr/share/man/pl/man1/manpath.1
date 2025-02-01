@@ -1,0 +1,107 @@
+.\" Man page for manpath
+.\"
+.\" Copyright (C) 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the docs/COPYING.GPLv2 file that comes with the
+.\" man-db distribution.
+.\"
+.\" Sun Jan 22 22:15:17 GMT 1995 Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANPATH 1 2024-04-05 2.12.1 "Narzędzia przeglądarki stron podręcznika ekranowego"
+.SH NAZWA
+manpath \- określa ścieżkę przeszukiwania stron podręcznika ekranowego
+.SH SKŁADNIA
+\fBmanpath\fP [\|\fB\-qgdc?V\fP\|] [\|\fB\-m\fP \fIsystem\fP\|[\|,.\|.\|.\|]\|] [\|\fB\-C\fP
+\fIplik\fP\|]
+.SH OPIS
+Jeżeli ustawiona jest zmienna $\fBMANPATH\fP, to \fBmanpath\fP po prostu
+wyświetli jej zawartość i wyśle ostrzeżenie. W przeciwnym razie \fBmanpath\fP
+określi odpowiednią hierarchię ścieżek poszukiwania stron podręcznika man i
+wyświetli wyniki.
+
+The colon\-delimited path is determined using information gained from the
+man\-db configuration file \(en (\fI/etc/man_db.conf\fP)  and the user's
+environment.
+.SH OPCJE
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Nie wysyła ostrzeżeń.
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Wyświetla informację diagnostyczną (debug).
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-catpath
+Tworzy ścieżkę catpath [do stron w postaci catman] zamiast manpath. Po
+ustaleniu ścieżki manpath, każdy jej element zamieniany jest na jego
+odpowiednik catpath.
+.TP 
+.if  !'po4a'hide' .BR \-g ", " \-\-global
+Produce a manpath consisting of all paths named as "global" within the
+man\-db configuration file.
+.TP 
+\fB\-m\fP \fIsystem\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fIsystem\fP\|[\|,.\|.\|.\|]
+If this system has access to other operating systems' manual hierarchies,
+this option can be used to include them in the output of \fBmanpath\fP.  To
+include NewOS's manual page hierarchies use the option \fB\-m\fP \fBNewOS\fP.
+
+Podany \fIsystem\fP może być kombinacją oddzielonych przecinkami nazw systemów
+operacyjnych. Jeżeli chcemy włączyć hierarchię stron man macierzystego
+systemu operacyjnego, to musimy użyć \fBman\fP jako nazwy systemu w łańcuchu
+argumentów. Niniejsza opcja unieważnia ewentualne użycie zmiennej środowiska
+$\fBSYSTEM\fP.
+.TP 
+\fB\-C\ \fP\fIplik\fP,\ \fB\-\-config\-file=\fP\fIplik\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Wyświetla komunikat pomocy i kończy pracę.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Wyświetla krótki opis użycia programu i kończy pracę.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Wyświetla informację o wersji.
+.SH ŚRODOWISKO
+.TP 
+.if  !'po4a'hide' .B MANPATH
+If $\fBMANPATH\fP is set, \fBmanpath\fP displays its value rather than
+determining it on the fly.
+
+See the \fBSEARCH PATH\fP section of \fBmanpath\fP(5)  for the default behaviour
+and details of how this environment variable is handled.
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+Jeżeli ustawiona jest zmienna $\fBSYSTEM\fP, to ma to taki sam skutek, jak
+przekazanie jej wartości jako argumentu opcji \fB\-m\fP.
+.SH PLIKI
+.TP  \w'/etc/man_db.conf'u+2n
+.if  !'po4a'hide' .I /etc/man_db.conf
+Plik konfiguracyjny man\-db.
+.SH "ZOBACZ TAKŻE"
+.if  !'po4a'hide' .BR apropos (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR whatis (1)
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BŁĘDY
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db
+.SH TŁUMACZENIE
+Wojciech Kotwica w 1999 roku przetłumaczył część stron podręcznika pakietu
+man-db i udostępnił je w ramach Projektu Tłumaczenia Manuali.
+.br
+Robert Luberda tłumaczenie zaktualizował i uzupełnił w roku 2008.

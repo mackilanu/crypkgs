@@ -1,0 +1,13 @@
+[package]
+name = "util-linux"
+version = "2.40.2"
+description = "description"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://www.kernel.org/pub/linux/utils/util-linux/v2.40/util-linux-2.40.2.tar.xz"
+
+build = [
+    "BUILD",
+]

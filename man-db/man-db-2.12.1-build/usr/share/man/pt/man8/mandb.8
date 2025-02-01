@@ -1,0 +1,186 @@
+'\" t
+.\" Man page for mandb
+.\"
+.\" Copyright (C) 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Tue Apr 26 12:56:44 BST 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANDB 8 2024-04-05 2.12.1 "Utilidades do paginador do manual"
+.SH NOME
+mandb \- cria ou actualiza as caches de índice das páginas do manual
+.SH SINOPSE
+\fBmandb\fP [\|\fB\-dqsucpt?V\fP\|] [\|\fB\-C\fP \fIficheiro\fP\|] [\|\fImanpath\fP\|]
+.br
+\fBmandb\fP [\|\fB\-dqsut\fP\|] [\|\fB\-C\fP \fIficheiro\fP\|] \fB\-f\fP \fInomeficheiro\fP\ \&.\|.\|.
+.SH DESCRIÇÃO
+\fBmandb\fP é usado para inicializar ou actualizar manualmente as caches de
+bases de dados \fBíndice\fP. As caches contêm informação relevante sobre o
+estado actual do sistema de páginas do manual e a informação nelas
+armazenada é usada pelos utilitários do man\-db para melhorar a sua
+velocidade e funcionalidade.
+
+Ao criar ou actualizar um \fBíndice\fP, \fBmandb\fP avisa sobre maus pedidos .so
+ROFF, nomes de ficheiro de páginas do manual fictícios e páginas do manual
+das quais não consegue analisar o \fBwhatis\fP.
+
+Fornecer a \fBmandb\fP um caminho opcional separado por dois\-pontos
+sobrepõe\-se ao caminho interno de procura de hierarquias de páginas do
+manual, determinado por informação dentro do ficheiro de configuração do
+man\-db.
+.SH "CACHES DE BASES DE DADOS"
+\fBmandb\fP pode ser compilado com suporte a qualquer um dos seguintes tipos
+de bases de dados.
+
+.TS
+tab (@);
+l l l.
+Nome@Async@Nome de ficheiro
+_
+Berkeley db@Sim@\fIindex.bt\fP
+GNU gdbm@Sim@\fIindex.db\fP
+UNIX ndbm@Não@\fIindex.(dir|pag)\fP
+.TE
+
+Os tipos de bases de dados que suportam actualizações assíncronas fornecem
+velocidade melhorada a custo de possível corrupção em caso de fecho
+irregular. Num caso em que tal tenha ocorrido, pode ser necessário voltar a
+executar o \fBmandb\fP com a opção \fB\-c\fP para recriar as bases de dados de
+raiz.
+.SH OPÇÕES
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+imprime informação de depuração.
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Não produz avisos
+.TP 
+.if  !'po4a'hide' .BR \-s ", " \-\-no-straycats
+Não perde tempo a procurar ou adicionar informação às bases de dados sobre
+cats perdidos.
+.TP 
+.if  !'po4a'hide' .BR \-p ", " \-\-no-purge
+Não perde tempo a procurar páginas do manual eliminadas e a purgá\-las da
+base de dados.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-create
+Por predefinição, o \fBmandb\fP tentará actualizar quaisquer bases de dados
+anteriormente criadas. Se uma delas não existir, será criada. Esta opção
+força o \fBmandb\fP a eliminar bases de dados anteriores e a recriá\-las de
+raiz, o que implica \fB\-\-no\-purge.\fP. Pode ser necessário se uma base de dados
+for corrompida ou se for introduzido um novo esquema de armazenagem.
+.TP 
+.if  !'po4a'hide' .BR \-u ", " \-\-user-db
+Criar só bases de dados do utilizador, mesmo com permissões de escrita
+necessárias para criar bases de dados de sistema.
+.TP 
+.if  !'po4a'hide' .BR \-t ", " \-\-test
+Realiza testes de correcção em páginas do manual no caminho de procura da
+hierarquia. Com esta opção, \fBmandb\fP não altera as bases de dados
+existentes.
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-filename
+Actualiza só as entradas do nome de ficheiro indicado. Esta opção não é para
+uso geral; é usada internamente pelo \fBman\fP quando foi compilado com a
+opção \fBMAN_DB_UPDATES\fP e descobre uma página desactualizada. Implica \fB\-p\fP
+e desactiva \fB\-c\fP e \fB\-s\fP.
+.TP 
+\fB\-C\ \fP\fIficheiro\fP,\ \fB\-\-config\-file=\fP\fIficheiro\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Mostra a mensagem de uso e sai.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+mostra uma mensagem curta de uso e sai.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Mostra a versão e sai.
+.SH "ESTADO DE SAÍDA"
+.TP 
+.if  !'po4a'hide' .B 0
+Execução de programa com sucesso.
+.TP 
+.if  !'po4a'hide' .B 1
+Erro de uso, sintaxe ou do ficheiro de configuração.
+.TP 
+.if  !'po4a'hide' .B 2
+Erro de operação.
+.TP 
+.if  !'po4a'hide' .B 3
+Falhou um processo\-filho.
+.SH DIAGNÓSTICO
+As seguintes mensagens de aviso podem ser emitidas durante a construção das
+bases de dados.
+.TP 
+\fB<nomeficheiro>: falha na análise do whatis para page(sec)\fP
+Falhou uma tentativa de extrair linhas whatis do
+<nomeficheiro>. Normalmente, é devido a uma escrita pobre de uma
+página do manual, mas se forem emitidas muitas destas mensagens, é provável
+que o sistema contenha páginas do manual não\-padrão incompatíveis com o
+analisador whatis do man\-db. Veja a secção \fBANÁLISE WHATIS\fP em
+\fBlexgrog\fP(1) para mais informação.
+.TP 
+\fB<nomeficheiro>: é uma ligação simbólica pendente\fP
+<nomeficheiro> não existe mas é referenciado por uma ligação
+simbólica. Normalmente, são emitidos mais diagnósticos para identificar o
+<nomeficheiro> da ligação culposa.
+.TP 
+\fB<nomeficheiro>: má ligação simbólica ou pedido ROFF ".so"\fP
+<nomeficheiro> ou é uma ligação simbĺica a, ou contém um pedido ROFF
+include a um ficheiro não existente.
+.TP 
+\fB<nomeficheiro>: a ignorar nomeficheiro fictício\fP
+O <nomeficheiro> pode ou não ser uma página de manual válida, mas o
+seu nome é inválido. É normalmente devido a uma página do manual com uma
+extensão seccional <x> posta na secção <y> da página do
+manual.
+.TP 
+\fB<máscara_nomeficheiro>: extensões concorrentes\fP
+O carácter universal <máscara_nomeficheiro> não é único. É
+normalmente causado pela co\-existência de versões comprimida e descomprimida
+da mesma página do manual. São todas ignoradas menos a mais recente.
+.SH FICHEIROS
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+ficheiro de configuração do man\-db.
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt|db|dir|pag)
+Uma cache de base de dados de \fIíndice\fP global de acordo com FHS.
+.PP
+Localizações antigas da cache de base de dados incluíam:
+.TP 
+.if  !'po4a'hide' .I /usr/man/index.(bt|db|dir|pag)
+Uma cache de base de dados de \fIíndice\fP global tradicional.
+.TP 
+.if  !'po4a'hide' .I /var/catman/index.(bt|db|dir|pag)
+Uma cache de base de dados \fIíndice\fP alternativa ou respeitante FSSTND.
+.SH "VEJA TAMBÉM"
+.if  !'po4a'hide' .BR lexgrog (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR catman (8)
+.PP
+A secção \fBANÁLISE WHATIS\fP anteriormente parte desta página do manual é
+agora parte de \fBlexgrog\fP(1).
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH ERROS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

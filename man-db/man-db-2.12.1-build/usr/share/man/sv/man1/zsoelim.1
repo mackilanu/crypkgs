@@ -1,0 +1,66 @@
+.\" Man page for zsoelim
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Dec 10 19:33:32 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH ZSOELIM 1 2024-04-05 2.12.1 "Verktyg för sidvisning av manual"
+.SH NAMN
+zsoelim \- uppfyll .so\-begäran i roff\-inmatning
+.SH SYNOPSIS
+\fBzsoelim\fP [\|\fB\-CVh\fP\|] [\|\fIfil\fP \&.\|.\|.\|]
+.SH BESKRIVNING
+\fBzsoelim\fP tolkar \fIfil\fP argumenten, eller om inget angivits, dess
+standardinmatning efter rader på formen:
+
+\&\fB.so\fP <\|\fIfilnamn\fP\|>
+
+Dessa begäran ersätts av innehållet från det \fIfilnamn\fP som angivits.  Om
+begäran inte kan uppfyllas letar \fBzsoelim\fP efter \fIfilnamn.änd\fP där
+\&\fI.änd\fP kan vara någon av \fB.gz\fP, \fB.Z\fP eller \fB.z\fP.  Andra ändelsetyper kan
+ha stöd beroende på vilka flaggor som använts vid kompileringen.  Om begäran
+kan uppfyllas av en komprimerad fil kommer denna fil att dekomprimeras med
+en lämplig dekomprimerare och dess utmatning kommer att användas för att
+uppfylla begäran.
+
+Traditionellt användes \fBsoelim\fP\-program för att låta roff\-preprocessorer
+kunna preprocessa filer som refererats till av begäran.  Denna speciella
+version skrevs för att komma runt problemen som skapades då stöd för
+komprimerade manualsidor lades till.
+.SH FLAGGOR
+.TP 
+.if  !'po4a'hide' .BR \-C ", " \-\-compatible
+Denna flagga är tillgänglig för kompatibilitet med andra \fBsoelim\fP\-program.
+Den är tänkt att tillåta .so\-begäran att åtföljas av något annat än
+blanksteg.  Då detta redan är standardbeteendet ignoreras den.
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+Skriv ut ett hjälpmeddelande och avsluta.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Visa versionsinformation.
+.SH "SE VIDARE"
+.if  !'po4a'hide' .BR groff (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR nroff (1),
+.if  !'po4a'hide' .BR troff (1)
+.SH UPPHOVSMAN
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH FEL
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

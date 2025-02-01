@@ -1,0 +1,52 @@
+.\" Man page for accessdb
+.\"
+.\" Copyright (c) 1998 Fabrizio Polacco <fpolacco@debian.org
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Tue, 24 Feb 1998 18:18:36 +0200
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH ACCESSDB 8 2024-04-05 2.12.1 "Utilitários de paginação de manual"
+.SH NOME
+accessdb \- despeja o conteúdo de um banco de dados do man\-db em um formato
+legível por humanos
+.SH SINOPSE
+\fB/usr/sbin/accessdb\fP [\|\fB\-d?V\fP\|] [\fI<arquivo\-índice>\fP]
+.SH DESCRIÇÃO
+\fBaccessdb\fP emitirá os dados contidos dentro de um banco de dados em uma
+forma legível por humanos. Por padrão, ele despejará os dados do
+\fB/var/cache/man/index.<tipo\-db>,\fP sendo <tipo\-db> depende
+da biblioteca de banco de dados em uso.
+
+Fornecer um argumento para accessdb sobrescreverá esse padrão.
+.SH OPÇÕES
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Emite mensagens de depuração.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Imprime uma mensagem de ajuda e sai.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Imprime uma mensagem curta e sai.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Exibe informação da versão.
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH PROBLEMAS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

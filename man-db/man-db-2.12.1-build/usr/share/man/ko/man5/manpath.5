@@ -1,0 +1,128 @@
+.\" Man page for format of the manpath.config data file
+.\"
+.\" Copyright (C) 1994, 1995 Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANPATH 5 2024-04-05 2.12.1 /etc/man_db.conf
+.SH 이름
+manpath \- /etc/man_db.conf 파일 형식
+.SH 설명
+맨 페이지 경로 구성 파일은 설명서 페이지 유틸리티에서 실행 시간동안 사용자의 맨 페이지 경로에 접근할 때 사용하며, 어떤 설명서 페이지
+계층(맨 페이지 경로)을 시스템 계층으로 다루는지, 캣 페이지 파일을 저장할 때 어떤 디렉터리를 할당할 지를 나타냅니다.
+
+$\fBMANPATH\fP 환경 변수를 이미 설정했다면, /etc/man_db.conf에 있는 정보는 이 변수 값을 무시하지
+않습니다.
+.SH "검색 경로"
+기본적으로 man\-db는 사용자 $\fBPATH\fP 변수를 확인합니다. \fI경로요소\fP 제각각을 찾아낸 다음, 검색 경로에
+\fI멘_페이지_경로요소\fP를 추가합니다.
+
+설정 파일에 주어진 \fI경로_요소\fP의 \fBMANPATH_MAP\fP 행이 없다면, 디렉터리로 존재하는 모든 \fI경로_요소/../man\fP,
+\fI경로_요소/man\fP, \fI경로_요소/../share/man\fP, \fI경로_요소/share/man\fP 항목을 검색 경로에 추가합니다.
+
+그 다음 설정 파일의 \fBMANDATORY_MANPATH\fP 항목을 검색 경로에 추가합니다.
+
+마지막으로 \fB\-\-systems\fP 옵션을 사용했거나 $\fBSYSTEM\fP 환경 변수를 설정했다면, 쉼표 또는 콜론으로 순차 구분한 운영체제
+이름이 들어가야합니다.  이 동작은 다른 운영체제 설명서 페이지에 접근할 수 있게 1회 이상 검색 경로를 확장하는 양식으로 활용합니다:
+각 시스템 이름에 대해 man\-db는 검색 경로상에서 해당 이름이 들어간 하위 디렉터리를 검색하고, 최종 검색 경로가 있다면
+추가합니다.  \fBman\fP의 시스템 이름을 하위 디렉터리를 넣지 않고 일반 검색 경로에 추가합니다.  예를 들면 검색 경로에
+\fI/usr/share/man:/usr/local/man\fP 경로가 들어갔고, $\fBSYSTEM\fP 환경 변수에 \fInewOS:man\fP 값이
+들어갔다면, 최종 검색 경로 설정 값은
+\fI/usr/share/man/newOS:/usr/share/man:/usr/local/man/newOS:/usr/local/man\fP
+값이 됩니다.
+
+$\fBMANPATH\fP 환경 변수 값은 man\-db 기본 설명서 페이지 검색 경로 값보다 우선합니다.  대부분 사용자는 설정할 필요가
+없습니다.  문법은 $\fBPATH\fP 환경 변수와 유사합니다. 순서대로 적은 디렉터리 이름을 콜론으로 구분합니다.  위에서 설명한 기본
+검색 경로 값보다 우선합니다.
+
+$\fBMANPATH\fP 값이 콜론으로 시작하면, 기본 검색 경로를 시작 부분에 추가합니다.  $\fBMANPATH\fP 값이 콜론으로 끝나면
+기본 검색 경로를 끝에 추가합니다.  $\fBMANPATH\fP에 이중 콜론(\fB::\fP)이 들어있다면, 기본 검색 경로는 콜론 사이에 값
+중간에 들어갑니다.
+.SH 형식
+현재 다음 필드 형식을 인식합니다:
+.TP 
+\fB#\fP\fI\ 주석\fP
+빈 줄이나 \fB#\fP 문자로 시작하는 행은 주석으로 취급하며 무시합니다.
+.TP 
+\fBMANDATORY_MANPATH\fP\fI\ 맨_페이지_경로요소\fP
+이러한 모양새를 가진 행은 매번 자동으로 만드는 $\fBMANPATH\fP 환경 변수에 들어있는 맨 페이지 경로를 나타냅니다.  보통
+\fI/usr/man\fP이 들어갑니다.
+.TP 
+\fBMANPATH_MAP\fP\fI\ 경로_요소\ 맨_페이지_경로요소\fP
+이러한 모양새를 가진 행은 $\fBPATH\fP 값을 $\fBMANPATH\fP에 대응하도록 구성합니다.  각 \fI경로_요소\fP는 사용자의
+$\fBPATH\fP 환경 변수에 있으며, \fI맨_페이지_경로요소\fP는 $\fBMANPATH\fP 환경 변수에 추가합니다.
+.TP 
+\fBMANDB_MAP \fP\fI맨_페이지_경로요소 \fP\|[\| \fI캣_페이지_경로요소\fP \|]
+이러한 모양새를 가진 행은 어떤 맨 페이지 경로를 시스템 맨 페이지 경로로 취급하는지 이 경로에 들어간 캣 페이지 파일을 어디에 저장해야
+하는지를 나타냅니다.  이 필드 형식은 \fBman\fP이 setuid 프로그램일 경우 (사용자 별 .manpath 구성 파일이 아닌
+/etc/man_db.conf 시스템 구성 파일일 경우)  어떤 설명서 페이지 계층에 setuid 사용자가 접근하고 어떤
+사용자가 실행 사용자로 접근하는지를 나타낼 때와 같이 일부 중요한 면이 있습니다.
+
+시스템 설명서 페이지 계층은 \fI/usr/man\fP, \fI/usr/local/man\fP, \fI/usr/X11R6/man\fP과 같이 보통
+\fI/usr\fP 하위 계층에 저장합니다.
+
+\fI맨_페이지_경로요소\fP 일부의 캣 페이지를 저장하지 않거나 원래 사용하던 위치로 저장한다면 \fI캣_페이지_경로요소\fP를 생략할 수도
+있습니다.
+
+원래 캣 페이지 위치로의 복사는 설명서 페이지 계층을 읽기 전용으로 마운트하는 문제로 불가능한데, 설명서 페이지 저장소의 적절한 디렉터리
+계층 지정이 가능하기 때문입니다.  \fBLinux FSSTND\fP를 확인해보려면 검색어 \fBFSSTND\fP를 실제 디렉터리 위치에서 활용해볼
+수 있습니다.
+
+불행하게도, \fI/usr/man/sun\fP과 같은 대체 운영체제 경로와 같이 \fB모든\fP 시스템의 man 트리 경로를 지정해야 하며,
+심지어는 \fI/usr/man/de_DE.88591\fP와 같은 \fBNLS 로캘\fP 경로도 지정해야 합니다.
+
+앞서 기록한 방식대로 행 별로 정보를 분석하고 나면, 우선 목록에 나타내야 하는 다른 계층의 하위 계층 맨 페이지 경로에 필요하며,
+그렇지 않으면 부정확한 일치 내용을 만들어냅니다.  예제에서는 \fI/usr/man/de_DE.88591\fP이 \fI/usr/man\fP보다 앞에
+와야 함을 보여줍니다.
+.TP 
+\fBDEFINE\fP\fI\ 키\ 값\fP
+이러한 모양새를 가진 행은 기타 설정 변수를 지정합니다. 설명서 페이저 유틸리티에서 사용하는 변수의 기본 설정 파일을 참고하십시오.
+다양한 프로그램(\fIgrep\fP과 \fItbl\fP 등)의 기본 경로가 들어가며, 인자 기본 설정이 이 프로그램에 들어갑니다.
+.TP 
+\fBSECTION\fP \fI섹션\fP .\|.\|.
+.RS
+이러한 모양새를 가진 행은 검색해야 할 설명서의 섹션 순서를 지정합니다.  설정 파일에 \fBSECTION\fP 지시자가 없으면 기본 동작은:
+.PP
+.RS
+.nf
+.if  !'po4a'hide' SECTION 1 n l 8 3 0 2 3type 5 4 9 6 7
+.fi
+.RE
+.PP
+다중 \fBSECTION\fP 지시자를 지정했다면, 섹션 목록을 합칩니다.
+.PP
+각 확장이 이 목록(1mh라 합니다)에 없으면 목록에 속한 섹션의 나머지를 나타냅니다.  이 결과에 대해 제각각의 순서를 강제하고 싶다면
+확장자 목록을 분명하게 지정하는 것 뿐입니다.  확장자가 붙은 섹션은 주 섹션에 인접해야 합니다(예: "1 1mh 8 ...").
+.PP
+\fBSECTIONS\fP는 이 지시자의 대체 이름으로 수용합니다.
+.RE
+.TP 
+\fBMINCATWIDTH\fP\fI\ 너비\fP
+터미널 너비가 \fI너비\fP 값보다 작으면, (없을 경우) 캣 페이지를 만들지 않거나 표시하지 않습니다.  기본값은 80입니다.
+.TP 
+\fBMAXCATWIDTH\fP\fI\ 너비\fP
+터미널 너비가 \fI너비\fP 값보다 크면, (없을 경우) 캣 페이지를 만들지 않거나 표시하지 않습니다.  기본값은 80입니다.
+.TP 
+\fBCATWIDTH\fP\fI\ 너비\fP
+\fI너비\fP값이 0이 아니면, 터미널의 폭이 실제로 어느정도인지 여부와는 관계 없이 항상 주어진 터미널 너비 값으로 캣 페이지를
+서식화처리합니다.  이 값은 \fBMINCATWIDTH\fP값과 \fBMAXCATWIDTH\fP값에 우선합니다.
+.TP 
+.if  !'po4a'hide' .B NOCACHE
+이 플래그는 \fBman\fP(1) 이 캣 페이지를 자동으로 만드는 동작을 막아줍니다.
+.SH 버그
+위 규칙을 제대로 따라가지 않으면, 설명서 페이저 유틸리티는 원하는 대로 동작하지 않습니다.  규칙은 전반적으로 복잡합니다.
+.PP
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

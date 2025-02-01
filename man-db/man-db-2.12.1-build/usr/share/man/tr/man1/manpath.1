@@ -1,0 +1,100 @@
+.\" Man page for manpath
+.\"
+.\" Copyright (C) 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the docs/COPYING.GPLv2 file that comes with the
+.\" man-db distribution.
+.\"
+.\" Sun Jan 22 22:15:17 GMT 1995 Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANPATH 1 2024-04-05 2.12.1 "Kılavuz sayfası yardımcıları"
+.SH AD
+manpath \- kılavuz sayfalarının arama yolunu belirler
+.SH ÖZET
+\fBmanpath\fP [\|\fB\-qgdc?V\fP\|] [\|\fB\-m\fP \fIsistem\fP\|[\|,.\|.\|.\|]\|] [\|\fB\-C\fP
+\fIfile\fP\|]
+.SH AÇIKLAMA
+$\fBMANPATH\fP ayarlıysa \fBmanpath\fP yalnızca içeriğini görüntüler ve bir
+uyarı yayınlar.  Değilse \fBmanpath\fP uygun bir kılavuz sayfa hiyerarşisi
+arama yolunu belirleyecek ve sonuçları gösterecektir.
+
+İki nokta üstüste ile sınırlandırılmış yol, man\-db yapılandırma dosyasından
+\(en (\fI/etc/man_db.conf\fP) elde edilen bilgiler ve kullanıcının çevresi
+kullanılarak belirlenir.
+.SH SEÇENEKLER
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Uyarıları gösterme.
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Hata ayıklama bilgisini göster.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-catpath
+Bir manpath yerine bir catpath üretin.  Manpath belirlendiğinde, her bir yol
+elemanı göreli catpath'a dönüştürülür.
+.TP 
+.if  !'po4a'hide' .BR \-g ", " \-\-global
+man\-db yapılandırma dosyasındaki tüm "global" adlı yolların tümünden
+oluşturulmuş bir manpath oluştur.
+.TP 
+\fB\-m\fP \fIsistem\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fIsistem\fP\|[\|,.\|.\|.\|]
+Bu sistemin diğer işletim sisteminin kılavuz hiyerarşilerine erişimi varsa
+bu seçenek \fBmanpath\fP'in çıktısına dahil etmek için kullanılabilir.
+NewOS'un kılavuz sayfası hiyerarşilerini eklemek için \fB\-m\fP \fBNewOS\fP
+seçeneğini kullanın.
+
+Belirtilen \fIsystem\fP, virgülle sınırlandırılmış işletim sistemi adlarının
+birleşimi olabilir.  Yerel işletim sisteminin kılavuz sayfası
+hiyerarşilerini eklemek için, sistem adı \fBman\fP, argüman karakter katarına
+eklenmelidir.  Bu seçenek, $\fBSYSTEM\fP çevre değişkenini geçersiz kılacaktır.
+.TP 
+\fB\-C\ \fP\fIdosya\fP,\ \fB\-\-config\-file=\fP\fIdosya\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Bir yardım iletisi göster ve çık.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Kısa kullanım iletisini göster ve çık.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Sürüm bilgisini göster.
+.SH ÇEVRE
+.TP 
+.if  !'po4a'hide' .B MANPATH
+$\fBMANPATH\fP ayarlanmışsa \fBmanpath\fP değerini yolda giderken belirlemek
+yerine olan değerini görüntüler.
+
+Bu çevre değişkeninin nice işlendiğinin ayrıntılarına ve öntanımlı
+davranışına bakmak için \fBmanpath\fP(5)'in \fBSEARCH PATH\fP bölümüne bakın.
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+$\fBSYSTEM\fP ayarlanmışsa \fB\-m\fP seçeneğine argüman olarak belirtilmişçesine
+aynı etkiyi verecektir.
+.SH DOSYALAR
+.TP  \w'/etc/man_db.conf'u+2n
+.if  !'po4a'hide' .I /etc/man_db.conf
+man\-db yapılandırma dosyası.
+.SH "AYRICA BAKINIZ"
+.if  !'po4a'hide' .BR apropos (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR whatis (1)
+.SH YAZAR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH HATALAR
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

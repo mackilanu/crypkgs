@@ -1,0 +1,205 @@
+.if  !'po4a'hide' .ds mC CW
+.\" Man page for lexgrog
+.\"
+.\" Copyright (c) 2001 Colin Watson <cjwatson@debian.org>
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.if  t .if \n(.g .ds mC CR
+.if  n .ds mC R
+.
+.\" in an example (EX/EE)?
+.nr mE 0
+.
+.if  !\n(.g \{\
+.de EX
+.  br
+.  if !\\n(mE \{\
+.    nr mF \\n(.f
+.    nr mP \\n(PD
+.    nr PD 1v
+.    nf
+.    ft \\*(mC
+.    nr mE 1
+.  \}
+..
+.\}
+.
+.
+.if  !\n(.g \{\
+.de EE
+.  br
+.  if \\n(mE \{\
+.    ft \\n(mF
+.    nr PD \\n(mP
+.    fi
+.    nr mE 0
+.  \}
+..
+.\}
+.\" End example.
+.
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH LEXGROG 1 2024-04-05 2.12.1 "Kılavuz sayfası yardımcıları"
+.SH AD
+lexgrog \- man sayfalarında başlık bilgisini ayrıştır
+.SH ÖZET
+\fBlexgrog\fP [\|\fB\-m\fP\||\|\fB\-c\fP\|] [\|\fB\-dfw?V\fP\|] [\|\fB\-E\fP \fIkodlama\fP\|]
+\fIdosya\fP \&.\|.\|.
+.SH AÇIKLAMA
+\fBlexgrog\fP, \fBlex\fP'de geleneksel \(lqgroff guess\(rq yardımcı programının
+bir uygulamasıdır.  Komut satırında kılavuz sayfası kaynak dosyaları ya da
+önceden biçimlendirilmiş \(lqcat\(rq sayfaları olarak dosyaların listesini
+okur ve adını ve açıklamasını \fBapropos\fP ve \fBwhatis\fP tarafından kullanılan
+biçimde görüntüler, kılavuz sayfası tarafından gerekli önişleme
+süzgeçlerinin listesi \fBnroff\fP veya \fBtroff\fP ya da her ikisine geçmeden
+önce.
+.PP
+Eğer girdi kötü biçimlendirilmişse \fBlexgrog\fP \(lqayrıştırma başarısız\(rq
+yazdıracaktır; bu, kılavuz sayfalarının doğru olup olmadığını kontrol
+etmeniz gereken harici programlar için yararlı olabilir.  \fBlexgrog\fP'un
+girdi dosyalardan biri \(lq\-\(rq ise standart girdiden okunur; herhangi bir
+girdi dosyası sıkıştırılırsa sıkıştırılmış bir sürüm otomatik olarak
+okunacaktır.
+.SH SEÇENEKLER
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Hata ayıklama bilgisini göster.
+.TP 
+.if  !'po4a'hide' .BR \-m ", " \-\-man
+Girdiyi kılavuz sayfası kaynak dosyaları olarak ayrıştır.  Ne \fB\-\-man\fP ne de
+\fB\-\-cat\fP verilmezse bu öntanımlıdır.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-cat
+Girdiyi önceden biçimlendirilmiş kılavuz sayfaları (\(lqcat sayfaları\(rq)
+olarak ayrıştır.  \fB\-\-man\fP ve \fB\-\-cat\fP aynı anda verilemez.
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-whatis
+\fBapropos\fP ve \fBwhatis\fP tarafından kullanılan kılavuz sayfasındaki başlıktan
+gelen adı ve açıklamayı görüntüle.  Ne \fB\-\-whatis\fP ne de \fB\-\-filters\fP
+verilmezse bu öntanımlıdır.
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-filters
+\fBnroff\fP veya \fBtroff\fP ile biçimlendirmeden önce kılavuz sayfasını ön işleme
+koymak için gerekli süzgeçlerin listesini görüntüleyin.
+.TP 
+\fB\-E\fP \fIkodlama\fP, \fB\-\-encoding\fP \fIkodlama\fP
+Sayfa için tahmin edilen karakter kümesini \fIkodlama\fP olarak değiştirin.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Bir yardım iletisi göster ve çık.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Kısa kullanım iletisini göster ve çık.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Sürüm bilgisini göster.
+.SH "ÇIKIŞ DURUMU"
+.TP 
+.if  !'po4a'hide' .B 0
+Başarılı program çalıştırma.
+.TP 
+.if  !'po4a'hide' .B 1
+Kullanım hatası.
+.TP 
+.if  !'po4a'hide' .B 2
+\fBlexgrog\fP, bir veya daha fazla girdi dosyasını ayrıştıramadı.
+.SH ÖRNEKLER
+.nf
+  $ lexgrog man.1
+  man.1: "man \- sistem başvuru kılavuzları için bir arayüz"
+  $ lexgrog \-fw man.1
+  man.1 (t): "man \- sistem başvuru kılavuzları için bir arayüz"
+  $ lexgrog \-c whatis.cat1
+  whatis.cat1: "whatis \- kılavuz sayfa açıklamalarını görüntüle"
+  $ lexgrog broken.1
+  broken.1: ayrıştırma başarısız
+.fi
+.SH "WHATIS AYRIŞTIRMA"
+\fBmandb\fP (\fBlexgrog\fP ile aynı kodu kullanır) her bir kılavuz sayfanın
+üstündeki \fBAD\fP bölümünü, belgelenen özelliklerin adlarını ve açıklamalarını
+ayrıştırır.  Ayrıştırıcı oldukça toleranslı olsa da, tarihsel olarak
+kullanılan çeşitli formlarla baş etmek zorundaysa bazen gerekli bilgileri
+elde etmek başarısız olabilir.
+.PP
+Geleneksel \fIman\fP makro setini kullanırken, doğru bir \fBAD\fP bölümü şu
+şekilde görünür:
+.PP
+.RS
+.EX
+\&.SH NAME
+foo \e\- program to do something
+.EE
+.RE
+.PP
+Bazı kılavuz sayfalayıcıları, \(oq\e\-\(cq'nin tam olarak gösterildiği gibi
+olmasını gerektirir; \fBmandb\fP daha hoşgörülüdür; ancak diğer sistemlerle
+uyumluluk için ters eğik çizgiyi korumak iyi bir fikirdir.
+.PP
+Sol tarafta virgülle ayrılmış birkaç ad olabilir.  Boş alan içeren adlar,
+bazı kötü biçimli \fBAD\fP bölümlerinde patolojik davranışlardan kaçınmak için
+göz ardı edilir.  Sağdaki metin serbest biçimdedir ve birden fazla satıra
+yayılabilir.  Aynı kılavuz sayfasında farklı açıklamalara sahip çeşitli
+özellikler belgeleniyorsa aşağıdaki biçim kullanılır:
+.PP
+.RS
+.EX
+\&.SH NAME
+foo, bar \e\- programs to do something
+\&.br
+baz \e\- program to do nothing
+.EE
+.RE
+.PP
+(A macro which starts a new paragraph, like \fB.PP\fP, may be used instead of
+the break macro \fB.br\fP.)
+.PP
+BSD türevi \fImdoc\fP makro setini kullanırken, doğru bir \fBAD\fP bölümü şu
+şekilde görünür:
+.PP
+.RS
+.EX
+\&.Sh NAME
+\&.Nm foo
+\&.Nd program to do something
+.EE
+.RE
+
+Ayrıştırmanın başarısız olmasının birkaç ortak nedeni vardır.  Bazen kılavuz
+sayfalarının yazarları, \(oq.SH NAME\(cq'yi \(oq.SH MYPROGRAM\(cq ile
+değiştirir ve \fBmandb\fP, ihtiyaç duyduğu bilgiyi çıkaracağı bölümü
+bulamaz.  Bazen yazarlar bir AD bölümü ekler; ancak \(oqad \e\- açıklama\(cq
+yerine, serbest biçimli metin yerleştirirler.  Bununla birlikte, yukarıdaki
+gibi herhangi bir sözdizim kabul edilmelidir.
+.SH "AYRICA BAKINIZ"
+.if  !'po4a'hide' .IR apropos (1),
+.if  !'po4a'hide' .IR man (1),
+.if  !'po4a'hide' .IR whatis (1),
+.if  !'po4a'hide' .IR mandb (8)
+.SH NOTLAR
+\fBlexgrog\fP, .so isteklerini içeren dosyaları ayrıştırmaya çalışır; ancak
+yalnızca dosyalar el ile bir sayfa hiyerarşisinde düzgün bir şekilde
+yüklenirse bu işlemi doğru yapabilir.
+.SH YAZAR
+\fBlexgrog\fP tarafından klavuz sayfalarını taramak için kullanılan kod şu
+tarafından yazılmıştır:
+.PP
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.PP
+Colin Watson, bu kılavuz sayfasının yanı sıra komut satırı ön ucunun mevcut
+canlı örneğini yazdı.
+.SH HATALAR
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

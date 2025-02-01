@@ -1,0 +1,101 @@
+.\" Man page for manpath
+.\"
+.\" Copyright (C) 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the docs/COPYING.GPLv2 file that comes with the
+.\" man-db distribution.
+.\"
+.\" Sun Jan 22 22:15:17 GMT 1995 Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANPATH 1 2024-04-05 2.12.1 "Utilidades do paginador do manual"
+.SH NOME
+manpath \- determina o caminho de procura para páginas do manual
+.SH SINOPSE
+\fBmanpath\fP [\|\fB\-qgdc?V\fP\|] [\|\fB\-m\fP \fIsistema\fP\|[\|,.\|.\|.\|]\|]
+[\|\fB\-C\fP \fIficheiro\fP\|]
+.SH DESCRIÇÃO
+Se $\fBMANPATH\fP estiver definida, \fBmanpath\fP mostra simplesmente o seu
+conteúdo e emite um aviso. Senão, \fBmanpath\fP determina um caminho de
+procura para a hierarquia de páginas do manual adequado e mostra os
+resultados.
+
+O caminho separado por dois\-pontos é determinado usando informação retirada
+do ficheiro de configuração do man\-db \(en (\fI/etc/man_db.conf\fP) e do
+ambiente do utilizador.
+.SH OPÇÕES
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Não emite avisos.
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+imprime informação de depuração.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-catpath
+Produz um catpath em oposição a um manpath. Uma vez determinado o manpath,
+cada elemento do caminho é convertido para o seu catpath relativo.
+.TP 
+.if  !'po4a'hide' .BR \-g ", " \-\-global
+Produz um manpath consistindo em todos os caminhos nomeados como "global"
+dentro do ficheiro de configuração do man\-db.
+.TP 
+\fB\-m\fP \fIsistema\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fIsistema\fP\|[\|,.\|.\|.\|]
+If this system has access to other operating systems' manual hierarchies,
+this option can be used to include them in the output of \fBmanpath\fP.  To
+include NewOS's manual page hierarchies use the option \fB\-m\fP \fBNewOS\fP.
+
+O \fIsistema\fP especificado pode ser uma combinação de nomes de sistemas
+operativos, separados por vírgulas. Para incluir a hierarquia de páginas do
+manual do sistema nativo, o nome de sistema \fBman\fP tem de estar incluído na
+cadeia de argumentos. Esta opção sobrepõe\-se à variável de ambiente
+$\fBSYSTEM\fP.
+.TP 
+\fB\-C\ \fP\fIficheiro\fP,\ \fB\-\-config\-file=\fP\fIficheiro\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+mostra uma mensagem de ajuda e sai.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+mostra uma mensagem curta de uso e sai.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+mostra informação da versão.
+.SH AMBIENTE
+.TP 
+.if  !'po4a'hide' .B MANPATH
+If $\fBMANPATH\fP is set, \fBmanpath\fP displays its value rather than
+determining it on the fly.
+
+See the \fBSEARCH PATH\fP section of \fBmanpath\fP(5)  for the default behaviour
+and details of how this environment variable is handled.
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+Se $\fBSYSTEM\fP estiver definido, terá o mesmo efeito como se fosse
+especificado como argumento da opção \fB\-m\fP.
+.SH FICHEIROS
+.TP  \w'/etc/man_db.conf'u+2n
+.if  !'po4a'hide' .I /etc/man_db.conf
+ficheiro de configuração do man\-db.
+.SH "VEJA TAMBÉM"
+.if  !'po4a'hide' .BR apropos (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR whatis (1)
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH ERROS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

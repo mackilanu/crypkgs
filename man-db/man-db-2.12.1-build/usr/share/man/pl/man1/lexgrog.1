@@ -1,0 +1,216 @@
+.if  !'po4a'hide' .ds mC CW
+.\" Man page for lexgrog
+.\"
+.\" Copyright (c) 2001 Colin Watson <cjwatson@debian.org>
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.if  t .if \n(.g .ds mC CR
+.if  n .ds mC R
+.
+.\" in an example (EX/EE)?
+.nr mE 0
+.
+.if  !\n(.g \{\
+.de EX
+.  br
+.  if !\\n(mE \{\
+.    nr mF \\n(.f
+.    nr mP \\n(PD
+.    nr PD 1v
+.    nf
+.    ft \\*(mC
+.    nr mE 1
+.  \}
+..
+.\}
+.
+.
+.if  !\n(.g \{\
+.de EE
+.  br
+.  if \\n(mE \{\
+.    ft \\n(mF
+.    nr PD \\n(mP
+.    fi
+.    nr mE 0
+.  \}
+..
+.\}
+.\" End example.
+.
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH LEXGROG 1 2024-04-05 2.12.1 "Narzędzia przeglądarki stron podręcznika ekranowego"
+.SH NAZWA
+lexgrog \- przetwarza nagłówki stron podręcznika ekranowego
+.SH SKŁADNIA
+\fBlexgrog\fP [\|\fB\-m\fP\||\|\fB\-c\fP\|] [\|\fB\-dfw?V\fP\|] [\|\fB\-E\fP
+\fIkodowanie_znaków\fP\|] \fIplik\fP \&.\|.\|.
+.SH OPIS
+\fBlexgrog\fP jest implementacją w \fBlex\fPie tradycyjnych narzędzi
+\(lqzgadywanki groffa\(rq. Ze swojej linii poleceń czyta listę plików, które
+mogą być albo źródłami stron podręcznika albo preformatowanymi stronami
+\(lqcat\(rq, i wyświetla ich nazwy i opisy, tak jak są używane przez
+\fBapropos\fP i \fBwhatis\fP, albo listę filtrów preprocesora wymaganych przez
+stronę podręcznika zanim zostanie przekazana do \fBnroff\fP lub \fBtroff\fP, albo
+obie te listy.
+.PP
+Jeżeli wejście \fBlexgrog\fP jest w złym formacie, to wypisze on komunikat
+\(lqparse failed\(rq; może to być użyteczne dla zewnętrznych programów
+sprawdzających poprawność stron podręcznika. Jeżeli jednym z plików
+wejściowych \fBlexgrog\fPa jest \(lq\-\(rq, to będzie czytał ze swojego
+standardowego wejścia; jeśli plik wejściowy jest skompresowany, to go
+automatycznie zdekompresuje.
+.SH OPCJE
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Wyświetla informację diagnostyczną (debug).
+.TP 
+.if  !'po4a'hide' .BR \-m ", " \-\-man
+Przetwarza wejście jako pliki źródłowe stron podręcznika ekranowego. Jest to
+zachowanie domyślne, jeśli nie podano ani \fB\-\-man\fP, ani \fB\-\-cat\fP.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-cat
+Przetwarza wejście jako sformatowane wcześniej strony podręcznika ekranowego
+(\(lqstrony cat\(rq). \fB\-\-man\fP i \fB\-\-cat\fP nie mogą być użyte jednocześnie.
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-whatis
+Wyświetla nazwę i opis z nagłówka strony podręcznika ekranowego, używanego
+przez \fBapropos\fP i \fBwhatis\fP. Jest to domyślne zachowanie, jeżeli nie podano
+ani \fB\-\-whatis\fP, ani \fB\-\-filters\fP.
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-filters
+Wyświetla listę filtrów potrzebnych do wstępnego przetworzenia strony
+podręcznika zanim zostanie sformatowana przez program \fBnroff\fP lub \fBtroff\fP.
+.TP 
+\fB\-E\fP \fIkodowanie_znaków\fP, \fB\-\-encoding\fP \fIkodowanie_znaków\fP
+Nadpisuje odgadnięte kodowanie znaków strony podręcznika, ustawiając je na
+\fIkodowanie_znaków\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Wyświetla komunikat pomocy i kończy pracę.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Wyświetla krótki opis użycia programu i kończy pracę.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Wyświetla informację o wersji.
+.SH "KOD ZAKOŃCZENIA"
+.TP 
+.if  !'po4a'hide' .B 0
+Program zakończony bez żadnych błędów.
+.TP 
+.if  !'po4a'hide' .B 1
+Błąd użycia.
+.TP 
+.if  !'po4a'hide' .B 2
+\fBlexgrog\fP nie umiał przetworzyć jednego lub więcej spośród plików
+wejściowych.
+.SH PRZYKŁADY
+.nf
+  $ lexgrog man.1
+  man.1: "man \- an interface to the system reference manuals"
+  $ lexgrog \-fw man.1
+  man.1 (t): "man \- an interface to the system reference manuals"
+  $ lexgrog \-c whatis.cat1
+  whatis.cat1: "whatis \- display manual page descriptions"
+  $ lexgrog broken.1
+  broken.1: parse failed
+.fi
+.SH "PRZETWARZANIE WHATIS"
+\fBmandb\fP (oparty na tym samym kodzie, co \fBlexgrog\fP) przetwarza sekcję
+\fBNAZWA\fP (\fBNAME\fP) znajdującą się samej górze strony podręcznika ekranowego,
+szukając w niej nazw i opisów. Mimo że parser jest całkiem tolerancyjny,
+ponieważ musi sobie radzić z rożnymi formatami, które były używane na
+przestrzeni lat, to jednak czasem nie potrafi wyciągnąć potrzebnych
+informacji.
+.PP
+Jeżeli używany jest tradycyjny zbiór makr \fIman\fP, to poprawna sekcja
+\fBNAZWA\fP wygląda tak jak poniżej:
+.PP
+.RS
+.EX
+\&.SH NAME
+foo \e\- program to do something
+.EE
+.RE
+.PP
+Niektóre programy do obsługi stron podręcznika wymagają, aby separator
+\(oq\e\-\(cq był dokładnie taki, jak to pokazano; \fBmandb\fP jest bardziej
+tolerancyjny, jednakże w celu zachowania kompatybilności z innymi systemami
+dobrym pomysłem jest pozostawienie znaku odwrotnego ukośnika.
+.PP
+Po lewej stronie może występować kilka nazw, rozdzielonych od siebie
+przecinkami. Nazwy zawierające białe znaki są ignorowane, aby uniknąć
+nieprawidłowego zachowania przy niektórych źle sformatowanych sekcjach
+\fBNAZWA\fP. Tekst po prawej stronie ma dowolną postać i może zajmować wiele
+linii. Jeżeli w tej samej stronie podręcznika udokumentowanych jest kilka
+programów z różnymi opisami, powinna być użyta poniższa forma:
+.PP
+.RS
+.EX
+\&.SH NAME
+foo, bar \e\- programs to do something
+\&.br
+baz \e\- program to do nothing
+.EE
+.RE
+.PP
+(A macro which starts a new paragraph, like \fB.PP\fP, may be used instead of
+the break macro \fB.br\fP.)
+.PP
+Podczas używania pochodzącego z systemów BSD zbioru makr \fImdoc\fP poprawna
+sekcja \fBNAZWA\fP powinna wyglądać tak jak poniżej:
+.PP
+.RS
+.EX
+\&.Sh NAME
+\&.Nm foo
+\&.Nd program to do something
+.EE
+.RE
+
+Jest kilka powszechnych przyczyn, dla których przetwarzanie whatis kończy
+się fiaskiem. Czasami autorzy stron podręcznika zastępują \(oq.SH NAZWA\(cq
+przez \(oq.SH MÓJPROGRAM\(cq, co powoduje, że \fBmandb\fP nie potrafi
+odnaleźć potrzebnych informacji. Czasami autorzy umieszczają wprawdzie
+sekcję NAZWA, ale zawierają w niej dowolny tekst zamiast używać \(oqnazwa
+\e\- opis\(cq. Jednakże każda składania przypominająca powyższą powinna być
+akceptowana.
+.SH "ZOBACZ TAKŻE"
+.if  !'po4a'hide' .IR apropos (1),
+.if  !'po4a'hide' .IR man (1),
+.if  !'po4a'hide' .IR whatis (1),
+.if  !'po4a'hide' .IR mandb (8)
+.SH UWAGI
+\fBlexgrog\fP próbuje przetwarzać pliki zawierające żądania .so, jednakże
+będzie zdolny to zrobić tylko wtedy, gdy pliki te są poprawnie zainstalowane
+w hierarchii stron podręcznika ekranowego.
+.SH AUTOR
+Autorami kodu używanego przez program \fBlexgrog\fP do przetwarzania stron
+podręcznika są:
+.PP
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.PP
+Colin Watson napisał obecne wcielnie interfejsu linii poleceń i tę stronę
+podręcznika ekranowego.
+.SH BŁĘDY
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db
+.SH TŁUMACZENIE
+Wojciech Kotwica w 1999 roku przetłumaczył część stron podręcznika pakietu
+man-db i udostępnił je w ramach Projektu Tłumaczenia Manuali.
+.br
+Robert Luberda tłumaczenie zaktualizował i uzupełnił w roku 2008.

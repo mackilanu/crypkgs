@@ -1,0 +1,104 @@
+.\" Man page for catman
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Dec 10 14:17:29 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH CATMAN 8 2024-04-05 2.12.1 "Dienstprogramme für Handbuchseiten"
+.SH BEZEICHNUNG
+catman \- erzeugt oder aktualisiert vorformatierte Handbuchseiten
+.SH ÜBERSICHT
+\fBcatman\fP [\|\fB\-d?V\fP\|] [\|\fB\-M\fP \fIPfad\fP\|] [\|\fB\-C\fP \fIDatei\fP\|]
+[\|\fIAbschnitt\fP\|] \&.\|.\|.
+.SH BESCHREIBUNG
+\fBcatman\fP wird benutzt, um einen aktuellen Satz von vorformatierten
+Handbuchseiten zu erzeugen, die als Cat\-Seiten bezeichnet werden. Diese
+werden wesentlich schneller angezeigt als die unformatierten Handbuchseiten,
+benötigen aber zusätzlichen Speicherplatz. Die Entscheidung zur
+Unterstützung von »cat«\-Seiten liegt beim lokalen Administrator, der für
+diese Seiten passende Verzeichnisse bereitstellen muss.
+
+Die Optionen für \fBcatman\fP geben an, welche Handbuchseiten\-Hierarchien
+und welche Abschnitte vorformatiert werden sollen. Standard\-Hierarchien sind
+die, die in der Konfigurationsdatei von Man\-db als System\-Hierarchien
+festgelegt werden. Die Standard\-Abschnitte stehen in der Umgebungsvariable
+$\fBMANSEC\fP oder sind die in \fBman\fP(1) einkompilierten, wenn $\fBMANSEC\fP nicht
+definiert ist. Wird \fBcatman\fP eine durch Leerräume gegliederte Liste von
+Abschnittsnamen übergeben, setzt das die oben beschriebenen Standardwerte
+außer Kraft.
+
+Um die zu formatierenden Dateien zu ermitteln, wertet \fBcatman\fP die
+\fIIndex\fP\-Datenbankzwischenspeicher der jeweiligen Hierarchien aus.
+.SH OPTIONEN
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Ausgabe von Debug\-Informationen
+.TP 
+\fB\-M\ \fP\fIPfad\fP,\ \fB\-\-manpath=\fP\fIPfad\fP
+Gibt einen alternativen, durch Doppelpunkte gegliederten Suchpfad für
+Handbuchseiten\-Hierarchien an. Als Standard sind dies alle Pfade, die in der
+Man\-db\-Konfigurationsdatei als systemweit gültig deklariert sind.
+.TP 
+\fB\-C\ \fP\fIDatei\fP,\ \fB\-\-config\-file=\fP\fIDatei\fP
+Verwendung dieser benutzerspezifischen Konfigurationsdatei an Stelle der
+Vorgabe \fI\(ti/.manpath\fP
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Hilfetext anzeigen und beenden
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+zeigt eine kurze Anwendungszusammenfassung an und beendet das Programm.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Versionsinformation anzeigen und beenden
+.SH UMGEBUNGSVARIABLEN
+.TP 
+.if  !'po4a'hide' .B MANSECT
+Wenn $\fBMANSECT\fP gesetzt ist, wird ihr Wert als eine durch Doppelpunkte
+gegliederte Liste von Abschnitten interpretiert und dazu benutzt, die zu
+durchsuchenden Abschnitte und deren Reihenfolge zu bestimmen. Die Vorgabe
+ist »1 n l 8 3 0 2 3type 5 4 9 6 7«, es sei denn, dies wird durch die \fBSECTION\fP\-Anweisung in
+\fI/etc/man_db.conf\fP außer Kraft gesetzt.
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Wenn $MANPATH gesetzt ist, wird ihr Wert als der mit Kommas getrennte
+anzuwendende Hierarchie\-Suchpfad für Handbuchseiten interpretiert.
+
+Siehe den Abschnitt \fBSUCHPFAD\fP in der Handbuchseite \fBmanpath\fP(5) für das
+Standardverhalten und Details dazu, wie mit dieser Umgebungsvariable
+umgegangen wird.
+.SH DATEIEN
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+Konfigurationsdatei für Man\-db
+.TP 
+.if  !'po4a'hide' .I /usr/man/index.(bt|db|dir|pag)
+ein traditioneller, globaler Zwischenspeicher für die \fIIndex\fP\-Datenbank
+.TP 
+.if  !'po4a'hide' .I /var/catman/index.(bt|db|dir|pag)
+ein alternativer oder FSSTND\-konformer, globaler
+\fIIndex\fP\-Datenbankzwischenspeicher
+.SH "SIEHE AUCH"
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR mandb (8)
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH FEHLER
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

@@ -1,0 +1,186 @@
+.\" Man page for apropos
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH APROPOS 1 2024-04-05 2.12.1 "Utilitários de paginação de manual"
+.SH NOME
+apropos \- pesquisa por nomes e descrições de páginas de manual
+.SH SINOPSE
+\fBapropos\fP [\|\fB\-dalv?V\fP\|] [\|\fB\-e\fP\||\|\fB\-w\fP\||\|\fB\-r\fP\|] [\|\fB\-s\fP
+\fIlista\fP\|] [\|\fB\-m\fP \fIsistema\fP\|[\|,.\|.\|.\|]\|] [\|\fB\-M\fP \fIcaminho\fP\|]
+[\|\fB\-L\fP \fIlocalidade\fP\|] [\|\fB\-C\fP \fIarquivo\fP\|] \fIpalavra\-chave\fP \&.\|.\|.
+.SH DESCRIÇÃO
+Cada página de manual possui uma descrição curta disponível. \fBapropos\fP
+pesquisa nas descrições por ocorrências de \fIpalavra\-chave\fP.
+
+\fIpalavra\-chave\fP geralmente é uma expressão regular, como se (\fB\-r\fP) tivesse
+sido usada, ou pode conter opções curingas (\fB\-w\fP), ou corresponder a
+palavra\-chave exata (\fB\-e\fP). Ao usar essas opções, pode ser necessário
+colocar a \fIpalavra\-chave\fP entre aspas ou escapar (\e) os caracteres
+especiais para impedir que o shell interprete\-os.
+
+As regras padrões de correspondências permitem que estas sejam feitas em
+relação ao nome da página ou limites de uma palavra na descrição.
+
+O banco de dados pesquisado por \fBapropos\fP é atualizado pelo programa
+\fBmandb\fP. Dependendo de sua instalação, ele pode ser executado por um
+trabalho cron periódico ou pode precisar ser executado manualmente após
+novas páginas serem instaladas.
+.SH OPÇÕES
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Emite mensagens de depuração.
+.TP 
+.if  !'po4a'hide' .BR \-v ", " \-\-verbose
+Emite mensagens de aviso detalhadas.
+.TP 
+.if  !'po4a'hide' .BR \-r ", " \-\-regex
+Interpreta cada palavra\-chave como uma expressão regular. Esse é o
+comportamento padrão. Cada palavra\-chave será comparada aos nomes e às
+descrições de páginas independentemente. Ela pode corresponder qualquer
+parte de cada uma. A correspondência não está limitada aos limites de uma
+palavra.
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-wildcard
+Interpreta cada palavra\-chave como um padrão contendo caracteres curingas no
+estilo do shell. Cada palavra\-chave será comparada com os nomes e as
+descrições de páginas independentemente. Se \fB\-\-exact\fP também for usado, uma
+correspondência só será localizada se uma palavra\-chave expandida
+corresponder a toda uma descrição ou nome de páginas. Do contrário, a
+palavra\-chave também será permitida corresponder a limites de uma palavra na
+descrição.
+.TP 
+.if  !'po4a'hide' .BR \-e ", " \-\-exact
+Cada palavra\-chave será comparada em sua exatidão com nomes e descrições de
+páginas.
+.TP 
+.if  !'po4a'hide' .BR \-a ", " \-\-and
+Exibe apenas itens que correspondam a todas as palavras\-chaves fornecidas. O
+padrão é exibir itens que correspondam a qualquer palavra\-chave.
+.TP 
+.if  !'po4a'hide' .BR \-l ", " \-\-long
+Não apara a saída à largura do terminal. Normalmente, a saída será truncada
+à largura do terminal para evitar resultados causados por seções \fBNAME\fP mal
+escritas.
+.TP 
+\fB\-s\fP \fIlista\/\fP, \fB\-\-sections=\fP\fIlista\/\fP, \fB\-\-section=\fP\fIlista\fP
+Pesquisa apenas as seções de manual fornecidas. \fIlista\fP é uma lista de
+seções separada pelo caractere de dois pontos ou vírgula. Se uma entrada na
+\fIlista\fP for uma única seção, por exemplo "3", então a lista de descrições
+exibida incluirá páginas nas seções "3", "3perl", "3x" e por aí vai; se uma
+entrada na \fIlista\fP possuir uma extensão, por exemplo "3perl", então a lista
+incluirá apenas páginas naquela parte exata da seção de manual.
+.TP 
+\fB\-m\fP \fIsistema\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fIsistema\fP\|[\|,.\|.\|.\|]
+If this system has access to other operating systems' manual page
+descriptions, they can be searched using this option.  To search NewOS's
+manual page descriptions, use the option \fB\-m\fP \fBNewOS\fP.
+
+O \fIsistema\fP especificado pode ser uma combinação de nomes de sistemas
+operacionais delimitados por vírgula. Para incluir uma pesquisa às
+descrições do \fBwhatis\fP do sistema operacional nativo, inclua \fBman\fP como
+nome do sistema no texto do argumento. Essa opção vai sobrescrever a
+variável de ambiente $\fBSYSTEM\fP.
+.TP 
+\fB\-M\ \fP\fIcaminho\fP,\ \fB\-\-manpath=\fP\fIcaminho\fP
+Especifica um conjunto alternativo de hierarquias de páginas de manual,
+separadas por caractere de dois pontos, a ser pesquisado. Por padrão,
+\fBapropos\fP usa a variável de ambiente $\fBMANPATH\fP, a menos que esteja
+vazia ou não definida, caso em que ele vai determinar um manpath apropriado
+baseado em sua variável de ambiente $\fBPATH\fP. Essa opção sobrescreve o
+conteúdo de $\fBMANPATH\fP.
+.TP 
+\fB\-L\ \fP\fIlocalidade\fP,\ \fB\-\-locale=\fP\fIlocalidade\fP
+\fBapropos\fP geralmente vai determinar sua localidade atual por uma chamada
+à função C \fBsetlocale\fP(3), a qual pergunta a várias variáveis de ambiente,
+possibilitando incluir $\fBLC_MESSAGES\fP e $\fBLANG\fP. Para temporariamente
+substituir o valor determinado, use essa opção para fornecer uma
+\fIlocalidade\fP diretamente para \fBapropos\fP. Note que isso não surtirá
+efeito até que a pesquisa por páginas seja iniciada. Saída como a mensagem
+de ajuda sempre será exibida na localidade inicialmente determinada.
+.TP 
+\fB\-C\ \fP\fIarquivo\fP,\ \fB\-\-config\-file=\fP\fIarquivo\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Imprime uma mensagem de ajuda e sai.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Imprime uma mensagem curta e sai.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Exibe informação da versão.
+.SH "STATUS DE SAÍDA"
+.TP 
+.if  !'po4a'hide' .B 0
+Execução com sucesso do programa.
+.TP 
+.if  !'po4a'hide' .B 1
+Erro de uso, de sintaxe ou no arquivo de configuração.
+.TP 
+.if  !'po4a'hide' .B 2
+Erro operacional.
+.TP 
+.if  !'po4a'hide' .B 16
+Nada foi localizado que correspondesse aos critérios especificados.
+.SH AMBIENTE
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+Se $\fBSYSTEM\fP estiver definido, ele terá o mesmo efeito que se fosse
+especificado como um argumento da opção \fB\-m\fP.
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Se $\fBMANPATH\fP estiver definido, seu valor é interpretado como um caminho de
+pesquisa de hierarquia de páginas de manual, separadas por caractere de dois
+pontos, a ser usado.
+
+See the \fBSEARCH PATH\fP section of \fBmanpath\fP(5)  for the default behaviour
+and details of how this environment variable is handled.
+.TP 
+.if  !'po4a'hide' .B MANWIDTH
+Se $\fBMANWIDTH\fP estiver definido, seu valor é usado como largura do terminal
+(veja a opção \fB\-\-long\fP). Se não estiver definido, a largura do terminal
+será calculada usando o valor de $\fBCOLUMNS\fP e \fBioctl\fP(2), se disponível,
+ou recorrendo ao padrão de 80 caracteres se todo resto falhar.
+.TP 
+.if  !'po4a'hide' .B POSIXLY_CORRECT
+Se $\fBPOSIXLY_CORRECT\fP estiver definido, ainda que com um valor nulo, a
+pesquisa padrão de \fBapropos\fP será feita como uma expressão regular
+estendida (\fB\-r\fP). Hoje em dia, esse é o comportamento padrão.
+.SH ARQUIVOS
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/index.(bt\^|\^db\^|\^dir\^|\^pag)
+Um cache global de banco de dados \fIindex\fP tradicional.
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt\^|\^db\^|\^dir\^|\^pag)
+Um cache global de banco de dados \fIindex\fP compatível com FHS.
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/\|.\|.\|.\|/whatis
+Um banco de dados de texto tradicional do \fBwhatis\fP.
+.SH "VEJA TAMBÉM"
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR whatis (1),
+.if  !'po4a'hide' .BR mandb (8)
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH PROBLEMAS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

@@ -1,0 +1,812 @@
+'\" t
+.\" ** The above line should force tbl to be a preprocessor **
+.\" Man page for man
+.\"
+.\" Copyright (C) 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MAN 1 2024-04-05 2.12.1 "Verktyg för sidvisning av manual"
+.SH NAMN
+man \- ett gränssnitt för systemferensmanualer
+.SH SYNOPSIS
+.\" The general command line
+.\" The apropos command line
+\fBman\fP [\|\fImanflaggor\fP\|] [\|[\|\fIavsnitt\fP\|] \fIsida\fP\ \|.\|.\|.\|]\ \&.\|.\|.\&
+.br
+.\" The --global-apropos command line
+\fBman\fP \fB\-k\fP [\|\fIaproposflaggor\fP\|] \fIregutr\fP \&.\|.\|.\&
+.br
+.\" The whatis command line
+\fBman\fP \fB\-K\fP [\|\fImanflaggor\fP\|] [\|\fIavsnitt\fP\|] \fIterm\fP\ .\|.\|.\&
+.br
+.\" The --local command line
+\fBman\fP \fB\-f\fP [\|\fIwhatis\fP \fIflaggor\fP\|] \fIsida\fP \&.\|.\|.\&
+.br
+.\" The --where/--where-cat command line
+\fBman\fP \fB\-l\fP [\|\fImanflaggor\fP\|] \fIfil\fP \&.\|.\|.\&
+.br
+\fBman\fP \fB\-w\fP\||\|\fB\-W\fP [\|\fImanflaggor\fP\|] \fIsida\fP \&.\|.\|.\&
+.SH BESKRIVNING
+\fBman\fP är systemets sidvisare för manualen.  Varje \fIsid\fP\-argument som
+angetts till \fBman\fP är normalt sett namnet på ett program, verktyg eller
+en funktion.  \fIManualsidan\fP som associerats med vart och ett av dessa
+argument letas sedan upp och visas.  Ett \fIavsnitt\fP, om det angetts, kommer
+att dirigera \fBman\fP att leta endast i det \fIavsnitt\fPet av manualen.
+Standardåtgärden är att genomsöka alla tillgängliga \fIavsnitt\fP i en
+förutbestämd ordning (see \fBSTANDARDVÄRDEN\fP), och att visa endast den första
+\fIsida\fP som hittas, även om \fIsida\fP finns i flera \fIavsnitt\fP.
+
+Tabellen nedan visar \fIavsnitts\fP\-numren för manualen åtföljt av vilken typ
+av sidor de innehåller.
+
+.TS
+tab (@);
+l lx.
+1@T{
+Exekverbara program eller skalkommandon
+T}
+2@T{
+Systemanrop (funktioner som tillhandahålls av kerneln)
+T}
+3@T{
+Biblioteksanrop (funktioner i programbibliotek)
+T}
+4@T{
+Speciella filer (hittas vanligtvis i \fI/dev\/\fP)
+T}
+5@T{
+Filformat och konventioner t.ex. \& \fI/etc/passwd\fP
+T}
+6@T{
+Spel
+T}
+7@T{
+Diverse (inklusive makropaket och konventioner),
+t.ex.\& \fBman\fP(7), \fBgroff\fP(7), \fBman\-pages\fP(7)
+T}
+8@T{
+Kommandon för systemadministration (vanligtvis bara för root)
+T}
+9@T{
+Kernelrutiner [\|Icke\-standard\|]
+T}
+.TE
+
+En manual\fIsida\fP består av flera avsnitt.
+
+Vanliga avsnittsnamn inkluderar \fBNAMN\fP, \fBSYNOPSIS\fP, \fBKONFIGURATION\fP,
+\fBBESKRIVNING\fP, \fBFLAGGOR\fP, \fBAVSLUTSSTATUS\fP, \fBRETURVÄRDE\fP, \fBFEL\fP,
+\fBMILJÖ\fP, \fBFILER\fP, \fBVERSIONER\fP, \fBSTANDARDER\fP, \fBNOTERINGAR\fP, \fBFEL\fP,
+\fBEXEMPEL\fP, \fBUPPHOVSMÄN\fP och \fBSE\ VIDARE\fP.
+
+Följande konventioner gäller för \fBSYNOPSIS\fP\-avsnittet och kan användas som
+riktlinjer för andra avsnitt.
+
+.TS
+tab (@);
+l lx.
+\fBfet text\fP@T{
+skriv in exakt som visat.
+T}
+\fIkursiv text\fP@T{
+ersätt med lämpligt argument.
+T}
+[\|\fB\-abc\fP\|]@T{
+vilket som eller alla argumenten inom [ ] är valfria.
+T}
+\fB\-a\|\fP|\|\fB\-b\fP@T{
+flaggor avgränsade av | kan inte användas tillsammans.
+T}
+\fIargument\fP .\|.\|.@T{
+\fIargument\fP går att upprepa.
+T}
+[\|\fIuttryck\fP\|] .\|.\|.@T{
+hela \fIuttryck\fPet\ inom [ ] går att upprepa.
+T}
+.TE
+
+Den exakta renderingen kan variera beroende på utmatningsenhet.  Man kommer
+till exempel vanligtvis inte att kunna rendera kursiv text när det används i
+en terminal, utan kommer vanligtvis att använda understruken eller färgad
+text istället.
+
+Kommando\- eller funktionsexemplet är ett mönster som bör matcha alla möjliga
+anrop.  I vissa fall är det rekommenderat att exemplifiera med flera
+separata anrop så som visas i avsnittet \fBSYNOPSIS\fP i denna manualsida.
+.SH EXEMPEL
+.TP  \w'man\ 'u
+\fBman\fP\fI\ ls\fP
+Visa manualsidan för \fIobjektet\fP (programmet) \fIls\fP.
+.TP 
+\fBman\fP \fIman\fP.\fI7\fP
+Visa manualsidan för makropaketet \fIman\fP från sektion \fI7\fP. (Detta är en
+alternativ stavning av ”\fBman\fP \fI7 man\fP”.)
+.TP 
+\fBman '\fP\fIman\fP(|\fI7\fP)'
+Visa manualsidan för makropaketet \fIman\fP från avsitt \fI7\fP. (Det är en
+alternativ stavning av ”\fBman\fP \fI7 man\fP”. Det kan vara bekvämare vid
+kopiering och inklistring av korsreferenser mellan manualsidor. Notera att
+parenteserna normalt måste citeras för att skydda dem från skalet.)
+.TP 
+\fBman\ \-a\fP\fI\ intro\fP
+Visa, i följd, alla tillgängliga \fIintro\fP\-manualsidor som finns i manualen.
+Det är möjligt att avsluta mellan visningarna eller hoppa över någon av dem.
+.TP 
+\fBman \-t \fP\fIbash \fP|\fI lpr \-Pps\fP
+Formatera manualsidan för \fIbash\fP till standard \fBtroff\fP\- eller
+\fBgroff\fP\-format och öppna rör till skrivaren med namnet \fIps\fP.
+Standardutmatningen för \fBgroff\fP är vanligtvis PostScript.  \fBman \-\-help\fP
+borde ange vilken hanterare som är bunden till flaggan \fB\-t\fP.
+.TP 
+\fBman \-l \-T\fP\fIdvi ./foo.1x.gz\fP\fB > \fP\fI./foo.1x.dvi\fP
+Detta kommando kommer att dekomprimera och formatera nroff\-källmanualsidan
+\&\fI./foo.1x.gz\fP till en \fBenhetsoberoende (dvi)\fP\-fil.  Omdirigeringen är
+nödvändig eftersom \fB\-T\fP\-flaggan förorsakar att utmatningen kommer att
+dirigeras till \fBstdout\fP utan sidvisare.  Utmatningen skulle kunna visas med
+ett program så som \fBxdvi\fP eller processas vidare till PostScript med hjälp
+av ett program så som \fBdvips\fP.
+.TP 
+\fBman\ \-k\fP\fI\ printf\fP
+Genomsök de korta beskrivningarna och namnen på manualsidorna efter
+nyckelordet \fIprintf\fP som ett reguljärt uttryck.  Skriv ut allt som
+matchar.  Ekvivalent med \fBapropos\fP\fI\ printf\fP\fB.\fP
+.TP 
+\fBman\ \-f\fP\fI\ smail\fP
+Leta upp manualsidorna som refereras till som \fIsmail\fP och skriv ut de korta
+beskrivningarna för de som hittas.  Ekvivalent med \fBwhatis\fP\fI\ smail\fP\fB.\fP
+.SH ÖVERSIKT
+Många flaggor till \fBman\fP finns för att ge användaren så mycket
+flexibilitet som möjligt.  Ändringar kan göras till sökvägen,
+avsnittsordningen, utmatningshanteraren och andra beteenden och operationer
+som beskrivs nedan.
+
+Om satta kommer diverse miljövariabler att studeras för att bestämma hur
+\fBman\fP ska fungera. Det är möjligt att sätta den övergripande variabeln
+$\fBMANOPT\fP till vilken sträng som helst i kommandoradsformat förutom att de
+blanksteg som används som del av en flaggas argument måste markeras (föregås
+av ett bakstreck). \fBman\fP kommer att tolka $\fBMANOPT\fP före att det tolkar
+sin egen kommandorad. De flaggor som kräver ett argument kommer att
+åsidosättas av samma flaggor som finns på kommandoraden. För att återställa
+alla flaggorna som ställts in i $\fBMANOPT\fP så kan \fB\-D\fP anges som den första
+kommandoradsflaggan. Detta låter man ”glömma” de flaggor som angetts i
+$\fBMANOPT\fP, även om de fortfarande måste vara giltiga.
+
+Manualsidor lagras normalt i \fBnroff\fP(1)\-format under en katalog så som
+\fI/usr/share/man\fP. För vissa installationer find det också förformaterade
+\fIcat\-sidor\fP för att förbättra prestanda. Se \fBmanpath\fP(5) för detaljer om
+var dessa filer lagras.
+
+Detta paket har stöd för manualsidor på flera språk, vilket styrs av din
+\fIlocale\fP. Om ditt system inte ställde inte detta automatiskt för dig, kan
+du behöva sätta $\fBLC_MESSAGES\fP, $\fBLANG\fP eller någon annan systemberoende
+miljövariabel för att indikera din önskade lokal, vanligtvis angiven i det
+\fBPOSIX\fP\-format:
+
+<\fIspråk\fP>[\|\fB_\fP<\fIterritorium\fP>\|[\|\fB.\fP<\fIteckenuppsättning\fP>\|[\|\fB,\fP<\fIversion\fP>\|]\|]\|]
+
+Om den önskade sidan finns tillgänglig i din \fIlokal\fP så kommer den att
+visas istället för standardsidan (vanligtvis på amerikansk engelska).
+
+Om du finner att översättningarna som kommer med detta paket inte finns
+tillgängliga på ditt modersmål och skulle vilja tillhandahålla dem, vänligen
+kontakta den ansvariga utvecklaren som kan koordinera en sådan aktivitet.
+
+Individualla manualsidor skrivs och underhålls normalt av utvecklarna av
+programmet, funktionen eller annat ämne som de dokumenterar och inkluderas
+inte i detta paket. Om du upptäcker att en manualsida saknas eller är
+ofullständig, rapportera det till utvecklarna av paketet i fråga.
+
+För information angående andra funktioner och tillägg för denna visare för
+manualsidor, se vidare i dokumenten som levererats med paketet.
+.SH STANDARDVÄRDEN
+Ordningen av avsnitten som ska genomsökas kan åsidosättas via miljövariabeln
+$\fBMANSECT\fP eller av direktivet \fBSECTION\fP i \fI/etc/man_db.conf\fP. Som
+standard är den som följer:
+
+.RS
+.if  !'po4a'hide' 1 n l 8 3 0 2 3type 5 4 9 6 7
+.RE
+
+Den formaterade manualsidan visas med hjälp av en \fIsidvisare\fP. Detta kan
+anges på ett antal sätt, eller så faller man tillbaka på ett standardvärde
+(see alternativ \fB\-P\fP för vidare information).
+
+Filtren lokaliseras på ett antal olika sätt.  Först kommer
+kommandoradsflaggan \fB\-p\fP eller miljövariabeln $\fBMANROFFSEQ\fP att
+inspekteras.  Om \fB\-p\fP inte användes och miljövariabeln inte var satt kommer
+den första raden av nroff\-filen att tolkas och genomsökas efter en
+preprocessorsträng.  För att innehålla en giltig preprocessorsträng så måste
+första raden vara på formen
+
+\&\fB'\e"\fP <\fBsträng\fP>
+
+där \fBsträng\fP kan vara vilken kombination som helst av bokstäver som
+beskrivs av flaggan \fB\-p\fP nedan.
+
+Om ingen av de ovanstående metoderna tillhandahåller någon filterinformation
+kommer standarduppsättningen att användas.
+
+.\" ********************************************************************
+En formateringsrörledning skapas från filtren och den primära formateraren
+(\fBnroff\fP eller [\fBtg\fP]\fBroff\fP med \fB\-t\fP) och köras. Alternativt om ett
+körbart program \fImandb_nfmt\fP (eller \fImandb_tfmt\fP med \fB\-t\fP) existerar i
+roten till man\-trädet kommer det att köras istället.  Det förses med
+manualsidans källkodsfil, preprocessorsträngen och valfritt enheten som
+angetts med \fB\-T\fP eller \fB\-E\fP som argument.
+.SH FLAGGOR
+Icke\-argument flaggor som duplicerats antingen på kommandoraden, i
+$\fBMANOPT\fP eller båda är inte skadliga.  För flaggor som kräver ett argument
+kommer varje duplicering att åsidosätta det tidigare argumentvärdet.
+.SS "Allmänna flaggor"
+.TP 
+\fB\-C\ \fP\fIfil\fP,\ \fB\-\-config\-file=\fP\fIfil\fP
+Använd denna användarkonfigurationsfil snarare än standard \fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Skriver ut felsökningsinformation.
+.TP 
+.if  !'po4a'hide' .BR \-D ", " \-\-default
+Denna flagga anges normalt som den allra första flaggan och återställer
+\fBman\fP:s beteende till standardinställningarna.  Den används för att
+återställa de flaggor som kan ha satts i $\fBMANOPT\fP.  Flaggor som följer
+\fB\-D\fP kommer att ha sin vanliga effekt.
+.TP 
+\fB\-\-warnings\fP[=\fIvarningar\/\fP]
+Aktivera varningar från \fIgroff\fP.  Detta kan användas för att utföra
+rimlighetskontroller av källkodstexten för manualsidor.  \fIvarningar\fP är en
+kommaseparerad lista av varningsnamn; om de inte anges är standardvärdet
+”mac”.  För att inaktivera en \fIgroff\fP\-varning, prefixa den med ”!”: till
+exempel aktiverar \fB\-\-warnings=mac,!break\fP varningar i kategorin ”mac” och
+inaktiverar varningar i kategorin ”break”. Se noden \(lqVarningar\(rq i
+\fBinfo groff\fP för en lista över möjliga varningsnamn.
+.SS Huvudarbetssätt
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-whatis
+Ungefär motsvarande \fBwhatis\fP.  Visa en kort beskrivning från manualsidan
+om tillgänglig.  Se \fBwhatis\fP(1) för detaljer.
+.TP 
+.if  !'po4a'hide' .BR \-k ", " \-\-apropos
+Ungefär motsvarande \fBapropos\fP.  Sök efter nyckelord bland de korta
+beskrivningarna för manualsidorna och visa eventuella matchningar.  Se
+\fBapropos\fP(1) för detaljer.
+.TP 
+.if  !'po4a'hide' .BR \-K ", " \-\-global\-apropos
+Sök efter text i alla manualsidor.  Detta är en naiv sökning och tar
+troligtvis lite tid; om du kan så bör du ange ett avsnitt för att reducera
+antalet sidor som måste genomsökas.  Söktermer kan vara enkla strängar (som
+standard) eller reguljära uttryck om flaggan \fB\-\-regex\fP används.
+.IP
+Notera att detta genomsöker manualsidornas \fIkällor\fP, inte den renderade
+texten, och kan därför inkludera falska positiver på grund av exempelvis
+kommentarer i källfiler, eller falska negativer på grund av saker så som att
+bindestreck skrivs som ”\e\-” i källkodsfiler. Sökning i den renderade texten
+hade varit mycket långsammare.
+.TP 
+.if  !'po4a'hide' .BR \-l ", " \-\-local\-file
+.\" Compressed nroff source files with a supported compression
+.\" extension will be decompressed by man prior to being displaying via the
+.\" usual filters.
+Aktivera ”lokalt” läge.  Formatera och visa lokala manualfiler istället för
+att söka genom systemets manualsamling.  Varje manualsidesargument kommer
+att tolkas som en nroff\-källkodsfil i det korrekta formatet.  Ingen cat\-fil
+produceras.  Om ”\-” listas som ett av argumenten kommer inmatningen att tas
+från standard in.  När denna flagga inte används och man misslyckas med att
+hitta den begärda sidan, innan felmeddelandet visas, så kommer det att bete
+sig som om denna flagga angavs, och använda namnet som ett filnamn och söka
+efter en exakt matchning.
+.IP
+Om denna flagga inte används kommer \fBman\fP att falla tillbaka på att tolka
+manualsidesargumenten som lokala filnamn om argumentet innehåller ett
+”/”\-tecken, eftersom detta är en god indikation på att argumentet refererar
+till en sökväg i filsystemet.
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-where ", " \-\-path ", " \-\-location
+Visa inte själva manualsidan, utan skriv ut platsen för nroff\-källfilen som
+skulle ha formaterats. Om flaggan \fB\-a\fP också används, skriv ut alla
+källkodsfiler som matchar sökkriterierna.
+.TP 
+.if  !'po4a'hide' .BR \-W ", " \-\-where\-cat ", " \-\-location\-cat
+Visa inte själva manualsidan, utan skriv ut platsen för den förformaterade
+cat\-filen som skulle ha visats. Om flaggan \fB\-a\fP också används, skriv då ut
+platserna för alla förformaterade cat\-filer som matchar sökkriterierna.
+.IP
+Om både \fB\-w\fP och \fB\-W\fP används, skriv då ut både källfiler och cat\-filer
+separerade av ett blanksteg. Om både \fB\-w\fP, \fB\-W\fP och \fB\-a\fP används, gör då
+detta för varje eventuell matchning.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-catman
+Denna flagga är inte avsedd för allmänt bruk och bör bara användas av
+programmet \fBcatman\fP.
+.TP 
+\fB\-R\ \fP\fIkodning\fP,\ \fB\-\-recode\fP=\fIkodning\fP
+Istället för att formatera manualsidan på det vanliga sättet, mata ut dess
+källkod konverterat till den angivna \fIkodningen\fP.  Om du redan vet
+kodningen för källkodsfilen kan du också använda \fBmanconv\fP(1) direkt.
+Denna flagga låter dig dock konvertera flera manualsidor till en enstaka
+kodning utan att du måste explicit ange kodningstillstånden för var och en,
+givet att de redan fanns installerade i en struktur liknande en hierarki av
+manualsidor.
+.IP
+Överväg att använda \fBman-recode\fP(1) istället för att konvertera flera
+manualsidor då det har ett gränssnitt designat för masskonvertering och
+därför kan vara mycket snabbare.
+.SS "Att hitta manualsidor"
+.TP 
+\fB\-L\ \fP\fIlokal\fP,\ \fB\-\-locale=\fP\fIlokal\fP
+\fBman\fP kommer normalt att avgöra din aktuella lokal genom att anrop
+till C\-funktionen \fBsetlocale\fP(3)  som kontrollerar diverse miljövariabler,
+som eventuellt $\fBLC_MESSAGES\fP och $\fBLANG\fP.  För att tillfälligt åsidosätta
+det framtagna värdet, använd denna flagga för att ange en \fIlokal\fP\-sträng
+direkt till \fBman\fP.  Notera att det inte får någon effekt förrän
+sökningen efter sidor faktiskt påbörjas.  Utmatning så som hjälpmeddelandet
+kommer alltid att visas enligt den först bestämda lokalen.
+.TP 
+\fB\-m\fP \fIsystem\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fIsystem\fP\|[\|,.\|.\|.\|]
+Om detta system har tillgång till andra operativsystems manualsidor kan de
+nås via den här flaggan.  För att söka efter en manualsida från samlingen av
+manualsidor för NyttOS, använd flaggan \fB\-m\fP \fBNyttOS\fP.
+
+\fIsystem\fP som angetts kan vara en kombination av kommaavgränsade namn på
+operativsystem.  För att inkludera en sökning för det normala
+operativsystemets manualsidor, inkludera systemnamnet \fBman\fP i
+argumentsträngen.  Denna flagga kommer att åsidosätta miljövariabeln
+$\fBSYSTEM\fP.
+.TP 
+\fB\-M\ \fP\fIsökväg\fP,\ \fB\-\-manpath=\fP\fIsökväg\fP
+Ange en alternativ man\-sökväg att använda.  Som standard kommer \fBman\fP att
+använda \fBmanpath\fP\-härledd kod för att avgöra vilken sökväg som ska
+genomsökas.  Denna flagga åsidosätter miljövariabeln $\fBMANPATH\fP och gör att
+flaggan \fB\-m\fP ignoreras.
+
+En sökväg angiven som en man\-sökväg måste vara roten för en hierarki av
+manualsidor strukturerad i avsnitt som beskrivits i man\-db\-manualen (Under
+”Systemet för manualsidor”). För att visa manualsidor utanför sådana
+hierarkier, se flaggan \fB\-l\fP.
+.TP 
+\fB\-S\\fP \fIlista\/\fP,\ \fB\-s\\fP \fIlista\/\fP, \fB\-\-sections=\fP\fIlista\/\fP
+Den angivena \fIlistan\fP är en kolon\- eller kommaseparerad lista av avsnitt,
+som används för att avgöra vilka manualavsnitt som ska genomsökas och i
+vilken ordning.  Denna flagga åsidosätter miljövariabeln $\fBMANSECT\fP.
+(Stavningen \fB\-s\fP är för att vara kompatibel med System V.)
+.TP 
+\fB\-e\ \fP\fIunderändelse\fP,\ \fB\-\-extension=\fP\fIunderändelse\fP
+Vissa system införlivar stora paket med manualsidor, så som de som följer
+med paketet \fBTcl\fP, i huvudhierarkin för manualsidor.  För att komma runt
+problemet med att ha två manualsidor med samma namn, exempelvis \fBexit\fP(3),
+så tilldelades normalt sett alla \fBTcl\fP\-sidorna till avsnitt \fBl\fP.  Då detta
+är olyckligt är det nu möjligt att placera sidorna i det korrekta avsnittet
+och att tilldela en specifik ”ändelse” till dem, i detta fallet
+\fBexit\fP(3tcl).  Vid normal användning kommer \fBman\fP att visa \fBexit\fP(3)
+istället för \fBexit\fP(3tcl).  För att förhandla denna situation och för att
+undvika att man måste veta vilket avsnitt sidan du begär finns i, är det nu
+möjligt att förse \fBman\fP med en \fIunderändelse\fP\-sträng som indikerar
+vilket paket sidan måste höra till.  Med exemplet ovan så kan man ange
+flaggan \fB\-e\ tcl\fP till \fBman\fP för att det ska begränsa sökningen till
+sidor som har ändelsen \fB*tcl\fP.
+.TP 
+.if  !'po4a'hide' .BR \-i ", " \-\-ignore\-case
+Ignorera skiftläge vid sökning efter manualsidor.  Detta är standard.
+.TP 
+.if  !'po4a'hide' .BR \-I ", " \-\-match\-case
+Sök efter manualsidor på ett skiftlägeskänsligt sätt.
+.TP 
+.if  !'po4a'hide' .B \-\-regex
+Visa alla sidor där någon del av antingen deras namn eller deras
+beskrivningar matchar varje \fIsida\fP\-argument som ett reguljärt uttryck, som
+med \fBapropos\fP(1).  Eftersom det vanligtvis inte finns något rimligt sätt
+att välja en ”bästa” sida vid sökning via ett reguljärt uttryck så
+implicerar denna flagga \fB\-a\fP.
+.TP 
+.if  !'po4a'hide' .B \-\-wildcard
+Visa alla sidor där någon del av antingen deras namn eller deras
+beskrivningar matchar varje \fIsida\fP\-argument med jokertecken i skal\-stil,
+som med \fBapropos\fP(1) \fB\-\-wildcard\fP.  Argumentet \fIsida\fP måste matcha hela
+namnet eller beskrivningen eller matcha på ordgränser i beskrivningen.
+Eftersom det vanligtvis inte finns något rimligt sätt att välja en ”bästa”
+sida vid sökning via jokertecken så implicerar denna flagga \fB\-a\fP.
+.TP 
+.if  !'po4a'hide' .B \-\-names\-only
+Om flaggan \fB\-\-regex\fP eller \fB\-\-wildcard\fP används så matcha enbart sidnamn,
+inte sidbeskrivningar, som med \fBwhatis\fP(1).  Förövrigt har den ingen
+effekt.
+.TP 
+.if  !'po4a'hide' .BR \-a ", " \-\-all
+Som standard kommer \fBman\fP att avsluta efter ha visat den mest lämpliga
+manualsidan den hittar.  Om denna flagga används så tvingas \fBman\fP att
+visa alla manualsidor med namn som matchar sökkriteriet.
+.TP 
+.if  !'po4a'hide' .BR \-u ", " \-\-update
+Denna flagga får \fBman\fP att uppdatera sina databascachar för installerade
+manualsidor. Detta behövs endast i speciella situationer och det är normalt
+sett bättre att köra \fBmandb\fP(8) istället.
+.TP 
+.if  !'po4a'hide' .B \-\-no\-subpages
+Som standard kommer \fBman\fP att försöka tolka par av namn på manualsidor
+som anges på kommandoraden som ekvivalenta med ett enstaka namn på en
+manualsida som innehåller ett bindestreck eller ett understreck.  Detta
+stöder vanliga mönster för program som implementerar ett antal
+underkommandon, vilket låter dem tillhandahålla manualsidor för vart och ett
+som kan nås via liknande syntax som skulle ha använts för att köra
+underkommandona själva.  Till exempel:
+
+.nf
+.if  !'po4a'hide' \&  $ man \-aw git diff
+.if  !'po4a'hide' \&  /usr/share/man/man1/git\-diff.1.gz
+.fi
+
+För att inaktivera detta beteende, använd flaggan \fB\-\-no\-subpages\fP.
+
+.nf
+.if  !'po4a'hide' \&  $ man \-aw \-\-no\-subpages git diff
+.if  !'po4a'hide' \&  /usr/share/man/man1/git.1.gz
+.if  !'po4a'hide' \&  /usr/share/man/man3/Git.3pm.gz
+.if  !'po4a'hide' \&  /usr/share/man/man1/diff.1.gz
+.fi
+.SS "Att kontrollera formaterad utmatning"
+.TP 
+\fB\-P\ \fP\fIsidvisare\fP,\ \fB\-\-pager=\fP\fIsidvisare\fP
+Ange vilken utmatningssidvisare som ska användas.  Som standard använder
+\fBman\fP \fBless\fP, om \fBless\fP inte finns eller är körbar används
+\fBcat\fP.  Denna flagga åsidosätter miljövariabeln $\fBMANPAGER\fP, vilken i
+sin tur åsidosätter miljövariabeln $\fBPAGER\fP.  Den används inte i samband
+med \fB\-f\fP eller \fB\-k\fP.
+
+Värdet kan vara ett enkelt kommandonamn eller ett kommando med argument och
+får använda skalcitering (bakstreck, enkla citattecken eller dubbla
+citattecken).  Det får inte använda rörledningar för att koppla ihop flera
+kommandon; om du behöver detta så använd ett inkapslingsskript som kan ta
+filen som ska visas antingen som ett argument eller via standard in.
+.TP 
+\fB\-r\ \fP\fIprompt\fP,\ \fB\-\-prompt=\fP\fIprompt\fP
+Om en sen version av \fBless\fP används som sidvisaren kommer \fBman\fP att
+försöka ställa in dess prompt och en del vettiga flaggor.  Standardprompten
+ser ut som
+
+\fB Manualsida\fP\fI namn\fP\fB(\fP\fIavsn\fP\fB) rad\fP\fI x\fP
+
+.\"The default options are
+.\".BR \-six8 .
+.\"The actual default will depend on your chosen
+.\".BR locale .
+där \fInamn\fP betecknar manualsidans namn, \fIavsn\fP betecknar avsnittet i
+vilket den hittades och \fIx\fP det aktuella radnumret.  Detta åstadkoms via
+miljövariabeln $\fBLESS\fP.
+
+.\"You may need to do this if your
+.\"version of
+.\".B less
+.\"rejects the default options or if you prefer a different prompt.
+Om \fB\-r\fP förses med en sträng kommer den att åsidosätta detta
+standardvärde.  Strängen får innehålla texten \fB$MAN_PN\fP vilken kommer att
+expanderas till namn på den aktuella manualsidan och dess avsnittsnamn
+omgärdat av ”(” och ”)”.  Strängen som används för att producera
+standardvärdet kan uttryckas som
+
+\fB\e\ Manualsida\e\ \e$MAN_PN\e\ ?ltrad\e\ %lt?L/%L.:\fP
+.br
+\fBbyte\e\ %bB?s/%s..?\e\ (SLUT):?pB\e\ %pB\e\e%..\fP
+.br
+\fB(tryck på h för hjälp eller q för att avsluta)\fP
+
+Den har radbrutits till tre rader enkom för läslighet.  För dess innebörd se
+manualsidan för \fBless\fP(1).  Promptsträngen utvärderas av skalet.  Alla
+dubbla citattecken, grav accent och bakstreck i prompten måste föregås av en
+kontrollsekvens med ett bakstreck.  Promptsträngen får sluta med en
+kontrollsekvens följd av ett $ vilket i sin tur kan följas av ytterligare
+flaggor till less.  Som standard sätter \fBman\fP flaggorna \fB\-ix8\fP.
+
+Miljövariabeln $\fBMANLESS\fP som beskrivs nedan kan användas för att ställa in
+en standardpromptsträng om ingen anges på kommandoraden.
+.TP 
+.if  !'po4a'hide' .BR \-7 ", " \-\-ascii
+När du tittar på en ren \fIascii\fP(7) manualsida på en 7\-bitars terminal eller
+terminalemulator så kan vissa tecken komma att inte visas korrekt när
+\fIlatin1\fP(7) enhetsbeskrivningen används med \fBGNU\fP \fBnroff\fP.  Denna flagga
+låter rena \fIascii\fP manualsidor visas i \fIascii\fP med \fIlatin1\fP\-enheten.  Den
+kommer inte att översätta någon \fIlatin1\fP\-text.  Följande tabell visar
+översättningarna som görs: visa delar av den kan endast visas korrekt när
+\fBGNU\fP \fBnroff\fP:s \fIlatin1\fP(7)\-enhet används.
+
+.ie  c \[shc] \
+.  ds softhyphen \[shc]
+.el \
+.  ds softhyphen \(hy
+.na
+.TS
+tab (@);
+l c c c.
+Beskrivning@Oktal@latin1@ascii
+_
+T{
+bindestreck
+T}@255@\*[softhyphen]@-
+T{
+punkt (mittpunkt)
+T}@267@\(bu@o
+T{
+akut accent
+T}@264@\(aa@'
+T{
+multiplikationstecken
+T}@327@\(mu@x
+.TE
+.ad
+
+Om \fIlatin1\fP\-kolumnen visas korrekt kan din terminal vara inställd på
+\fIlatin1\fP\-tecken och denna flagga behövs inte.  Om \fIlatin1\fP\- och
+\fIascii\fP\-kolumnerna är identiska läser du denna sida med hjälp av denna
+flagga eller så formaterade inte \fBman\fP denna sidan via
+\fIlatin1\fP\-enhetsbeskrivningen.  Om \fIlatin1\fP\-kolumnen saknas eller är trasig
+så kan du vara tvungen att visa manualsidor med denna flagga.
+
+Denna flagga ignoreras om flaggorna \fB\-t\fP, \fB\-H\fP, \fB\-T\fP, eller \fB\-Z\fP används
+och kan vara meningslös för andra \fBnroff\fP än \fBGNU\fP:s.
+.TP 
+\fB\-E\ \fP\fIkodning\fP,\ \fB\-\-encoding\fP=\fIkodning\fP
+Generera utmatning för en annan teckenkodning är standardkodningen.  För
+bakåtkompatibilitet kan \fIkodning\fP så väl vara en \fBnroff\fP\-enhet, exempelvis
+\fBascii\fP, \fBlatin1\fP eller \fButf8\fP, som en riktig teckenkodning så som
+\fBUTF\-8\fP.
+.TP 
+.if  !'po4a'hide' .BR \-\-no\-hyphenation ", " \-\-nh
+Normalt kommer \fBnroff\fP automatiskt avstava text vid radbrytning även för
+ord som inte innehåller några bindestreck om detta behövs för att placera ut
+orden på en rad utan allt för mycket blanktecken.  Denna flagga inaktiverar
+automatisk avstavning så att ord bara kommer att avstavas om de redan
+innehåller bindestreck.
+
+Om du skriver en manualsida och helt enkelt vill förhindra \fBnroff\fP från att
+avstava ett ord vid en olämplig punkt ska du inte använda denna flagga utan
+konsultera \fBnroff\fP\-dokumentationen istället; du kan till exempel placera
+”\e%” inuti ett ord för att indikera att det kan avstavas vid denna punkten,
+eller placera ”\e%” vid ordets början för att förhindra det från att
+avstavas.
+.TP 
+.if  !'po4a'hide' .BR \-\-no\-justification ", " \-\-nj
+Normalt sett kommer \fBnroff\fP automatiskt att justera text längs båda
+marginalerna.  Denna flagga inaktiverar fullständig justering men tillåter
+justering längs vänstermarginalen, ibland kallat ”text med ojämn
+högermarginal”.
+
+Om du skriver en manualsida och helt enkelt vill förhindra \fBnroff\fP från att
+justera vissa stycken ska du inte använda denna flagga, utan konsultera
+\fBnroff\fP\-dokumentationen istället; du kan till exempel använda ”.na”, ”.nf”,
+”.fi” och ”.ad”\-begäran för att tillfälligt inaktivera justering och
+fyllning.
+.TP 
+\fB\-p\ \fP\fIsträng\fP,\ \fB\-\-preprocessor=\fP\fIsträng\fP
+Ange sekvensen av preprocessorer som ska köras innan \fBnroff\fP eller
+\fBtroff\fP/\fBgroff\fP.  Inte alla installationer kommer att ha den fullständiga
+uppsättningen av preprocessorer.  Visa av preprocessorerna och bokstäverna
+som används för att beteckna dem är \fBeqn\fP (\fBe\fP), \fBgrap\fP (\fBg\fP), \fBpic\fP
+(\fBp\fP), \fBtbl\fP (\fBt\fP), \fBvgrind\fP (\fBv\fP), \fBrefer\fP (\fBr\fP).  Denna flagga
+åsidosätter miljövariabeln $\fBMANROFFSEQ\fP.  \fBzsoelim\fP körs alltid som den
+allra första preprocessorn.
+.TP 
+.if  !'po4a'hide' .BR \-t ", " \-\-troff
+Använd \fIgroff \-mandoc\fP för att formatera manualsidan till standard ut.  Denna
+flagga krävs inte i samband med \fB\-H\fP, \fB\-T\fP, eller \fB\-Z\fP.
+.TP 
+\fB\-T\fP[\fIenhet\/\fP], \fB\-\-troff\-device\fP[=\fIenhet\/\fP]
+This option is used to change \fBgroff\fP (or possibly \fBtroff's\fP)  output to
+be suitable for a device other than the default.  It implies \fB\-t\fP.
+Examples (as of groff 1.23.0) include \fBdvi\fP, \fBlatin1\fP, \fBpdf\fP, \fBps\fP,
+\fButf8\fP, \fBX75\fP and \fBX100\fP.
+.TP 
+\fB\-H\fP[\fIwebbläsare\/\fP], \fB\-\-html\fP[=\fIwebbläsare\/\fP]
+Denna flagga kommer att få \fBgroff\fP att producera HTML\-utmatning och kommer
+att visa den utmatningen i en webbläsare.  Valet av webbläsare bestäms av
+det valfria argumentet \fIwebbläsare\fP om det finns angivet, av miljövariabeln
+$\fBBROWSER\fP eller av ett standardvärde vid kompileringen (vanligtvis
+\fBlynx\fP).  Denna flagga implicerar \fB\-t\fP och kommer endast att fungera med
+\fBGNU\fP \fBtroff\fP.
+.TP 
+\fB\-X\fP[\fIppt\/\fP], \fB\-\-gxditview\fP[=\fIppt\/\fP]
+Denna flagga visar utmatningen från \fBgroff\fP i ett grafiskt fönster med
+hjälp av programmet \fBgxditview\fP.  \fIppt\fP (punkter per tum) kan vara 75,
+75\-12, 100, eller 100\-12 där standardvärdet är 75; varianterna med \-12
+använder ett 12\-punkters bastypsnitt.  Denna flagga implicerar \fB\-T\fP med
+enheten X75, X75\-12, X100, respektive X100\-12.
+.TP 
+.if  !'po4a'hide' .BR \-Z ", " \-\-ditroff
+\fBgroff\fP kommer att köra \fBtroff\fP och sedan använda en lämplig postprocessor
+för att producera utmatning lämplig för den valda enheten.  Om \fIgroff \-mandoc\fP är
+\fBgroff\fP kommer denna flagga att skickas vidare till \fBgroff\fP och
+undertrycka användandet av en postprocessor.  Den implicerar \fB\-t\fP.
+.SS "Att få hjälp"
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Skriv ut ett hjälpmeddelande och avsluta.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Skriv ut ett kort användningsmeddelande och avsluta.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Visa versionsinformation.
+.SH SLUTSTATUS
+.TP 
+.if  !'po4a'hide' .B 0
+Framgångsrik programexekvering.
+.TP 
+.if  !'po4a'hide' .B 1
+Användnings\-, syntax\- eller konfigurationsfilsfel.
+.TP 
+.if  !'po4a'hide' .B 2
+Funktionsfel.
+.TP 
+.if  !'po4a'hide' .B 3
+En barnprocess returnerade en slutstatus som inte var noll.
+.TP 
+.if  !'po4a'hide' .B 16
+Åtminstone en av sidorna/filerna/nyckelorden existerade inte eller matchades
+inte.
+.SH MILJÖ
+.\".TP \w'MANROFFSEQ\ \ 'u
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Om $\fBMANPATH\fP är satt kommer dess värde att användas som sökvägen att
+genomsöka efter manualsidor.
+
+Se avsnittet för \fBSÖKVÄG\fP i \fBmanpath\fP(5)  för standardbeteende och
+detaljer om hur denna miljövariabel hanteras.
+.TP 
+.if  !'po4a'hide' .B MANROFFOPT
+Varje gång \fBman\fP kör formateraren (\fBnroff\fP, \fBtroff\fP eller \fBgroff\fP)
+lägger den till innehåller från $\fBMANROFFOPT\fP till formaterarens
+kommandorad.
+
+For example, \fBMANROFFOPT=\-P\-i\fP tells the formatter to use italic text
+(which is only supported by some terminals) rather than underlined text.
+.TP 
+.if  !'po4a'hide' .B MANROFFSEQ
+Om $\fBMANROFFSEQ\fP är satt kommer dess värde att användas för att bestämma
+uppsättningen av preprocessorer som varje manualsida ska propageras genom.
+Standard preprocessorlistan är systemberoende.
+.TP 
+.if  !'po4a'hide' .B MANSECT
+Om $\fBMANSECT\fP är satt är dess värde en kolonavgränsad lista över avsnitt
+och den används för att bestämma vilka manualavsnitt som ska genomsökas och
+i vilken ordning.  Standardvärdet är ”1 n l 8 3 0 2 3type 5 4 9 6 7” om det inte åsidosatts av
+direktivet \fBSECTION\fP i \fI/etc/man_db.conf\fP.
+.TP 
+.if  !'po4a'hide' .BR MANPAGER , " PAGER"
+Om $\fBMANPAGER\fP eller $\fBPAGER\fP är satt ($\fBMANPAGER\fP används i första hand)
+så kommer dess värde att användas som namnet på det program som används för
+att visa manualsidan.  Som standard kommer \fBless\fP att användas, om
+\fBless\fP inte hittas eller är körbar används \fBcat\fP.
+
+Värdet kan vara ett enkelt kommandonamn eller ett kommando med argument och
+får använda skalcitering (bakstreck, enkla citattecken eller dubbla
+citattecken).  Det får inte använda rörledningar för att koppla ihop flera
+kommandon; om du behöver detta så använd ett inkapslingsskript som kan ta
+filen som ska visas antingen som ett argument eller via standard in.
+.TP 
+.if  !'po4a'hide' .B MANLESS
+Om $\fBMANLESS\fP är satt kommer dess värde att användas som
+standardpromptsträngen för sidvisaren \fBless\fP, som om den hade angetts via
+flaggan \fB\-r\fP (så förekomster av texten \fB$MAN_PN\fP kommer att expanderas på
+samma sätt).  Om du till exempel ovillkorligen vill ställa in promptsträngen
+till \(lqmin promptsträng\(rq, sätt $\fBMANLESS\fP till \(oq\fB\-Psmin\ promptsträng\fP\(cq.  Om flaggan \fB\-r\fP används så åsidosätts denna
+miljövariabel.
+.TP 
+.if  !'po4a'hide' .B BROWSER
+Om $\fBBROWSER\fP är satt är dess värde en kolonavgränsad lista av kommandon,
+som vart och ett kommer att användas för att försöka starta en webbläsare åt
+\fBman\fP \fB\-\-html\fP.  I varje kommando kommer \fI%s\fP att ersättas med ett
+filnamn innehållandes HTML\-utmatningen från \fBgroff\fP, \fI%%\fP ersätts med ett
+enkelt procenttecken (%) och \fI%c\fP ersätts med ett kolon (:).
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+Om $\fBSYSTEM\fP är satt kommer den att ha samma effekt som om den hade angetts
+som argument till flaggan \fB\-m\fP.
+.TP 
+.if  !'po4a'hide' .B MANOPT
+Om $\fBMANOPT\fP är satt kommer den att tolkas innan \fBman\fP:s kommandorad och
+förväntas att följa samma format.  Eftersom alla andra \fBman\fP\-specifika
+miljövariabler kan uttryckas som kommandoradsflaggor och därför är
+kandidater att inkluderas i $\fBMANOPT\fP är det förväntat att de kommer att
+bli föråldrade.  Notera: alla blanksteg som ska tolkas som en del av en
+flaggas argument måste föregås av en kontrollsekvens.
+.TP 
+.if  !'po4a'hide' .B MANWIDTH
+Om $\fBMANWIDTH\fP är satt kommer dess värde att användas som radbredden för
+vilken manualsidor ska formateras.  Om den inte är satt kommer manualsidor
+att formateras med en radbredd som är lämplig för den aktuella terminalen
+(där värdet från $\fBCOLUMNS\fP, och \fBioctl\fP(2) används eller så faller den
+tillbaka på 80 tecken om ingendera är tillgänglig).  Cat\-sidor kommer endast
+att sparas om standardformateringen kan användas, det vill säga när
+terminalradbredden är mellan 66 och 80 tecken.
+.TP 
+.if  !'po4a'hide' .B MAN_KEEP_FORMATTING
+När utmatning inte dirigeras till en terminal utan exempelvis till en fil
+eller en rörledning så förkastas formateringstecken för att göra det enklare
+att läsa resultatet utan något särskilt verktyg.  Om $\fBMAN_KEEP_FORMATTING\fP
+är satt till ett icke\-tomt värde kommer dessa formateringstecken dock att
+bibehållas.  Detta kan vara användbart vid inkapsling av \fBman\fP som kan
+tolka formateringstecken.
+.TP 
+.if  !'po4a'hide' .B MAN_KEEP_STDERR
+När utmatning inte dirigeras till en terminal (vanligtvis en sidvisare)
+kommer felutskrifter från kommandot som använts för att producera
+formaterade versioner av manualsidor att förkastas för att undvika störning
+i sidvisarens visning.  Program så som \fBgroff\fP producerar ofta mindre
+felmeddelanden om typografiska problem så som dålig justering som är fula
+och allmänt förvirrande när de visas samtidigt med manualsidan.  Vissa
+användare vill dock se dem ändå så om $\fBMAN_KEEP_STDERR\fP är satt till ett
+icke\-tomt värde kommer felutskrifter att visas som normalt.
+.TP 
+.if  !'po4a'hide' .B MAN_DISABLE_SECCOMP
+I Linux begränsar \fBman\fP normalt underprocesser som hanterar opålitlig
+data med hjälp av en \fBseccomp\fP(2)\-sandlåda.  Detta gör det säkrare att köra
+komplex tolkningskod över godtyckliga manualsidor.  Om detta går fel av
+någon anledning orelaterad till innehållet för sidan som visas kan du sätta
+$\fBMAN_DISABLE_SECCOMP\fP till ett icke\-tomt värde för att inaktivera
+sandlådan.
+.TP 
+.if  !'po4a'hide' .B PIPELINE_DEBUG
+Om miljövariabeln $\fBPIPELINE_DEBUG\fP sätts till ”1”, kommer \fBman\fP att
+skriva ut felsökningsmeddelanden till standard fel som beskriver varje
+underprocess det kör.
+.TP 
+.if  !'po4a'hide' .BR LANG , " LC_MESSAGES"
+Beroende på system och implementation kommer endera eller båda av $\fBLANG\fP
+och $\fBLC_MESSAGE\fP att studeras för att bestämma den aktuella
+meddelandelokalen.  \fBman\fP kommer att visa sina meddelanden i den lokalen
+(om den finns tillgänglig).  Se \fBsetlocale\fP(3) för vidare detaljer.
+.SH FILER
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+man\-db\-konfigurationsfil.
+.TP 
+.if  !'po4a'hide' .I /usr/share/man
+En global hierarki av manualsidor.
+.SH STANDARDER
+POSIX.1\-2001, POSIX.1\-2008, POSIX.1\-2017.
+.SH "SE VIDARE"
+.if  !'po4a'hide' .BR apropos (1),
+.if  !'po4a'hide' .BR groff (1),
+.if  !'po4a'hide' .BR less (1),
+.if  !'po4a'hide' .BR manpath (1),
+.if  !'po4a'hide' .BR nroff (1),
+.if  !'po4a'hide' .BR troff (1),
+.if  !'po4a'hide' .BR whatis (1),
+.if  !'po4a'hide' .BR zsoelim (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR man (7),
+.if  !'po4a'hide' .BR catman (8),
+.if  !'po4a'hide' .BR mandb (8)
+.PP
+Dokumentation för vissa paket kan finnas tillgängliga i andra format, så som
+\fBinfo\fP(1) eller HTML.
+.SH HISTORIA
+1990, 1991 \(en Skrevs i original av John W.\& Eaton (jwe@che.utexas.edu).
+
+23:e dec 1992: Rik Faith (faith@cs.unc.edu) lade till felfixar från Willem
+Kasdorp (wkasdo@nikhefk.nikef.nl).
+
+30:e april 1994 \(en 23:e februari 2000: Wilf.\& (G.Wilford@ee.surrey.ac.uk)
+har utvecklat och underhållit detta paket med hjälp av ett par hängivna
+individer.
+
+30:e oktober 1996 \(en 30:e mars 2001: Farizio Polacco
+<fpolacco@debian.org> underhöll och förbättrade detta paket för
+Debian\-projektet, med hjälp från hela gemenskapen.
+
+31:a mars 2001 \(en idag: Colin Watson <cjwatson@debian.org>
+utvecklar och underhåller nu man\-db.
+.SH FEL
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

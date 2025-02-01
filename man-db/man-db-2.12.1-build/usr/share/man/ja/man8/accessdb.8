@@ -1,0 +1,51 @@
+.\" Man page for accessdb
+.\"
+.\" Copyright (c) 1998 Fabrizio Polacco <fpolacco@debian.org
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Tue, 24 Feb 1998 18:18:36 +0200
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH ACCESSDB 8 2024-04-05 2.12.1 マニュアルページユーティリティー
+.SH 名前
+accessdb \- dumps the content of a man\-db database in a human readable format
+.SH 書式
+\fB/usr/sbin/accessdb\fP [\|\fB\-d?V\fP\|] [\fI<index\-file>\fP]
+.SH 説明
+\fBaccessdb\fP will output the data contained within a man\-db database in a
+human readable form.  By default, it will dump the data from
+\fB/var/cache/man/index.<db\-type>,\fP where <db\-type> is
+dependent on the database library in use.
+
+Supplying an argument to accessdb will override this default.
+.SH オプション
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+デバッグ情報を表示します。
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+ヘルプメッセージを表示して終了します。
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Print a short usage message and exit.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+バージョン情報を表示します。
+.SH 著者
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH バグ
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

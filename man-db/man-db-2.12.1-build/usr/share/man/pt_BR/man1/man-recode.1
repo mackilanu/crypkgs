@@ -1,0 +1,86 @@
+.\" Man page for man-recode
+.\"
+.\" Copyright (C) 2019 Colin Watson <cjwatson@debian.org>
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MAN-RECODE 1 2024-04-05 2.12.1 "Utilitários de paginação de manual"
+.SH NOME
+man-recode \- converte páginas de manual para outra codificação
+.SH SINOPSE
+\fBman-recode\fP \fB\-t\fP \fIpara\-código\fP
+{\|\fB\-\-suffix=\fP\fIsufixo\/\fP\||\|\fB\-\-in\-place\fP\|} [\|\fB\-dqhV\fP\|]
+[\|\fInome\-de\-arquivo\fP\|]
+.SH DESCRIÇÃO
+\fBman-recode\fP converte várias páginas de manual de uma codificação para
+outra, adivinhando a codificação de entrada apropriada para cada uma. É útil
+ao recodificar permanentemente páginas escritas em conjuntos de caracteres
+legados ou em sistemas de compilação que precisam recodificar um conjunto de
+páginas em uma única codificação comum (geralmente UTF\-8) para
+instalação. Ao converter muitas páginas de manual, esse programa é muito
+mais rápido do que executar \fBman \-\-recode\fP ou \fBmanconv\fP em cada
+página.
+.PP
+Se uma declaração de codificação for encontrada na primeira linha da página
+de manual, esta declaração é usada como codificação de entrada para aquela
+página. Se falhar em fazer isso, a codificação de entrada é adivinhada com
+base no nome de arquivo.
+.PP
+As declarações de codificação têm a seguinte forma:
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" \-*\- coding: UTF\-8 \-*\-
+.fi
+.RE
+.PP
+ou (se pré\-processadores de página de manual também estiverem declarados):
+.PP
+.RS
+.nf
+.if  !'po4a'hide' \&\(aq\e" t \-*\- coding: ISO\-8859\-1 \-*\-
+.fi
+.RE
+.SH OPÇÕES
+.TP 
+\fB\-t\fP \fIcodificação\/\fP, \fB\-\-to\-code=\fP\fIcodificação\fP
+Converte páginas de manual para \fIcodificação\fP.
+.TP 
+\fB\-\-suffix=\fP\fIsufixo\fP
+Forma cada nome de arquivo de saída acrescentando \fIsufixo\fP ao nome de
+aquivo de entrada, após remover qualquer extensão de compressão.
+.TP 
+.if  !'po4a'hide' .B \-\-in\-place
+Sobrescreve cada arquivo de entrada com a saída, após remover qualquer
+extensão de compressão.
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Não emite mensagens quando a página não puder ser convertida.
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Emite mensagens de depuração.
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+Imprime uma mensagem de ajuda e sai.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Exibe informação da versão.
+.SH "VEJA TAMBÉM"
+.if  !'po4a'hide' .IR iconv (1),
+.if  !'po4a'hide' .IR man (1),
+.if  !'po4a'hide' .IR manconv (1)
+.SH PROBLEMAS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi

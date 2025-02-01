@@ -1,0 +1,67 @@
+.\" Man page for zsoelim
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Dec 10 19:33:32 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH ZSOELIM 1 2024-04-05 2.12.1 "Utilidades do paginador do manual"
+.SH NOME
+zsoelim \- satisfaz pedidos .so na entrada roff
+.SH SINOPSE
+\fBzsoelim\fP [\|\fB\-CVh\fP\|] [\|\fIficheiro\fP \&.\|.\|.\|]
+.SH DESCRIÇÃO
+\fBzsoelim\fP analisa argumentos \fIficheiro\fP ou, se nenhum for especificado,
+a sua entrada padrão, procurando linhas na forma:
+
+\&\fB.so\fP <\|\fInomeficheiro\fP\|>
+
+Estes pedidos são substituídos pelo conteúdo do \fInomeficheiro\fP
+especificado. Se o pedido não puder ser cumprido, \fBzsoelim\fP procura por
+\fInomeficheiro.ext\fP onde \fI.ext\fP pode ser uma de \fB.gz\fP, \fB.Z\fP ou
+\&\fB.z\fP. Podem ser suportados outros tipos de extensões, dependendo das opções
+da compilação. Se o pedido puder ser cumprido por um ficheiro comprimido,
+este ficheiro é apropriadamente descomprimido e a sua saída é usada para
+satisfazer o pedido.
+
+Tradicionalmente, os programas \fBsoelim\fP eram usados para permitir aos
+pré\-processadores roff o pré\-processamento de ficheiros referidos pelos
+pedidos. Esta versão em particular foi escrita para contornar problema
+criados pelo suporte a páginas do manual comprimidas.
+.SH OPÇÕES
+.TP 
+.if  !'po4a'hide' .BR \-C ", " \-\-compatible
+Esta bandeira está disponível para manter compatibilidade com outros
+programas \fBsoelim\fP. É usada para activar pedidos .so seguidos de algo
+diferente de espaço em branco. Sendo este o comportamento predefinido, é
+ignorada.
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+mostra uma mensagem de ajuda e sai.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+mostra informação da versão.
+.SH "VEJA TAMBÉM"
+.if  !'po4a'hide' .BR groff (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR nroff (1),
+.if  !'po4a'hide' .BR troff (1)
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH ERROS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

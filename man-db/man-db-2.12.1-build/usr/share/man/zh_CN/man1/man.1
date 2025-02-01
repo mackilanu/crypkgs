@@ -1,0 +1,589 @@
+'\" t
+.\" ** The above line should force tbl to be a preprocessor **
+.\" Man page for man
+.\"
+.\" Copyright (C) 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MAN 1 2024-04-05 2.12.1 手册分页显示工具
+.SH 名称
+man \- 系统参考手册的接口
+.SH 概述
+.\" The general command line
+.\" The apropos command line
+\fBman\fP [\|\fIman 选项\fP\|] [\|[\|\fI章节\fP\|] \fI页\fP\ \|.\|.\|.\|]\ .\|.\|.\&
+.br
+.\" The --global-apropos command line
+\fBman\fP \fB\-k\fP [\|\fIapropos 选项\fP\|] \fI正则表达式\fP \&.\|.\|.\&
+.br
+.\" The whatis command line
+\fBman\fP \fB\-K\fP [\|\fIman 选项\fP\|] [\|\fI章节\fP\|] \fI关键词\fP\ .\|.\|.\&
+.br
+.\" The --local command line
+\fBman\fP \fB\-f\fP [\|\fIwhatis\fP \fI选项\fP\|] \fI页\fP \&.\|.\|.\&
+.br
+.\" The --where/--where-cat command line
+\fBman\fP \fB\-l\fP [\|\fIman 选项\fP\|] \fI文件\fP \&.\|.\|.\&
+.br
+\fBman\fP \fB\-w\fP\||\|\fB\-W\fP [\|\fIman 选项\fP\|] \fIpage\fP \&.\|.\|.\&
+.SH 描述
+\fBman\fP 是系统的手册分页程序。指定给 \fBman\fP 的 \fI页\fP 选项通常是程序、工具或函数名。程序将显示每一个找到的相关
+\fI手册页\fP。如果指定了 \fI章节\fP，\fBman\fP 将只在手册的指定 \fI章节\fP 搜索。默认将按预定的顺序查找所有可用的 \fI章节\fP（参见
+\fB默认值\fP 一节），并只显示找到的第一个 \fI页\fP，即使多个 \fI章节\fP 中都有这个 \fI页面\fP。
+
+下表显示了手册的 \fI章节\fP 号及其包含的手册页类型。
+
+.TS
+tab (@);
+l lx.
+1@T{
+可执行程序或 shell 命令
+T}
+2@T{
+系统调用(内核提供的函数)
+T}
+3@T{
+库调用(程序库中的函数)
+T}
+4@T{
+特殊文件(通常位于 \fI/dev\/\fP)
+T}
+5@T{
+文件格式和规范，如 \& \fI/etc/passwd\fP
+T}
+6@T{
+游戏
+T}
+7@T{
+杂项（包括宏包和规范），
+如 \fBman\fP(7)，\fBgroff\fP(7), \fBman\-pages\fP(7)
+T}
+8@T{
+系统管理命令(通常只针对 root 用户)
+T}
+9@T{
+内核例程 [\|非标准\|
+T}
+.TE
+
+一个手册 \fI页面\fP 包含若干个小节。
+
+小节名称通常包括 \fBNAME\fP, \fB概述(SYNOPSIS)\fP, \fB配置(CONFIGURATION)\fP, \fB描述(DESCRIPTION)\fP,
+\fB选项(OPTIONS)\fP, \fB退出状态(EXIT\ STATUS)\fP, \fB返回值(RETURN\ VALUE)\fP, \fB错误(ERRORS)\fP,
+\fB环境(ENVIRONMENT)\fP, \fB文件(FILES)\fP, \fB版本(VERSIONS)\fP, \fB标准(STANDARDS)\fP,
+\fB注(NOTES)\fP, \fB缺陷(BUGS)\fP, \fB示例(EXAMPLE)\fP, \fB作者(AUTHORS)\fP, 和 \fB亦见(SEE\ ALSO)\fP.
+
+以下规范适用于 \fB概述(SYNOPSIS)\fP 小节，也可作为其他小节的指南。
+
+.TS
+tab (@);
+l lx.
+\fB加粗文本\fP@T{
+按原样显示。
+T}
+\fI倾斜文本\fP@T{
+用相应的参数进行替换。
+T}
+[\|\fB\-abc\fP\|]@T{
+“[ ]” 内的任意/全部参数都是可选的。
+T}
+\fB\-a\|\fP|\|\fB\-b\fP@T{
+以“|”分隔的选项不可以一起使用。
+T}
+\fI参数\fP .\|.\|.@T{
+\fI参数\fP 可以重复。
+T}
+[\|\fI表达式\fP\|] .\|.\|.@T{
+“[ ]”内的整个 \fI表达式\fP 可以重复。
+T}
+.TE
+
+实际渲染的效果可能因输出设备而异。例如，在终端中 man 程序通常无法渲染出斜体，这时一般会以下划线或彩色文字代替。
+
+程序和函数说明应该是一个可以匹配所有可能用法的模式(pattern)。有些情况下，建议按此手册页 \fB概述(SYNOPSIS)\fP
+小节所显示的分别陈述几种互斥的用法。
+.SH 示例
+.TP  \w'man\ 'u
+\fBman\fP\fI\ ls\fP
+显示 \fI项目\fP (程序)  \fIls\fP 对应的手册页。
+.TP 
+\fBman\fP \fIman\fP.\fI7\fP
+显示章节 \fI7\fP 中宏包 \fIman\fP 对应的手册页。（这是“\fBman\fP \fI7 man\fP”的另一种拼写方法。）
+.TP 
+\fBman '\fP\fIman\fP(\fI7\fP)'
+显示章节 \fI7\fP 中宏包 \fIman\fP 对应的手册页。（这是“\fBman\fP \fI7 man\fP”的另一种拼写方法。该方法在复制和粘贴手册页的交叉引用时可能更方便。请注意，括号在通常情况下必须被引号括起以避免 shell 转义。）
+.TP 
+\fBman\ \-a\fP\fI\ intro\fP
+正确执行时显示手册中包含的所有可用的 \fIintro\fP 手册页。可以在连续显示过程中退出或跳过任一页。
+.TP 
+\fBman \-t \fP\fIbash \fP|\fI lpr \-Pps\fP
+将 \fIbash\fP 的手册页格式化为默认的 \fBtroff\fP 或 \fBgroff\fP 格式，并将其通过管道送至名为 \fIps\fP 的打印机。\fBgroff\fP
+的默认输出通常是 PostScript。\fBman \-\-help\fP 应该会提示哪个处理器程序与 \fB\-t\fP 选项绑定。
+.TP 
+\fBman \-l \-T\fP\fIdvi ./foo.1x.gz\fP\fB > \fP\fI./foo.1x.dvi\fP
+此命令会将 nroff 源手册页 \fI./foo.1x.gz\fP 解压并格式化为 \fB设备无关(dvi)\fP 文件。重定向是必须的，因为 \fB\-T\fP
+标志会导致输出不经分页程序直接传送到 \fBstdout\fP。 应该使用 \fBxdvi\fP 这样的程序查看输出结果，或使用 \fBdvips\fP
+这样的程序进一步处理为 PostScript。
+.TP 
+\fBman\ \-k\fP\fI\ printf\fP
+将关键词 \fIprintf\fP 作为正则表达式来搜索对应的手册页概述和手册页名称，并打印所有匹配结果。等效于 \fBapropos\fP\fI\ printf\fP\fB.\fP
+.TP 
+\fBman\ \-f\fP\fI\ smail\fP
+查找 \fIsmail\fP 引用的手册页并输出找到的所有概述。等效于 \fBwhatis\fP\fI\ smail\fP\fB.\fP
+.SH 概述
+\fBman\fP 有许多选项供用户灵活使用。搜索路径、章节顺序、输出处理器和其他行为和操作均可更改，具体如下。
+
+如果被设置，程序将检查各种环境变量来确定 \fBman\fP 如何操作。可以对命令行中的任何字符串设置“catch all”变量
+$\fBMANOPT\fP，除非是选项参数中需要转义的空格。\fBman\fP 将会先解析
+$\fBMANOPT\fP，再解析它自己的命令行。这些需要参数的选项将会被命令行中其他的相同选项所覆盖。若要重置 $\fBMANOPT\fP
+中的所有选项，可以在命令行开头指定 \fB\-D\fP 选项。这会让 man “忘掉”$\fBMANOPT\fP
+中给定的选项，但即便如此曾经给定的选项必须仍然合法。
+
+手册页通常以 \fBnroff\fP(1) 格式存放在诸如 \fI/usr/share/man\fP
+路径下的目录中。在某些安装场景中，也可能存在用于提高性能的预格式化 \fIcat pages\fP。请参见 \fBmanpath\fP(5)
+以了解这些文件存放位置的具体信息。
+
+本软件包支持多语言的手册页，其行为由您的 \fIlocale\fP（语区）所控制。如果您的系统未帮您自动设置，那么您可能需要手动设置
+$\fBLC_MESSAGES\fP、$\fBLANG\fP 或其它系统相关的环境变量以指示您偏好的区域语言设置，通常以 \fBPOSIX\fP 格式给出：
+
+<\fI语言\fP>[\|\fB_\fP<\fI地区\fP>\|[\|\fB.\fP<\fI字符集\fP>\|[\|\fB,\fP<\fI版本\fP>\|]\|]\|]
+
+如果所需的页面有您的 \fI区域\fP 对应的版本，它会替代标准的(通常为美国英语)手册页显示。
+
+如果您发现此包提供的翻译对您的本地语言不可用并且您想提供支持的话，请联系协调这类活动的（手册本地化）维护者。
+
+独立的各个手册页通常由各个程序、函数或相关主题的维护者所编写提供，它们并不包含于本软件包中。如果您发现了缺失或内容不完整的手册页，请向对应软件包的维护者报告这个问题。
+
+有关此手册分页程序其他可用功能和扩展的信息，请阅读此包提供的文档。
+.SH 默认值
+要搜索的章节顺序可以使用 $\fBMANSECT\fP 或 \fI/etc/man_db.conf\fP 配置文件的 \fBSECTION\fP
+指令进行覆盖。其默认行为如下所示：
+
+.RS
+.if  !'po4a'hide' 1 n l 8 3 0 2 3type 5 4 9 6 7
+.RE
+
+经过格式化的手册页将使用一个分页器（\fIpager\fP）进行显示。有数种指定分页显示的方法，若无指定则将使用默认方式（参见 \fB\-P\fP
+选项了解详细信息）。
+
+可以通过几种方式指定过滤程序。首先，会查询命令行选项 \fB\-p\fP 或环境变量 $\fBMANROFFSEQ\fP。如果没有指定
+\fB\-p\fP，环境变量也未设置，将解析 nroff 的第一行来查找预处理器字符串。要包含有效的预处理器字符串，第一行必须这样写：
+
+\&\fB'\e"\fP <\fB字符串\fP>
+
+其中 \fB字符串\fP 可以是下面 \fB\-p\fP 选项所描述的任何字符的组合。
+
+如果以上方法都没有提供过滤程序信息，将使用默认程序集。
+
+.\" ********************************************************************
+过滤程序和主格式化程序(\fBnroff\fP 或 [\fBtg\fP]\fBroff\fP \fB\-t\fP) 将组成格式化流水线并执行。或者，如果 man
+树根节点有可执行的 \fImandb_nfmt\fP (或 \fImandb_tfmt\fP  \fB\-t\fP)
+程序，将转而执行它。手册源文件、预处理字符串，以及可选的以 \fB\-T\fP 或 \fB\-E\fP 指定的设备将作为参数传递给它。
+.SH 选项
+非参数的选项如果在命令行和/或 $\fBMANOPT\fP 重复指定，不会产生问题。对于需要参数的选项，每次重复将覆盖上个参数值。
+.SS 常规选项
+.TP 
+\fB\-C\ \fP\fI文件\fP,\ \fB\-\-config\-file=\fP\fI文件\fP
+使用此用户配置文件代替默认的 \fI\(ti/.manpath\fP。
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+打印调试信息。
+.TP 
+.if  !'po4a'hide' .BR \-D ", " \-\-default
+此选项通常作为第一个选项，它将 \fBman\fP 的行为恢复为默认值。它的作用是重置任何在 $\fBMANOPT\fP 中设置的选项。\fB\-D\fP
+之后的任何选项保留其原有效果。
+.TP 
+\fB\-\-warnings\fP[=\fI警告\/\fP]
+启用来自 \fIgroff\fP 的警告。这可以用于检查手册页源文件完整性。\fI警告\fP
+是以英文逗号分隔的警告名列表；如果不提供，默认为“mac”。如需禁用某个 \fIgroff\fP
+警告，请在其名称前添加“!”符号：例如，\fB\-\-warnings=mac,!break\fP
+启用“mac”分类里的警告并禁用“break”分类里的警告。请查阅 \fBinfo groff\fP 中的 \(lq警告\(rq 节点了解可用的警告名列表。
+.SS 主要操作方式
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-whatis
+大约等同于 \fBwhatis\fP。显示来自手册页的加简短说明(若有)。详见 \fBwhatis\fP(1)。
+.TP 
+.if  !'po4a'hide' .BR \-k ", " \-\-apropos
+大约等同于 \fBapropos\fP。搜索关键词对应的手册概述并显示所有匹配结果。详见 \fBapropos\fP。
+.TP 
+.if  !'po4a'hide' .BR \-K ", " \-\-global\-apropos
+在所有手册中搜索文本。这是蛮力搜索，需要花费一定时间；如果可以，您应该指定手册章节以减少需要搜索的手册页数量。搜索条目可以是简单的字符串(默认)，或正则表达式(若使用了
+\fB\-\-regex\fP 选项)。
+.IP
+注意，这种做法应用于搜索手册页的
+\fI资源\fP，而非渲染后的文本，所以可能会包含一些假结果（如源文件中的注释），或遗漏某些结果（如源文件中写为“\e\-”的连字符）。若要搜索渲染后的文本，速度会比较慢。
+.TP 
+.if  !'po4a'hide' .BR \-l ", " \-\-local\-file
+.\" Compressed nroff source files with a supported compression
+.\" extension will be decompressed by man prior to being displaying via the
+.\" usual filters.
+启用“本地”方式。格式化并显示本地手册文件，而非搜索系统手册集。每个手册页参数将解释为格式正确的 nroff 源文件。不产生 cat
+文件。如果参数中有“\-”，将从标准输入读取。
+.IP
+如果未指定该选项，则 \fBman\fP
+也会在参数中包含“/”字符的情况下回退到将手册页参数解释为本地文件名的行为。这是因为该特征说明参数对应了文件系统中的一个文件路径。
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-where ", " \-\-path ", " \-\-location
+不实际显示手册页，但打印将被格式化的源 nroff 文件的位置。如果同时指定了 \fB\-a\fP 选项，则打印所有匹配搜索条件的源文件的位置。
+.TP 
+.if  !'po4a'hide' .BR \-W ", " \-\-where\-cat ", " \-\-location\-cat
+不实际显示手册页，但打印将显示的预格式化 cat 文件的位置。如果同时使用了 \fB\-a\fP 选项，则打印所有匹配搜索条件的预格式化 cat 文件的位置。
+.IP
+如果同时使用了 \fB\-w\fP 和 \fB\-W\fP 选项，则同时打印源文件和 cat 文件，并使用空格分隔。如果使用了全部 \fB\-w\fP、\fB\-W\fP 和
+\fB\-a\fP 三个选项，则为每个可能的匹配进行相同的操作。
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-catman
+此选项一般不使用，并且只应由 \fBcatman\fP 程序使用。
+.TP 
+\fB\-R\ \fP\fI编码\fP,\ \fB\-\-recode\fP=\fI编码\fP
+与正常的格式化手册页不同，将输入源转换成指定的 \fI编码\fP 输出。如果您已经知道源文件的编码，也可以直接使用
+\fBmanconv\fP(1)。不过，此选项可以将几个手册页转换为单一编码，而不用明确声明各自的编码，前提是它们已经安装在与手册页层次结构类似的目录结构中。
+.IP
+如需转换多个手册页，请考虑使用 \fBman-recode\fP(1) 工具；它提供了批量转换的接口，能够大大加快处理速度。
+.SS 查找手册页
+.TP 
+\fB\-L\ \fP\fI区域\fP,\ \fB\-\-locale=\fP\fI区域\fP
+\fBman\fP 通常会通过调用 C 语言函数 \fBsetlocale\fP(3) 来确定您的当前区域设置。该函数会查询多个环境变量，可能包括
+$\fBLC_MESSAGES\fP 和 $\fBLANG\fP。要临时覆盖检测到的值，请使用该选项直接向 \fBman\fP 提供一个 \fI区域\fP
+字符串。注意，在搜索页面实际开始前它不会生效。帮助消息等输出将始终以检测到的区域语言显示。
+.TP 
+\fB\-m\fP \fI系统\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fI系统\fP\|[\|,.\|.\|.\|]
+如果此系统可以访问其他操作系统的手册页，可以使用此选项访问它们。如要在 NewOS 的手册页集合中搜索某个手册页，使用 \fB\-m\fP \fBNewOS\fP
+选项。
+
+指定的 \fI系统\fP 选项可以是逗号分隔的操作系统名称组合。要在搜索中包括本地操作系统的手册页，可以在参数字符串中包含系统名 \fBman\fP。此选项会覆盖
+$\fBSYSTEM\fP 环境变量。
+.TP 
+\fB\-M\ \fP\fI路径\fP,\ \fB\-\-manpath=\fP\fI路径\fP
+指定要使用的另一 manpath 路径。默认情况下 \fBman\fP 使用 \fBmanpath\fP 得到的代码来确定搜索路径。此选项会覆盖
+$\fBSYSTEM\fP 环境变量。
+
+指定为 manpath 的路径必须是划分为若干章节的手册页层次结构的根目录。章节描述见 man\-db
+手册(位于“手册页系统”)。要查看层次结构之外的手册页，请参阅 \fB\-l\fP 选项。
+.TP 
+\fB\-S\fP \fI列表\/\fP, \fB\-s\fP \fI列表\/\fP, \fB\-\-sections=\fP\fI列表\/\fP
+给定的 \fIlist\fP 是一个用英文冒号或逗号分隔的手册章节列表，用于确定要搜索的手册章节的搜索顺序。此选项会覆盖 $\fBMANSECT\fP
+环境变量。(使用 \fB\-s\fP 表示是为了与 System V 兼容。)
+.TP 
+\fB\-e\ \fP\fIsub\-extension\fP,\ \fB\-\-extension=\fP\fIsub\-extension\fP
+某些系统包含大量的手册页包，例如某些系统将 \fBTcl\fP (手册)包并入主手册页层次目录。为避免两个手册页重名，如 \fBexit\fP(3)，\fBTcl\fP
+手册页通常都归于 \fBl\fP 章节。为解决这一不便，现在可以将页面放在正确的节，分配给它们一个特定的“扩展（extension）”即可；这个例子中则是
+\fBexit\fP(3tcl)。正常操作时，\fBman\fP 会优先显示 \fBexit\fP(3) 而不是
+\fBexit\fP(3tcl)。为协调这一状况并避免要记住所需手册页属于哪个章节，现在可以给 \fBman\fP 指定一个
+\fIsub\-extension\fP字符串，指示该手册页必须属于哪个包。对于上面的例子，给 \fBman\fP 加上 \fB\-e\ tcl\fP
+选项，就能限制只搜索带有 \fB*tcl\fP 扩展的页面。
+.TP 
+.if  !'po4a'hide' .BR \-i ", " \-\-ignore\-case
+搜索手册页时忽略大小写。此为默认值。
+.TP 
+.if  !'po4a'hide' .BR \-I ", " \-\-match\-case
+搜索手册页时匹配大小写。
+.TP 
+.if  !'po4a'hide' .B \-\-regex
+显示名字或描述的任何部分与所提供的正则表达式 \fI页\fP 参数匹配的所有页面，像使用 \fBapropos\fP(1)
+一样。由于搜索正则表达式时通常没办法选出“最佳”手册页，此选项隐含了 \fB\-a\fP 选项。
+.TP 
+.if  !'po4a'hide' .B \-\-wildcard
+显示名字或描述的任何部分与所提供的 shell 格式通配符 \fI页\fP 参数匹配的所有页面，像使用 \fBapropos\fP(1) \fB\-\-wildcard\fP
+一样。\fI页\fP 参数必须匹配整个名字或描述，或匹配描述中单词的边界。由于搜索通配符时通常没办法选出“最佳”手册页，此选项隐含了 \fB\-a\fP 选项。
+.TP 
+.if  !'po4a'hide' .B \-\-names\-only
+如果使用了 \fB\-\-regex\fP 或 \fB\-\-wildcard\fP 选项，则只匹配手册页名而不匹配描述，就像使用 \fBwhatis\fP(1)
+一样。否则不起作用。
+.TP 
+.if  !'po4a'hide' .BR \-a ", " \-\-all
+默认情况下，\fBman\fP 在显示它找到的最符合的手册页后会退出。此选项强制 \fBman\fP 显示名字匹配搜索条件的所有的手册页。
+.TP 
+.if  !'po4a'hide' .BR \-u ", " \-\-update
+该选项将使得 \fBman\fP 更新已安装手册页的缓存数据库。该操作只在极少数情况下才需要进行，一般情况下只运行 \fBmandb\fP(8) 更好。
+.TP 
+.if  !'po4a'hide' .B \-\-no\-subpages
+默认情况下，\fBman\fP
+会试图将命令行上提供的一对手册页名视同包含连字符或下划线的单个手册页名来解释。这会支持那些实现了多个子命令的程序的常见模式，允许程序为每个子命令提供手册页，并用和调用各子命令的语法类似的方式访问它们。例如：
+
+.nf
+.if  !'po4a'hide' \&  $ man \-aw git diff
+.if  !'po4a'hide' \&  /usr/share/man/man1/git\-diff.1.gz
+.fi
+
+要禁用此行为，请使用 \fB\-\-no\-subpages\fP 选项。
+
+.nf
+.if  !'po4a'hide' \&  $ man \-aw \-\-no\-subpages git diff
+.if  !'po4a'hide' \&  /usr/share/man/man1/git.1.gz
+.if  !'po4a'hide' \&  /usr/share/man/man3/Git.3pm.gz
+.if  !'po4a'hide' \&  /usr/share/man/man1/diff.1.gz
+.fi
+.SS 控制格式化输出
+.TP 
+\fB\-P\ \fP\fI分页程序\fP,\ \fB\-\-pager=\fP\fI分页程序\fP
+指定使用哪个输出分页程序。\fBman\fP 默认使用 \fBless\fP，在无法找到 \fBless\fP 或它不是可执行文件时则会回退到使用
+\fBcat\fP。此选项会覆盖 $\fBMANPAGER\fP 环境变量，进一步覆盖 $\fBPAGER\fP 环境变量。它不和 \fB\-f\fP 或 \fB\-k\fP 合用。
+
+值可以是简单的命令名或带参数的命令，并可以使用 shell
+引用(反斜杠、单引号或双引号)。不能使用管道连接多个命令；如果您需要，请使用封装器脚本，它能够以参数形式或从标准输入获得要显示的文件。
+.TP 
+\fB\-r\ \fP\fI提示\fP,\ \fB\-\-prompt=\fP\fI提示\fP
+如果使用较新的 \fBless\fP 作为分页程序，\fBman\fP 将尝试设置它的提示消息和一些敏感选项。默认的提示消息类似于
+
+\fB Manual page\fP\fI name\fP\fB(\fP\fIsec\fP\fB) line\fP\fI x\fP
+
+.\"The default options are
+.\".BR \-six8 .
+.\"The actual default will depend on your chosen
+.\".BR locale .
+其中 \fIname\fP 表示手册页名，\fIsec\fP 表示找到的手册页所属的章节，\fIx\fP 是当前行号。这是通过使用 $\fBLESS\fP 环境变量实现的。
+
+.\"You may need to do this if your
+.\"version of
+.\".B less
+.\"rejects the default options or if you prefer a different prompt.
+提供一个带字符串的 \fB\-r\fP 选项会覆盖这个默认值。字符串可以包含文本
+\fB$MAN_PN\fP，它会展开为用“(”和“)”括起来的当前手册页的章节名。显示默认提示的字符串可以表示为
+
+\fB\e\ Manual\e\ page\e\ \e$MAN_PN\e\ ?ltline\e\ %lt?L/%L.:\fP
+.br
+\fBbyte\e\ %bB?s/%s..?\e\ (END):?pB\e\ %pB\e\e%..\fP
+.br
+\fB(press h for help or q to quit)\fP
+
+为了方便阅读，这里分成了三行。字符串的含义请参阅 \fBless\fP(1) 手册页。提示字符串将首先由 shell
+解释。提示中的所有的双引号、反斜杠都必须在前面加一个反斜杠转义。提示字符串可以转义的 $ 结束，后面还可以跟其他的 less 选项。\fBman\fP
+默认设置 \fB\-ix8\fP 选项。
+
+下面描述的 $\fBMANLESS\fP 环境变量可以用来在命令行未指定时设置默认的提示字符串。
+.TP 
+.if  !'po4a'hide' .BR \-7 ", " \-\-ascii
+当在7位编码的终端或终端模拟器中查看纯 \fIascii\fP(7) 手册页时，若使用 \fBGNU\fP \fBnroff\fP \fIlatin1\fP(7)
+设备描述，一些字符可能显示不正确。此选项允许纯 \fIascii\fP 手册页使用 \fIlatin11\fP 设备以 \fIascii\fP 显示。它不会转换任何
+\fIlatin1\fP 文本。以下表格显示了进行的转换：其中一部分可能只有在使用 \fBGNU\fP \fBnroff\fP 的 \fIlatin1\fP(7)
+设备时才正确显示。
+
+.ie  c \[shc] \
+.  ds softhyphen \[shc]
+.el \
+.  ds softhyphen \(hy
+.na
+.TS
+tab (@);
+l c c c.
+描述@八进制@latin1@ascii
+_
+T{
+连字符
+T}@255@\*[softhyphen]@-
+T{
+点（中间点）
+T}@267@\(bu@o
+T{
+重音符号
+T}@264@\(aa@'
+T{
+乘号
+T}@327@\(mu@x
+.TE
+.ad
+
+如果 \fIlatin1\fP 列显示正确，您的终端可能作了 \fIlatin1\fP 字符设置，此选项将不需要。如果 \fIlatin1\fP 和 \fIascii\fP
+列一样，那么您正在使用此选项阅读本手册页，或 \fBman\fP 未使用 \fIlatin1\fP 设备描述来格式化此页。如果 \fIlatin1\fP
+列缺损，您可能要使用此选项来查看手册页。
+
+在使用 \fB\-t\fP, \fB\-H\fP, \fB\-T\fP, 或 \fB\-Z\fP 选项时此选项可能对 \fBGNU 版\fP 之外的 \fBnroff\fP 程序无用。
+.TP 
+\fB\-E\ \fP\fI编码\fP,\ \fB\-\-encoding\fP=\fI编码\fP
+生成对应字符编码的输出，而非默认编码。为向后兼容，\fI编码\fP 可以是 \fBnroff\fP 设备，如 \fBascii\fP、\fBlatin1\fP 或
+\fButf8\fP，也可以是实际的字符编码如 \fBUTF\-8\fP。
+.TP 
+.if  !'po4a'hide' .BR \-\-no\-hyphenation ", " \-\-nh
+通常，如果需要将单词排在一行而不添加过多的空格， \fBnroff\fP
+会在换行处自动断字(给文本添加连字符，即使单词本来不包含)。此选项禁止自动断字，即单词包含连字符时才会被断开。
+
+如果您编写手册页时只是不希望 \fBnroff\fP 在某个位置不恰当地断字，不要使用此选项，而应查阅 \fBnroff\fP
+文档中的相关方法；例如，您可以在单词中插入“\e%”来指示该位置可以断字，或在单词开头插入“\e%”来阻止对它断字。
+.TP 
+.if  !'po4a'hide' .BR \-\-no\-justification ", " \-\-nj
+通常，\fBnroff\fP 会自动两端对齐文本。此选项禁止两端对齐，只对齐左边，形成所谓的“ragged\-right”(右边不齐)的文本。
+
+如果您编写手册页时只是不希望 \fBnroff\fP 对齐某些段落，不要使用此选项，而应查阅 \fBnroff\fP
+文档中的相关方法；例如，您可以使用“.na”、“.nf”、“.fi”和“.ad”请求来临时禁止对齐和填充。
+.TP 
+\fB\-p\ \fP\fI字符串\fP,\ \fB\-\-preprocessor=\fP\fI字符串\fP
+指定 \fBnroff\fP 或 \fBtroff\fP/\fBgroff\fP
+之前运行的预处理器序列。系统中可能未安装所有的预处理器。一些预处理器及其代号如下：\fBeqn\fP (\fBe\fP), \fBgrap\fP (\fBg\fP),
+\fBpic\fP (\fBp\fP), \fBtbl\fP (\fBt\fP), \fBvgrind\fP (\fBv\fP), \fBrefer\fP (\fBr\fP)。此选项覆盖
+$\fBMANROFFSEQ\fP 环境变量。\fBzsoelim\fP 总是作为第一个预处理器运行。
+.TP 
+.if  !'po4a'hide' .BR \-t ", " \-\-troff
+使用 \fI%troff\fP 来格式化手册页到 stdout。此选项不要求和 \fB\-H\fP、\fB\-T\fP 或 \fB\-Z\fP 一起使用。
+.TP 
+\fB\-T\fP[\fI设备\/\fP], \fB\-\-troff\-device\fP[=\fI设备\/\fP]
+This option is used to change \fBgroff\fP (or possibly \fBtroff's\fP)  output to
+be suitable for a device other than the default.  It implies \fB\-t\fP.
+Examples (as of groff 1.23.0) include \fBdvi\fP, \fBlatin1\fP, \fBpdf\fP, \fBps\fP,
+\fButf8\fP, \fBX75\fP and \fBX100\fP.
+.TP 
+\fB\-H\fP[\fI浏览器\/\fP], \fB\-\-html\fP[=\fI浏览器\/\fP]
+此选项使 \fBgroff\fP 生成 HTML 输出并在浏览器中显示输出结果。浏览器选择取决于可选的 \fIbrowser\fP
+参数(若提供)、$\fBBROWSER\fP 环境变量，或编译时指定的默认值(或环境变量未设置，默认值通常为 \fBlynx\fP)。此选项隐含了
+\fB\-t\fP，并只和 \fBGNU\fP \fBtroff\fP 一起使用。
+.TP 
+\fB\-X\fP[\fIdpi\/\fP], \fB\-\-gxditview\fP[=\fIdpi\/\fP]
+此选项使用 \fBgxditview\fP 程序在一个图形窗口中显示 \fBgroff\fP 的输出结果。\fIdpi\fP (点/英寸)可以是 75、75\-12、100
+或 100\-12，默认为 75；\-12 形式使用 12 点的基础字号。此选项隐含了带相应 X75、X75\-12、X100 或 X100\-12 参数的
+\fB\-T\fP 选项。
+.TP 
+.if  !'po4a'hide' .BR \-Z ", " \-\-ditroff
+\fBgroff\fP 会运行 \fBtroff\fP 然后使用合适的后处理器产生适合所选设备的输出。如果 \fI%troff\fP 为 \fBgroff\fP，此选项会传递给
+\fBgroff\fP 并禁止使用后处理器。此选项隐含了 \fB\-t\fP 选项。
+.SS 获取帮助
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+打印帮助消息并退出。
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+打印简短的帮助消息并退出。
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+显示版本信息。
+.SH 退出状态
+.TP 
+.if  !'po4a'hide' .B 0
+程序成功执行。
+.TP 
+.if  !'po4a'hide' .B 1
+用法、语法或配置文件出错。
+.TP 
+.if  !'po4a'hide' .B 2
+操作出错。
+.TP 
+.if  !'po4a'hide' .B 3
+子进程返回了非零的退出状态码。
+.TP 
+.if  !'po4a'hide' .B 16
+至少有一个页面/文件/关键词不存在或不匹配。
+.SH 环境
+.\".TP \w'MANROFFSEQ\ \ 'u
+.TP 
+.if  !'po4a'hide' .B MANPATH
+如果设置了 $\fBMANPATH\fP，它的值会用作搜索手册页的路径。
+
+请参考 \fBmanpath\fP(5) 中的\fB搜索路径\fP一节以了解默认行为以及处理该环境变量的细节。
+.TP 
+.if  !'po4a'hide' .B MANROFFOPT
+每当 \fBman\fP 调用格式化工具时（\fBnroff\fP、\fBtroff\fP 或 \fBgroff\fP），它将把 $\fBMANROFFOPT\fP
+的内容添加至格式化工具的命令行参数。
+
+For example, \fBMANROFFOPT=\-P\-i\fP tells the formatter to use italic text
+(which is only supported by some terminals) rather than underlined text.
+.TP 
+.if  !'po4a'hide' .B MANROFFSEQ
+如果设置了 $\fBMANROFFSEQ\fP，它的值会用于确定每个手册页经过的预处理程序的集合。默认的预处理器列表因系统而异。
+.TP 
+.if  !'po4a'hide' .B MANSECT
+如果设置了 $\fBMANSECT\fP，它的值(以冒号分隔的章节列表)会用于确定搜索哪些章节及搜索顺序。默认值为“1 n l 8 3 0 2 3type 5 4 9 6 7”，除非被
+\fI/etc/man_db.conf\fP 中的 \fBSECTION\fP 指令覆盖。
+.TP 
+.if  !'po4a'hide' .BR MANPAGER , " PAGER"
+如果设置了 $\fBMANPAGER\fP 或 $\fBPAGER\fP (优先使用 $\fBMANPAGER\fP)，它的值会用作显示手册页的程序的名称。默认使用
+\fBless\fP，如果无法找到 \fBless\fP 或它不是可执行文件的话则会回退到使用 \fBcat\fP。
+
+值可以是简单的命令名或带参数的命令，并可以使用 shell
+引用(反斜杠、单引号或双引号)。不能使用管道连接多个命令；如果您需要，请使用封装器脚本，它能够以参数形式或从标准输入获得要显示的文件。
+.TP 
+.if  !'po4a'hide' .B MANLESS
+如果设置了 $\fBMANLESS\fP，它的值将用作 \fBless\fP 分页程序的默认提示字符串，如同作为 \fB\-r\fP 选项的参数传递一样(因此出现的任何
+\fB$MAN_PN\fP 会以同样的方式展开)。例如，如果您想将提示字符串无条件地设置为\(lqmy prompt string\(rq，请将
+$\fBMANLESS\fP 设置为 \(oq\fB\-Psmy\ prompt\ string\fP\(cq。使用 \fB\-r\fP 选项会覆盖此环境变量。
+.TP 
+.if  !'po4a'hide' .B BROWSER
+如果设置了 $\fBBROWSER\fP，它的值(冒号分隔的命令列表)中的每一个会轮流用于尝试为 \fBman\fP \fB\-\-html\fP
+启动一个网络浏览器。每个命令中，\fI%s\fP 会替换成包含 \fBgroff\fP HTML 输出的文件名，\fI%%\fP 会替换成一个百分号(%)，\fI%c\fP
+会替换成冒号(:)。
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+如果设置了 $\fBSYSTEM\fP 环境变量，其效果将与 \fB\-m\fP 选项的参数相同。
+.TP 
+.if  !'po4a'hide' .B MANOPT
+如果设置了 $\fBMANOPT\fP，它会先于 \fBman\fP 的命令行并假设为类似的格式来解析。由于所有其他的 \fBman\fP
+特定环境变量可以表达为命令行选项而可以包被含进 $\fBMANOPT\fP，因此
+这些环境变量可能废弃。注意，所有应当解释为命令行选项参数一部分的空格必须被转义。
+.TP 
+.if  !'po4a'hide' .B MANWIDTH
+如果设置了 $\fBMANWIDTH\fP，它的值将用作手册页格式化时的每行长度。如果未设置，手册页将使用适合当前终端的行长度格式化(使用
+$\fBCOLUMNS\fP 的值或通过 \fBioctl\fP(2) 调用获取，或在都不可用的情况下退回到 80 个字符)。Cat
+页面只有在默认格式化可用时才会保存，即终端行长度介于 66 到 80 个字符时。
+.TP 
+.if  !'po4a'hide' .B MAN_KEEP_FORMATTING
+通常，当输出不定向到终端时(如定向到文件或管道)，格式化字符会被忽略，以便不使用特殊工具就能阅读结果。但如果
+$\fBMAN_KEEP_FORMATTING\fP 设置成了任何非空的值，这些格式化字符将保存。这对于可以解释格式化字符的 \fBman\fP 封装程序有用。
+.TP 
+.if  !'po4a'hide' .B MAN_KEEP_STDERR
+通常，当输出定向到终端时(一般是分页程序)，产生手册格式化版本的命令造成的任何错误输出都会被忽略，以免干扰分页程序显示。\fBgroff\fP
+这样的程度经常产生较小的有关排版显示的错误消息(如未对齐)。这些消息很难看，并且一般与手册页一起显示时会产生干扰。不过，有些用户就是想看到它们，好吧，如果
+$\fBMAN_KEEP_STDERR\fP 设成了非空的值，这些错误输出会照常显示。
+.TP 
+.if  !'po4a'hide' .B MAN_DISABLE_SECCOMP
+在 Linux 系统中，\fBman\fP 通常将处理不受信任数据的子进程使用 \fBseccomp\fP(2)
+沙盒进行限制。这能够使得运行复杂的手册页解析代码变得更加安全。如果这种限制使得一些与页面显示内容无关的原因影响了程序正常行为，您可以设置
+$\fBMAN_DISABLE_SECCOMP\fP 为任意非空值来禁用该沙盒。
+.TP 
+.if  !'po4a'hide' .B PIPELINE_DEBUG
+如果 $\fBPIPELINE_DEBUG\fP 环境变量置为“1”，则 \fBman\fP 会向标准错误打印描述每个所运行子进程的调试信息。
+.TP 
+.if  !'po4a'hide' .BR LANG , " LC_MESSAGES"
+取决于系统和实现，程序会查询 $\fBLANG\fP 和/或 $\fBLC_MESSAGES\fP 获知当前的消息区域语言。\fBman\fP
+会以该区域语言显示消息(若可用)。参阅 \fBsetlocale\fP(3) 了解准确的详情。
+.SH 文件
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+man\-db 配置文件。
+.TP 
+.if  !'po4a'hide' .I /usr/share/man
+全局手册页层次结构。
+.SH 标准
+POSIX.1\-2001, POSIX.1\-2008, POSIX.1\-2017.
+.SH 亦见
+.if  !'po4a'hide' .BR apropos (1),
+.if  !'po4a'hide' .BR groff (1),
+.if  !'po4a'hide' .BR less (1),
+.if  !'po4a'hide' .BR manpath (1),
+.if  !'po4a'hide' .BR nroff (1),
+.if  !'po4a'hide' .BR troff (1),
+.if  !'po4a'hide' .BR whatis (1),
+.if  !'po4a'hide' .BR zsoelim (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR man (7),
+.if  !'po4a'hide' .BR catman (8),
+.if  !'po4a'hide' .BR mandb (8)
+.PP
+某些包的文档可能以其它格式提供，如 \fBinfo\fP(1) 或 HTML。
+.SH 历史
+1990, 1991 \(en 原作者 John W.\& Eaton (jwe@che.utexas.edu)。
+
+1992年12月23日: Rik Faith (faith@cs.unc.edu) 应用了 Willem Kasdorp
+(wkasdo@nikhefk.nikef.nl) 提供的 bug 补丁。
+
+1994年4月30日 \(en 2000年2月23日: Wilf.\& (G.Wilford@ee.surrey.ac.uk)
+在几位热心人的帮助下开发和维护这个包。
+
+1996年10月30日 \(en 2001年3月30日: Fabrizio Polacco <fpolacco@debian.org>
+为 Debian 项目维护并增强了这个包，过程中得到整个社区的帮助。
+
+2001年3月31日 \(en 今天: Colin Watson <cjwatson@debian.org> 开发和维护着
+man\-db。
+.SH BUGS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

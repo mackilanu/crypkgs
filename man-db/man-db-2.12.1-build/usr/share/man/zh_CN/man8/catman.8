@@ -1,0 +1,84 @@
+.\" Man page for catman
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Dec 10 14:17:29 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH CATMAN 8 2024-04-05 2.12.1 手册分页显示工具
+.SH 名称
+catman \- 创建或更新预格式化的手册页
+.SH 概述
+\fBcatman\fP [\|\fB\-d?V\fP\|] [\|\fB\-M\fP \fI路径\fP\|] [\|\fB\-C\fP \fI文件\fP\|] [\|\fI章节\fP\|]
+\&.\|.\|.
+.SH 描述
+\fBcatman\fP 用于创建最新的预格式化手册页集合(称为 cat 页面)。Cat 页面通常比原手册页显示得快。若本地管理员决定加入 cat
+页面支持，他们必须提供合适的目录来保存这些页面。
+
+\fBcatman\fP 的可用选项为要预格式化的手册页层次结构和章节。默认的层次结构是那些在 man\-db
+配置文件中指定的系统层次结构，默认章节是环境变量 $\fBMANSECT\fP 中以冒号分隔的内容或编译进 \fBman\fP 的标准集合(如果未定义
+$\fBMANSECT\fP)。给 \fBcatman\fP 提供一组空格分隔的章节名会覆盖以上两个选项。
+
+\fBcatman\fP 利用与每个层次结构关联的 \fB索引\fP 数据库缓存来确定需要格式化哪些文件。
+.SH 选项
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+打印调试信息。
+.TP 
+\fB\-M\ \fP\fI路径\fP,\ \fB\-\-manpath=\fP\fI路径\fP
+指定替代的手册页层次结构搜索路径，以冒号分隔。默认情况下，这是 man\-db 配置文件中指定的所有系统层次结构。
+.TP 
+\fB\-C\ \fP\fI文件\fP,\ \fB\-\-config\-file=\fP\fI文件\fP
+使用此用户配置文件代替默认的 \fI\(ti/.manpath\fP。
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+打印帮助消息并退出。
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+打印简短的帮助消息并退出。
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+显示版本信息。
+.SH 环境
+.TP 
+.if  !'po4a'hide' .B MANSECT
+如果设置了 $\fBMANSECT\fP，它的值(以冒号分隔的章节列表)会用于确定搜索哪些章节及搜索顺序。默认值为“1 n l 8 3 0 2 3type 5 4 9 6 7”，除非被
+\fI/etc/man_db.conf\fP 中的 \fBSECTION\fP 指令覆盖。
+.TP 
+.if  !'po4a'hide' .B MANPATH
+如果设置了 $\fBMANPATH\fP 环境变量，它的值将被解释为要使用的，以冒号分隔的手册页层次结构搜索路径。
+
+请参考 \fBmanpath\fP(5) 中的\fB搜索路径\fP一节以了解默认行为以及处理该环境变量的细节。
+.SH 文件
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+man\-db 配置文件。
+.TP 
+.if  !'po4a'hide' .I /usr/man/index.(bt|db|dir|pag)
+传统的全局 \fI索引\fP 数据库缓存。
+.TP 
+.if  !'po4a'hide' .I /var/catman/index.(bt|db|dir|pag)
+替代的或 FSSTND 兼容的全局 \fI索引\fP 数据库缓存。
+.SH 亦见
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR mandb (8)
+.SH 作者
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BUGS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

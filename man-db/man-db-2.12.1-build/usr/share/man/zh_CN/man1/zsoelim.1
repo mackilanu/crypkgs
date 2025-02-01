@@ -1,0 +1,56 @@
+.\" Man page for zsoelim
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Dec 10 19:33:32 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH ZSOELIM 1 2024-04-05 2.12.1 手册分页显示工具
+.SH 名称
+zsoelim \- 满足 roff 输入中的 .so 请求
+.SH 概述
+\fBzsoelim\fP [\|\fB\-CVh\fP\|] [\|\fI文件\fP \&.\|.\|.\|]
+.SH 描述
+\fBzsoelim\fP 解析 \fI文件\fP 参数，如果未指定，它的标准输入应包含如下形式的几行：
+
+\&\fB.so\fP <\|\fI文件名\fP\|>
+
+这些请求由 \fI文件名\fP 指定的内容替换。如果请求不满足，\fBzsoelim\fP 查找 \fI文件名.ext\fP，这里 \fI.ext\fP 可以是
+\&\fB.gz\fP、\fB.Z\fP 或 \fB.z\fP
+之一。其他扩展类型也可能支持，取决于编译时选项。如果压缩文件满足了请求，程序将使用相应的解压程序解压此文件，并使用其输出来满足请求。
+
+传统上，\fBsoelim\fP 程序使用时允许 roff 预处理器能够预处理请求引用的那些文件。此特别版本编写时避开了支持压缩手册页造成的问题。
+.SH 选项
+.TP 
+.if  !'po4a'hide' .BR \-C ", " \-\-compatible
+此标志的存在是为了与其他 \fBsoelim\fP 程序兼容。它的用法是启用 .so 请求，后面跟一些非空格的内容。由于这已经是默认行为，程序将忽略它。
+.TP 
+.if  !'po4a'hide' .BR \-h ", " \-\-help
+打印帮助消息并退出。
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+显示版本信息。
+.SH 亦见
+.if  !'po4a'hide' .BR groff (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR nroff (1),
+.if  !'po4a'hide' .BR troff (1)
+.SH 作者
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH BUGS
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

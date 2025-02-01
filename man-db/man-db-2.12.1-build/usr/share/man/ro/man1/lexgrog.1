@@ -1,0 +1,208 @@
+.if  !'po4a'hide' .ds mC CW
+.\" Man page for lexgrog
+.\"
+.\" Copyright (c) 2001 Colin Watson <cjwatson@debian.org>
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.if  t .if \n(.g .ds mC CR
+.if  n .ds mC R
+.
+.\" in an example (EX/EE)?
+.nr mE 0
+.
+.if  !\n(.g \{\
+.de EX
+.  br
+.  if !\\n(mE \{\
+.    nr mF \\n(.f
+.    nr mP \\n(PD
+.    nr PD 1v
+.    nf
+.    ft \\*(mC
+.    nr mE 1
+.  \}
+..
+.\}
+.
+.
+.if  !\n(.g \{\
+.de EE
+.  br
+.  if \\n(mE \{\
+.    ft \\n(mF
+.    nr PD \\n(mP
+.    fi
+.    nr mE 0
+.  \}
+..
+.\}
+.\" End example.
+.
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH LEXGROG 1 2024-04-05 2.12.1 "Utilitare ale paginatorului de manual"
+.SH NUME
+lexgrog \- analizează informațiile antetului din paginile de manual
+.SH REZUMAT
+\fBlexgrog\fP [\|\fB\-m\fP\||\|\fB\-c\fP\|] [\|\fB\-dfw?V\fP\|] [\|\fB\-E\fP \fIcodificarea\fP\|]
+\fIfișier\fP \&.\|.\|.
+.SH DESCRIERE
+\fBlexgrog\fP este o implementare a utilitarului tradițional \(lqgroff în
+\fBlex\fP.  Acesta citește lista de fișiere din linia de comandă fie ca fișiere
+sursă a paginilor de manual, fie ca pagini preformatate \\(lqcat\\(rq, și
+afișează numele și descrierea acestora așa cum sunt utilizate de \fBapropos\fP
+și \fBwhatis\fP, afișează lista filtrelor de preprocesare necesare paginii de
+manual înainte de a fi transmisă la \fBnroff\fP sau \fBtroff\fP sau ambele.
+.PP
+Dacă intrarea aceasta este formatată greșit, \fBlexgrog\fP va imprima \(lqparse
+failed\(rq; acest lucru poate fi util pentru programele externe care trebuie
+să verifice paginile de manual pentru corectitudine.  Dacă unul dintre
+fișierele de intrare ale lui \fBlexgrog\fP este \(lq\-\(rq, se va citi de la
+intrarea standard; dacă orice fișier de intrare este comprimat, o versiune
+descomprimată va fi citită automat.
+.SH OPȚIUNI
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Imprimă informațiile de depanare.
+.TP 
+.if  !'po4a'hide' .BR \-m ", " \-\-man
+Analizează intrarea ca fișiere sursă de pagini de manual. Acesta este
+comportamentul implicit dacă nu este dat nici \fB\-\-man\fP, nici \fB\-\-cat\fP.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-cat
+Analizează intrarea ca pagini de manual preformatate (\(lqcat
+pages\(rq). \fB\-\-man\fP și \fB\-\-cat\fP nu pot fi date simultan.
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-whatis
+Afișează numele și descrierea din antetul paginii de manual, așa cum sunt
+utilizate de \fBapropos\fP și \fBwhatis\fP. Aceasta este comportamentul implicit
+dacă nu este specificat nici \fB\-\-whatis\fP, nici \fB\-\-filters\fP.
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-filters
+Afișează lista de filtre necesare pentru a preprocesa pagina de manual,
+înainte de a fi formatată cu \fBnroff\fP sau \fBtroff\fP.
+.TP 
+\fB\-E\fP \fIcodificarea\fP, \fB\-\-encoding\fP \fIcodificarea\fP
+Suprascrie setul de caractere ghicit pentru pagină, cu \fIcodificarea\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Imprimă un mesaj de ajutor și iese.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Imprimă un mesaj scurt de utilizare și iese.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Afișează informații despre versiune.
+.SH "STARE DE IEȘIRE"
+.TP 
+.if  !'po4a'hide' .B 0
+Executarea programului s\-a încheiat fără erori.
+.TP 
+.if  !'po4a'hide' .B 1
+Eroare de utilizare.
+.TP 
+.if  !'po4a'hide' .B 2
+\fBlexgrog\fP nu a reușit să analizeze unul sau mai multe dintre fișierele de
+intrare.
+.SH EXEMPLE
+.nf
+  $ lexgrog man.1
+  man.1: "man \- o interfață la manualele de referință ale sistemului"
+  $ lexgrog \-fw man.1
+  man.1 (t): "man \- o interfață la manualele de referință ale sistemului"
+  $ lexgrog \-c whatis.cat1
+  whatis.cat1: "whatis \- afișează descrieri ale paginilor de manual"
+  $ lexgrog defect.1
+  broken.1: analizarea a eșuat
+.fi
+.SH "ANALIZARE WHATIS"
+\fBmandb\fP (care utilizează același cod ca \fBlexgrog\fP)  analizează secțiunea
+\fBNUME\fP din partea de sus a fiecărei pagini de manual, căutând nume și
+descrieri ale caracteristicilor documentate în fiecare dintre ele.  Cu toate
+că analizatorul este destul de tolerant, deoarece trebuie să facă față unui
+număr de forme diferite care au fost folosite în trecut, acesta poate
+câteodată să eșueze în extragerea informațiilor necesare.
+.PP
+Când se utilizează setul de macrocomenzi tradițional \fIman\fP, o secțiune
+corectă \fBNUME\fP arată cam așa:
+.PP
+.RS
+.EX
+\&.SH NUME
+foo \e\- program ce face ceva
+.EE
+.RE
+.PP
+Unele paginatoare de manual necesită ca \(oq\e\-\(cq să fie exact așa cum
+este arătat(aici); \fBmandb\fP este mai tolerant, dar pentru compatibilitate
+cu alte sisteme este totuși o idee bună să păstrați bara oblică inversă.
+.PP
+În partea din stânga, pot să fie mai multe nume, separate prin virgulă.
+Numele care conțin spații, vor fi ignorate pentru a se evita un comportament
+neobișnuit în anumite secțiuni \fBNUME\fP formatate greșit.  Textul din partea
+dreaptă este în formă liberă, și se poate fi întinde pe mai multe rânduri.
+Dacă mai multe funcționalități cu descrieri diferite sunt documentate în
+aceeași pagină de manual, va fi utilizat următorul format:
+.PP
+.RS
+.EX
+\&.SH NUME
+foo, bar \e\- programe ce fac ceva
+\&.br
+baz \e\- program ce nu face nimic
+.EE
+.RE
+.PP
+(O macrocomandă care începe un nou paragraf, cum ar fi \fB.PP\fP, poate fi
+utilizată în locul macrocomenzii de întrerupere de linie \fB.br\fP.)
+.PP
+Când se utilizează setul de macrocomenzi \fImdoc\fP derivat din BSD, o secțiune
+\fBNUME\fP corectă, arată cam așa:
+.PP
+.RS
+.EX
+\&.Sh NUME
+\&.Nm foo
+\&.Nd program ce face ceva
+.EE
+.RE
+
+Există mai multe motive comune pentru care analizarea «whatis »eșuează.
+Uneori autorii paginilor de manual înlocuiesc \(oq.SH NUME\(cq cu \(oq.SH
+PROGRAMULMEU\(cq și apoi \fBmandb\fP nu poate găsi secțiunea de la care să
+extragă informațiile de care are nevoie.  Uneori autorii includ o secțiune
+NUME, dar plasează text în formă liberă acolo, în locul \(oqnume \e\-
+descriere\(cq.  Totuși, orice sintaxă care se aseamănă cu cea de deasupra ar
+trebui să fie acceptată.
+.SH "CONSULTAȚI ȘI"
+.if  !'po4a'hide' .IR apropos (1),
+.if  !'po4a'hide' .IR man (1),
+.if  !'po4a'hide' .IR whatis (1),
+.if  !'po4a'hide' .IR mandb (8)
+.SH NOTE
+\fBlexgrog\fP încearcă să analizeze fișierele care conțin solicitări .so, dar
+va putea face acest lucru corect numai dacă fișierele sunt instalate așa cum
+trebuie într\-o ierarhie de pagini de manual.
+.SH AUTOR
+Codul utilizat de \fBlexgrog\fP pentru a scana paginile de manual a fost scris
+de:
+.PP
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.PP
+Colin Watson a scris versiunea curentă a interfeței liniei de comandă,
+precum și această pagină de manual.
+.SH DEFECȚIUNI
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

@@ -1,0 +1,861 @@
+'\" t
+.\" ** The above line should force tbl to be a preprocessor **
+.\" Man page for man
+.\"
+.\" Copyright (C) 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MAN 1 2024-04-05 2.12.1 "Utilitaires de l'afficheur des pages de manuel"
+.SH NOM
+man \- Interface de consultation des manuels de référence du système
+.SH SYNOPSIS
+.\" The general command line
+.\" The apropos command line
+\fBman\fP [\|\fIoptions de man\fP\|] [\|[\|\fIsection\fP\|] \fIpage\fP\ \|.\|.\|.\|]\ \&.\|.\|.\&
+.br
+.\" The --global-apropos command line
+\fBman\fP \fB\-k\fP [\|\fIoptions d'apropos\fP\|] \fIexpression_rationnelle\fP
+\&.\|.\|.\&
+.br
+.\" The whatis command line
+\fBman\fP \fB\-K\fP [\|\fIoptions de man\fP\|] [\|\fIsection\fP\|] \fIterm\fP\ .\|.\|.\&
+.br
+.\" The --local command line
+\fBman\fP \fB\-f\fP [\|\fIoptions de whatis\fP\|] \fIpage\fP \&.\|.\|.\&
+.br
+.\" The --where/--where-cat command line
+\fBman\fP \fB\-l\fP [\|\fIoptions de man\fP\|] \fIfichier\fP \&.\|.\|.\&
+.br
+\fBman\fP \fB\-w\fP\||\|\fB\-W\fP [\|\fIoptions de man\fP\|] \fIpage\fP \&.\|.\|.\&
+.SH DESCRIPTION
+\fBman\fP est le programme de visualisation des pages de manuel. Chacun des
+arguments \fIpage\fP, indiqué dans la ligne de commande de \fBman\fP, porte, en
+principe, le nom d'un programme, d'un utilitaire ou d'une fonction. La
+\fIpage de manuel\fP correspondant à chaque argument est alors trouvée et
+affichée. Si une \fIsection\fP est précisée alors \fBman\fP limite la recherche
+à cette \fIsection\fP. Par défaut, il recherche dans toutes les \fIsections\fP
+disponibles en suivant un ordre prédéfini (voir \fBDEFAULTS\fP). Il n'affiche
+que la première \fIpage de manuel\fP trouvée, même si d'autres \fIpages de manuel\fP existent dans d'autres \fIsections\fP.
+
+Le tableau ci\-dessous indique le numéro des \fIsections\fP de manuel ainsi que
+le type de pages qu'elles contiennent.
+
+.TS
+tab (@);
+l lx.
+1@T{
+Programmes exécutables ou commandes de l'interpréteur de commandes (shell)
+T}
+2@T{
+Appels système (fonctions fournies par le noyau)
+T}
+3@T{
+Appels de bibliothèque (fonctions fournies par les bibliothèques des programmes)
+T}
+4@T{
+Fichiers spéciaux (situés généralement dans \fI/dev\/\fP)
+T}
+5@T{
+Formats des fichiers et conventions. Par exemple \& \fI/etc/passwd\fP
+T}
+6@T{
+Jeux
+T}
+7@T{
+Miscellaneous (including macro packages and conventions),
+e.g.\& \fBman\fP(7), \fBgroff\fP(7), \fBman\-pages\fP(7)
+T}
+8@T{
+Commandes de gestion du système (généralement réservées au superutilisateur)
+T}
+9@T{
+Sous\-programmes du noyau [\|hors standard\|]
+T}
+.TE
+
+Une \fIpage\fP de manuel est constituée de plusieurs sections.
+
+Conventional section names include \fBNAME\fP, \fBSYNOPSIS\fP, \fBCONFIGURATION\fP,
+\fBDESCRIPTION\fP, \fBOPTIONS\fP, \fBEXIT\ STATUS\fP, \fBRETURN\ VALUE\fP, \fBERRORS\fP,
+\fBENVIRONMENT\fP, \fBFILES\fP, \fBVERSIONS\fP, \fBSTANDARDS\fP, \fBNOTES\fP, \fBBUGS\fP,
+\fBEXAMPLE\fP, \fBAUTHORS\fP, and \fBSEE\ ALSO\fP.
+
+Les conventions suivantes s'appliquent à la section \fBSYNOPSIS\fP et peuvent
+être utilisées comme un guide pour les autres sections.
+
+.TS
+tab (@);
+l lx.
+\fBtexte gras\fP@T{
+à taper exactement comme indiqué\ ;
+T}
+\fItexte italique\fP@T{
+à remplacer par l'argument approprié\ ;
+T}
+[\|\fB\-abc\fP\|]@T{
+tous les arguments entre [\ ] sont facultatifs\ ;
+T}
+\fB\-a\|\fP|\|\fB\-b\fP@T{
+les options séparées par | ne peuvent pas être utilisées simultanément\ ;
+T}
+\fIargument\fP .\|.\|.@T{
+\fIargument\fP peut être répété\ ;
+T}
+[\|\fIexpression\fP\|] .\|.\|.@T{
+toute l'\fIexpression\fP\ située à l'intérieur de [\ ] peut être répétée.
+T}
+.TE
+
+Le rendu exact dépend du dispositif d'affichage. Par exemple, man ne sera
+généralement pas capable d'afficher les italiques dans un terminal, et
+utilisera typiquement le soulignement ou la coloration du texte à la place.
+
+Le synopsis de la commande ou de la fonction est un modèle qui permet de
+représenter toutes les utilisations possibles. Dans certains cas, il est
+recommandé d'illustrer plusieurs utilisations exclusives comme dans la
+partie \fBSYNOPSIS\fP de cette page de manuel.
+.SH EXEMPLES
+.TP  \w'man\ 'u
+\fBman\fP\fI\ ls\fP
+Affiche la page de manuel de l'\fIélément\fP (du programme) \fIls\fP.
+.TP 
+\fBman\fP \fIman\fP.\fI7\fP
+Affiche la page de manuel de la macro \fIman\fP à la section \fI7\fP. (C'est une
+autre orthographe de "\fBman\fP \fI7 man\fP".)
+.TP 
+\fBman '\fP\fIman\fP(\fI7\fP)'
+Affiche la page de manuel du paquet de macro \fIman\fP pour la section \fI7\fP
+(Autre orthographe de "\fBman\fP \fI7 man\fP"). Cela est utile pour copier ou
+coller des références croisées de pages de manuel. Notez que les parenthèses
+doivent normalement être échappées pour les protéger dans le shell.
+.TP 
+\fBman\ \-a\fP\fI\ intro\fP
+Affiche, successivement, toutes les pages de manuel disponibles nommées «\ \fIintro\fP\ ». Il est possible de s'arrêter après l'affichage de chaque page
+ou de sauter n'importe quelle page.
+.TP 
+\fBman \-t \fP\fIbash \fP|\fI lpr \-Pps\fP
+Formate la page du manuel de \fIbash\fP\ selon le format par défaut (\fBtroff\fP
+ou \fBgroff\fP) et la redirige vers l'imprimante nommée \fIps\fP. Le format par
+défaut généré pour \fBgroff\fP est habituellement PostScript. \fBman \-\-help\fP
+devrait préciser le format associé à l'option \fB\-t\fP.
+.TP 
+\fBman \-l \-T\fP\fIdvi ./toto.1x.gz\fP\fB > \fP\fI./toto.1x.dvi\fP
+Cette commande décompresse puis met en forme la page de manuel source nroff
+nommée \fI./toto.1x.gz\fP. Elle l'enregistre ensuite dans un fichier «\ \fBdevice independent (dvi)\fP\ ». La redirection est nécessaire car l'option
+\fB\-T\fP produit un envoi vers la sortie standard (\fBstdout\fP) sans aucun
+programme d'affichage. Le résultat peut être visualisé avec un programme tel
+que \fBxdvi\fP ou être ultérieurement transformé au format PostScript grâce à
+un programme comme \fBdvips\fP.
+.TP 
+\fBman\ \-k\fP\fI\ printf\fP
+Recherche la description courte et le nom des pages de manuel comportant le
+mot\-clé \fIprintf\fP, utilisé comme une expression rationnelle, puis affiche
+tout ce qui a été trouvé. Cette commande est équivalente à \fBapropos\fP\fI\ printf\fP\fB.\fP
+.TP 
+\fBman\ \-f\fP\fI\ smail\fP
+Recherche les pages de manuel nommées \fIsmail\fP et en affiche les
+descriptions courtes. Équivalent à \fBwhatis\fP\fI\ smail\fP\fB.\fP
+.SH "VUE D'ENSEMBLE"
+Beaucoup d'options sont disponibles avec \fBman\fP afin de donner autant de
+souplesse que possible à l'utilisateur. Des modifications peuvent être
+apportées au chemin de recherche, à l'ordre d'exploration des sections, au
+programme d'affichage ainsi qu'à d'autres éléments et comportements. Tout
+ceci est détaillé ci\-après.
+
+Si elles ne sont pas vides, diverses variables d'environnement sont
+exploitées pour influer sur le fonctionnement de \fBman\fP. Il est possible
+de donner à la variable «\ fourre\-tout\ » $\fBMANOPT\fP n'importe quelle chaîne
+de caractères respectant le format de la ligne de commande. La seule
+condition est que toutes les espaces, utilisées en tant qu'élément de
+l'argument d'une option, soient protégés, c'est\-à\-dire précédées par une
+contre\-oblique «\ \e\ » (antislash). \fBman\fP analysera $\fBMANOPT\fP avant
+d'analyser sa propre ligne de commande. Ainsi, les options exigeant un
+argument seront remplacées par les mêmes options trouvées sur la ligne de
+commande. Pour ignorer toutes les options placées dans $\fBMANOPT\fP, l'option
+\fB\-D\fP peut être indiquée comme option initiale de la ligne de commande. Ceci
+permettra à man d'«\ oublier\ » les options indiquées dans
+$\fBMANOPT\fP. Toutefois, celles\-ci doivent quand même être valides.
+
+Les pages de manuel sont ordinairement stockées au format \fBnroff\fP(1) dans
+un répertoire tel que \fI/usr/share/man\fP. Pour certaines installations, des
+pages préformatées (\fIcat pages\fP) sont aussi disponibles pour améliorer les
+preformances. Voir \fBmanpath\fP(5) pour les détails et l'emplacement de ces
+fichiers.
+
+Ce paquet prend en charge les pages de manuel en plusieurs langues, suivant
+votre \fIlocale\fP. Si votre système ne configure pas automatiquement cette
+information pour vous, vous pouvez définir $\fBLC_MESSAGES\fP, $\fBLANG\fP, ou une
+autre variable d'environnement système pour indiquer votre locale préférée
+au format \fBPOSIX\fP :
+
+<\fIlangue\fP>[\|\fB_\fP<\fIpays\fP>\|[\|\fB.\fP<\fIjeu_de_caractères\fP>\|[\|\fB,\fP<\fIversion\fP>\|]\|]\|]
+
+Si la page désirée est disponible dans votre «\ \fIlocale\fP\ » (dans votre
+langue ou votre dialecte), elle sera affichée au lieu de la page standard,
+écrite le plus souvent dans le dialecte anglo\-américain (en_US).
+
+Si vous constatez que les traductions de ce paquet ne sont pas disponibles
+dans votre langue et souhaitez les réaliser, contactez le responsable qui
+coordonnera cette activité.
+
+Les pages de manuel individuelles sont d'ordinaire écrites et mises à jour
+par les mainteneurs des programmes et fonctions concernés (ou autres sujets)
+et ne sont pas inclus dans ce paquet. Si vous trouvez une erreur ou
+l'absence d'une page de manuel, veuillez contacter les mainteneurs des
+paquets concernés.
+
+Pour obtenir des renseignements concernant d'autres fonctionnalités
+disponibles avec cet afficheur de manuel, lire les documents fournis avec le
+programme.
+.SH "COMPORTEMENT PAR DÉFAUT"
+L'ordre de recherche dans les sections peut être modifié par la variable
+d'environnement $\fBMANSECT\fP ou par la directive \fBSECTION\fP du fichier
+\fI/etc/man_db.conf\fP. L'ordre par défaut est :
+
+.RS
+.if  !'po4a'hide' 1 n l 8 3 0 2 3type 5 4 9 6 7
+.RE
+
+La page de manuel formatée est affichée à l'aide d'un \fIpager\fP. Il peut être
+choisi de multiple manières ou être celui par défaut (voir l'option \fB\-P\fP
+pour plus de détails).
+
+Les filtres sont déterminés de plusieurs façons. Tout d'abord, l'option
+\fB\-p\fP ou la variable d'environnement $\fBMANROFFSEQ\fP sont vérifiées. Si \fB\-p\fP
+n'est pas employée et que la variable d'environnement est vide, alors la
+première ligne du fichier nroff est analysée à la recherche d'une chaîne de
+caractères indiquant le préprocesseur à utiliser. Pour que l'indication du
+préprocesseur soit valide, la première ligne doit ressembler à\ :
+
+\&\fB'\e"\fP <\fBchaîne\fP>
+
+dans laquelle \fBchaîne\fP peut être n'importe quelle combinaison de lettres,
+décrite par l'option \fB\-p\fP ci\-dessous.
+
+Si aucune des méthodes précédentes ne fournit d'indication sur le filtre à
+utiliser, une valeur par défaut est utilisée.
+
+.\" ********************************************************************
+Une chaîne de formatage est constituée et exécutée à partir des filtres et
+du format de départ (\fBnroff\fP ou [\fBtg\fP]\fBroff\fP avec l'option
+\fB\-t\fP). Toutefois, si un programme exécutable \fImandb_nfmt\fP (ou
+\fImandb_tfmt\fP avec l'option \fB\-t\fP) existe à la racine de l'arborescence des
+pages de manuel, c'est lui qui sera exécuté. Il recevra en argument le
+fichier source de la page de manuel, la chaîne de préprocesseur et,
+éventuellement, le périphérique indiqué par les arguments de \fB\-T\fP ou \fB\-E\fP.
+.SH OPTIONS
+La duplication d'options sans argument dans la ligne de commande ou dans
+$\fBMANOPT\fP (ou dans les deux) n'est pas gênante. Pour les options qui
+requièrent un argument, chaque duplication remplace la valeur précédemment
+donnée à l'argument.
+.SS "Options générales"
+.TP 
+\fB\-C\ \fP\fIfichier\fP,\ \fB\-\-config\-file=\fP\fIfichier\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Affiche les informations de mise au point.
+.TP 
+.if  !'po4a'hide' .BR \-D ", " \-\-default
+Cette option est normalement utilisée en toute première option et
+réinitialise les comportements de \fBman\fP à leurs valeurs par défaut. Son
+utilisation réinitialise les options qui auraient pu être modifiées par les
+valeurs placées dans $\fBMANOPT\fP. Toutes les options qui suivent \fB\-D\fP auront
+leur effet habituel.
+.TP 
+\fB\-\-warnings\fP[=\fIavertissements\/\fP]
+Enable warnings from \fIgroff\fP.  This may be used to perform sanity checks on
+the source text of manual pages.  \fIwarnings\fP is a comma\-separated list of
+warning names; if it is not supplied, the default is "mac".  To disable a
+\fIgroff\fP warning, prefix it with "!": for example, \fB\-\-warnings=mac,!break\fP
+enables warnings in the "mac" category and disables warnings in the "break"
+category.  See the \(lqWarnings\(rq node in \fBinfo groff\fP for a list of
+available warning names.
+.SS "Modes opératoires principaux"
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-whatis
+Approximately equivalent to \fBwhatis\fP.  Display a short description from
+the manual page, if available.  See \fBwhatis\fP(1)  for details.
+.TP 
+.if  !'po4a'hide' .BR \-k ", " \-\-apropos
+Approximately equivalent to \fBapropos\fP.  Search the short manual page
+descriptions for keywords and display any matches.  See \fBapropos\fP(1)  for
+details.
+.TP 
+.if  !'po4a'hide' .BR \-K ", " \-\-global\-apropos
+Recherche le texte dans toutes les pages de manuel. Il s'agit d'une
+recherche par force brute qui peut prendre un peu de temps ; si possible,
+vous devriez indiquer une section pour réduire le nombre de pages à prendre
+en considération. Les termes de la recherche peuvent être de simples chaînes
+(par défaut) ou des expressions rationnelles si l'option \fB\-\-regex\fP est
+utilisée.
+.IP
+Note that this searches the \fIsources\fP of the manual pages, not the rendered
+text, and so may include false positives due to things like comments in
+source files, or false negatives due to things like hyphens being written as
+"\e\-" in source files.  Searching the rendered text would be much slower.
+.TP 
+.if  !'po4a'hide' .BR \-l ", " \-\-local\-file
+.\" Compressed nroff source files with a supported compression
+.\" extension will be decompressed by man prior to being displaying via the
+.\" usual filters.
+Activate "local" mode.  Format and display local manual files instead of
+searching through the system's manual collection.  Each manual page argument
+will be interpreted as an nroff source file in the correct format.  No cat
+file is produced.  If '\-' is listed as one of the arguments, input will be
+taken from stdin.
+.IP
+If this option is not used, then \fBman\fP will also fall back to
+interpreting manual page arguments as local file names if the argument
+contains a "/" character, since that is a good indication that the argument
+refers to a path on the file system.
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-where ", " \-\-path ", " \-\-location
+N'affiche pas la page de manuel mais affiche le ou les emplacements des
+fichiers source nroff qui auraient dû être formatés. Si l'option \fB\-a\fP est
+aussi utilisée, affiche l'emplacement de tous les fichiers source
+correspondants aux critères.
+.TP 
+.if  !'po4a'hide' .BR \-W ", " \-\-where\-cat ", " \-\-location\-cat
+N'affiche pas la pages de manuel mais affiche le ou les emplacements des
+fichiers «\ cat\ » préformatés qui auraient dû être affichés. Si l'option
+\fB\-a\fP est aussi utilisée, affiche l'emplacement de tous les fichiers cat
+préformatés correspondants aux critères.
+.IP
+Si \fB\-w\fP et \fB\-W\fP sont tout les deux utilisées, la source et le fichier
+formaté sont affichés en suivant, séparés par un espace. Si toutes les
+options \fB\-w\fP, \fB\-W\fP, et \fB\-a\fP sont utilisées, fait de même pour toutes les
+correspondances.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-catman
+Cette option n'est pas d'un usage général et devrait seulement être utilisée
+par le programme \fBcatman\fP.
+.TP 
+\fB\-R\ \fP\fIencodage\fP,\ \fB\-\-recode\fP=\fIencodage\fP
+Plutôt que de formater la page de manuel comme d'habitude, affiche le code
+source converti en \fIencodage\fP indiqué. Si vous connaissez déjà l'encodage
+du fichier source, vous pouvez aussi utiliser directement
+\fBmanconv\fP(1). Cependant, cette option permet de convertir plusieurs pages
+de manuel vers un unique encodage sans devoir explicitement déclarer
+l'encodage de chacune, à condition qu'elles soient déjà installées dans une
+structure similaire à la hiérarchie des pages de manuel.
+.IP
+Veuillez utiliser \fBman-recode\fP(1) à la place pour convertir plusieurs
+pages de manuel car il a été conçu pour un traitement par lot qui est plus
+rapide.
+.SS "Trouver des pages de manuel"
+.TP 
+\fB\-L\ \fP\fIlocale\fP,\ \fB\-\-locale=\fP\fIlocale\fP
+\fBman\fP détermine habituellement la \fIlocale\fP (NdT\ : la langue ou le
+dialecte) actuelle par un appel à la fonction C \fBsetlocale\fP(3) qui consulte
+diverses variables d'environnement, y compris $\fBLC_MESSAGES\fP et
+$\fBLANG\fP. Pour remplacer temporairement la valeur définie, utilisez cette
+option. Elle fournit directement à \fBman\fP la chaîne de caractères
+représentant la \fIlocale\fP. Notez que cette valeur ne prendra effet qu'à
+partir de la recherche des pages. Par conséquent, les autres affichages,
+tels que les messages d'aide, seront toujours montrés dans la langue
+initialement déterminée.
+.TP 
+\fB\-m\fP \fIsystème\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fIsystème\fP\|[\|,.\|.\|.\|]
+If this system has access to other operating systems' manual pages, they can
+be accessed using this option.  To search for a manual page from NewOS's
+manual page collection, use the option \fB\-m\fP \fBNewOS\fP.
+
+Le \fIsystème\fP mentionné peut être une succession de noms de systèmes
+d'exploitation, séparés par des virgules. Pour que la recherche ait lieu
+également sur le système d'exploitation natif, il faut inclure le nom
+système \fBman\fP dans la chaîne fournie en argument (NdT\ : il semble que le
+système natif soit inclus dans la recherche, même en l'absence de cette
+valeur). Cette option remplace la variable d'environnement $\fBSYSTEM\fP.
+.TP 
+\fB\-M\ \fP\fIliste_de_chemins\fP,\ \fB\-\-manpath=\fP\fIliste_de_chemins\fP
+Précise le chemin de recherche à utiliser. Par défaut, \fBman\fP se sert de
+\fBmanpath\fP pour déterminer la liste des chemins d'accès aux structures
+hiérarchiques de pages de manuel. Cette option remplace la variable
+d'environnement $\fBMANPATH\fP et entraîne l'inefficience de l'option \fB\-m\fP.
+
+Chaque chemin indiqué avec cette option doit être la racine d'une hiérarchie
+de pages de manuel, structurée en sections, comme décrit dans le manuel de
+man\-db, sous le titre «\ The manual page system\ ». Pour consulter des pages
+de manuel situées en dehors de telles structures hiérarchiques, utilisez
+l'option \fB\-l\fP.
+.TP 
+\fB\-S\fP \fIliste\/\fP, \fB\-s\fP \fIliste\/\fP, \fB\-\-sections=\fP\fIliste\/\fP
+La liste \fIliste\fP est une liste de sections séparés par des deux\-points ou
+des virgules, utilisée pour déterminer dans quelles sections de manuel
+rechercher et suivant quel ordre. Cette option remplace la variable
+d'environnement $\fBMANSECT\fP (l'écriture \fB\-s\fP existe par compatibilité avec
+System V).
+.TP 
+\fB\-e\ \fP\fIsous\-extension\fP,\ \fB\-\-extension=\fP\fIsous\-extension\fP
+Certains programmes installent un grand nombre de pages de manuel dans la
+structure hiérarchique principale des manuels, comme celles qui accompagnent
+le programme \fBTcl\fP. Pour éviter d'avoir deux pages de manuel avec le même
+nom, comme \fBexit\fP(3), toutes les pages de manuel de \fBTcl\fP étaient
+habituellement assignées à la section \fBl\fP. Comme ceci est maladroit, il est
+maintenant possible de mettre les pages dans la bonne section, et de leur
+assigner une extension spécifique. Dans le cas présent \fBexit\fP(3tcl). En
+fonctionnement normal, \fBman\fP affichera \fBexit\fP(3) de préférence à
+\fBexit\fP(3tcl). Pour gérer cette situation et éviter d'avoir à connaître la
+section où se trouve la page désirée, il est maintenant possible de donner à
+\fBman\fP une chaîne de \fIsous\-extension\fP indiquent à quel programme la page
+appartient. Avec l'exemple ci\-dessus, l'emploi de l'option \fB\-e\ tcl\fP
+limitera la recherche aux pages ayant une extension \fB*tcl\fP.
+.TP 
+.if  !'po4a'hide' .BR \-i ", " \-\-ignore\-case
+Ignore la casse lors de la recherche de la page de manuel. C'est le
+comportement par défaut.
+.TP 
+.if  !'po4a'hide' .BR \-I ", " \-\-match\-case
+Cherche la page de manuel en tenant compte de la casse.
+.TP 
+.if  !'po4a'hide' .B \-\-regex
+Montre toutes les pages ayant une partie de leur nom ou description qui
+correspond à chaque argument \fIpage\fP en tant qu'expression rationnelle,
+comme avec \fBapropos\fP(1). Puisqu'il n'existe pas de façon raisonnable de
+choisir une « meilleure » page lors d'une recherche d'expression
+rationnelle, cette option induit \fB\-a\fP.
+.TP 
+.if  !'po4a'hide' .B \-\-wildcard
+Montre toutes les pages ayant une partie de leur nom ou description qui
+correspond à chaque argument \fIpage\fP en utilisant des jokers (\fIwildcards\fP),
+comme avec \fBapropos\fP(1) \fB\-\-wildcard\fP. L'argument \fIpage\fP doit correspondre
+à la totalité du nom ou de la description, ou aux frontières de mot de la
+description. Puisqu'il n'existe pas de façon raisonnable de choisir une
+« meilleure » page lors d'une recherche de joker, cette option induit \fB\-a\fP.
+.TP 
+.if  !'po4a'hide' .B \-\-names\-only
+Si une des options \fB\-\-regex\fP ou \fB\-\-wildcard\fP est utilisée, correspond
+seulement aux noms de pages, pas aux descriptions, comme avec \fBwhatis\fP(1),
+sans effet sinon.
+.TP 
+.if  !'po4a'hide' .BR \-a ", " \-\-all
+Par défaut, \fBman\fP s'arrêtera après avoir affiché la page de manuel la
+plus appropriée trouvée. L'emploi de cette option force \fBman\fP à afficher
+toutes les pages de manuel dont les noms satisfont les critères de
+recherche.
+.TP 
+.if  !'po4a'hide' .BR \-u ", " \-\-update
+Cette option force \fBman\fP à mettre à jour ses caches et installer les
+pages de manuel. Ceci ne devrait être nécessaire que rarement. À l'ordinaire
+utilsez de préférence \fBmandb\fP(8).
+.TP 
+.if  !'po4a'hide' .B \-\-no\-subpages
+Par défaut, \fBman\fP essaiera d'interpréter une paire de noms de page de
+manuel donnés sur la ligne de commande comme s'il s'agissait d'un seul nom
+de page de manuel contenant un tiret ou un tiret bas. Cela prend en charge
+le motif habituel des programmes avec plusieurs sous\-commandes, leur
+permettant de fournir une page de manuel pour chacune accessible avec une
+syntaxe similaire à celle utilisée pour appeler les sous\-commandes. Par
+exemple :
+
+.nf
+.if  !'po4a'hide' \&  $ man \-aw git diff
+.if  !'po4a'hide' \&  /usr/share/man/man1/git\-diff.1.gz
+.fi
+
+Pour désactiver ce comportement, utilisez l'option \fB\-\-no\-subpages\fP :
+
+.nf
+.if  !'po4a'hide' \&  $ man \-aw \-\-no\-subpages git diff
+.if  !'po4a'hide' \&  /usr/share/man/man1/git.1.gz
+.if  !'po4a'hide' \&  /usr/share/man/man3/Git.3pm.gz
+.if  !'po4a'hide' \&  /usr/share/man/man1/diff.1.gz
+.fi
+.SS "Contrôle du format d'affichage"
+.TP 
+\fB\-P\ \fP\fIafficheur\fP,\ \fB\-\-pager=\fP\fIafficheur\fP
+Précise l'afficheur à utiliser. Par défaut, \fBman\fP utilise \fBless\fP, à
+moins que \fBless\fP ne soit pas défini ou exécutable auquel cas \fBcat\fP
+est utilisé. Cette option remplace la variable d'environnement $\fBMANPAGER\fP,
+elle\-même remplaçant la variable d'environnement $\fBPAGER\fP. Elle n'est pas
+utilisable avec \fB\-f\fP ou \fB\-k\fP.
+
+La valeur peut être juste un nom de commande ou une commande avec des
+arguments, et peut utiliser les protections de l'interpréteur
+(contre\-obliques, guillemets simples ou doubles). L'utilisation de tubes
+pour relier plusieurs commandes n'est pas possible ; si vous en avez
+vraiment besoin, utilisez un script enveloppe qui pourra prendre en argument
+le fichier à afficher ou l'entrée standard.
+.TP 
+\fB\-r\ \fP\fIinvite\fP,\ \fB\-\-prompt=\fP\fIinvite\fP
+Si une version récente de \fBless\fP est utilisée comme afficheur, \fBman\fP
+tentera de régler l'invite ainsi que d'autres options. L'invite par défaut
+ressemble à\ :
+
+\fB Manual Page\fP\fI nom\fP\fB(\fP\fIsection\fP\fB) line\fP\fI x\fP
+
+.\"The default options are
+.\".BR \-six8 .
+.\"The actual default will depend on your chosen
+.\".BR locale .
+dans laquelle \fInom\fP représente le nom de la page de manuel, \fIsection\fP le
+numéro de section où la page a été trouvée et \fIx\fP le numéro de la ligne
+actuelle. C'est réalisé en utilisant la variable d'environnement $\fBLESS\fP.
+
+.\"You may need to do this if your
+.\"version of
+.\".B less
+.\"rejects the default options or if you prefer a different prompt.
+Fournir \fB\-r\fP avec une chaîne écrasera ce comportement par défaut. La chaîne
+indiquée peut contenir la variable de substitution \fB$MAN_PN\fP qui sera
+remplacée par le nom de la page de manuel affichée, accompagnée de son
+numéro de section, entouré par «\ (\ » et «\ )\ ». La chaîne employée pour
+obtenir la valeur par défaut ressemble à\ :
+
+\fB\e\ Manual\e\ page\e\ \e$MAN_PN\e\ ?ltline\e\ %lt?L/%L.:\fP
+.br
+\fBbyte\e\ %bB?s/%s..?\e\ (END):?pB\e\ %pB\e\e%..\fP
+.br
+\fB(tapez h pour l'aide ou q pour quitter)\fP
+
+Cette chaîne a été coupée en trois lignes, ici, uniquement pour des raisons
+de lisibilité. Pour sa signification, consultez la page de manuel de
+\fBless\fP(1). La chaîne de caractères est d'abord évaluée par l'interpréteur
+de commandes. Tous les guillemets, apostrophes inversées et contre\-obliques
+(antislash) devant apparaître dans l'invite doivent être précédés du
+caractère de protection «\ \e\ ». La chaîne de caractères de l'invite peut
+se terminer par un « $ » protégé qui peut être suivi d'autres options de
+\fBless\fP. Par défaut, \fBman\fP utilise l'option \fB\-ix8\fP.
+
+La variable d'environnement $\fBMANLESS\fP décrite ci\-dessous peut être
+utilisée pour définir une chaîne d’invite par défaut si aucune n’est fournie
+sur la ligne de commande.
+.TP 
+.if  !'po4a'hide' .BR \-7 ", " \-\-ascii
+En visualisant une page de manuel en \fIascii\fP(7) pur, sur un terminal 7\ bits ou sur un émulateur de terminal, certains caractères peuvent ne pas
+être affichés correctement lors de l'utilisation d'un descripteur de
+périphérique \fIlatin1\fP(7) avec \fBGNU\fP \fBnroff\fP. Cette option permet aux
+pages de manuel en \fIascii\fP pur d'être affichées en \fIascii\fP sur des
+périphériques \fIlatin1\fP. Il n'y aura pas de traduction du texte en
+\fIlatin1\fP. La table ci\-dessous montre les traductions effectuées. Certains
+éléments de cette table ne peuvent être affichés correctement qu'en
+utilisant un périphérique \fIlatin1\fP conforme à \fBGNU\fP \fBnroff\fP.
+
+.ie  c \[shc] \
+.  ds softhyphen \[shc]
+.el \
+.  ds softhyphen \(hy
+.na
+.TS
+tab (@);
+l c c c.
+Description@Octal@latin1@ascii
+_
+T{
+trait d'union
+T}@255@\*[softhyphen]@-
+T{
+point médian
+T}@267@\(bu@o
+T{
+accent aigu
+T}@264@\(aa@'
+T{
+symbole de multiplication
+T}@327@\(mu@x
+.TE
+.ad
+
+Si la colonne \fIlatin1\fP est affichée correctement, votre terminal peut être
+exploité avec les caractères \fIlatin1\fP et cette option est inutile. Si les
+colonnes \fIlatin1\fP et \fIascii\fP sont identiques, soit vous avez utilisé cette
+option, soit \fBman\fP n'a pas formaté cette page en utilisant le descripteur
+de périphérique \fIlatin1\fP. Si la colonne \fIlatin1\fP est absente ou altérée,
+vous devriez utilisez cette option.
+
+Cette option est ignorée lors de l'usage des options \fB\-t\fP, \fB\-H\fP, \fB\-T\fP, ou
+\fB\-Z\fP et peut être omise pour les \fBnroff\fP autres que ceux du \fBGNU\fP.
+.TP 
+\fB\-E\ \fP\fIencodage\fP,\ \fB\-\-encoding\fP=\fIencodage\fP
+Produit une sortie avec un encodage de caractères autre que celui par
+défaut. Pour des raisons de compatibilité ascendante, \fIencodage\fP peut être
+un périphérique \fBnroff\fP tel que \fBascii\fP, \fBlatin1\fP, ou \fButf8\fP ainsi
+qu'une réelle valeur d'encodage comme \fBUTF\-8\fP.
+.TP 
+.if  !'po4a'hide' .BR \-\-no\-hyphenation ", " \-\-nh
+Normalement, \fBnroff\fP place un trait d'union lorsque les lignes sont coupées
+même si les mots n'en contiennent pas, s'il est nécessaire de le faire pour
+arranger les mots sur une ligne sans espacements excessifs. Cette option
+désactive la césure automatique, et les mots ne seront coupés que s'il
+contiennent déjà un trait d'union.
+
+Pour éviter à \fBnroff\fP de couper un mot au mauvais endroit quand vous
+écrivez une page de manuel, n'utilisez pas cette option, mais consultez
+plutôt la documentation de \fBnroff\fP. Par exemple, vous pouvez placer « \e% »
+dans un mot pour indiquer qu'il peut être coupé à cet endroit, ou « \e% » au
+début d'un mot pour l'empêcher d'être coupé.
+.TP 
+.if  !'po4a'hide' .BR \-\-no\-justification ", " \-\-nj
+Normalement, \fBnroff\fP justifie automatiquement le texte. Cette option
+désactive la justification, laissant le texte aligné (ou « ferré ») à
+droite, aussi appelé « drapeau gauche ».
+
+Pour éviter à \fBnroff\fP de justifier certains paragraphes quand vous écrivez
+une page de manuel, n'utilisez pas cette option, mais consultez plutôt la
+documentation de \fBnroff\fP. Par exemple, vous pouvez utiliser les requêtes
+« .na », « .nf », « .fi » et « .ad » pour désactiver temporairement le
+réglage et le remplissage.
+.TP 
+\fB\-p\ \fP\fIchaîne\fP,\ \fB\-\-preprocessor=\fP\fIchaîne\fP
+Indique la liste des préprocesseurs à utiliser avant \fBnroff\fP, \fBtroff\fP ou
+\fBgroff\fP. Toutes les implémentations ne disposent pas du jeu complet de
+préprocesseurs. Voici une liste de certains préprocesseurs, avec les lettres
+les désignant\ : \fBeqn\fP\ (\fBe\fP), \fBgrap\fP\ (\fBg\fP), \fBpic\fP\ (\fBp\fP), \fBtbl\fP\ (\fBt\fP), \fBvgrind\fP\ (\fBv\fP), \fBrefer\fP\ (\fBr\fP). Cette option remplace la
+variable d'environnement $\fBMANROFFSEQ\fP. \fBzsoelim\fP est toujours exécuté
+comme le tout premier préprocesseur.
+.TP 
+.if  !'po4a'hide' .BR \-t ", " \-\-troff
+Utilise \fBgroff \-mandoc\fP pour mettre en forme la page de manuel sur la sortie
+standard. Cette option n'est pas nécessaire avec \fB\-H\fP, \fB\-T\fP, ou \fB\-Z\fP.
+.TP 
+\fB\-T\fP[\fIpériphérique\/\fP], \fB\-\-troff\-device\fP[=\fIpériphérique\/\fP]
+This option is used to change \fBgroff\fP (or possibly \fBtroff's\fP)  output to
+be suitable for a device other than the default.  It implies \fB\-t\fP.
+Examples (as of groff 1.23.0) include \fBdvi\fP, \fBlatin1\fP, \fBpdf\fP, \fBps\fP,
+\fButf8\fP, \fBX75\fP and \fBX100\fP.
+.TP 
+\fB\-H\fP[\fInavigateur\/\fP], \fB\-\-html\fP[=\fInavigateur\/\fP]
+Cette option fera produire à \fBgroff\fP une page au format HTML qui sera
+ensuite affichée dans un navigateur web. Le choix du navigateur est
+déterminé soit par l'argument optionnel \fInavigateur\fP, s'il est indiqué,
+soit par la variable d'environnement $\fBBROWSER\fP ou sinon par la valeur par
+défaut indiquée lors de la compilation (habituellement \fBlynx\fP). Cette
+option induit \fB\-t\fP et ne fonctionne qu'avec les \fBtroff\fP \fBGNU\fP.
+.TP 
+\fB\-X\fP[\fIppp\/\fP], \fB\-\-gxditview\fP[=\fIppp\/\fP]
+Cette option affiche la sortie de \fBgroff\fP dans une fenêtre graphique en
+utilisant le programme \fBgxditview\fP. Le \fIppp\fP (points par pouce) peut être
+75 (par défaut), 75\-12, 100 ou 100\-12. La variante « \-12 » utilise une fonte
+de 12 points. Cette option induit \fB\-T\fP avec comme \fIpériphérique\fP respectif
+X75, X75\-12, X100 ou X100\-12.
+.TP 
+.if  !'po4a'hide' .BR \-Z ", " \-\-ditroff
+\fBgroff\fP exécutera \fBtroff\fP puis utilisera le postprocesseur approprié afin
+de produire une sortie exploitable par le périphérique choisi. Si \fBgroff \-mandoc\fP
+est \fBgroff\fP alors cette option sera passée à \fBgroff\fP et aucun
+postprocesseur ne sera exécuté. Cette option induit \fB\-t\fP.
+.SS "Obtenir de l'aide"
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Affiche un message d'aide et s'arrête.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Affiche un court mode d'emploi et s'arrête.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Affiche le numéro de version.
+.SH "CODE DE RETOUR"
+.TP 
+.if  !'po4a'hide' .B 0
+Programme exécuté sans erreur.
+.TP 
+.if  !'po4a'hide' .B 1
+Erreur d'utilisation, de syntaxe ou de fichier de configuration.
+.TP 
+.if  !'po4a'hide' .B 2
+Erreur d'exécution.
+.TP 
+.if  !'po4a'hide' .B 3
+Un processus fils a produit une valeur de retour non nulle.
+.TP 
+.if  !'po4a'hide' .B 16
+Au moins une des pages ou un des fichiers ou un des mots\-clés n'existe pas
+ou n'a pas été trouvé.
+.SH ENVIRONNEMENT
+.\".TP \w'MANROFFSEQ\ \ 'u
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Si $\fBMANPATH\fP est définie, sa valeur est exploitée comme le chemin de
+recherche des pages de manuel.
+
+See the \fBSEARCH PATH\fP section of \fBmanpath\fP(5)  for the default behaviour
+and details of how this environment variable is handled.
+.TP 
+.if  !'po4a'hide' .B MANROFFOPT
+À chaque fois que \fBman\fP invoque le programme de formattage (\fBnroff\fP,
+\fBtroff\fP, or \fBgroff\fP), il ajoute le contenu de $\fBMANROFFOPT\fP aux options
+de ce programme.
+
+For example, \fBMANROFFOPT=\-P\-i\fP tells the formatter to use italic text
+(which is only supported by some terminals) rather than underlined text.
+.TP 
+.if  !'po4a'hide' .B MANROFFSEQ
+Si $\fBMANROFFSEQ\fP est définie, sa valeur est exploitée pour déterminer
+l'ensemble des préprocesseurs à appliquer à chacune des pages de manuel. La
+liste des préprocesseurs est dépendante du système utilisé.
+.TP 
+.if  !'po4a'hide' .B MANSECT
+Si $\fBMANSECT\fP est définie, sa valeur est une liste de sections, séparées
+par des deux\-points. Cette liste est utilisée pour déterminer les sections
+de manuel, et l’ordre, utilisés pour la recherche. C’est « 1 n l 8 3 0 2 3type 5 4 9 6 7 » par
+défaut, à moins d’être écrasée par la directive \fBSECTION\fP dans
+\fI/etc/man_db.conf\fP.
+.TP 
+.if  !'po4a'hide' .BR MANPAGER , " PAGER"
+Si $\fBMANPAGER\fP ou $\fBPAGER\fP est définie ($\fBMANPAGER\fP est prioritaire), sa
+valeur est exploitée en tant que nom du programme utilisé pour afficher les
+pages de manuel. Par défaut, \fBless\fP est utilisé, à moins que \fBless\fP
+ne soit pas défini ou exécutable, auquel cas \fBcat\fP est utilisé.
+
+La valeur peut être juste un nom de commande ou une commande avec des
+arguments, et peut utiliser les protections de l'interpréteur
+(contre\-obliques, guillemets simples ou doubles). L'utilisation de tubes
+pour relier plusieurs commandes n'est pas possible ; si vous en avez
+vraiment besoin, utilisez un script enveloppe qui pourra prendre en argument
+le fichier à afficher ou l'entrée standard.
+.TP 
+.if  !'po4a'hide' .B MANLESS
+Si $\fBMANLESS\fP est définie, sa valeur sera utilisée comme chaîne d’invite
+par défaut de l'afficheur \fBless\fP, comme si elle avait été passée en
+utilisant l’option \fB\-r\fP (donc toutes les occurrences du texte \fB$MAN_PN\fP
+seront développées de la même façon). Par exemple, si vous voulez obtenir
+dans tous les cas la chaîne d'invite «\ Ma chaîne d'invite\ » donnez à
+$\fBMANLESS\fP la valeur «\ \-PsMa chaîne d'invite\ ». L’utilisation de l’option
+\fB\-r\fP écrasera cette variable d’environnement.
+.TP 
+.if  !'po4a'hide' .B BROWSER
+Si $\fBBROWSER\fP est définie, sa valeur est une liste de commandes séparées
+par des deux\-points. Chaque élément de la liste est utilisé pour essayer de
+lancer un navigateur web lors de l'utilisation de \fBman\fP \fB\-\-html\fP. Dans
+chaque commande, \fI%s\fP est remplacé par un nom de fichier contenant la page
+de manuel au format HTML produite à partir de \fBgroff\fP, \fI%%\fP est remplacé
+par un simple signe «\ %\ » et \fI%c\fP est remplacé par «\ :\ ».
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+Si $\fBSYSTEM\fP est définie, l'effet sera le même que si on l'avait indiquée
+comme argument de l'option \fB\-m\fP.
+.TP 
+.if  !'po4a'hide' .B MANOPT
+Si $\fBMANOPT\fP est définie, elle sera analysée préalablement à la ligne de
+commande de \fBman\fP et son contenu doit avoir un format similaire. Étant
+donné que les actions produites par l'ensemble des autres variables
+d'environnement spécifiques à \fBman\fP peuvent être obtenues grâce aux
+options de la ligne de commande et qu'elles peuvent, de ce fait, être
+placées dans $\fBMANOPT\fP, il est prévu que ces variables d'environnement
+tombent en désuétude. N'oubliez pas que toutes les espaces qui devront être
+interprétées comme éléments de l'argument d'une option doivent être
+protégées.
+.TP 
+.if  !'po4a'hide' .B MANWIDTH
+Si $\fBMANWIDTH\fP est définie, sa valeur est utilisée comme indiquant la
+largeur de la ligne pour toutes les pages de manuel qui seront formatées. Si
+elle est vide, les pages de manuel seront formatées avec une largeur de
+ligne appropriée au terminal utilisé. Cette largeur sera déterminée d'après
+les valeurs de $\fBCOLUMNS\fP et \fBioctl\fP(2) s'il est disponible, soit à
+80 colonnes si aucune indication n'est trouvée. Les pages «\ cat\ » ne
+seront enregistrées que si la mise en forme par défaut est utilisée,
+c'est\-à\-dire quand la largeur de ligne du terminal est comprise entre 66 et
+80 colonnes.
+.TP 
+.if  !'po4a'hide' .B MAN_KEEP_FORMATTING
+Normalement, quand la sortie n'est pas envoyée directement vers un terminal
+(comme vers un fichier ou un tube), les caractères de mise en page sont
+effacés pour faciliter la lecture du résultat sans outil spécial. Cependant,
+si $\fBMAN_KEEP_FORMATTING\fP contient une valeur non nulle, les caractères de
+mise en page sont gardés. Ce peut être utile pour les scripts enveloppes
+autour de \fBman\fP capable d'interpréter ces caractères de mise en page.
+.TP 
+.if  !'po4a'hide' .B MAN_KEEP_STDERR
+Normalement, quand la sortie est envoyée directement vers un terminal
+(habituellement vers un afficheur), toute sortie d'erreur de la commande
+utilisée pour produire les versions formatées des pages de manuel est
+ignorée pour éviter d'interférer avec l'affichage de la page. Des programmes
+comme \fBgroff\fP produisent souvent des messages d'erreur relativement mineurs
+à propos de problèmes typographiques comme de mauvais
+alignements. L'affichage de la page de manuel s'en trouve enlaidi et
+déroutant. Cependant, certains utilisateurs veulent tout de même voir ces
+erreurs, donc si $\fBMAN_KEEP_FORMATTING\fP contient une valeur non nulle, la
+sortie d'erreur sera affichée comme d'habitude.
+.TP 
+.if  !'po4a'hide' .B MAN_DISABLE_SECCOMP
+On Linux, \fBman\fP normally confines subprocesses that handle untrusted data
+using a \fBseccomp\fP(2)  sandbox.  This makes it safer to run complex parsing
+code over arbitrary manual pages.  If this goes wrong for some reason
+unrelated to the content of the page being displayed, you can set
+$\fBMAN_DISABLE_SECCOMP\fP to any non\-empty value to disable the sandbox.
+.TP 
+.if  !'po4a'hide' .B PIPELINE_DEBUG
+If the $\fBPIPELINE_DEBUG\fP environment variable is set to "1", then \fBman\fP
+will print debugging messages to standard error describing each subprocess
+it runs.
+.TP 
+.if  !'po4a'hide' .BR LANG , " LC_MESSAGES"
+Suivant le système et l'implémentation, soit $\fBLANG\fP, soit $\fBLC_MESSAGES\fP,
+soit les deux, seront interrogées pour déterminer la langue ou le dialecte
+utilisé. \fBman\fP affichera ses messages dans cette langue ou ce dialecte
+(s'ils sont disponibles). Consultez \fBsetlocale\fP(3) pour plus de précisions.
+.SH FICHIERS
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+Fichier de configuration de man\-db.
+.TP 
+.if  !'po4a'hide' .I /usr/share/man
+Structure hiérarchique de pages de manuel globale
+.SH STANDARDS
+POSIX.1\-2001, POSIX.1\-2008, POSIX.1\-2017.
+.SH "VOIR AUSSI"
+.if  !'po4a'hide' .BR apropos (1),
+.if  !'po4a'hide' .BR groff (1),
+.if  !'po4a'hide' .BR less (1),
+.if  !'po4a'hide' .BR manpath (1),
+.if  !'po4a'hide' .BR nroff (1),
+.if  !'po4a'hide' .BR troff (1),
+.if  !'po4a'hide' .BR whatis (1),
+.if  !'po4a'hide' .BR zsoelim (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR man (7),
+.if  !'po4a'hide' .BR catman (8),
+.if  !'po4a'hide' .BR mandb (8)
+.PP
+La documentation de certains paquets peut être disponible dans d'autres
+formats tel que \fBinfo\fP(1) ou HTML.
+.SH HISTORIQUE
+1990, 1991 \(en Première version écrite par John W.\& Eaton
+(jwe@che.utexas.edu).
+
+23 Décembre 1992\ : Rik Faith (faith@cs.unc.edu) a appliqué les correctifs
+fournis par Willem Kasdorp (wkasdo@nikhefk.nikef.nl).
+
+30 avril 1994 \(en 23 février 2000\ : Wilf. (G.Wilford@ee.surrey.ac.uk) a
+développé et assuré la maintenance de ce programme avec l'aide de quelques
+personnes motivées.
+
+30 octobre 1996 \(en 30 mars 2001\ : Fabrizio Polacco
+<fpolacco@debian.org> a assuré la maintenance et développé ce
+programme pour le projet Debian avec l'aide de toute la communauté.
+
+Depuis le 31 mars 2001\ : Colin Watson <cjwatson@debian.org> est
+désormais le responsable et le développeur de man\-db.
+.SH BOGUES
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db
+.SH TRADUCTION
+Cette traduction est maintenue à l'aide de l'outil
+po4a <URL:https://po4a.org/> par l'équipe
+francophone de traduction de Debian.
+.PP
+Valéry Perrin <valery.perrin.debian@free.fr> le 2 janvier 2006.
+David Prévot <david@tilapin.org> et l'équipe francophone de traduction de Debian\ (2010).
+.PP
+Veuillez signaler toute erreur de traduction en écrivant à
+<debian\-l10n\-french@lists.debian.org> ou par un rapport de bogue sur
+le paquet man-db.
+.PP
+Vous pouvez toujours avoir accès à la version anglaise de ce document en
+utilisant la commande
+«\ \fBman\ \-L C\fR \fI<section>\fR\ \fI<page_de_man>\fR\ ».

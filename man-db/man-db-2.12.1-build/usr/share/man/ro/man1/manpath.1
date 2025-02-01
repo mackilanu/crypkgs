@@ -1,0 +1,104 @@
+.\" Man page for manpath
+.\"
+.\" Copyright (C) 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the docs/COPYING.GPLv2 file that comes with the
+.\" man-db distribution.
+.\"
+.\" Sun Jan 22 22:15:17 GMT 1995 Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANPATH 1 2024-04-05 2.12.1 "Utilitare ale paginatorului de manual"
+.SH NUME
+manpath \- determină ruta de căutare pentru paginile de manual
+.SH REZUMAT
+\fBmanpath\fP [\|\fB\-qgdc?V\fP\|] [\|\fB\-m\fP \fIsistem\fP\|[\|,.\|.\|.\|]\|] [\|\fB\-C\fP
+\fIfișier\fP\|]
+.SH DESCRIERE
+Dacă $\fBMANPATH\fP este stabilită, \fBmanpath\fP va afișa pur și simplu
+conținutul și va emite un avertisment.  Dacă nu, \fBmanpath\fP va determina o
+rută de căutare potrivită pentru ierarhia paginilor de manual, și va afișa
+rezultatele.
+
+Ruta delimitată de două puncte este determinată utilizând informații
+obținute din fișierul de configurare man\-db  \(en (\fI/etc/man_db.conf\fP)
+și din mediul utilizatorului.
+.SH OPȚIUNI
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Nu emite avertismente.
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Imprimă informațiile de depanare.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-catpath
+Produce o rută «cat» spre deosebire de o rută «man».  Odată ce ruta «man»
+este determinată, fiecare element al rutei este convertit în rută «cat»
+relativă.
+.TP 
+.if  !'po4a'hide' .BR \-g ", " \-\-global
+Produce o rută «man» care consistă din toate rutele numite ca „globale”
+înăuntrul fișierului de configurare «man\-db».
+.TP 
+\fB\-m\fP \fIsistem\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fIsistem\fP\|[\|,.\|.\|.\|]
+Dacă acest sistem are acces la ierarhiile de manual ale altor sisteme de
+operare, această opțiune poate fi utilizată pentru a le include în ieșirea
+lui \fBmanpath\fP.  Pentru a include ierarhiile de pagini de manual ale
+Noului_SO, utilizați opțiunea \fB\-m\fP \fBNou_SO\fP.
+
+\fIsistem(ul)\fP specificat poate fi o combinație de nume de sistem de operare
+delimitate prin virgulă.  Pentru a include ierarhiile de pagini de manual
+ale sistemului de operare nativ, numele sistemului \fBman\fP trebuie să fie
+inclus în șirul argumentului.  Această opțiune va suprascrie variabila de
+mediu $\fBSYSTEM\fP.
+.TP 
+\fB\-C\ \fP\fIfișier\fP,\ \fB\-\-config\-file=\fP\fIfișier\fP
+Utilizează acest fișier de configurare al utilizatorului, mai degrabă decât
+cel implicit din \fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Imprimă un mesaj de ajutor și iese.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Imprimă un mesaj scurt de utilizare și iese.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Afișează informații despre versiune.
+.SH MEDIU
+.TP 
+.if  !'po4a'hide' .B MANPATH
+Dacă $\fBMANPATH\fP este stabilită, \fBmanpath\fP îi afișează valoarea în loc să
+o determine din mers.
+
+Consultați secțiunea \fBRUTA DE CĂUTARE\fP din \fBmanpath\fP(5) pentru
+comportamentul implicit și detalii despre modul în care este gestionată
+această variabilă de mediu.
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+Dacă $\fBSYSTEM\fP este stabilit, acesta va avea același efect ca și cum ar fi
+fost specificat ca argument la opțiunea \fB\-m\fP.
+.SH FIȘIERE
+.TP  \w'/etc/man_db.conf'u+2n
+.if  !'po4a'hide' .I /etc/man_db.conf
+fișier de configurare man\-db.
+.SH "CONSULTAȚI ȘI"
+.if  !'po4a'hide' .BR apropos (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR whatis (1)
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH DEFECȚIUNI
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

@@ -1,0 +1,163 @@
+.\" Man page for format of the manpath.config data file
+.\"
+.\" Copyright (C) 1994, 1995 Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANPATH 5 2024-04-05 2.12.1 /etc/man_db.conf
+.SH NAMA
+manpath \- format dari berkas /etc/man_db.conf
+.SH DESKRIPSI
+Berkas konfigurasi manpath digunakan oleh aplikasi halaman buku panduan
+untuk mengakses manpath pengguna pada waktu berjalan, mengindikasikan
+susunan halaman buku panduan mana (manpath) yang diperlukan sebagai sistem
+hierarki dan menempatkan direktori untuk digunakan untuk penyimpanan berkas
+cat.
+
+Jika variabel lingkungan $\fBMANPATH\fP telah diset, informasi yang berada
+dalam /etc/man_db.conf akan menimpanya.
+.SH "SEARCH PATH"
+By default, man\-db examines the user's $\fBPATH\fP.  For each \fIpath_element\fP
+found there, it adds \fImanpath_element\fP to the search path.
+
+If there is no \fBMANPATH_MAP\fP line in the configuration file for a given
+\fIpath_element\fP, then it adds all of \fIpath_element/../man\fP,
+\fIpath_element/man\fP, \fIpath_element/../share/man\fP, and
+\fIpath_element/share/man\fP that exist as directories to the search path.
+
+It then adds any \fBMANDATORY_MANPATH\fP entries from the configuration file to
+the search path.
+
+Finally, if the \fB\-\-systems\fP option is used or the $\fBSYSTEM\fP environment
+variable is set, then that should consist of a sequence of operating system
+names separated by commas or colons.  This acts as a template, expanding the
+search path once more to allow access to other operating systems' manual
+pages: for each system name, man\-db looks for that name as a subdirectory of
+each entry in the search path, and adds it to the final search path if it
+exists.  A system name of \fBman\fP inserts the normal search path without
+subdirectories.  For example, if the search path would otherwise have been
+\fI/usr/share/man:/usr/local/man\fP, and $\fBSYSTEM\fP is set to \fInewOS:man\fP,
+then the final search path will be
+\fI/usr/share/man/newOS:/usr/share/man:/usr/local/man/newOS:/usr/local/man\fP.
+
+The $\fBMANPATH\fP environment variable overrides man\-db's default manual page
+search paths.  Most users should not need to set it.  Its syntax is similar
+to the $\fBPATH\fP environment variable: it consists of a sequence of directory
+names separated by colons.  It overrides the default search path described
+above.
+
+If the value of $\fBMANPATH\fP starts with a colon, then the default search
+path is added at its start.  If the value of $\fBMANPATH\fP ends with a colon,
+then the default search path is added at its end.  If the value of
+$\fBMANPATH\fP contains a double colon (\fB::\fP), then the default search path is
+inserted in the middle of the value, between the two colons.
+.SH FORMAT
+Tipe daerah berikut saat ini dikenal:
+.TP 
+\fB#\fP\fI\ komentar\fP
+Baris kosong atau yang berawal dengan sebuah \fB#\fP akan diperlakukan sebagai
+komentar dan akan diabaikan.
+.TP 
+\fBMANDATORY_MANPATH\fP\fI\ manpath_element\fP
+Baris dari bentuk ini mengindikasikan manpath yang secara otomatis
+seharusnya berisi $\fBMANPATH\fP. Ini biasanya termasuk \fI/usr/man\fP.
+.TP 
+\fBMANPATH_MAP\fP\fI\ path_element\ manpath_element\fP
+Baris dari konfigurasi bentuk pemetaan ini $\fBPATH\fP ke $\fBMANPATH\fP. Untuk
+setiap \fIpath_element\fP ditemukan dalam $\fBPATH\fP pengguna, \fImanpath_element\fP
+akan ditambahkan ke $\fBMANPATH\fP.
+.TP 
+\fBMANDB_MAP \fP\fImanpath_element \fP\|[\| \fIcatpath_element\fP \|]
+Baris dari bentuk ini mengindikasikan manpaths mana yang diperlakukan
+sebagai sistem manpath, dan secara opsional dimana berkas catnya seharusnya
+disimpan. Tipe bagian ini biasanya penting jika \fBman\fP adalah aplikasi
+setuid, seperti (ketika dalam berkas sistem konfigurasi
+/etc/man_db.conf daripada berkas konfiguras setiap pengguna .manpath)
+ini mengindikasikan ke susunan halaman buku panduan mana untuk diakses
+sebagai setuid pengguna dan mana yang memanggil pengguna.
+
+Susunan sistem halaman buku panduan biasanya disimpan dibawah \fI/usr\fP
+seperti \fI/usr/man\fP, \fI/usr/local/man\fP dan \fI/usr/X11R6/man\fP.
+
+Jika halaman cat dari \fImanpath_element\fP tertentu tidak disimpan atau akan
+disimpan dalam lokasi tradisional, \fIcatpath_element\fP mungkin diabaikan.
+
+Traditional cat placement would be impossible for read only mounted manual
+page hierarchies and because of this it is possible to specify any valid
+directory hierarchy for their storage.  To observe the \fBLinux FSSTND\fP the
+keyword \fBFSSTND\fP can be used in place of an actual directory.
+
+Sayangnya, ini diperlukan untuk menspesifikasikan \fBseluruh\fP susunan jalur
+sistem buku panduan, termasuk jalur sistem operasi alternatif seperti
+\fI/usr/man/sun\fP dan \fBNLS locale\fP jalur apapun seperti
+\fI/usr/man/de_DE.88591\fP.
+
+Karena informasi diambil baris demi baris dalam urutan penulisan, ini
+diperlukan untuk manpath apapun yang berupa sub\-hierarki dari hierarki lain
+untuk ditampilkan pertama, jika tidak sebuah kesalahan pencocokan
+terjadi. Sebagai contoh \fI/usr/man/de_DE.88591\fP harus datang sebelum
+\fI/usr/man\fP.
+.TP 
+\fBDEFINISI\fP\fI\ nilai\ kunci\fP
+Baris dari bentuk ini mendefinisikan variabel konfigurasi lain; lihat berkas
+konfigurasi baku untuk variabel tersebut digunakan oleh aplikasi halaman
+buku panduan. Termasuk jalur baku ke berbagai aplikasi (seperti \fIgrep\fP dan
+\fItbl\fP), dan set baku dari argumen ke aplikasi tersebut.
+.TP 
+\fBBAGIAN\fP \fIbagian\fP .\|.\|.
+.RS
+Baris dari formulir ini mendefinisikan urutan dimana bagian buku panduan
+seharusnya dicari. Jika disana tidak ada arah \fBBAGIAN\fP dalam berkas
+konfigurasi, yang baku adalah:
+.PP
+.RS
+.nf
+.if  !'po4a'hide' SECTION 1 n l 8 3 0 2 3type 5 4 9 6 7
+.fi
+.RE
+.PP
+Jika beberapa \fBBAGIAN\fP direktif diberikan, daftar bagian itu akan dipotong.
+.PP
+Jika sebuah ekstensi tertentu tidak ada dalam daftar ini (contoh, 1mh) ini
+akan ditampilkan dengan sisa bagian ini berada. Efek dari ini, anda hanya
+membutuhkan untuk secara eksplisit mendaftar ekstensi jika anda ingin
+memaksa urutan tertentu. Bagian dengan ekstensi seharusnya berurutan ke
+bagian utamanya (contoh "1 1mh 8 ...").
+.PP
+\fBBAGIAN\fP diterima sebagai sebuah nama alternatif untuk direktif ini.
+.RE
+.TP 
+\fBMINCATWIDTH\fP\fI\ lebar\fP
+Jika lebar terminal lebih kecil dari \fIlebar\fP, halaman cat tidak akan dibuat
+(jika hilang) atau ditampilkan. Baku adalah 80.
+.TP 
+\fBMAXCATWIDTH\fP\fI\ lebar\fP
+Jika lebar terminal lebih besar dari \fIlebar\fP, halaman cat tidak akan dibuat
+(jika hilang) atau ditampilkan. Baku adalah 80.
+.TP 
+\fBCATWIDTH\fP\fI\ lebar\fP
+If \fIwidth\fP is non\-zero, cat pages will always be formatted for a terminal
+of the given width, regardless of the width of the terminal actually being
+used.  This overrides \fBMINCATWIDTH\fP and \fBMAXCATWIDTH\fP.
+.TP 
+.if  !'po4a'hide' .B NOCACHE
+Pilihan ini menjaga \fBman\fP(1)  dari membuat halaman cat secara otomatis.
+.SH BUGS
+Kecuali aturan diatas diikuti dan diamati secara tepat, aplikasi halaman
+buku panduan tidak akan berfungsi seperti yang diinginkan. Aturan yang ada
+sangat kompleks.
+.PP
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

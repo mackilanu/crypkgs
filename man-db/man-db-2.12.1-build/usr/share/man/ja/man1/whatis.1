@@ -1,0 +1,152 @@
+.\" Man page for whatis
+.\"
+.\" Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH WHATIS 1 2024-04-05 2.12.1 マニュアルページユーティリティー
+.SH 名前
+whatis \- display one\-line manual page descriptions
+.SH 書式
+\fBwhatis\fP [\|\fB\-dlv?V\fP\|] [\|\fB\-r\fP\||\|\fB\-w\fP\|] [\|\fB\-s\fP \fIlist\fP\|]
+[\|\fB\-m\fP \fIsystem\fP\|[\|,.\|.\|.\|]\|] [\|\fB\-M\fP \fIpath\fP\|] [\|\fB\-L\fP
+\fIlocale\fP\|] [\|\fB\-C\fP \fIfile\fP\|] \fIname\fP \&.\|.\|.
+.SH 説明
+各マニュアルページには短い要約文が含まれています。 \fBwhatis\fP はマニュアルページ名を検索し、 \fIname\fP
+に一致するすべてのマニュアルページの要約文を表示します。
+
+\fIname\fP はワイルドカード (\fB\-w\fP を指定した場合)  または正規表現 (\fB\-r\fP を指定した場合)
+で指定できます。これらのオプションを使用した場合、シェルが特殊文字を解釈するのを防ぐために、 \fIname\fP を引用符でくくるか、エスケープ (\e)
+しなければいけない場合があります。
+
+検索には\fBインデックス型\fPデータベースが使用されます。これは \fBmandb\fP プログラムによって更新します。インストール方法によっては、
+\fBmandb\fP は cron
+ジョブとして定期的に実行されているかもしれませんし、新しいマニュアルページをインストールした時に手動で実行する必要があるかもしれません。古いテキスト型
+\fBwhatis\fP データベースから対応する\fBインデックス型\fPデータベースを生成するには、次のコマンドを実行してください。
+
+\fBwhatis \-M\fP \fImanpath\fP \fB\-w '*' | sort >\fP \fImanpath/whatis\fP
+
+ここで、 \fImanpath\fP は \fI/usr/man\fP のようなマニュアルページ階層を指定します。
+.SH オプション
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+デバッグ情報を表示します。
+.TP 
+.if  !'po4a'hide' .BR \-v ", " \-\-verbose
+冗長な警告メッセージを表示します。
+.TP 
+.if  !'po4a'hide' .BR \-r ", " \-\-regex
+各 \fIname\fP を正規表現として解釈します。 \fIname\fP
+はマニュアルページ名のどの部分に対しても一致処理が行われ、一致処理結果が生成されます。この処理は、データベース検索の特性により、通常の
+\fBwhatis\fP 処理より幾分遅くなります。
+.TP 
+.if  !'po4a'hide' .BR \-w ", " \-\-wildcard
+各 \fIname\fP をシェル形式のワイルドカードとして解釈します。\fIname\fP
+はマニュアルページ名のどの部分に対しても一致処理が行われ、一致処理結果が生成されます。この処理は、データベース検索の特性により、通常の
+\fBwhatis\fP 処理より幾分遅くなります。
+.TP 
+.if  !'po4a'hide' .BR \-l ", " \-\-long
+出力を端末幅で切り詰めません。通常は、適切に書かれていない \fB名前\fP (\fBNAME\fP)
+節による見にくさを避けるために出力が端末の幅に切り詰められます。
+.TP 
+\fB\-s\fP \fIlist\/\fP, \fB\-\-sections=\fP\fIlist\/\fP, \fB\-\-section=\fP\fIlist\fP
+指定したマニュアルセクションのみ検索します。 \fIlist\fP はコロンまたはコンマで区切られたセクションのリストです。もし、 \fIlist\fP
+の項目が単純なセクション、例えば "3" ならば、表示される説明のリストには "3"、 "3perl"、 "3x"
+等のセクションのページが含まれます。一方 \fIlist\fP に拡張部分も含める、例えば "3perl"
+ならば、表示される説明のリストはマニュアルセクションに厳密に一致したページのみ含まれるようになります。
+.TP 
+\fB\-m\fP \fIsystem\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fIsystem\fP\|[\|,.\|.\|.\|]
+If this system has access to other operating systems' manual page names,
+they can be accessed using this option.  To search NewOS's manual page
+names, use the option \fB\-m\fP \fBNewOS\fP.
+
+\fIsystem\fP はコンマ区切りの OS 名で指定します。現在使用しているオペレーティングシステムを検索に含める場合は、システム名の引数文字列に
+\fBman\fP を含めます。このオプションは $\fBSYSTEM\fP 環境変数を上書きします。
+.TP 
+\fB\-M\ \fP\fIpath\fP,\ \fB\-\-manpath=\fP\fIpath\fP
+検索するマニュアルページ階層を変更する場合、その集合をコロンで区切って指定します。デフォルトでは、\fBwhatis\fP は $\fBMANPATH\fP
+環境変数を使用します。 $\fBMANPATH\fP 環境変数が空であるか、設定されていない場合、$\fBPATH\fP
+環境変数に応じて適切なマニュアルページのパスが決定されます。このオプションは $\fBMANPATH\fP の内容を上書きします。
+.TP 
+\fB\-L\ \fP\fIlocale\fP,\ \fB\-\-locale=\fP\fIlocale\fP
+\fBwhatis\fP は通常、現在のロケールを C の関数 \fBsetlocale\fP(3) を呼び出すことによって決定します。これはおそらく
+$\fBLC_MESSAGES\fP や $\fBLANG\fP
+などを含むさまざまな環境変数を使用します。一時的にこの値を上書きしたい場合には、このオプションを使用して \fBwhatis\fP に直接
+\fIlocale\fP
+文字列を渡します。これはページの検索が実際に開始されるまでは効果が無いことに注意してください。ヘルプメッセージなどは常に初期に決定されたロケールによって表示されます。
+.TP 
+\fB\-C\ \fP\fIfile\fP,\ \fB\-\-config\-file=\fP\fIfile\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+ヘルプメッセージを表示して終了します。
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Print a short usage message and exit.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+バージョン情報を表示します。
+.SH 終了ステータス
+.TP 
+.if  !'po4a'hide' .B 0
+プログラムが正常に実行されました。
+.TP 
+.if  !'po4a'hide' .B 1
+使用法、構文または設定ファイルのエラーです。
+.TP 
+.if  !'po4a'hide' .B 2
+操作のエラーです。
+.TP 
+.if  !'po4a'hide' .B 16
+指定したキーワードにマッチしたページが見つかりませんでした。
+.SH 環境変数
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+$\fBSYSTEM\fP が設定されている場合、 \fB\-m\fP オプションで指定した引数と同様の効果があります。
+.TP 
+.if  !'po4a'hide' .B MANPATH
+$\fBMANPATH\fP が設定されている場合、その値はコロン区切りのマニュアルページ階層の検索パスとして使用されます。
+
+See the \fBSEARCH PATH\fP section of \fBmanpath\fP(5)  for the default behaviour
+and details of how this environment variable is handled.
+.TP 
+.if  !'po4a'hide' .B MANWIDTH
+If $\fBMANWIDTH\fP is set, its value is used as the terminal width (see the
+\fB\-\-long\fP option).  If it is not set, the terminal width will be calculated
+using the value of $\fBCOLUMNS\fP, and \fBioctl\fP(2)  if available, or falling
+back to 80 characters if all else fails.
+.SH ファイル
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/index.(bt|db|dir|pag)
+伝統的な大域\fIインデックス型\fPデータベースキャッシュです。
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt|db|dir|pag)
+FHS 準拠の大域\fIインデックス型\fPデータベースキャッシュです。
+.TP 
+.if  !'po4a'hide' .I /usr/share/man/\|.\|.\|.\|/whatis
+伝統的な \fBwhatis\fP テキスト型データベースです。
+.SH 関連項目
+.if  !'po4a'hide' .BR apropos (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR mandb (8)
+.SH 著者
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH バグ
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

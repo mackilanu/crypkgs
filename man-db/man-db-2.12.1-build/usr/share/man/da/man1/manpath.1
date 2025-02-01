@@ -1,0 +1,99 @@
+.\" Man page for manpath
+.\"
+.\" Copyright (C) 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the docs/COPYING.GPLv2 file that comes with the
+.\" man-db distribution.
+.\"
+.\" Sun Jan 22 22:15:17 GMT 1995 Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANPATH 1 2024-04-05 2.12.1 "Værktøjer til manualsider"
+.SH NAVN
+manpath \- bestem søgesti for manualsider
+.SH SYNOPSIS
+\fBmanpath\fP [\|\fB\-qgdc?V\fP\|] [\|\fB\-m\fP \fIsystem\fP\|[\|,.\|.\|.\|]\|] [\|\fB\-C\fP
+\fIfil\fP\|]
+.SH BESKRIVELSE
+Hvis $\fBMANPATH\fP er angivet, så vil \fBmanpath\fP vise dets indhold og
+udstede en advarsel. Hvis ikke vil \fBmanpath\fP bestemme en egnet
+hierarkisøgesti for manualsiden og vise resultaterne.
+
+The colon\-delimited path is determined using information gained from the
+man\-db configuration file \(en (\fI/etc/man_db.conf\fP)  and the user's
+environment.
+.SH TILVALG
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Vis ikke advarsler.
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Vis fejlsøgningsinformation.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-catpath
+Produce a catpath as opposed to a manpath.  Once the manpath is determined,
+each path element is converted to its relative catpath.
+.TP 
+.if  !'po4a'hide' .BR \-g ", " \-\-global
+Produce a manpath consisting of all paths named as "global" within the
+man\-db configuration file.
+.TP 
+\fB\-m\fP \fIsystem\fP\|[\|,.\|.\|.\|]\|, \fB\-\-systems=\fP\fIsystem\fP\|[\|,.\|.\|.\|]
+If this system has access to other operating systems' manual hierarchies,
+this option can be used to include them in the output of \fBmanpath\fP.  To
+include NewOS's manual page hierarchies use the option \fB\-m\fP \fBNewOS\fP.
+
+The \fIsystem\fP specified can be a combination of comma delimited operating
+system names.  To include the native operating system's manual page
+hierarchies, the system name \fBman\fP must be included in the argument
+string.  This option will override the $\fBSYSTEM\fP environment variable.
+.TP 
+\fB\-C\ \fP\fIfil\fP,\ \fB\-\-config\-file=\fP\fIfil\fP
+Use this user configuration file rather than the default of
+\fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Vis en hjælpebesked og afslut.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Vis en kort hjælpebesked og afslut.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Vis versionsinformation.
+.SH MILJØ
+.TP 
+.if  !'po4a'hide' .B MANPATH
+If $\fBMANPATH\fP is set, \fBmanpath\fP displays its value rather than
+determining it on the fly.
+
+See the \fBSEARCH PATH\fP section of \fBmanpath\fP(5)  for the default behaviour
+and details of how this environment variable is handled.
+.TP 
+.if  !'po4a'hide' .B SYSTEM
+Hvis $\fBSYSTEM\fP er angivet, vil det have den samme effekt, som hvis den var
+blevet angivet som argument for tilvalget \fB\-m\fP.
+.SH FILER
+.TP  \w'/etc/man_db.conf'u+2n
+.if  !'po4a'hide' .I /etc/man_db.conf
+konfigurationsfil for man\-db.
+.SH "SE OGSÅ"
+.if  !'po4a'hide' .BR apropos (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR whatis (1)
+.SH FORFATTER
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH FEJL
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

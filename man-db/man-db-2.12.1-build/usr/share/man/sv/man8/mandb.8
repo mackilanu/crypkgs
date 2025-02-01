@@ -1,0 +1,181 @@
+'\" t
+.\" Man page for mandb
+.\"
+.\" Copyright (C) 1994, 1995, Graeme W. Wilford. (Wilf.)
+.\" Copyright (C) 2001-2019 Colin Watson.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Tue Apr 26 12:56:44 BST 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MANDB 8 2024-04-05 2.12.1 "Verktyg för sidvisning av manual"
+.SH NAMN
+mandb \- skapa eller uppdatera indexcachar för manualsidor
+.SH SYNOPSIS
+\fBmandb\fP [\|\fB\-dqsucpt?V\fP\|] [\|\fB\-C\fP \fIfil\fP\|] [\|\fIman\-sökväg\fP\|]
+.br
+\fBmandb\fP [\|\fB\-dqsut\fP\|] [\|\fB\-C\fP \fIfil\fP\|] \fB\-f\fP \fIfilnamn\fP\ .\|.\|.
+.SH BESKRIVNING
+\fBmandb\fP används för att initiera eller manuellt uppdatera
+\fBindex\fP\-databascachar.  Cacharna innehåller information relevant för det
+aktuella tillståndet för systemet av manualsidor och informationen som
+lagras i dem används av man\-db\-verktygen för att förbättra deras hastighet
+och funktionalitet.
+
+När ett \fBindex\fP skapas eller uppdateras kommer \fBmandb\fP att varna vid
+felaktiga ROFF .so\-begäran, felaktiga filnamn för manualsidor och
+manualsidor för vilka \fBwhatis\fP inte kan tolkas.
+
+Om \fBmandb\fP förses med en valfri kolonavgränsad sökväg så kommer detta att
+åsidosätta den interna sökvägen för hierarkier av manualsidor i systemet,
+fastställd från information hittad i konfigurationsfilen för man\-db.
+.SH DATABASCACHAR
+\fBmandb\fP kan kompileras med stöd för någon av följande databastyper.
+
+.TS
+tab (@);
+l l l.
+Namn@Asynk@Filnamn
+_
+Berkeley\-db@Ja@\fIindex.bt\fP
+GNU gdbm@Ja@\fIindex.db\fP
+UNIX ndbm@Nej@\fIindex.(dir|pag)\fP
+.TE
+
+De databastyper som har stöd för asynkrona uppdateringar tillhandahåller
+förbättrad hastighet på bekostnad av potentiell korrumpering vid oväntat
+avslut.  I det ovanliga fall då detta inträffat kan det vara nödvändigt att
+köra om \fBmandb\fP med flaggan \fB\-c\fP för att återskapa databaserna från
+grunden.
+.SH FLAGGOR
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Skriver ut felsökningsinformation.
+.TP 
+.if  !'po4a'hide' .BR \-q ", " \-\-quiet
+Producera inte några varningar.
+.TP 
+.if  !'po4a'hide' .BR \-s ", " \-\-no-straycats
+Spendera inte tid på att söka efter eller lägga till information till
+databaserna om lösa cat\-sidor.
+.TP 
+.if  !'po4a'hide' .BR \-p ", " \-\-no-purge
+Spendera inte tid på att leta efter borttagna manualsidor och rensa bort dem
+från databaserna.
+.TP 
+.if  !'po4a'hide' .BR \-c ", " \-\-create
+Som standard kommer \fBmandb\fP att försöka uppdatera tidigare skapade
+databaser.  Om en databas inte existerar kommer den att skapas.  Denna
+flagga tvingar \fBmandb\fP att ta bort tidigare databaser och återskapa dem
+från grunden och implicerar \fB\-\-no\-purge.\fP Detta kan vara nödvändigt om
+databasen blir korrumperad eller om ett nytt databaslagringssystem
+introduceras i framtiden.
+.TP 
+.if  !'po4a'hide' .BR \-u ", " \-\-user-db
+Skapa endast användardatabaser, även med skrivbehörigheter som behövs för
+att skapa systemdatabaser.
+.TP 
+.if  !'po4a'hide' .BR \-t ", " \-\-test
+Utför konsistenskontroller på manualsidor i hierarkisökvägen.  Med denna
+flagga kommer \fBmandb\fP inte att förändra några existerande databaser.
+.TP 
+.if  !'po4a'hide' .BR \-f ", " \-\-filename
+Uppdatera bara posterna för det angivna filnamnet.  Denna flagga är inte
+avsedd för allmänt bruk; den används internt av \fBman\fP när det har
+kompilerats med flaggan \fBMAN_DB_UPDATES\fP och hittar sidor som är
+föråldrade.  Den implicerar \fB\-p\fP och inaktiverar \fB\-c\fP och \fB\-s\fP.
+.TP 
+\fB\-C\ \fP\fIfil\fP,\ \fB\-\-config\-file=\fP\fIfil\fP
+Använd denna användarkonfigurationsfil snarare än standard \fI\(ti/.manpath\fP.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Visa hjälptexten, avsluta sedan.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Skriv ut ett kort användningsmeddelande och avsluta.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Visa versionen, avsluta sedan.
+.SH SLUTSTATUS
+.TP 
+.if  !'po4a'hide' .B 0
+Framgångsrik programexekvering.
+.TP 
+.if  !'po4a'hide' .B 1
+Användnings\-, syntax\- eller konfigurationsfilsfel.
+.TP 
+.if  !'po4a'hide' .B 2
+Funktionsfel.
+.TP 
+.if  !'po4a'hide' .B 3
+En barnprocess misslyckades.
+.SH DIAGNOSTIK
+Följande varningsmeddelanden kan matas ut under databasuppbyggnaden.
+.TP 
+\fB<filnamn>: whatis\-tolkning för sida(sekt) misslyckades\fP
+Ett försök att extrahera whatis\-rader från det angivna filnamnet
+<filnamn> misslyckades.  Detta sker vanligtvis på grund av en dåligt
+skriven manualsida, men om många sådana meddelanden matas ut är det troligt
+att systemet innehåller icke\-standardiserade manualsidor som är inkompatibla
+med man\-db:s whatis\-tolk.  Se avsnittet \fBWHATIS\-TOLKNING\fP i \fBlexgrog\fP(1)
+för vidare information.
+.TP 
+\fB<filnamn>: är en lös symbolisk länk\fP
+<filnamn> existerar inte men refereras till med en symbolisk länk.
+Vidare diagnostikmeddelanden matas vanligtvis ut för att identifiera namnet
+<filnamn> på den länk som är problematisk.
+.TP 
+\fB<filnamn>: felaktig symbolisk länk eller ROFF ”.so”\-begäran\fP
+<filnamn> är antingen en symbolisk länk till, eller innehåller en
+ROFF\-inklusionsbegäran till, en icke existerande fil.
+.TP 
+\fB<filnamn>: ignorerar felaktigt filnamn\fP
+Filnamnet <filnamn> kan vara en giltig manualsida men dess namn är
+ogiltigt.  Detta sker vanligtvis för att en manualsida med avsnittsändelsen
+<x> lagts till i avsnitt <y> i en manualsida.
+.TP 
+\fB<filnamn_mask>: filändelser i konflikt\fP
+Jokerteckensträngen <filnamn_mask> är inte unik.  Detta sker
+vanligtvis för att det finns både komprimerade och okomprimerade versioner
+av samma manualsida.  Alla, förutom de senaste, kommer att ignoreras.
+.SH FILER
+.TP 
+.if  !'po4a'hide' .I /etc/man_db.conf
+man\-db\-konfigurationsfil.
+.TP 
+.if  !'po4a'hide' .I /var/cache/man/index.(bt|db|dir|pag)
+En FHS\-kompatibel global \fIindex\fP\-databascache.
+.PP
+Äldre platser för databascachen inkluderar:
+.TP 
+.if  !'po4a'hide' .I /usr/man/index.(bt|db|dir|pag)
+En traditionell global \fIindex\fP\-databascache.
+.TP 
+.if  !'po4a'hide' .I /var/catman/index.(bt|db|dir|pag)
+En alternativ eller FSSTND\-kompatibel global \fIindex\fP\-databascache.
+.SH "SE VIDARE"
+.if  !'po4a'hide' .BR lexgrog (1),
+.if  !'po4a'hide' .BR man (1),
+.if  !'po4a'hide' .BR manpath (5),
+.if  !'po4a'hide' .BR catman (8)
+.PP
+Avsnittet \fBWHATIS\-TOLKNING\fP som tidigare fanns på denna manualsida finns nu
+i \fBlexgrog\fP(1).
+.SH UPPHOVSMAN
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH FEL
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db

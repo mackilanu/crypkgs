@@ -1,0 +1,52 @@
+.\" Man page for accessdb
+.\"
+.\" Copyright (c) 1998 Fabrizio Polacco <fpolacco@debian.org
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the file docs/COPYING.GPLv2 that comes with the
+.\" man-db distribution.
+.\"
+.\" Tue, 24 Feb 1998 18:18:36 +0200
+.\"
+.pc ""
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH ACCESSDB 8 2024-04-05 2.12.1 "Utilitare ale paginatorului de manual"
+.SH NUME
+accessdb \- transferă conținutul unei baze de date «man\-db» într\-un format
+care poate fi citit de om
+.SH REZUMAT
+\fB/usr/sbin/accessdb\fP [\|\fB\-d?V\fP\|] [\fI<fișier\-index>\fP]
+.SH DESCRIERE
+\fBaccessdb\fP va afișa datele conținute într\-o bază de date man\-db într\-o
+formă care poate fi citită de om.  În mod implicit, va transforma datele din
+\fB/var/cache/man/index.<tipul_de_BD>,\fP unde <tipul_de_BD>,
+depinde de biblioteca bazei de date în uz.
+
+Furnizarea unui argument la «accessdb» va suprascrie acest mod implicit.
+.SH OPȚIUNI
+.TP 
+.if  !'po4a'hide' .BR \-d ", " \-\-debug
+Imprimă informațiile de depanare.
+.TP 
+.if  !'po4a'hide' .BR \-? ", " \-\-help
+Imprimă un mesaj de ajutor și iese.
+.TP 
+.if  !'po4a'hide' .B \-\-usage
+Imprimă un mesaj scurt de utilizare și iese.
+.TP 
+.if  !'po4a'hide' .BR \-V ", " \-\-version
+Afișează informații despre versiune.
+.SH AUTOR
+.nf
+.if  !'po4a'hide' Wilf.\& (G.Wilford@ee.surrey.ac.uk).
+.if  !'po4a'hide' Fabrizio Polacco (fpolacco@debian.org).
+.if  !'po4a'hide' Colin Watson (cjwatson@debian.org).
+.fi
+.SH DEFECȚIUNI
+.if  !'po4a'hide' https://gitlab.com/man-db/man-db/-/issues
+.br
+.if  !'po4a'hide' https://savannah.nongnu.org/bugs/?group=man-db
