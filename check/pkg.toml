@@ -1,0 +1,13 @@
+[package]
+name = "check"
+version = "0.15.2"
+description = "description"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://github.com/libcheck/check/releases/download/0.15.2/check-0.15.2.tar.gz"
+
+build = [
+    "BUILD",
+]

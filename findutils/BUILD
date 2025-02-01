@@ -1,4 +1,4 @@
-BD=../../$BUILDDIR
+BD=$(pwd)/$BUILDDIR
 SRCDIR=$PKGNAME-$PKGVER
 tar -xf $SRCDIR.tar.xz
 
