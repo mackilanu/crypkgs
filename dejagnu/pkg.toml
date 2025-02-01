@@ -1,0 +1,13 @@
+[package]
+name = "dejagnu"
+version = "1.6.3"
+description = "description"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://ftp.gnu.org/gnu/dejagnu/dejagnu-1.6.3.tar.gz"
+
+build = [
+    "BUILD",
+]

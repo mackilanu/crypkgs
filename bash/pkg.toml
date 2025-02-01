@@ -1,0 +1,13 @@
+[package]
+name = "bash"
+version = "5.2.32"
+description = "The bash package contains the Bourne-Again Shell"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://ftp.gnu.org/gnu/bash/bash-5.2.32.tar.gz"
+
+build = [
+    "BUILD",
+]

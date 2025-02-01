@@ -1,0 +1,13 @@
+[package]
+name = "xz"
+version = "5.6.2"
+description = "The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://github.com//tukaani-project/xz/releases/download/v5.6.2/xz-5.6.2.tar.xz"
+
+build = [
+    "BUILD",
+]

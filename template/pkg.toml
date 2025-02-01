@@ -1,0 +1,13 @@
+[package]
+name = "pkgname"
+version = "1.0"
+description = "description"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location=""
+
+build = [
+    "BUILD",
+]

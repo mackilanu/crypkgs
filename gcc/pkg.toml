@@ -1,0 +1,13 @@
+[package]
+name = "gcc"
+version = "14.2.0"
+description = "The GNU compiler collection."
+license = "GPL"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://ftp.gnu.org/gnu/gcc/gcc-14.2.0/gcc-14.2.0.tar.xz"
+
+build = [
+    "BUILD",
+]

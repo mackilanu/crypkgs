@@ -1,0 +1,13 @@
+[package]
+name = "gdbm"
+version = "1.24"
+description = "description"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://ftp.gnu.org/gnu/gdbm/gdbm-1.24.tar.gz"
+
+build = [
+    "BUILD",
+]

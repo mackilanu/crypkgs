@@ -1,0 +1,13 @@
+[package]
+name = "readline"
+version = "8.2.13"
+description = "The Readline package is a set of libraries that offer command-line editing and history capabilities"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://ftp.gnu.org/gnu/readline/readline-8.2.13.tar.gz"
+
+build = [
+    "BUILD",
+]

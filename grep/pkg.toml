@@ -1,0 +1,13 @@
+[package]
+name = "grep"
+version = "3.11"
+description = "The Grep package contains programs for searching through the contents of files. "
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://ftp.gnu.org/gnu/grep/grep-3.11.tar.xz"
+
+build = [
+    "BUILD",
+]

@@ -1,0 +1,13 @@
+[package]
+name = "linux-api-headers"
+version = "6.10.5"
+description = "The Linux API Headers expose the kernel's API for use by Glibc. "
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://www.kernel.org/pub/linux/kernel/v6.x/linux-6.10.5.tar.xz"
+
+build = [
+    "BUILD",
+]

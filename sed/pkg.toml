@@ -1,0 +1,13 @@
+[package]
+name = "sed"
+version = "4.9"
+description = "The Sed package contains a stream editor"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://ftp.gnu.org/gnu/sed/sed-4.9.tar.xz"
+
+build = [
+    "BUILD",
+]

@@ -1,0 +1,13 @@
+[package]
+name = "shadow"
+version = "4.16.0"
+description = "description"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://github.com/shadow-maint/shadow/releases/download/4.16.0/shadow-4.16.0.tar.xz"
+
+build = [
+    "BUILD",
+]

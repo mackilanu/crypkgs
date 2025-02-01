@@ -1,0 +1,13 @@
+[package]
+name = "coreutils"
+version = "9.5"
+description = "The Coreutils package contains the basic utility programs needed by every operating system. "
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://ftp.gnu.org/gnu/coreutils/coreutils-9.5.tar.xz"
+
+build = [
+    "BUILD",
+]

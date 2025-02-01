@@ -1,0 +1,13 @@
+[package]
+name = "tcl"
+version = "8.6.14"
+description = "A robust general-purpose scripting language"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://downloads.sourceforge.net/tcl/tcl8.6.14-src.tar.gz"
+
+build = [
+    "BUILD",
+]

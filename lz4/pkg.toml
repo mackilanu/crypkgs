@@ -1,0 +1,13 @@
+[package]
+name = "lz4"
+version = "1.10.0"
+description = "A lossless compression algorithm"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://github.com/lz4/lz4/releases/download/v1.10.0/lz4-1.10.0.tar.gz"
+
+build = [
+    "BUILD",
+]

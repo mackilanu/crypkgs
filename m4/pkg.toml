@@ -1,0 +1,13 @@
+[package]
+name = "m4"
+version = "1.4.19"
+description = "The M4 package contains a macro processor. "
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://ftp.gnu.org/gnu/m4/m4-1.4.19.tar.xz"
+
+build = [
+    "BUILD",
+]

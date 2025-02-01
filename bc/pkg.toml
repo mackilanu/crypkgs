@@ -1,0 +1,13 @@
+[package]
+name = "bc"
+version = "6.7.6"
+description = "The Bc package contains an arbitrary precision numeric processing language."
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://github.com/gavinhoward/bc/releases/download/6.7.6/bc-6.7.6.tar.xz"
+
+build = [
+    "BUILD",
+]

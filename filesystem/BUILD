@@ -2,9 +2,11 @@
 mkdir -pv ${BUILDDIR}/{etc,var} 
 mkdir -pv ${BUILDDIR}/usr/{bin,lib,sbin}
 
-for i in bin lib sbin; do
-  ln -sv ${BUILDDIR}/usr/$i ${BUILDDIR}/$i
-done
 
+cd $BUILDDIR
+for i in bin lib sbin; do
+  ln -sv usr/$i $i
+done
+cd ..
 mkdir -pv ${BUILDDIR}/lib64
 

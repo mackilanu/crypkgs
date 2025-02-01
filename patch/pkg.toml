@@ -1,0 +1,13 @@
+[package]
+name = "patch"
+version = "2.7.6"
+description = "The Patch package contains a program for modifying or creating files by applying a “patch” file typically created by the diff program. "
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://ftp.gnu.org/gnu/patch/patch-2.7.6.tar.xz"
+
+build = [
+    "BUILD",
+]

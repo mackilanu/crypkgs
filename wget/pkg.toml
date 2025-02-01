@@ -1,0 +1,13 @@
+[package]
+name = "wget"
+version = "1.25.0"
+description = "The Wget package contains a utility useful for non-interactive downloading of files from the Web. "
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://ftp.gnu.org/gnu/wget/wget-1.25.0.tar.gz"
+
+build = [
+    "BUILD",
+]

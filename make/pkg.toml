@@ -1,0 +1,13 @@
+[package]
+name = "make"
+version = "4.4.1"
+description = " The Make package contains a program for controlling the generation of executables and other non-source files of a package from source files. "
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://ftp.gnu.org/gnu/make/make-4.4.1.tar.gz"
+
+build = [
+    "BUILD",
+]

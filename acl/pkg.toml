@@ -1,0 +1,13 @@
+[package]
+name = "acl"
+version = "2.3.2"
+description = "description"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://download.savannah.gnu.org/releases/acl/acl-2.3.2.tar.xz"
+
+build = [
+    "BUILD",
+]

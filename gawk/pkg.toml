@@ -1,0 +1,13 @@
+[package]
+name = "gawk"
+version = "5.3.0"
+description = "The Gawk package contains programs for manipulating text files"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://ftp.gnu.org/gnu/gawk/gawk-5.3.0.tar.xz"
+
+build = [
+    "BUILD",
+]

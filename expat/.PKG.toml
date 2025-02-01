@@ -1,0 +1,13 @@
+[package]
+name = "expat"
+version = "2.6.2"
+description = "description"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://prdownloads.sourceforge.net/expat/expat-2.6.2.tar.xz"
+
+build = [
+    "BUILD",
+]

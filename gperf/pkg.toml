@@ -1,0 +1,13 @@
+[package]
+name = "gperf"
+version = "3.1"
+description = "description"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://ftp.gnu.org/gnu/gperf/gperf-3.1.tar.gz"
+
+build = [
+    "BUILD",
+]

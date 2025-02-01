@@ -1,0 +1,8 @@
+BD=$(pwd)/$BUILDDIR
+SRCDIR=$PKGNAME-$PKGVER
+tar -xf $SRCDIR.tar.gz
+
+cd $SRCDIR
+
+make BUILD_STATIC=no PREFIX=/usr
+make BUILD_STATIC=no PREFIX=/usr DESTDIR=$BD install

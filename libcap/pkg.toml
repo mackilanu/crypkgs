@@ -1,0 +1,13 @@
+[package]
+name = "libcap"
+version = "2.70"
+description = "description"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.70.tar.xz"
+
+build = [
+    "BUILD",
+]

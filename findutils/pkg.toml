@@ -1,0 +1,13 @@
+[package]
+name = "findutils"
+version = "4.10.0"
+description = " The Diffutils package contains programs that show the differences between files or directories. "
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://ftp.gnu.org/gnu/findutils/findutils-4.10.0.tar.xz"
+
+build = [
+    "BUILD",
+]

@@ -1,0 +1,13 @@
+[package]
+name = "libtool"
+version = "2.4.7"
+description = "A generic library support script"
+license = "GPL-2.0-or-later"
+arch = "*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location = "https://ftp.gnu.org/gnu/libtool/libtool-2.4.7.tar.xz"
+
+build = [
+    "BUILD",
+]

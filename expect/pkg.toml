@@ -1,0 +1,13 @@
+[package]
+name = "expect"
+version = "5.45.4"
+description = "contains tools for automating, via scripted dialogues, interactive applications"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://prdownloads.sourceforge.net/expect/expect5.45.4.tar.gz"
+
+build = [
+    "BUILD",
+]

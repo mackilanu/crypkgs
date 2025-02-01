@@ -1,0 +1,13 @@
+[package]
+name = "file"
+version = "5.45"
+description = ""
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://astron.com/pub/file/file-5.45.tar.gz"
+
+build = [
+    "BUILD",
+]

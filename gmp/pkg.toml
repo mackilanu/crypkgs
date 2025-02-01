@@ -1,0 +1,13 @@
+[package]
+name = "gmp"
+version = "6.3.0"
+description = "The GMP package contains math libraries"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.xz"
+
+build = [
+    "BUILD",
+]

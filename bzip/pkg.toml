@@ -1,0 +1,13 @@
+[package]
+name = "bzip2"
+version = "1.0.8"
+description = "The Diffutils package contains programs that show the differences between files or directories. "
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://www.sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz"
+
+build = [
+    "BUILD",
+]

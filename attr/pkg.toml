@@ -1,0 +1,13 @@
+[package]
+name = "attr"
+version = "2.5.2"
+description = "desc"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://download.savannah.gnu.org/releases/attr/attr-2.5.2.tar.gz"
+
+build = [
+    "BUILD",
+]

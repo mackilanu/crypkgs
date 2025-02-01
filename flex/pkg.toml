@@ -1,0 +1,13 @@
+[package]
+name = "flex"
+version = "2.6.4"
+description = "The Flex package contains a utility for generating programs that recognize patterns in text."
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://github.com/westes/flex/releases/download/v2.6.4/flex-2.6.4.tar.gz"
+
+build = [
+    "BUILD",
+]

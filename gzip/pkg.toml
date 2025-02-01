@@ -1,0 +1,13 @@
+[package]
+name = "gzip"
+version = "1.13"
+description = "The Gzip package contains programs for compressing and decompressing files."
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://ftp.gnu.org/gnu/gzip/gzip-1.13.tar.xz"
+
+build = [
+    "BUILD",
+]

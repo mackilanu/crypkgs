@@ -1,0 +1,13 @@
+[package]
+name = "XML-Parser"
+version = "2.47"
+description = "description"
+license = "MIT"
+arch="*"
+dependencies = []
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.47.tar.gz"
+
+build = [
+    "BUILD",
+]
