@@ -1,5 +1,4 @@
-
-$BD = $(pwd)/$BUILDDIR
+BD=$(pwd)/$BUILDDIR
 
 SRCDIR=$PKGNAME-$PKGVER
 
@@ -10,4 +9,4 @@ cd $SRCDIR
 ./configure --prefix=/usr
 make
 
-make DESTDIR=$BD/usr install
+make DESTDIR=$BD install

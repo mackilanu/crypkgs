@@ -13,3 +13,6 @@ cd $SRCDIR
 
 make
 make DESTDIR=$BD install
+
+mkdir -pv $BD/bin
+ln -s bash "$BD/usr/bin/sh"
