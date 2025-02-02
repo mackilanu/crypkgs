@@ -1,0 +1,15 @@
+[package]
+name = "libpsl"
+version = "0.21.5"
+description = "description"
+license = "MIT"
+arch="*"
+dependencies = [
+    "libidn2", "libunistring"
+]
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://github.com/rockdaboot/libpsl/releases/download/0.21.5/libpsl-0.21.5.tar.gz"
+
+build = [
+    "BUILD",
+]
