@@ -12,6 +12,7 @@ mkdir -v build
 cd build
 ../configure --prefix=/usr            \
              LD=ld                    \
+              --with-ld=/usr/bin/ld    \
              --enable-languages=c,c++ \
              --enable-default-pie     \
              --enable-default-ssp     \

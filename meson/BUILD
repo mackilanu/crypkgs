@@ -1,9 +1,10 @@
 BD=$(pwd)/$BUILDDIR
 SRCDIR=$PKGNAME-$PKGVER
-tar -xf $SRCDIR.tar.xz
+tar -xf $SRCDIR.tar.gz
 
 cd $SRCDIR
 
-./configure --prefix=/usr
-make
-make DESTDIR=$BD install
+./packaging/create_zipapp.py --outfile meson --interpreter '/usr/bin/env python3' .
+
+mkdir -pv $BD/usr/bin
+mv meson $BD/usr/bin
