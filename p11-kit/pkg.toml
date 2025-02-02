@@ -1,0 +1,15 @@
+[package]
+name = "p11-kit"
+version = "0.25.5"
+description = "provides a way to load and enumerate PKCS #11 (a Cryptographic Token Interface Standard) modules"
+license = "MIT"
+arch="*"
+dependencies = [
+    "libtasn1"
+]
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://github.com/p11-glue/p11-kit/releases/download/0.25.5/p11-kit-0.25.5.tar.xz"
+
+build = [
+    "BUILD",
+]

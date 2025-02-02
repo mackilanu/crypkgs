@@ -1,0 +1,15 @@
+[package]
+name = "make-ca"
+version = "1.14"
+description = "description"
+license = "MIT"
+arch="*"
+dependencies = [
+    "p11-kit", "libtasn1"
+]
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://github.com/lfs-book/make-ca/archive/v1.14/make-ca-1.14.tar.gz"
+
+build = [
+    "BUILD",
+]

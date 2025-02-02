@@ -1,0 +1,15 @@
+[package]
+name = "libtasn1"
+version = "4.19.0"
+description = "libtasn1 is a highly portable C library that encodes and decodes DER/BER data following an ASN.1 schema."
+license = "MIT"
+arch="*"
+dependencies = [
+    "glibc"
+]
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://ftp.gnu.org/gnu/libtasn1/libtasn1-4.19.0.tar.gz"
+
+build = [
+    "BUILD",
+]

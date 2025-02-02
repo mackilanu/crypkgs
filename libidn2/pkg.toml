@@ -1,0 +1,15 @@
+[package]
+name = "libidn2"
+version = "2.3.7"
+description = "Internationalized string handling based on standards from the Internet Engineering Task Force"
+license = "MIT"
+arch="*"
+dependencies = [
+    "libunistring"
+]
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://ftp.gnu.org/gnu/libidn/libidn2-2.3.7.tar.gz"
+
+build = [
+    "BUILD",
+]

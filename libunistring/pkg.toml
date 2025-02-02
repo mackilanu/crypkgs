@@ -1,0 +1,15 @@
+[package]
+name = "libunistring"
+version = "1.2"
+description = "libunistring is a library that provides functions for manipulating Unicode strings and for manipulating C strings."
+license = "MIT"
+arch="*"
+dependencies = [
+    "glibc"
+]
+maintainer = "Marcus Andersson <marcus@unifun.se>"
+source_location="https://ftp.gnu.org/gnu/libunistring/libunistring-1.2.tar.xz"
+
+build = [
+    "BUILD",
+]

@@ -4,10 +4,7 @@ tar -xf $SRCDIR.tar.gz
 
 cd $SRCDIR
 
-./configure --prefix=/usr      \
-            --sysconfdir=/etc  \
-            --with-ssl=openssl &&
-make
 
+./configure --prefix=/usr --disable-static &&
 make
 make DESTDIR=$BD install
